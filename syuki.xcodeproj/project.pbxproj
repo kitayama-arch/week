@@ -32,6 +32,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A2BEDF72C32B42D00D2307F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5A2BEDF82C32B43400D2307F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		5A4ED3682C3275BA003E2E0C = {
 			isa = PBXGroup;
 			children = (
@@ -55,6 +69,8 @@
 				5A4ED3762C3275BA003E2E0C /* ContentView.swift */,
 				5A4ED3782C3275BB003E2E0C /* Assets.xcassets */,
 				5A4ED37A2C3275BB003E2E0C /* Preview Content */,
+				5A2BEDF72C32B42D00D2307F /* Views */,
+				5A2BEDF82C32B43400D2307F /* Models */,
 			);
 			path = syuki;
 			sourceTree = "<group>";
