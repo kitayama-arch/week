@@ -11,18 +11,15 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                //                Color.gray
-                //                    .ignoresSafeArea()
-                VStack(alignment: .leading) {
-                    Text("今週の目標")
+                Color.gray.opacity(0.2)
+                    .ignoresSafeArea()
+                VStack {
+                    Text("今週")
                         .font(.title2).bold()
                         .padding(.horizontal)
                     GoalCardView()
                         .padding(.bottom)
                     
-                    Text("思考記録")
-                        .font(.title2).bold()
-                        .padding(.horizontal)
                     ThoughtCardView()
                     // ここではまだ思考カードは1枚のみ
                         .padding(.bottom)

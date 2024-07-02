@@ -17,6 +17,7 @@ struct GoalCardView: View {
                 .frame(height: 60)
             TextField("今週の目標を入力", text: $goalText) // TextFieldを追加
                 .padding()
+                .lineLimit(3)
         }
         .padding(.horizontal)
     }

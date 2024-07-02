@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ThoughtCardView: View {
     @State private var thoughtText = ""
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray.opacity(0.2))
+//            Color.gray.opacity(0.2)
             TextEditor(text: $thoughtText)
                 .padding()
-                .frame(height: 120)
-                .textEditorStyle(.plain)
+                .textEditorStyle(.automatic)
+                .cornerRadius(10)
         }
         .padding(.horizontal)
     }
