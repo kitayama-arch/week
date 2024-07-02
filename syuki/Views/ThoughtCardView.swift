@@ -23,7 +23,7 @@ struct ThoughtCardView: View {
                 // 背景色を設定（グレーで透明度0.1）
                 .background(Color.white)
                 // 角を丸くする
-                .cornerRadius(10)
+                .cornerRadius(8)
                 // テキストが変更されたときに高さを更新
                 .onChange(of: thoughtText) { oldValue, newValue in
                     // アニメーション付きで高さを更新
