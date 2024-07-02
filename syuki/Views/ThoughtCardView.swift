@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ThoughtCardView: View {
-    // テキストエディタの内容を保持するState変数
     @State private var thoughtText = ""
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
@@ -18,15 +17,11 @@ struct ThoughtCardView: View {
             TextEditor(text: $thoughtText)
                 // テキストエディタの高さを動的に設定（最小50）
                 .frame(height: max(50, textEditorHeight))
-                // テキストエディタの内部パディングを設定
                 .padding()
-                // 背景色を設定（グレーで透明度0.1）
                 .background(Color.white)
-                // 角を丸くする
                 .cornerRadius(8)
                 // テキストが変更されたときに高さを更新
                 .onChange(of: thoughtText) { oldValue, newValue in
-                    // アニメーション付きで高さを更新
                     withAnimation {
                         updateTextEditorHeight()
                     }
@@ -55,7 +50,6 @@ struct ThoughtCardView: View {
     }
 }
 
-// プレビュー用のストラクト
 struct ThoughtCardView_Previews: PreviewProvider {
     static var previews: some View {
         ThoughtCardView()
