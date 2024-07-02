@@ -13,11 +13,10 @@ struct GoalCardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray.opacity(0.2))
+                .fill(Color.white)
                 .frame(height: 60)
             TextField("今週の目標を入力", text: $goalText) // TextFieldを追加
                 .padding()
-                .lineLimit(3)
         }
         .padding(.horizontal)
     }

@@ -8,20 +8,56 @@
 import SwiftUI
 
 struct ThoughtCardView: View {
+    // テキストエディタの内容を保持するState変数
     @State private var thoughtText = ""
+    // テキストエディタの高さを動的に管理するState変数
+    @State private var textEditorHeight: CGFloat = 50
     
     var body: some View {
         ZStack {
-//            Color.gray.opacity(0.2)
             TextEditor(text: $thoughtText)
+                // テキストエディタの高さを動的に設定（最小50）
+                .frame(height: max(50, textEditorHeight))
+                // テキストエディタの内部パディングを設定
                 .padding()
-                .textEditorStyle(.automatic)
+                // 背景色を設定（グレーで透明度0.1）
+                .background(Color.white)
+                // 角を丸くする
                 .cornerRadius(10)
+                // テキストが変更されたときに高さを更新
+                .onChange(of: thoughtText) { oldValue, newValue in
+                    // アニメーション付きで高さを更新
+                    withAnimation {
+                        updateTextEditorHeight()
+                    }
+                }
+                .padding(.horizontal)
         }
-        .padding(.horizontal)
+        // ZStackの高さを無限に設定し、上揃えにする
+        .frame(maxHeight: .infinity, alignment: .top)
+    }
+    
+    // テキストエディタの高さを更新する関数
+    private func updateTextEditorHeight() {
+        // 画面幅からパディングを引いたサイズを計算
+        let size = CGSize(width: UIScreen.main.bounds.width - 40, height: .infinity)
+        // テキストの実際の高さを計算
+        let estimatedSize = thoughtText.boundingRect(
+            with: size,
+            options: .usesLineFragmentOrigin,
+            attributes: [.font: UIFont.preferredFont(forTextStyle: .body)],
+            context: nil
+        )
+        
+        // 計算された高さと最小高さ(100)を比較し、大きい方を採用
+        // 30ピクセルの余白を追加
+        textEditorHeight = max(50, estimatedSize.height + 30)
     }
 }
 
-#Preview {
-    ThoughtCardView()
+// プレビュー用のストラクト
+struct ThoughtCardView_Previews: PreviewProvider {
+    static var previews: some View {
+        ThoughtCardView()
+    }
 }

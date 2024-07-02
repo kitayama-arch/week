@@ -17,6 +17,7 @@ struct HomeView: View {
                     Text("今週")
                         .font(.title2).bold()
                         .padding(.horizontal)
+                    
                     GoalCardView()
                         .padding(.bottom)
                     
