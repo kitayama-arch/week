@@ -20,6 +20,7 @@ struct HomeView: View {
                     
                     GoalCardView()
                         .padding(.bottom)
+                        .padding(.horizontal)
                     
                     ThoughtCardView()
                     // ここではまだ思考カードは1枚のみ

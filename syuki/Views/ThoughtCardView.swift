@@ -45,8 +45,8 @@ struct ThoughtCardView: View {
         )
         
         // 計算された高さと最小高さ(100)を比較し、大きい方を採用
-        // 30ピクセルの余白を追加
-        textEditorHeight = max(50, estimatedSize.height + 30)
+        // 20ピクセルの余白を追加
+        textEditorHeight = max(50, estimatedSize.height + 20)
     }
 }
 

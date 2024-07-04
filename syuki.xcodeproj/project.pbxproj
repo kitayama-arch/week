@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */; };
 		5A3539342C33CA0400C3AB8D /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539332C33CA0400C3AB8D /* ArchiveView.swift */; };
 		5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539352C33CBB700C3AB8D /* GoalCardView.swift */; };
 		5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539372C33D03700C3AB8D /* ThoughtCard.swift */; };
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +113,9 @@
 			dependencies = (
 			);
 			name = syuki;
+			packageProductDependencies = (
+				5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */,
+			);
 			productName = syuki;
 			productReference = 5A4ED3712C3275BA003E2E0C /* syuki.app */;
 			productType = "com.apple.product-type.application";
@@ -139,6 +144,9 @@
 				Base,
 			);
 			mainGroup = 5A4ED3682C3275BA003E2E0C;
+			packageReferences = (
+				5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+			);
 			productRefGroup = 5A4ED3722C3275BA003E2E0C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -376,6 +384,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
+			productName = MCEmojiPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5A4ED3692C3275BA003E2E0C /* Project object */;
 }
