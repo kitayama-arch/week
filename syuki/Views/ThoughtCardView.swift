@@ -17,7 +17,6 @@ struct ThoughtCardView: View {
             TextEditor(text: $thoughtText)
                 // テキストエディタの高さを動的に設定（最小50）
                 .frame(height: max(50, textEditorHeight))
-                .padding()
                 .background(Color.white)
                 .cornerRadius(8)
                 // テキストが変更されたときに高さを更新
@@ -44,7 +43,7 @@ struct ThoughtCardView: View {
             context: nil
         )
         
-        // 計算された高さと最小高さ(100)を比較し、大きい方を採用
+        // 計算された高さと最小高さ(50)を比較し、大きい方を採用
         // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
     }
