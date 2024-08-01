@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    // ダミーデータを用意
+    let thoughtCards = sampleThoughtCards
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -22,11 +25,12 @@ struct HomeView: View {
                         .padding(.bottom)
                         .padding(.horizontal)
                     
-                    ThoughtCardView()
-                    // ここではまだ思考カードは1枚のみ
-                        .padding(.bottom)
-                    
-                    Spacer()
+                    ScrollView {
+                        ForEach(thoughtCards) { card in
+                            ThoughtCardView(thoughtCard: card)
+                            // ここではまだ思考カードは1枚のみ
+                        }
+                    }
                 }
             }
         }
