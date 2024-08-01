@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     // ダミーデータを用意
-    let thoughtCards = sampleThoughtCards
+    @State private var thoughtCards = [ThoughtCard(content: "",date: Date())] // 初期データとして空のThoughtCardを追加
     
     var body: some View {
         NavigationView {
@@ -26,9 +26,8 @@ struct HomeView: View {
                         .padding(.horizontal)
                     
                     ScrollView {
-                        ForEach(thoughtCards) { card in
-                            ThoughtCardView(thoughtCard: card)
-                            // ここではまだ思考カードは1枚のみ
+                        ForEach($thoughtCards) { $card in // ForEachで各ThoughtCardをバインディングして渡す
+                            ThoughtCardView(thoughtCard: $card)
                         }
                     }
                 }

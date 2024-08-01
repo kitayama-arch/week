@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct ThoughtCardView: View {
-    var thoughtCard: ThoughtCard
-    
-    @State private var thoughtText = ""
+    @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
     
     var body: some View {
         ZStack {
-            TextEditor(text: $thoughtText)
+            TextEditor(text: $thoughtCard.content)
                 // テキストエディタの高さを動的に設定（最小50）
                 .frame(height: max(50, textEditorHeight))
+                .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
                 // テキストが変更されたときに高さを更新
-                .onChange(of: thoughtText) { oldValue, newValue in
+                .onChange(of: thoughtCard.content) { oldValue, newValue in
                     withAnimation {
                         updateTextEditorHeight()
                     }
@@ -32,7 +31,7 @@ struct ThoughtCardView: View {
         // ZStackの高さを無限に設定し、上揃えにする
         .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
-                    thoughtText = thoughtCard.content // 思考の内容をセット
+                    thoughtCard.content = thoughtCard.content // 思考の内容をセット
                     updateTextEditorHeight() // 初期高さの更新
                 }
     }
@@ -42,7 +41,7 @@ struct ThoughtCardView: View {
         // 画面幅からパディングを引いたサイズを計算
         let size = CGSize(width: UIScreen.main.bounds.width - 40, height: .infinity)
         // テキストの実際の高さを計算
-        let estimatedSize = thoughtText.boundingRect(
+        let estimatedSize = thoughtCard.content.boundingRect(
             with: size,
             options: .usesLineFragmentOrigin,
             attributes: [.font: UIFont.preferredFont(forTextStyle: .body)],
@@ -56,7 +55,11 @@ struct ThoughtCardView: View {
 }
 
 struct ThoughtCardView_Previews: PreviewProvider {
+    @State static var sampleCard = ThoughtCard(content: "Sample Thought", date: Date())
+
     static var previews: some View {
-        ThoughtCardView(thoughtCard: ThoughtCard(content: "Sample Thought", date: Date()))
+        ThoughtCardView(thoughtCard: $sampleCard)
+            .previewLayout(.sizeThatFits)
+            .padding()
     }
 }
