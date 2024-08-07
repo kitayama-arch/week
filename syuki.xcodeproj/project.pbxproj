@@ -16,6 +16,8 @@
 		5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3762C3275BA003E2E0C /* HomeView.swift */; };
 		5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED3782C3275BB003E2E0C /* Assets.xcassets */; };
 		5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */; };
+		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
+		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		5A4ED3762C3275BA003E2E0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5A4ED3782C3275BB003E2E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 				5A4ED37A2C3275BB003E2E0C /* Preview Content */,
 				5A2BEDF72C32B42D00D2307F /* Views */,
 				5A2BEDF82C32B43400D2307F /* Models */,
+				5AAB8A4B2C635E64002ECBC5 /* Coredata */,
 			);
 			path = syuki;
 			sourceTree = "<group>";
@@ -95,6 +100,15 @@
 				5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5AAB8A4B2C635E64002ECBC5 /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */,
+				5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */,
+			);
+			path = Coredata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,8 +190,10 @@
 				5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */,
 				5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */,
 				5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */,
+				5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */,
 				5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */,
 				5A3539342C33CA0400C3AB8D /* ArchiveView.swift in Sources */,
+				5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */,
 				5A4ED3752C3275BA003E2E0C /* syukiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +419,19 @@
 			productName = MCEmojiPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */,
+			);
+			currentVersion = 5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5A4ED3692C3275BA003E2E0C /* Project object */;
 }

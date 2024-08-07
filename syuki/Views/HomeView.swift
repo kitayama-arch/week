@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     // ダミーデータを用意
-    @State private var thoughtCards = [ThoughtCard(content: "",date: Date())] // 初期データとして空のThoughtCardを追加
+    @State private var thoughtCards = [ThoughtCard(content: "",date: Date(), items: [])] // 初期データとして空のThoughtCardを追加
     
     var body: some View {
         NavigationView {

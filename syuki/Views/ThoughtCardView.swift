@@ -55,7 +55,7 @@ struct ThoughtCardView: View {
 }
 
 struct ThoughtCardView_Previews: PreviewProvider {
-    @State static var sampleCard = ThoughtCard(content: "Sample Thought", date: Date())
+    @State static var sampleCard = ThoughtCard(content: "Sample Thought", date: Date(), items: ["item1", "item2"])
 
     static var previews: some View {
         ThoughtCardView(thoughtCard: $sampleCard)
