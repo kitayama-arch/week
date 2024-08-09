@@ -58,5 +58,14 @@ class CoreDataManager {
             print("ThoughtCardの更新に失敗しました\(error)")
         }
     }
-    
+    func deleteThoughtCard(thoughtCard: ThoughtCardEntity) {
+        let context = persistentContainer.viewContext
+        context.delete(thoughtCard)
+        
+        do {
+            try context.save()
+        } catch {
+            print("ThoughtCardの削除に失敗しました\(error)")
+        }
+    }
 }
