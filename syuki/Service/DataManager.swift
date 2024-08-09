@@ -19,12 +19,14 @@ class DataManager: ObservableObject {
     
     private func loadThoughtCards() {
         let thoughtCardEntities = coreDataManager.readThoughtCards()
-        thoughtCards = thoughtCardEntities.compactMap { entity in
+        thoughtCards = thoughtCardEntities.compactMap { entity -> ThoughtCard? in
             guard let id = entity.id,
                   let content = entity.content,
                   let date = entity.date,
                   let items = entity.items else { return nil }
-            return ThoughtCard(id:id, content: content, date: date, items: items)
+            return ThoughtCard(content: content, date: date, items: items)
         }
     }
+    
+    
 }
