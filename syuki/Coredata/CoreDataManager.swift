@@ -19,9 +19,9 @@ class CoreDataManager {
         }
     }
     
-    func createThoughtCard(content:String, date:Date, items:[String]) -> ThoughtCardEntity? {
-        let context = persistentContainer.viewContext
-        let thoughtCardEntity = ThoughtCardEntity(context: context)
+    func createThoughtCard(content:String, date:Date, items:[String]) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
+        let context = persistentContainer.viewContext // managedObjectContextを取得
+        let thoughtCardEntity = ThoughtCardEntity(context: context) 
         
         thoughtCardEntity.id = UUID()
         thoughtCardEntity.content = content
@@ -36,4 +36,27 @@ class CoreDataManager {
             return nil
         }
     }
+    func readThoughtCards() -> [ThoughtCardEntity] {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<ThoughtCardEntity> = ThoughtCardEntity.fetchRequest()
+        
+        do {
+            let thoughtCards = try context.fetch(fetchRequest)
+            return thoughtCards
+        } catch {
+            print("ThoughtCardの取得に失敗しました:\(error)")
+            return []
+        }
+    }
+    func updateThoughtCard(thoughtCard: ThoughtCardEntity, newContent: String) {
+        let context = persistentContainer.viewContext
+        thoughtCard.content = newContent
+        
+        do {
+            try context.save()
+        } catch {
+            print("ThoughtCardの更新に失敗しました\(error)")
+        }
+    }
+    
 }
