@@ -10,6 +10,7 @@ import SwiftUI
 struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
     @ObservedObject var dataManager: DataManager
+    @State private var showingOptions = false
     let index: Int
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
@@ -33,11 +34,16 @@ struct ThoughtCardView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            let indexSet = IndexSet(integer: index)
-                            dataManager.deleteThoughtCard(at: indexSet)
+                            showingOptions = true
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.gray)
+                        }
+                        .confirmationDialog("確認", isPresented: $showingOptions) {
+                            Button("削除") {
+                                let indexSet = IndexSet(integer: index)
+                                dataManager.deleteThoughtCard(at: indexSet)
+                            }
                         }
                         .padding(.trailing, 8)
                     }
