@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
+    @ObservedObject var dataManager: DataManager
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
     
@@ -25,8 +26,10 @@ struct ThoughtCardView: View {
                     withAnimation {
                         updateTextEditorHeight()
                     }
+                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content)
                 }
                 .padding(.horizontal)
+
         }
         // ZStackの高さを無限に設定し、上揃えにする
         .frame(maxHeight: .infinity, alignment: .top)
@@ -56,9 +59,10 @@ struct ThoughtCardView: View {
 
 struct ThoughtCardView_Previews: PreviewProvider {
     @State static var sampleCard = ThoughtCard(content: "Sample Thought", date: Date(), items: ["item1", "item2"])
+    @State static var dataManager = DataManager()
 
     static var previews: some View {
-        ThoughtCardView(thoughtCard: $sampleCard)
+        ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager)
             .previewLayout(.sizeThatFits)
             .padding()
     }

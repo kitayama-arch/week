@@ -24,7 +24,7 @@ struct HomeView: View {
                     
                     ScrollView {
                         ForEach($thoughtCards) { $card in // ForEachで各ThoughtCardをバインディングして渡す
-                            ThoughtCardView(thoughtCard: $card)
+                            ThoughtCardView(thoughtCard: $card, dataManager: dataManager)
                         }
                     }
                 }
