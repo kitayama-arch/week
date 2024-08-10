@@ -16,20 +16,34 @@ struct ThoughtCardView: View {
     var body: some View {
         ZStack {
             TextEditor(text: $thoughtCard.content)
-                // テキストエディタの高さを動的に設定（最小50）
+            // テキストエディタの高さを動的に設定（最小50）
                 .frame(height: max(50, textEditorHeight))
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
-                // テキストが変更されたときに高さを更新
+            // テキストが変更されたときに高さを更新
                 .onChange(of: thoughtCard.content) { oldValue, newValue in
                     withAnimation {
                         updateTextEditorHeight()
                     }
                     dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content)
                 }
+                .overlay(
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            dataManager.deleteThoughtCard(at: IndexSet)
+                        }) {
+                            Image(systemName: "ellipsis")
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.trailing, 8)
+                    }
+                        .padding(.top, 8), // 上部に余白を追加
+                    alignment: .topTrailing // 右上に配置
+                )
                 .padding(.horizontal)
-
+            
         }
         // ZStackの高さを無限に設定し、上揃えにする
         .frame(maxHeight: .infinity, alignment: .top)
@@ -37,8 +51,8 @@ struct ThoughtCardView: View {
             updateTextEditorHeight() // 初期高さの更新
         }
         .onDisappear { // Viewが消える時に実行される
-                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content) // DataManagerのupdateThoughtCard()を呼び出す
-                }
+            dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content) // DataManagerのupdateThoughtCard()を呼び出す
+        }
     }
     
     // テキストエディタの高さを更新する関数
@@ -62,7 +76,7 @@ struct ThoughtCardView: View {
 struct ThoughtCardView_Previews: PreviewProvider {
     @State static var sampleCard = ThoughtCard(content: "Sample Thought", date: Date(), items: ["item1", "item2"])
     @State static var dataManager = DataManager()
-
+    
     static var previews: some View {
         ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager)
             .previewLayout(.sizeThatFits)
