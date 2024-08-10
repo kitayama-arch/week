@@ -34,8 +34,10 @@ struct ThoughtCardView: View {
         // ZStackの高さを無限に設定し、上揃えにする
         .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
-                    thoughtCard.content = thoughtCard.content // 思考の内容をセット
-                    updateTextEditorHeight() // 初期高さの更新
+            updateTextEditorHeight() // 初期高さの更新
+        }
+        .onDisappear { // Viewが消える時に実行される
+                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content) // DataManagerのupdateThoughtCard()を呼び出す
                 }
     }
     
