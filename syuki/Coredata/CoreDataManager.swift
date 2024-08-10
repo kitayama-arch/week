@@ -30,34 +30,40 @@ class CoreDataManager {
         
         do {
             try context.save()
+            print("CoreDataManager: ThoughtCardが正常に保存されました。ID: \(thoughtCardEntity.id?.uuidString ?? "Unknown")")
             return thoughtCardEntity
         } catch {
-            print("ThoughtCardの作成に失敗しました:\(error)")
+            print("CoreDataManager: ThoughtCardの作成に失敗しました:\(error)")
             return nil
         }
     }
+    
     func readThoughtCards() -> [ThoughtCardEntity] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<ThoughtCardEntity> = ThoughtCardEntity.fetchRequest()
         
         do {
             let thoughtCards = try context.fetch(fetchRequest)
+            print("CoreDataManager: 取得したThoughtCardの数: \(thoughtCards.count)")
             return thoughtCards
         } catch {
             print("ThoughtCardの取得に失敗しました:\(error)")
             return []
         }
     }
+    
     func updateThoughtCard(thoughtCard: ThoughtCardEntity, newContent: String) {
         let context = persistentContainer.viewContext
         thoughtCard.content = newContent
         
         do {
             try context.save()
+            print("CoreDataManager: ThoughtCardが正常に更新されました。ID: \(thoughtCard.id?.uuidString ?? "Unknown")")
         } catch {
-            print("ThoughtCardの更新に失敗しました\(error)")
+            print("CoreDataManager: ThoughtCardの更新に失敗しました: \(error)")
         }
     }
+    
     func deleteThoughtCard(thoughtCard: ThoughtCardEntity) {
         let context = persistentContainer.viewContext
         context.delete(thoughtCard)
