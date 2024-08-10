@@ -21,8 +21,8 @@ struct HomeView: View {
                         .padding(.horizontal)
                     
                     ScrollView {
-                        ForEach($dataManager.thoughtCards) { $card in
-                            ThoughtCardView(thoughtCard: $card, dataManager: dataManager)
+                        ForEach(dataManager.thoughtCards.indices, id: \.self) { index in
+                            ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
                         }
                     }
                 }

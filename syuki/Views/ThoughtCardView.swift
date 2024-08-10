@@ -10,6 +10,7 @@ import SwiftUI
 struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
     @ObservedObject var dataManager: DataManager
+    let index: Int
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
     
@@ -32,7 +33,8 @@ struct ThoughtCardView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            dataManager.deleteThoughtCard(at: IndexSet)
+                            let indexSet = IndexSet(integer: index)
+                            dataManager.deleteThoughtCard(at: indexSet)
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.gray)
@@ -49,9 +51,6 @@ struct ThoughtCardView: View {
         .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
             updateTextEditorHeight() // 初期高さの更新
-        }
-        .onDisappear { // Viewが消える時に実行される
-            dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content) // DataManagerのupdateThoughtCard()を呼び出す
         }
     }
     
@@ -78,7 +77,7 @@ struct ThoughtCardView_Previews: PreviewProvider {
     @State static var dataManager = DataManager()
     
     static var previews: some View {
-        ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager)
+        ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager, index: 0)
             .previewLayout(.sizeThatFits)
             .padding()
     }
