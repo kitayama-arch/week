@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var dataManager = DataManager()
     // ダミーデータを用意
     @State private var thoughtCards = [ThoughtCard(content: "",date: Date(), items: [])] // 初期データとして空のThoughtCardを追加
     
@@ -17,10 +18,6 @@ struct HomeView: View {
                 Color.gray.opacity(0.2)
                     .ignoresSafeArea()
                 VStack {
-                    Text("今週")
-                        .font(.title2).bold()
-                        .padding(.horizontal)
-                    
                     GoalCardView()
                         .padding(.bottom)
                         .padding(.horizontal)
@@ -31,6 +28,11 @@ struct HomeView: View {
                         }
                     }
                 }
+                .onAppear {
+                    dataManager.loadThoughtCards()
+                }
+                .navigationTitle("今週")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
