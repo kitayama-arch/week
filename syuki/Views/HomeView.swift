@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var dataManager = DataManager()
-    // ダミーデータを用意
-    @State private var thoughtCards = [ThoughtCard(content: "",date: Date(), items: [])] // 初期データとして空のThoughtCardを追加
     
     var body: some View {
         NavigationView {
@@ -23,13 +21,15 @@ struct HomeView: View {
                         .padding(.horizontal)
                     
                     ScrollView {
-                        ForEach($thoughtCards) { $card in // ForEachで各ThoughtCardをバインディングして渡す
+                        ForEach($dataManager.thoughtCards) { $card in
                             ThoughtCardView(thoughtCard: $card, dataManager: dataManager)
                         }
                     }
                 }
                 .onAppear {
-                    dataManager.loadThoughtCards()
+                    if dataManager.thoughtCards.isEmpty {
+                        dataManager.addSampleThoughtCards()
+                    }
                 }
                 .navigationTitle("今週")
                 .navigationBarTitleDisplayMode(.inline)
@@ -37,6 +37,7 @@ struct HomeView: View {
         }
     }
 }
+
 #Preview {
     HomeView()
 }
