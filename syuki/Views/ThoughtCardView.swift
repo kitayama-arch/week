@@ -38,6 +38,8 @@ struct ThoughtCardView: View {
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.gray)
+                                .frame(width: 20, height: 20)
+                                .padding(.trailing, 8)
                         }
                         .confirmationDialog("確認", isPresented: $showingOptions) {
                             Button("削除") {
@@ -45,7 +47,6 @@ struct ThoughtCardView: View {
                                 dataManager.deleteThoughtCard(at: indexSet)
                             }
                         }
-                        .padding(.trailing, 8)
                     }
                     .padding(.top, 8), // 上部に余白を追加
                     alignment: .topTrailing // 右上に配置
