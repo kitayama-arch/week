@@ -516,7 +516,7 @@
     
     # Syukiアプリ 開発TODOリスト
     
-    ## スプリント1: 基本構造とホーム画面 (1-2週間)
+    ## スプリント1: 基本構造��ホーム画面 (1-2週間)
     
     - [x]  プロジェクトの初期設定
         - [x]  Xcodeでプロジェクトを作成
@@ -560,28 +560,28 @@
     - [x]  **`CoreDataManager` の作成**:
         - [x]  `CoreDataManager.swift` ファイルを作成し、`CoreDataManager` クラスを定義する。
         - [x]  `persistentContainer` を用いて、Core Dataスタックを初期化する。
-        - [ ]  以下のCRUD操作を実装する。
+        - [x]  以下のCRUD操作を実装する。
             - [x]  `createThoughtCard(content: String, date: Date) -> ThoughtCard`: 新しい `ThoughtCard` エンティティを作成し、`content` と `date` を設定して保存する。作成した `ThoughtCard` エンティティを返す。
-            - [ ]  `readThoughtCards() -> [ThoughtCard]` : 保存されている全ての `ThoughtCard` エンティティを取得し、`ThoughtCard` の配列として返す。
-            - [ ]  `updateThoughtCard(thoughtCard: ThoughtCard, newContent: String)`: 指定された `thoughtCard` の `content` を `newContent` で更新して保存する。
-            - [ ]  `deleteThoughtCard(thoughtCard: ThoughtCard)`: 指定された `thoughtCard` を削除する。
-            - [ ]  必要に応じて、エラー処理を追加する。
-    - [ ]  **`DataManager` の作成**:
-        - [ ]  `DataManager.swift` ファイルを作成し、`DataManager` クラスを定義する。
-        - [ ]  `CoreDataManager` のインスタンスをプロパティとして保持する。
-            - [ ]  `private let coreDataManager = CoreDataManager()` のように宣言
-        - [ ]  `CoreDataManager` のCRUD操作を呼び出す、以下の関数を定義する。
-            - [ ]  `createThoughtCard(content: String, date: Date) -> ThoughtCard`
-            - [ ]  `readThoughtCards() -> [ThoughtCard]`
-            - [ ]  `updateThoughtCard(thoughtCard: ThoughtCard, newContent: String)`
-            - [ ]  `deleteThoughtCard(thoughtCard: ThoughtCard)`
-            - [ ]  必要に応じて、データ加工やバリデーション処理などを追加する。
-    - [ ]  **データの保存と読み込みを実装**:
-        - [ ]  `HomeView` に `DataManager` のインスタンスを追加。
-            - [ ]  `@StateObject private var dataManager = DataManager()` のように宣言
-        - [ ]  `HomeView` の `onAppear` モディファイア内で、`dataManager.readThoughtCards()` を呼び出して、`ThoughtCard` 配列を初期化する。
-        - [ ]  `ThoughtCardView` で `TextEditor` の `onCommit` コールバックを利用し、テキスト編集が完了したタイミングで `dataManager.updateThoughtCard()` または `dataManager.createThoughtCard()` を呼び出してデータを保存する。
-        - [ ]  `ThoughtCardView` に削除ボタンを追加し、タップ時に `dataManager.deleteThoughtCard()` を呼び出す。
+            - [x]  `readThoughtCards() -> [ThoughtCard]` : 保存されている全ての `ThoughtCard` エンティティを取得し、`ThoughtCard` の配列として返す。
+            - [x]  `updateThoughtCard(thoughtCard: ThoughtCard, newContent: String)`: 指定された `thoughtCard` の `content` を `newContent` で更新して保存する。
+            - [x]  `deleteThoughtCard(thoughtCard: ThoughtCard)`: 指定された `thoughtCard` を削除する。
+            - [x]  必要に応じて、エラー処理を追加する。
+    - [x]  **`DataManager` の作成**:
+        - [x]  `DataManager.swift` ファイルを作成し、`DataManager` クラスを定義する。
+        - [x]  `CoreDataManager` のインスタンスをプロパティとして保持する。
+            - [x]  `private let coreDataManager = CoreDataManager()` のように宣言
+        - [x]  `CoreDataManager` のCRUD操作を呼び出す、以下の関数を定義する。
+            - [x]  `createThoughtCard(content: String, date: Date) -> ThoughtCard`
+            - [x]  `readThoughtCards() -> [ThoughtCard]`
+            - [x]  `updateThoughtCard(thoughtCard: ThoughtCard, newContent: String)`
+            - [x]  `deleteThoughtCard(thoughtCard: ThoughtCard)`
+            - [x]  必要に応じて、データ加工やバリデーション処理などを追加する。
+    - [x]  **データの保存と読み込みを実装**:
+        - [x]  `HomeView` に `DataManager` のインスタンスを追加。
+            - [x]  `@StateObject private var dataManager = DataManager()` のように宣言
+        - [x]  `HomeView` の `onAppear` モディファイア内で、`dataManager.readThoughtCards()` を呼び出して、`ThoughtCard` 配列を初期化する。
+        - [x]  `ThoughtCardView` で `TextEditor` の `onCommit` コールバックを利用し、テキスト編集が完了したタイミングで `dataManager.updateThoughtCard()` または `dataManager.createThoughtCard()` を呼び出してデータを保存する。
+        - [x]  `ThoughtCardView` に削除ボタンを追加し、タップ時に `dataManager.deleteThoughtCard()` を呼び出す。
     
     **ポイント**
     
@@ -591,11 +591,11 @@
     
     ### フェーズ4: 新規カード作成と削除 (1-2日)
     
-    - [ ]  **新規カード作成**:
-        - [ ]  `HomeView` に「新規作成ボタン」を追加し、タップ時に `ThoughtCard` 配列に新しいデータを追加する処理を実装する。
-    - [ ]  **カードの削除**:
-        - [ ]  `onDelete()` モディファイアを使って、リストからカードをスワイプで削除する機能を実装する。
-        - [ ]  `DataManager` を使って、削除に対応する処理を実装する。
+    - [x]  **新規カード作成**:
+        - [x]  `HomeView` に「新規作成ボタン」を追加し、タップ時に `ThoughtCard` 配列に新しいデータを追加する処理を実装する。
+    - [x]  **カードの削除**:
+        - [x]  `onDelete()` モディファイアを使って、リストからカードをスワイプで削除する機能を実装する。
+        - [x]  `DataManager` を使って、削除に対応する処理を実装する。
     
     ## スプリント3：振り返り機能の実装 (2-3週間)
     

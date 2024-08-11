@@ -20,11 +20,27 @@ struct HomeView: View {
                         .padding(.bottom)
                         .padding(.horizontal)
                     
-                    ScrollView {
-                        ForEach(dataManager.thoughtCards.indices, id: \.self) { index in
-                            ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                    ZStack {
+                        ScrollView {
+                            ForEach(dataManager.thoughtCards.indices, id: \.self) { index in
+                                ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                            }
+                        }
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    createNewThoughtCard()
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.system(size: 50))
+                                }
+                                .padding()
+                            }
                         }
                     }
+                    
                 }
                 .onAppear {
                     if dataManager.thoughtCards.isEmpty {
@@ -35,6 +51,10 @@ struct HomeView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
+    }
+    
+    private func createNewThoughtCard() {
+        dataManager.createThoughtCard(content: "", date: Date(), items: [])
     }
 }
 

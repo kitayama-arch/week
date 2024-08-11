@@ -47,7 +47,7 @@ struct ThoughtCardView: View {
                         }
                         .padding(.trailing, 8)
                     }
-                        .padding(.top, 8), // 上部に余白を追加
+                    .padding(.top, 8), // 上部に余白を追加
                     alignment: .topTrailing // 右上に配置
                 )
                 .padding(.horizontal)
