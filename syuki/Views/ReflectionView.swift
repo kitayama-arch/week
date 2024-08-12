@@ -23,7 +23,7 @@ struct ReflectionView: View {
                         
                     }
                 }
-                .navigationTitle("振り返り") // ナビゲーションバーのタイトルを設定
+                .navigationTitle("今週の振り返り") // ナビゲーションバーのタイトルを設定
                 .navigationBarTitleDisplayMode(.inline)
             }
         }
@@ -42,20 +42,37 @@ struct GoalView: View {
 
 struct ThoughtsListView: View {
     let thoughts: [ThoughtCard]
-
+    
     var body: some View {
-            ForEach(thoughts) { thought in
-                Text(thought.content)
+        ZStack {
+            VStack {
+                ForEach(thoughts) { thought in
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.white)
+                            .frame(height: 60)
+                        HStack {
+                            Text(thought.content)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                            Spacer()
+                        }
+                        .padding(.horizontal)
+                    }
+                }
             }
-            .cornerRadius(8)
+            .padding(.horizontal)
+        }
+        
     }
 }
 
 struct ReflectionInputView: View {
     @Binding var reflection: String
     var body: some View {
-      TextEditor(text: $reflection)
+        TextEditor(text: $reflection)
             .frame(height: 200)
+            .cornerRadius(8)
             .padding()
     }
 }

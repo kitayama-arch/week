@@ -600,22 +600,32 @@
     ## スプリント3：振り返り機能の実装 (2-3週間)
     
     ### フェーズ1: 振り返り画面のUI構築 (2-3日)
-    
-    - [ ]  **`ReflectionView` を作成**:
-        - [ ]  新しいSwiftUI Viewとして `ReflectionView` を作成。
-    - [ ]  **UI要素の配置**:
-        - [ ]  今週の目標表示 (`Text` など)
-        - [ ]  今週の思考サマリー表示 (リスト形式など)
-        - [ ]  振り返り入力欄 (`TextEditor` など)
-        - [ ]  次週の目標入力欄 (`TextField` など)
-        - [ ]  保存ボタン (`Button` など)
-    - [ ]  **`HomeView` からの画面遷移**:
-        - [ ]  `HomeView` にボタンを追加し、タップで `ReflectionView` に遷移できるようにする。
+
+    - [ ] **`WeeklyRecord` 構造体の作成**:
+    - [ ] `Models` フォルダ内に `WeeklyRecord.swift` ファイルを作成
+    - [ ] `id`, `startDate`, `endDate`, `thoughts`, `reflection`, `goal`, `nextWeekGoal` プロパティを持つ構造体を定義
+
+    - [ ] **ダミーデータの作成**:
+    - [ ] テスト用の `WeeklyRecord` インスタンスを作成
+
+    - [ ] **個別のUIコンポーネントの作成**:
+    - [ ] `Views` フォルダ内に `ReflectionView.swift` ファイルを作成し、その中に `GoalView`, `ThoughtsListView`, `ReflectionInputView` コンポーネントを実装する
+
+    - [ ] **`ReflectionView.swift` ファイルの作成と実装**:
+    - [ ] `Views` フォルダ内に新しいSwiftUIビューファイルを作成
+    - [ ] `WeeklyRecord` を受け取るプロパティを追加
+    - [ ] 作成した個別のUIコンポーネントを組み合わせてビューを構築
+    - [ ] ナビゲーションタイトルの設定
+    - [ ] 保存ボタンの配置（機能実装は後のフェーズで行う）
+
+    - [ ] **`HomeView` からの画面遷移の実装**:
+    - [ ] `HomeView.swift` を開き、`ReflectionView` へのナビゲーションリンクを追加
+
+    - [ ] **プレビュー機能の実装**:
+    - [ ] 各UIコンポーネントのプレビューを追加
+    - [ ] `ReflectionView` のプレビューを追加し、ダミーデータでテスト
     
     ### フェーズ2: `WeeklyRecord` との連携 (3-4日)
-    
-    - [ ]  **`WeeklyRecord` 構造体作成**:
-        - [ ]  `id`, `startDate`, `endDate`, `thoughts` ( `ThoughtCard` の配列), `goal`, `reflection` プロパティを持つ構造体を作成。
     - [ ]  **`ReflectionView` に `WeeklyRecord` を導入**:
         - [ ]  `@State` または `@ObservedObject` などを使って、`ReflectionView` が `WeeklyRecord` データを保持するようにする。
         - [ ]  UI要素を `WeeklyRecord` のプロパティとバインディングする。
