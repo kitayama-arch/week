@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct HomeView: View {
     @StateObject private var dataManager = DataManager()
     
@@ -40,7 +39,6 @@ struct HomeView: View {
                             }
                         }
                     }
-                    
                 }
                 .onAppear {
                     if dataManager.thoughtCards.isEmpty {
@@ -49,6 +47,13 @@ struct HomeView: View {
                 }
                 .navigationTitle("今週")
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: ReflectionView(weeklyRecord: WeeklyRecord.sampleData)) {
+                            Image(systemName: "square.and.pencil")
+                        }
+                    }
+                }
             }
         }
     }
