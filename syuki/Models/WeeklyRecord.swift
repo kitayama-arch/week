@@ -26,3 +26,21 @@ struct WeeklyRecord: Identifiable {
         self.nextWeekGoal = nextWeekGoal
     }
 }
+
+// テスト用のダミーデータ
+#if DEBUG
+extension WeeklyRecord {
+    static let sampleData: WeeklyRecord = WeeklyRecord(
+        id: UUID(),
+        startDate: Date(),
+        endDate: Date(),
+        thoughts: [
+            ThoughtCard(content: "アイデア1", date: Date(), items: []),
+            ThoughtCard(content: "アイデア2", date: Date(), items: [])
+        ],
+        reflection: "今週は集中できた",
+        goal: "アプリを完成させる",
+        nextWeekGoal: "新しい機能を追加する"
+    )
+}
+#endif
