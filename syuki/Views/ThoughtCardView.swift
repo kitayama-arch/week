@@ -38,7 +38,6 @@ struct ThoughtCardView: View {
                         }) {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(.gray)
-                                .frame(width: 20, height: 20)
                                 .padding(.trailing, 8)
                         }
                         .confirmationDialog("確認", isPresented: $showingOptions) {
