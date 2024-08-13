@@ -96,6 +96,7 @@ class CoreDataManager {
             return nil
         }
     }
+    
     func readWeeklyRecords() -> [WeeklyRecordEntity] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
@@ -107,6 +108,31 @@ class CoreDataManager {
         } catch {
             print("ThoughtCardの取得に失敗しました:\(error)")
             return []
+        }
+    }
+    
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String) {
+        let context = persistentContainer.viewContext
+        
+        weeklyRecord.reflection = reflection
+        weeklyRecord.nextWeekGoal = nextWeekGoal
+        
+        do {
+            try context.save()
+            print("CoreDataManager: WeeklyRecordが正常に更新されました。ID: \(weeklyRecord.id?.uuidString ?? "Unknown")")
+        } catch {
+            print("CoreDataManager: WeeklyRecordの更新に失敗しました: \(error)")
+        }
+    }
+    
+    func deleteWeeklyRecord(weeklyRecord: WeeklyRecordEntity) {
+        let context = persistentContainer.viewContext
+        context.delete(weeklyRecord)
+        
+        do {
+            try context.save()
+        } catch {
+            print("CoreDataManager: WeeklyRecordの削除に失敗しました\(error)")
         }
     }
 }
