@@ -21,7 +21,7 @@ class CoreDataManager {
     
     func createThoughtCard(content:String, date:Date, items:[String]) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
         let context = persistentContainer.viewContext // managedObjectContextを取得
-        let thoughtCardEntity = ThoughtCardEntity(context: context) 
+        let thoughtCardEntity = ThoughtCardEntity(context: context)
         
         thoughtCardEntity.id = UUID()
         thoughtCardEntity.content = content
@@ -72,6 +72,41 @@ class CoreDataManager {
             try context.save()
         } catch {
             print("ThoughtCardの削除に失敗しました\(error)")
+        }
+    }
+    
+    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String) -> WeeklyRecordEntity? {
+        let context = persistentContainer.viewContext
+        let weeklyRecordEntity = WeeklyRecordEntity(context: context)
+        
+        weeklyRecordEntity.id = UUID()
+        weeklyRecordEntity.startDate = startDate
+        weeklyRecordEntity.endDate = endDate
+        weeklyRecordEntity.goal = goal
+        weeklyRecordEntity.thoughts = []
+        weeklyRecordEntity.reflection = ""
+        weeklyRecordEntity.nextWeekGoal = ""
+        
+        do {
+            try context.save()
+            print("CoreDataManager: WeeklyRecordが正常に作成されました。ID: \(weeklyRecordEntity.id?.uuidString ?? "Unknown")")
+            return weeklyRecordEntity
+        } catch {
+            print("CoreDataManager: WeeklyRecordの作成に失敗しました:\(error)")
+            return nil
+        }
+    }
+    func readWeeklyRecords() -> [WeeklyRecordEntity] {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
+        
+        do {
+            let weeklyRecords = try context.fetch(fetchRequest)
+            print("CoreDataManager: 取得したweeklyRecordの数: \(weeklyRecords.count)")
+            return weeklyRecords
+        } catch {
+            print("ThoughtCardの取得に失敗しました:\(error)")
+            return []
         }
     }
 }
