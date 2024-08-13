@@ -120,7 +120,12 @@ class DataManager: ObservableObject {
                   let content = thoughtCardEntity.content,
                   let date = thoughtCardEntity.date,
                   let items = thoughtCardEntity.items else { return nil }
-            return ThoughtCard(content: content, date: date, items: items)
+            return ThoughtCard(
+                id: id,
+                content: content,
+                date: date,
+                items: items
+            )
         }
         let newWeeklyRecord = WeeklyRecord(
             id: id,
@@ -153,7 +158,12 @@ class DataManager: ObservableObject {
                       let content = thoughtCardEntity.content,
                       let date = thoughtCardEntity.date,
                       let items = thoughtCardEntity.items else { return nil }
-                return ThoughtCard(content: content, date: date, items: items)
+                return ThoughtCard(
+                    id: id,
+                    content: content,
+                    date: date,
+                    items: items
+                )
             }
             return WeeklyRecord(
                 id: id,
@@ -177,7 +187,7 @@ class DataManager: ObservableObject {
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
         guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
-            print("DataManager: 削除する WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
+            print("DataManager: 削除��る WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
             return
         }
         coreDataManager.deleteWeeklyRecord(weeklyRecord: entity)

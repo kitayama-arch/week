@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ReflectionView: View {
     @ObservedObject var weeklyRecord: WeeklyRecord
+    @EnvironmentObject var dataManager: DataManager
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
@@ -23,7 +25,9 @@ struct ReflectionView: View {
                         .padding(.horizontal)
                     Spacer()
                     Button("保存") {
-                        
+                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord, reflection: weeklyRecord.reflection, nextWeekGoal: weeklyRecord.nextWeekGoal
+                        )
+                        dismiss() // dismissを使って画面を閉じる
                     }
                 }
                 .navigationTitle("今週の振り返り") // ナビゲーションバーのタイトルを設定
@@ -101,13 +105,6 @@ struct ReflectionInputView: View {
         // 計算された高さと最小高さ(50)を比較し、大きい方を採用
         // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
-    }
-}
-
-struct NextGoalInputView: View {
-    @Binding var nextGoal: String
-    var body: some View {
-        TextField("次週の目標",text: $nextGoal)
     }
 }
 

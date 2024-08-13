@@ -8,9 +8,10 @@
 import SwiftUI
 struct HomeView: View {
     @StateObject private var dataManager = DataManager()
+    @State private var showReflectionView = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.gray.opacity(0.2)
                     .ignoresSafeArea()
@@ -49,10 +50,16 @@ struct HomeView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: ReflectionView(weeklyRecord: WeeklyRecord.sampleData)) {
+                        Button(action: {
+                            showReflectionView = true
+                        }) {
                             Image(systemName: "square.and.pencil")
                         }
                     }
+                }
+                .navigationDestination(isPresented: $showReflectionView) {
+                    ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
+                        .environmentObject(dataManager)
                 }
             }
         }
