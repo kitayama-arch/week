@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ReflectionView: View {
-    @State var weeklyRecord: WeeklyRecord
+    @ObservedObject var weeklyRecord: WeeklyRecord
+    
     var body: some View {
         ZStack {
             Color.gray.opacity(0.2)
@@ -18,8 +19,7 @@ struct ReflectionView: View {
                     GoalView(goal: weeklyRecord.goal)
                     ThoughtsListView(thoughts: weeklyRecord.thoughts)
                     ReflectionInputView(reflection: $weeklyRecord.reflection)
-                    Text("来週の目標")
-                        .font(.headline)
+                    NextGoalInputView(nextGoal: $weeklyRecord.nextWeekGoal)
                     Spacer()
                     Button("保存") {
                         
@@ -100,6 +100,13 @@ struct ReflectionInputView: View {
         // 計算された高さと最小高さ(50)を比較し、大きい方を採用
         // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
+    }
+}
+
+struct NextGoalInputView: View {
+    @Binding var nextGoal: String
+    var body: some View {
+        TextField("次週の目標",text: $nextGoal)
     }
 }
 
