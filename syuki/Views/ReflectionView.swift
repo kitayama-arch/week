@@ -19,7 +19,8 @@ struct ReflectionView: View {
                     GoalView(goal: weeklyRecord.goal)
                     ThoughtsListView(thoughts: weeklyRecord.thoughts)
                     ReflectionInputView(reflection: $weeklyRecord.reflection)
-                    NextGoalInputView(nextGoal: $weeklyRecord.nextWeekGoal)
+                    NextGoalCardView(nextWeekGoal: $weeklyRecord.nextWeekGoal)
+                        .padding(.horizontal)
                     Spacer()
                     Button("保存") {
                         

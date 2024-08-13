@@ -10,6 +10,7 @@
 		5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */; };
 		5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2471792C68BB9A001C3CAA /* ReflectionView.swift */; };
 		5A24717C2C6A0B0A001C3CAA /* WeeklyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24717B2C6A0B0A001C3CAA /* WeeklyRecord.swift */; };
+		5A24717E2C6B4D2D001C3CAA /* NextGoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24717D2C6B4D2D001C3CAA /* NextGoalCardView.swift */; };
 		5A3539342C33CA0400C3AB8D /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539332C33CA0400C3AB8D /* ArchiveView.swift */; };
 		5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539352C33CBB700C3AB8D /* GoalCardView.swift */; };
 		5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539372C33D03700C3AB8D /* ThoughtCard.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		5A2471792C68BB9A001C3CAA /* ReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionView.swift; sourceTree = "<group>"; };
 		5A24717B2C6A0B0A001C3CAA /* WeeklyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecord.swift; sourceTree = "<group>"; };
+		5A24717D2C6B4D2D001C3CAA /* NextGoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGoalCardView.swift; sourceTree = "<group>"; };
 		5A3539332C33CA0400C3AB8D /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
 		5A3539352C33CBB700C3AB8D /* GoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView.swift; sourceTree = "<group>"; };
 		5A3539372C33D03700C3AB8D /* ThoughtCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCard.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				5A3539352C33CBB700C3AB8D /* GoalCardView.swift */,
 				5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */,
 				5A2471792C68BB9A001C3CAA /* ReflectionView.swift */,
+				5A24717D2C6B4D2D001C3CAA /* NextGoalCardView.swift */,
 				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
 			);
 			path = Views;
@@ -208,6 +211,7 @@
 				5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */,
 				5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */,
 				5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */,
+				5A24717E2C6B4D2D001C3CAA /* NextGoalCardView.swift in Sources */,
 				5A24717C2C6A0B0A001C3CAA /* WeeklyRecord.swift in Sources */,
 				5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */,
 				5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */,
