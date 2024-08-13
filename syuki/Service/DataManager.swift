@@ -106,7 +106,7 @@ class DataManager: ObservableObject {
             return nil
         }
         guard let id = entity.id,
-                let startDate = entity.startDate,
+              let startDate = entity.startDate,
               let endDate = entity.endDate,
               let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
               let reflection = entity.reflection,
@@ -117,7 +117,7 @@ class DataManager: ObservableObject {
         }
         let thoughtCards = thoughts.compactMap { thoughtCardEntity -> ThoughtCard? in
             guard let id = thoughtCardEntity.id,
-                    let content = thoughtCardEntity.content,
+                  let content = thoughtCardEntity.content,
                   let date = thoughtCardEntity.date,
                   let items = thoughtCardEntity.items else { return nil }
             return ThoughtCard(content: content, date: date, items: items)
@@ -130,7 +130,49 @@ class DataManager: ObservableObject {
             reflection: reflection,
             goal: goal,
             nextWeekGoal: nextWeekGoal
-            )
+        )
         return newWeeklyRecord
     }
+    
+    func readWeeklyRecords() -> [WeeklyRecord] {
+        let weeklyRecordEntites = coreDataManager.readWeeklyRecords()
+        
+        return weeklyRecordEntites.compactMap { entity -> WeeklyRecord? in
+            guard let id = entity.id,
+                  let startDate = entity.startDate,
+                  let endDate = entity.endDate,
+                  let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
+                  let reflection = entity.reflection,
+                  let goal = entity.goal,
+                  let nextWeekGoal = entity.nextWeekGoal else {
+                print("DataManager: WeeklyRecord の読み込みに失敗しました: データのアンラップに失敗")
+                return nil
+            }
+            let thoughtCards = thoughts.compactMap { thoughtCardEntity -> ThoughtCard? in
+                guard let id = thoughtCardEntity.id,
+                      let content = thoughtCardEntity.content,
+                      let date = thoughtCardEntity.date,
+                      let items = thoughtCardEntity.items else { return nil }
+                return ThoughtCard(content: content, date: date, items: items)
+            }
+            return WeeklyRecord(
+                id: id,
+                startDate: startDate,
+                endDate: endDate,
+                thoughts: thoughtCards,
+                reflection: reflection,
+                goal: goal,
+                nextWeekGoal: nextWeekGoal
+            )
+        }
+    }
+    
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecord, reflection: String, nextWeekGoal: String) {
+        guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
+            print("DataManager: 更新する WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
+            return
+        }
+        coreDataManager.updateWeeklyRecord(weeklyRecord: entity, reflection: reflection, nextWeekGoal: nextWeekGoal)
+    }
+    
 }

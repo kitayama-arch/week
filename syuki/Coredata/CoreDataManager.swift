@@ -97,16 +97,30 @@ class CoreDataManager {
         }
     }
     
+    func readWeeklyRecord(withId id: UUID) -> WeeklyRecordEntity? {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.first
+        } catch {
+            print("特定のWeeklyRecordの取得に失敗しました: \(error)")
+            return nil
+        }
+    }
+    
     func readWeeklyRecords() -> [WeeklyRecordEntity] {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
         
         do {
             let weeklyRecords = try context.fetch(fetchRequest)
-            print("CoreDataManager: 取得したweeklyRecordの数: \(weeklyRecords.count)")
+            print("CoreDataManager: 取得したWeeklyRecordの数: \(weeklyRecords.count)")
             return weeklyRecords
         } catch {
-            print("ThoughtCardの取得に失敗しました:\(error)")
+            print("WeeklyRecordの取得に失敗しました:\(error)")
             return []
         }
     }
