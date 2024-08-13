@@ -175,4 +175,24 @@ class DataManager: ObservableObject {
         coreDataManager.updateWeeklyRecord(weeklyRecord: entity, reflection: reflection, nextWeekGoal: nextWeekGoal)
     }
     
+    func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
+        guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
+            print("DataManager: 削除する WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
+            return
+        }
+        coreDataManager.deleteWeeklyRecord(weeklyRecord: entity)
+    }
+    
+    func createNextWeeklyRecord(previousWeeklyRecord: WeeklyRecord) -> WeeklyRecord? {
+        let startDate = Calendar.current.date(byAdding: .day, value: 7, to: previousWeeklyRecord.endDate)!
+        let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
+        
+        guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal) else {
+            print("DataManager: 次の週のWeeklyRecordの作成に失敗しました")
+            return nil
+        }
+        
+        print("DataManager: 次の週のWeeklyRecordが正常に作成されました。ID: \(newWeeklyRecord.id)")
+        return newWeeklyRecord
+    }
 }
