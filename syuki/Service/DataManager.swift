@@ -23,9 +23,9 @@ class DataManager: ObservableObject {
         let thoughtCardEntities = coreDataManager.readThoughtCards()
         thoughtCards = thoughtCardEntities.compactMap { entity -> ThoughtCard? in
             guard let id = entity.id, // idを取得
-                          let content = entity.content,
-                          let date = entity.date,
-                          let items = entity.items else { return nil }
+                  let content = entity.content,
+                  let date = entity.date,
+                  let items = entity.items else { return nil }
             return ThoughtCard(
                 id: id,  // idを設定
                 content: content,
@@ -98,5 +98,39 @@ class DataManager: ObservableObject {
         }
         
         print("サンプルThoughtCardが追加されました。現在の総数: \(thoughtCards.count)")
+    }
+    
+    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String) -> WeeklyRecord? {
+        guard let entity = coreDataManager.createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal) else {
+            print("DataManager: WeeklyRecordの作成に失敗しました")
+            return nil
+        }
+        guard let id = entity.id,
+                let startDate = entity.startDate,
+              let endDate = entity.endDate,
+              let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
+              let reflection = entity.reflection,
+              let goal = entity.goal,
+              let nextWeekGoal = entity.nextWeekGoal else {
+            print("DataManager: WeeklyRecordの作成に失敗しました: データのアンラップに失敗")
+            return nil
+        }
+        let thoughtCards = thoughts.compactMap { thoughtCardEntity -> ThoughtCard? in
+            guard let id = thoughtCardEntity.id,
+                    let content = thoughtCardEntity.content,
+                  let date = thoughtCardEntity.date,
+                  let items = thoughtCardEntity.items else { return nil }
+            return ThoughtCard(content: content, date: date, items: items)
+        }
+        let newWeeklyRecord = WeeklyRecord(
+            id: id,
+            startDate: startDate,
+            endDate: endDate,
+            thoughts: thoughtCards,
+            reflection: reflection,
+            goal: goal,
+            nextWeekGoal: nextWeekGoal
+            )
+        return newWeeklyRecord
     }
 }
