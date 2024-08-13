@@ -5,5 +5,15 @@
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="items" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[String]"/>
+        <relationship name="weeklyRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeeklyRecordEntity" inverseName="thoughts" inverseEntity="WeeklyRecordEntity"/>
+    </entity>
+    <entity name="WeeklyRecordEntity" representedClassName="WeeklyRecordEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="goal" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="nextWeekGoal" optional="YES" attributeType="String"/>
+        <attribute name="reflection" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="thoughts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ThoughtCardEntity" inverseName="weeklyRecord" inverseEntity="ThoughtCardEntity"/>
     </entity>
 </model>
