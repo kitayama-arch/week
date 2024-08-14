@@ -12,9 +12,11 @@ class DataManager: ObservableObject {
     private let coreDataManager = CoreDataManager() // coredatamanagerのものを使えるように
     
     @Published var thoughtCards:[ThoughtCard] = [] // thoughtcardsが変更されたらswiftUIのview更新
+    @Published var weeklyRecords: [WeeklyRecord] = []
     
     init() {
         loadThoughtCards()
+        loadWeeklyRecords()
         print("Initial thoughtCards count: \(thoughtCards.count)")
         print("Initial CoreData entities count: \(coreDataManager.readThoughtCards().count)")
     }
@@ -33,6 +35,10 @@ class DataManager: ObservableObject {
                 items: items
             )
         }
+    }
+    
+    func loadWeeklyRecords() {
+        weeklyRecords = readWeeklyRecords()
     }
     
     func createThoughtCard(content: String, date: Date, items: [String]) {
@@ -187,7 +193,7 @@ class DataManager: ObservableObject {
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
         guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
-            print("DataManager: 削除��る WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
+            print("DataManager: 削除る WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
             return
         }
         coreDataManager.deleteWeeklyRecord(weeklyRecord: entity)
@@ -198,11 +204,43 @@ class DataManager: ObservableObject {
         let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
         
         guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal) else {
-            print("DataManager: 次の週のWeeklyRecordの作成に失敗しました")
+            print("DataManager: 次の週のWeeklyRecordの成に失敗しました")
             return nil
         }
         
         print("DataManager: 次の週のWeeklyRecordが正常に作成されました。ID: \(newWeeklyRecord.id)")
         return newWeeklyRecord
+    }
+    
+    func addSampleWeeklyRecords() {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        // 過去3週間分のサンプルデータを作成
+        for i in 0..<3 {
+            let endDate = calendar.date(byAdding: .day, value: -7 * i, to: today)!
+            let startDate = calendar.date(byAdding: .day, value: -6, to: endDate)!
+            
+            let goal = "第\(3-i)週目の目標"
+            let reflection = "第\(3-i)週目の振り返り"
+            let nextWeekGoal = "第\(4-i)週目の目標"
+            
+            if let weeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal) {
+                weeklyRecord.reflection = reflection
+                weeklyRecord.nextWeekGoal = nextWeekGoal
+                
+                // サンプルの思考カードを追加
+                for j in 0..<3 {
+                    let thoughtDate = calendar.date(byAdding: .day, value: j, to: startDate)!
+                    let thoughtContent = "第\(3-i)週目の思考\(j+1)"
+                    let thought = ThoughtCard(id: UUID(), content: thoughtContent, date: thoughtDate, items: [])
+                    weeklyRecord.thoughts.append(thought)
+                }
+                
+                weeklyRecords.append(weeklyRecord)
+            }
+        }
+        
+        print("サンプルWeeklyRecordが追加されました。現在の総数: \(weeklyRecords.count)")
     }
 }
