@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct ArchiveView: View {
+    @ObservedObject private var dataManager = DataManager()
+    @State private var selectedWeeklyRecord: WeeklyRecord? = nil
+    
     var body: some View {
-        Text("archive")
+        Text("a")
     }
 }
 
