@@ -303,7 +303,7 @@
     │   ├── SyukiApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
-    │   ├── Preview Content/
+    │   |── Preview Content/
     │   ├── Views/
     │   │   ├── HomeView.swift
     │   │   ├── ThoughtCardView.swift
@@ -601,48 +601,66 @@
     
     ### フェーズ1: 振り返り画面のUI構築 (2-3日)
 
-    - [ ] **`WeeklyRecord` 構造体の作成**:
-    - [ ] `Models` フォルダ内に `WeeklyRecord.swift` ファイルを作成
-    - [ ] `id`, `startDate`, `endDate`, `thoughts`, `reflection`, `goal`, `nextWeekGoal` プロパティを持つ構造体を定義
+    - [x] **`WeeklyRecord` 構造体の作成**:
+    - [x] `Models` フォルダ内に `WeeklyRecord.swift` ファイルを作成
+    - [x] `id`, `startDate`, `endDate`, `thoughts`, `reflection`, `goal`, `nextWeekGoal` プロパティを持つ構造体を定義
 
-    - [ ] **ダミーデータの作成**:
-    - [ ] テスト用の `WeeklyRecord` インスタンスを作成
+    - [x] **ダミーデータの作成**:
+    - [x] テスト用の `WeeklyRecord` インスタンスを作成
 
-    - [ ] **個別のUIコンポーネントの作成**:
-    - [ ] `Views` フォルダ内に `ReflectionView.swift` ファイルを作成し、その中に `GoalView`, `ThoughtsListView`, `ReflectionInputView` コンポーネントを実装する
+    - [x] **個別のUIコンポーネントの作成**:
+    - [x] `Views` フォルダ内に `ReflectionView.swift` ファイルを作成し、その中に `GoalView`, `ThoughtsListView`, `ReflectionInputView` コンポーネントを実装する
 
-    - [ ] **`ReflectionView.swift` ファイルの作成と実装**:
-    - [ ] `Views` フォルダ内に新しいSwiftUIビューファイルを作成
-    - [ ] `WeeklyRecord` を受け取るプロパティを追加
-    - [ ] 作成した個別のUIコンポーネントを組み合わせてビューを構築
-    - [ ] ナビゲーションタイトルの設定
-    - [ ] 保存ボタンの配置（機能実装は後のフェーズで行う）
+    - [x] **`ReflectionView.swift` ファイルの作成と実装**:
+    - [x] `Views` フォルダ内に新しいSwiftUIビューファイルを作成
+    - [x] `WeeklyRecord` を受け取るプロパティを追加
+    - [x] 作成した個別のUIコンポーネントを組み合わせてビューを構築
+    - [x] ナビゲーションタイトルの設定
+    - [x] 保存ボタンの配置（機能実装は後のフェーズで行う）
 
-    - [ ] **`HomeView` からの画面遷移の実装**:
-    - [ ] `HomeView.swift` を開き、`ReflectionView` へのナビゲーションリンクを追加
+    - [x] **`HomeView` からの画面遷移の実装**:
+    - [x] `HomeView.swift` を開き、`ReflectionView` へのナビゲーションリンクを追加
 
-    - [ ] **プレビュー機能の実装**:
-    - [ ] 各UIコンポーネントのプレビューを追加
-    - [ ] `ReflectionView` のプレビューを追加し、ダミーデータでテスト
+    - [x] **プレビュー機能の実装**:
+    - [x] 各UIコンポーネントのプレビューを追加
+    - [x] `ReflectionView` のプレビューを追加し、ダミーデータでテスト
     
     ### フェーズ2: `WeeklyRecord` との連携 (3-4日)
-    - [ ]  **`ReflectionView` に `WeeklyRecord` を導入**:
-        - [ ]  `@State` または `@ObservedObject` などを使って、`ReflectionView` が `WeeklyRecord` データを保持するようにする。
-        - [ ]  UI要素を `WeeklyRecord` のプロパティとバインディングする。
-    
+    - [x]  **`ReflectionView` の更新**:
+        - [x] `@State var weeklyRecord: WeeklyRecord` を `@ObservedObject var weeklyRecord: WeeklyRecord` に変更する。
+
+    - [x] **`WeeklyRecord` の更新**:
+        - [x] `WeeklyRecord.swift` を開き、構造体をクラスに変更する。
+        - [x] `ObservableObject` プロトコルに準拠させる。
+        - [x] 変更可能なプロパティに `@Published` 属性を追加する。
+
+    - [x] **UI要素とのバインディング**:
+        - [x] `GoalView` を更新し、`weeklyRecord.goal` とバインディングする。
+        - [x] `ThoughtsListView` を更新し、`weeklyRecord.thoughts` とバインディングする。
+        - [x] `ReflectionInputView` を更新し、`$weeklyRecord.reflection` とバインディングする。
+
+    - [x] **新しいUI要素の追加**:
+        - [x] `NextWeekGoalInputView` を作成し、`$weeklyRecord.nextWeekGoal` とバインディングする。
+
+    - [x] **保存ボタンの機能実装**:
+        - [x] 保存ボタンのアクションを実装し、`weeklyRecord` の変更を保存する処理を追加する。
+
+    - [x] **プレビューの更新**:
+        - [x] `ReflectionView` のプレビューを更新し、`ObservedObject` を使用するように変更する。
+
     ### フェーズ3: 振り返りデータの保存と読み込み (4-5日)
     
-    - [ ]  **`WeeklyRecordEntity` 作成**:
-        - [ ]  Core Dataに `WeeklyRecord` を保存するためのエンティティを作成。
-    - [ ]  **CoreDataManager の実装**: // 👈 ここに追記
-        - Core Dataスタックのセットアップ
-        - ThoughtCardEntity と WeeklyRecordEntity を操作するためのCRUD操作を実装
-            - createThoughtCard(), readThoughtCards(), updateThoughtCard(), deleteThoughtCard()
-            - createWeeklyRecord(), readWeeklyRecords(), updateWeeklyRecord(), deleteWeeklyRecord()
-    - [ ]  **`DataManager` にCRUD操作を追加**:
-        - [ ]  `WeeklyRecordEntity` を操作するための関数を `DataManager` に追加。
-    - [ ]  **`ReflectionView` でデータ保存**:
-        - [ ]  画面遷移時や保存ボタン押下時に、`DataManager` を使って `WeeklyRecord` データを保存。
+    - [x]  **`WeeklyRecordEntity` 作成**:
+        - [x]  Core Dataに `WeeklyRecord` を保存するためのエンティティを作成。
+    - [x]  **CoreDataManager の実装**:
+        - [x]  Core Dataスタックのセットアップ
+        - [x]  ThoughtCardEntity と WeeklyRecordEntity を操作するためのCRUD操作を実装
+            - [x]  createThoughtCard(), readThoughtCards(), updateThoughtCard(), deleteThoughtCard()
+            - [x]  createWeeklyRecord(), readWeeklyRecords(), updateWeeklyRecord(), deleteWeeklyRecord()
+    - [x]  **`DataManager` にCRUD操作を追加**:
+        - [x]  `WeeklyRecordEntity` を操作するための関数を `DataManager` に追加。
+    - [x]  **`ReflectionView` でデータ保存**:
+        - [x]  画面遷移時や保存ボタン押下時に、`DataManager` を使って `WeeklyRecord` データを保存。
     
     ### フェーズ4: アーカイブ機能の実装 (3-4日)
     
@@ -660,7 +678,7 @@
     - [ ]  **テストケース作成**:
         - [ ]  `DataManager` の各CRUD操作をテストするケースを作成する。
     - [ ]  **テスト実施**:
-        - [ ]  アプリを起動し、思考カードの作成、編集、削除、振り返りの入力、アーカイブの表示などを実行し、データが正しく保存・読み込まれているかを確認する。z
+        - [ ]  アプリを起動し、思考カードの作成、編集、削除、振り返りの入力、アーカイブの表示などを実行し、データが正しく保存・読み込まれているかを確認する。
     
     ---
     

@@ -16,9 +16,9 @@ struct HomeView: View {
                 Color.gray.opacity(0.2)
                     .ignoresSafeArea()
                 VStack {
-                    GoalCardView()
-                        .padding(.bottom)
-                        .padding(.horizontal)
+//                    GoalCardView(weeklyRecord: <#Binding<WeeklyRecord>#>)
+//                        .padding(.bottom)
+//                        .padding(.horizontal)
                     
                     ZStack {
                         ScrollView {

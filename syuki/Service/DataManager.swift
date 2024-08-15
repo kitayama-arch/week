@@ -106,8 +106,8 @@ class DataManager: ObservableObject {
         print("サンプルThoughtCardが追加されました。現在の総数: \(thoughtCards.count)")
     }
     
-    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String) -> WeeklyRecord? {
-        guard let entity = coreDataManager.createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal) else {
+    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String, emoji: String) -> WeeklyRecord? {
+        guard let entity = coreDataManager.createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal, emoji: emoji) else {
             print("DataManager: WeeklyRecordの作成に失敗しました")
             return nil
         }
@@ -117,7 +117,8 @@ class DataManager: ObservableObject {
               let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
               let reflection = entity.reflection,
               let goal = entity.goal,
-              let nextWeekGoal = entity.nextWeekGoal else {
+              let nextWeekGoal = entity.nextWeekGoal,
+              let emoji = entity.emoji else {
             print("DataManager: WeeklyRecordの作成に失敗しました: データのアンラップに失敗")
             return nil
         }
@@ -140,7 +141,8 @@ class DataManager: ObservableObject {
             thoughts: thoughtCards,
             reflection: reflection,
             goal: goal,
-            nextWeekGoal: nextWeekGoal
+            nextWeekGoal: nextWeekGoal,
+            emoji: emoji
         )
         return newWeeklyRecord
     }
@@ -155,7 +157,8 @@ class DataManager: ObservableObject {
                   let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
                   let reflection = entity.reflection,
                   let goal = entity.goal,
-                  let nextWeekGoal = entity.nextWeekGoal else {
+                  let nextWeekGoal = entity.nextWeekGoal,
+                  let emoji = entity.emoji else {
                 print("DataManager: WeeklyRecord の読み込みに失敗しました: データのアンラップに失敗")
                 return nil
             }
@@ -178,17 +181,18 @@ class DataManager: ObservableObject {
                 thoughts: thoughtCards,
                 reflection: reflection,
                 goal: goal,
-                nextWeekGoal: nextWeekGoal
+                nextWeekGoal: nextWeekGoal,
+                emoji: emoji
             )
         }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecord, reflection: String, nextWeekGoal: String) {
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecord, reflection: String, nextWeekGoal: String, emoji: String) {
         guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
             print("DataManager: 更新する WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
             return
         }
-        coreDataManager.updateWeeklyRecord(weeklyRecord: entity, reflection: reflection, nextWeekGoal: nextWeekGoal)
+        coreDataManager.updateWeeklyRecord(weeklyRecord: entity, reflection: reflection, nextWeekGoal: nextWeekGoal, emoji: emoji)
     }
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
@@ -203,7 +207,7 @@ class DataManager: ObservableObject {
         let startDate = Calendar.current.date(byAdding: .day, value: 7, to: previousWeeklyRecord.endDate)!
         let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
         
-        guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal) else {
+        guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal, emoji: previousWeeklyRecord.emoji) else {
             print("DataManager: 次の週のWeeklyRecordの成に失敗しました")
             return nil
         }
@@ -224,8 +228,9 @@ class DataManager: ObservableObject {
             let goal = "第\(3-i)週目の目標"
             let reflection = "第\(3-i)週目の振り返り"
             let nextWeekGoal = "第\(4-i)週目の目標"
+            let emoji = "😀"  // サンプル絵文字
             
-            if let weeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal) {
+            if let weeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal, emoji: emoji) {
                 weeklyRecord.reflection = reflection
                 weeklyRecord.nextWeekGoal = nextWeekGoal
                 

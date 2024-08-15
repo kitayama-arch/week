@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeeklyRecord: Identifiable,ObservableObject {
+class WeeklyRecord: Identifiable, ObservableObject {
     let id: UUID
     let startDate: Date
     let endDate: Date
@@ -15,8 +15,9 @@ class WeeklyRecord: Identifiable,ObservableObject {
     @Published var reflection: String
     @Published var goal: String
     @Published var nextWeekGoal: String
+    @Published var emoji: String
     
-    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String) {
+    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String, emoji: String) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
@@ -24,6 +25,7 @@ class WeeklyRecord: Identifiable,ObservableObject {
         self.reflection = reflection
         self.goal = goal
         self.nextWeekGoal = nextWeekGoal
+        self.emoji = emoji
     }
 }
 
@@ -40,7 +42,8 @@ extension WeeklyRecord {
         ],
         reflection: "今週は集中できた",
         goal: "アプリを完成させる",
-        nextWeekGoal: "新しい機能を追加する"
+        nextWeekGoal: "新しい機能を追加する",
+        emoji: "😀"
     )
 }
 #endif

@@ -75,7 +75,7 @@ class CoreDataManager {
         }
     }
     
-    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String) -> WeeklyRecordEntity? {
+    func createWeeklyRecord(startDate: Date, endDate: Date, goal: String, emoji: String) -> WeeklyRecordEntity? {
         let context = persistentContainer.viewContext
         let weeklyRecordEntity = WeeklyRecordEntity(context: context)
         
@@ -86,6 +86,7 @@ class CoreDataManager {
         weeklyRecordEntity.thoughts = []
         weeklyRecordEntity.reflection = ""
         weeklyRecordEntity.nextWeekGoal = ""
+        weeklyRecordEntity.emoji = emoji  // 絵文字を保存
         
         do {
             try context.save()
@@ -125,11 +126,12 @@ class CoreDataManager {
         }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String) {
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, emoji: String) {
         let context = persistentContainer.viewContext
         
         weeklyRecord.reflection = reflection
         weeklyRecord.nextWeekGoal = nextWeekGoal
+        weeklyRecord.emoji = emoji  // 絵文字を更新
         
         do {
             try context.save()

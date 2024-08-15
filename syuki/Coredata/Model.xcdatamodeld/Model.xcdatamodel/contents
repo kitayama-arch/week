@@ -8,6 +8,7 @@
         <relationship name="weeklyRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeeklyRecordEntity" inverseName="thoughts" inverseEntity="WeeklyRecordEntity"/>
     </entity>
     <entity name="WeeklyRecordEntity" representedClassName="WeeklyRecordEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goal" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

@@ -74,11 +74,14 @@ struct WeeklyRecordDetailView: View {
                         .background(Color.white)
                         .cornerRadius(8)
                 }
+                Spacer()
             }
-            .padding()
+            .padding(.horizontal)
+            .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .leading)
+            
         }
+        .background(Color.gray.opacity(0.2))
         .navigationTitle("週間記録詳細")
-        .background(Color.gray.opacity(0.2).ignoresSafeArea())
     }
     
     private func formatDate(_ date: Date) -> String {
