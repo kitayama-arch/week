@@ -14,57 +14,65 @@ struct ThoughtCardView: View {
     let index: Int
     // テキストエディタの高さを動的に管理するState変数
     @State private var textEditorHeight: CGFloat = 50
-    
+    @FocusState private var isFocused: Bool
+    @State private var previousContent: String = ""
+
     var body: some View {
-        ZStack {
+        VStack(spacing: 10) {
             TextEditor(text: $thoughtCard.content)
-            // テキストエディタの高さを動的に設定（最小50）
                 .frame(height: max(50, textEditorHeight))
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
-            // テキストが変更されたときに高さを更新
+                .focused($isFocused)
                 .onChange(of: thoughtCard.content) { oldValue, newValue in
                     withAnimation {
                         updateTextEditorHeight()
                     }
                     dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content)
-                }
-                .overlay(
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            showingOptions = true
-                        }) {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 8)
-                        }
-                        .confirmationDialog("確認", isPresented: $showingOptions) {
-                            Button("削除") {
-                                let indexSet = IndexSet(integer: index)
-                                dataManager.deleteThoughtCard(at: indexSet)
-                            }
-                        }
+                    
+                    // 改行を検知して処理
+                    if newValue.last == "\n" && newValue != previousContent {
+                        handleEnterKey()
                     }
-                    .padding(.top, 8), // 上部に余白を追加
-                    alignment: .topTrailing // 右上に配置
-                )
-                .padding(.horizontal)
+                    previousContent = newValue
+                }
             
+            HStack {
+                Button(action: { adjustIndent(increase: false) }) {
+                    Image(systemName: "chevron.left")
+                    Text("インデントを浅く")
+                }
+                Button(action: { adjustIndent(increase: true) }) {
+                    Image(systemName: "chevron.right")
+                    Text("インデントを深く")
+                }
+            }
         }
-        // ZStackの高さを無限に設定し、上揃えにする
-        .frame(maxHeight: .infinity, alignment: .top)
+        .padding()
+        .overlay(
+            Button(action: { showingOptions = true }) {
+                Image(systemName: "ellipsis")
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 8)
+            }
+            .confirmationDialog("確認", isPresented: $showingOptions) {
+                Button("削除") {
+                    let indexSet = IndexSet(integer: index)
+                    dataManager.deleteThoughtCard(at: indexSet)
+                }
+            },
+            alignment: .topTrailing
+        )
         .onAppear {
-            updateTextEditorHeight() // 初期高さの更新
+            updateTextEditorHeight()
+            isFocused = true
+            previousContent = thoughtCard.content
         }
     }
-    
-    // テキストエディタの高さを更新する関数
+
     private func updateTextEditorHeight() {
-        // 画面幅からパディングを引いたサイズを計算
         let size = CGSize(width: UIScreen.main.bounds.width - 40, height: .infinity)
-        // テキストの実際の高さを計算
         let estimatedSize = thoughtCard.content.boundingRect(
             with: size,
             options: .usesLineFragmentOrigin,
@@ -72,9 +80,38 @@ struct ThoughtCardView: View {
             context: nil
         )
         
-        // 計算された高さと最小高さ(50)を比較し、大きい方を採用
-        // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
+    }
+
+    private func handleEnterKey() {
+        let lines = thoughtCard.content.split(separator: "\n")
+        if let lastLine = lines.last,
+           let match = lastLine.firstMatch(of: /^\s*([-+*])\s*/) {
+            let newLine = "\(match.0)"
+            thoughtCard.content.append(newLine)
+        } else {
+            thoughtCard.content.append("- ")
+        }
+    }
+
+    private func adjustIndent(increase: Bool) {
+        let lines = thoughtCard.content.split(separator: "\n")
+        let updatedLines = lines.map { line -> String in
+            var currentLine = String(line)
+            if let match = currentLine.firstMatch(of: /^(\s*)([-+*])/) {
+                let currentIndent = match.1.count / 2
+                let newIndent = increase ? currentIndent + 1 : max(currentIndent - 1, 0)
+                let symbol = getSymbolForIndent(newIndent)
+                currentLine = String(repeating: "  ", count: newIndent) + symbol + " " + currentLine.replacing(/^\s*[-+*]\s*/, with: "")
+            }
+            return currentLine
+        }
+        thoughtCard.content = updatedLines.joined(separator: "\n")
+    }
+
+    private func getSymbolForIndent(_ indent: Int) -> String {
+        let symbols = ["-", "+", "*"]
+        return symbols[indent % symbols.count]
     }
 }
 
