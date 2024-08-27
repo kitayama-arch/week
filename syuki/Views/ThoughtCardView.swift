@@ -41,11 +41,9 @@ struct ThoughtCardView: View {
             HStack {
                 Button(action: { adjustIndent(increase: false) }) {
                     Image(systemName: "chevron.left")
-                    Text("インデントを浅く")
                 }
                 Button(action: { adjustIndent(increase: true) }) {
                     Image(systemName: "chevron.right")
-                    Text("インデントを深く")
                 }
             }
         }
