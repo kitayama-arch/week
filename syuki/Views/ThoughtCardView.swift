@@ -33,15 +33,6 @@ struct ThoughtCardView: View {
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
-                .onChange(of: thoughtCard.content) { oldValue, newValue in
-                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content)
-                    
-                    // 改行を検知して処理
-                    if newValue.last == "\n" && newValue != previousContent {
-                        handleEnterKey()
-                    }
-                    previousContent = newValue
-                }
             
             HStack {
                 Button(action: { adjustIndent(increase: false) }) {
