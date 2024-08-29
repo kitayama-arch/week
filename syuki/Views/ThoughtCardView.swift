@@ -12,23 +12,28 @@ struct ThoughtCardView: View {
     @ObservedObject var dataManager: DataManager
     @State private var showingOptions = false
     let index: Int
-    // テキストエディタの高さを動的に管理するState変数
-    @State private var textEditorHeight: CGFloat = 50
-    @FocusState private var isFocused: Bool
+    @State private var textViewHeight: CGFloat = 50 // テキストエディタの高さを動的に管理するState変数
     @State private var previousContent: String = ""
+    @FocusState private var isFocused: Bool
+    @State private var cursorPosition: Int = 0
 
     var body: some View {
         VStack(spacing: 10) {
-            TextEditor(text: $thoughtCard.content)
-                .frame(height: max(50, textEditorHeight))
+            UITextViewWrapper(text: $thoughtCard.content, height: $textViewHeight, onTextChange: { newText in
+                dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newText)
+                
+                // 改行を検知して処理
+                if newText.last == "\n" && newText != previousContent {
+                    handleEnterKey()
+                }
+                previousContent = newText
+            }, cursorPosition: $cursorPosition)
+                .focused($isFocused) // フォーカスを制御
+                .frame(height: max(50, textViewHeight))
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
-                .focused($isFocused)
                 .onChange(of: thoughtCard.content) { oldValue, newValue in
-                    withAnimation {
-                        updateTextEditorHeight()
-                    }
                     dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: thoughtCard.content)
                     
                     // 改行を検知して処理
@@ -78,7 +83,7 @@ struct ThoughtCardView: View {
             context: nil
         )
         
-        textEditorHeight = max(50, estimatedSize.height + 20)
+        textViewHeight = max(50, estimatedSize.height + 20)
     }
 
     private func handleEnterKey() {
@@ -93,18 +98,38 @@ struct ThoughtCardView: View {
     }
 
     private func adjustIndent(increase: Bool) {
-        let lines = thoughtCard.content.split(separator: "\n")
-        let updatedLines = lines.map { line -> String in
-            var currentLine = String(line)
+        let lines = thoughtCard.content.split(separator: "\n", omittingEmptySubsequences: false)
+        let currentLineIndex = getCurrentLineIndex(cursorPosition: cursorPosition, in: thoughtCard.content)
+        
+        if currentLineIndex < lines.count {
+            var currentLine = String(lines[currentLineIndex])
             if let match = currentLine.firstMatch(of: /^(\s*)([-+*])/) {
                 let currentIndent = match.1.count / 2
                 let newIndent = increase ? currentIndent + 1 : max(currentIndent - 1, 0)
                 let symbol = getSymbolForIndent(newIndent)
                 currentLine = String(repeating: "  ", count: newIndent) + symbol + " " + currentLine.replacing(/^\s*[-+*]\s*/, with: "")
             }
-            return currentLine
+            
+            var updatedLines = lines
+            updatedLines[currentLineIndex] = Substring(currentLine)
+            thoughtCard.content = updatedLines.joined(separator: "\n")
         }
-        thoughtCard.content = updatedLines.joined(separator: "\n")
+    }
+
+    private func getCurrentLineIndex(cursorPosition: Int, in text: String) -> Int {
+        let lines = text.split(separator: "\n", omittingEmptySubsequences: false)
+        var currentIndex = 0
+        var characterCount = 0
+        
+        for (index, line) in lines.enumerated() {
+            characterCount += line.count + 1 // +1 for newline character
+            if characterCount > cursorPosition {
+                currentIndex = index
+                break
+            }
+        }
+        
+        return currentIndex
     }
 
     private func getSymbolForIndent(_ indent: Int) -> String {
@@ -121,5 +146,50 @@ struct ThoughtCardView_Previews: PreviewProvider {
         ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager, index: 0)
             .previewLayout(.sizeThatFits)
             .padding()
+    }
+}
+
+struct UITextViewWrapper: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var height: CGFloat
+    var onTextChange: (String) -> Void
+    @Binding var cursorPosition: Int
+
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.delegate = context.coordinator
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.isScrollEnabled = false
+        textView.backgroundColor = .clear
+        return textView
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+        DispatchQueue.main.async {
+            self.height = uiView.contentSize.height
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    class Coordinator: NSObject, UITextViewDelegate {
+        var parent: UITextViewWrapper
+
+        init(_ parent: UITextViewWrapper) {
+            self.parent = parent
+        }
+
+        func textViewDidChange(_ textView: UITextView) {
+            parent.text = textView.text
+            parent.height = textView.contentSize.height
+            parent.onTextChange(textView.text)
+        }
+
+        func textViewDidChangeSelection(_ textView: UITextView) {
+            parent.cursorPosition = textView.selectedRange.location
+        }
     }
 }
