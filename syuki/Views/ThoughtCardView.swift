@@ -80,11 +80,11 @@ struct ThoughtCardView: View {
     private func handleEnterKey() {
         let lines = thoughtCard.content.split(separator: "\n")
         if let lastLine = lines.last,
-           let match = lastLine.firstMatch(of: /^\s*([-+*])\s*/) {
+           let match = lastLine.firstMatch(of: /^\s*([•◦◾])\s*/) {
             let newLine = "\(match.0)"
             thoughtCard.content.append(newLine)
         } else {
-            thoughtCard.content.append("- ")
+            thoughtCard.content.append("• ")
         }
     }
 
@@ -94,11 +94,11 @@ struct ThoughtCardView: View {
         
         if currentLineIndex < lines.count {
             var currentLine = String(lines[currentLineIndex])
-            if let match = currentLine.firstMatch(of: /^(\s*)([-+*])/) {
+            if let match = currentLine.firstMatch(of: /^(\s*)([•◦◾])/) {
                 let currentIndent = match.1.count / 2
                 let newIndent = increase ? currentIndent + 1 : max(currentIndent - 1, 0)
                 let symbol = getSymbolForIndent(newIndent)
-                currentLine = String(repeating: "  ", count: newIndent) + symbol + " " + currentLine.replacing(/^\s*[-+*]\s*/, with: "")
+                currentLine = String(repeating: "  ", count: newIndent) + symbol + " " + currentLine.replacing(/^\s*[•◦◾]\s*/, with: "")
             }
             
             var updatedLines = lines
@@ -124,7 +124,7 @@ struct ThoughtCardView: View {
     }
 
     private func getSymbolForIndent(_ indent: Int) -> String {
-        let symbols = ["-", "+", "*"]
+        let symbols = ["•", "◦", "◾"]
         return symbols[indent % symbols.count]
     }
 }
@@ -152,6 +152,21 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
+        
+        // カスタムリストスタイルを適用
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.headIndent = 15
+        paragraphStyle.firstLineHeadIndent = 0
+        paragraphStyle.tailIndent = -15
+        paragraphStyle.paragraphSpacingBefore = 2
+        paragraphStyle.paragraphSpacing = 2
+        paragraphStyle.lineSpacing = 1
+        
+        textView.typingAttributes = [
+            .paragraphStyle: paragraphStyle,
+            .font: UIFont.preferredFont(forTextStyle: .body)
+        ]
+        
         return textView
     }
 
