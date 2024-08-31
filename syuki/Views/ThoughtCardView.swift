@@ -8,40 +8,23 @@
 import SwiftUI
 
 struct ThoughtCardView: View {
-    @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
+    @Binding var thoughtCard: ThoughtCard
     @ObservedObject var dataManager: DataManager
     @State private var showingOptions = false
     let index: Int
-    @State private var textViewHeight: CGFloat = 50 // テキストエディタの高さを動的に管理するState変数
+    @State private var textViewHeight: CGFloat = 50
     @State private var previousContent: String = ""
     @FocusState private var isFocused: Bool
     @State private var cursorPosition: Int = 0
 
     var body: some View {
         VStack(spacing: 10) {
-            UITextViewWrapper(text: $thoughtCard.content, height: $textViewHeight, onTextChange: { newText in
-                dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newText)
-                
-                // 改行を検知して処理
-                if newText.last == "\n" && newText != previousContent {
-                    handleEnterKey()
-                }
-                previousContent = newText
-            }, cursorPosition: $cursorPosition)
-                .focused($isFocused) // フォーカスを制御
+            UITextViewWrapper(text: $thoughtCard.content, height: $textViewHeight, cursorPosition: $cursorPosition, adjustIndent: adjustIndent, handleEnterKey: handleEnterKey)
+                .focused($isFocused)
                 .frame(height: max(50, textViewHeight))
                 .padding(.horizontal)
                 .background(Color.white)
                 .cornerRadius(8)
-            
-            HStack {
-                Button(action: { adjustIndent(increase: false) }) {
-                    Image(systemName: "chevron.left")
-                }
-                Button(action: { adjustIndent(increase: true) }) {
-                    Image(systemName: "chevron.right")
-                }
-            }
         }
         .padding()
         .overlay(
@@ -59,9 +42,16 @@ struct ThoughtCardView: View {
             alignment: .topTrailing
         )
         .onAppear {
-            updateTextEditorHeight()
-            isFocused = true
-            previousContent = thoughtCard.content
+            DispatchQueue.main.async {
+                updateTextEditorHeight()
+                isFocused = true
+                previousContent = thoughtCard.content
+            }
+        }
+        .onChange(of: thoughtCard.content) { oldValue, newValue in
+            DispatchQueue.main.async {
+                dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+            }
         }
     }
 
@@ -81,10 +71,10 @@ struct ThoughtCardView: View {
         let lines = thoughtCard.content.split(separator: "\n")
         if let lastLine = lines.last,
            let match = lastLine.firstMatch(of: /^\s*([•◦◾])\s*/) {
-            let newLine = "\(match.0)"
+            let newLine = "\n\(match.0)"
             thoughtCard.content.append(newLine)
         } else {
-            thoughtCard.content.append("• ")
+            thoughtCard.content.append("\n• ")
         }
     }
 
@@ -143,8 +133,9 @@ struct ThoughtCardView_Previews: PreviewProvider {
 struct UITextViewWrapper: UIViewRepresentable {
     @Binding var text: String
     @Binding var height: CGFloat
-    var onTextChange: (String) -> Void
     @Binding var cursorPosition: Int
+    var adjustIndent: (Bool) -> Void
+    var handleEnterKey: () -> Void
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
@@ -153,7 +144,6 @@ struct UITextViewWrapper: UIViewRepresentable {
         textView.isScrollEnabled = false
         textView.backgroundColor = .clear
         
-        // カスタムリストスタイルを適用
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.headIndent = 15
         paragraphStyle.firstLineHeadIndent = 0
@@ -167,11 +157,23 @@ struct UITextViewWrapper: UIViewRepresentable {
             .font: UIFont.preferredFont(forTextStyle: .body)
         ]
         
+        // inputAccessoryViewの設定
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: context.coordinator, action: #selector(Coordinator.decreaseIndent)),
+            UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: context.coordinator, action: #selector(Coordinator.increaseIndent)),
+            UIBarButtonItem(title: "完了", style: .done, target: context.coordinator, action: #selector(Coordinator.doneEditing))
+        ]
+        textView.inputAccessoryView = toolbar
+        
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
+        if uiView.text != text {
+            uiView.text = text
+        }
         DispatchQueue.main.async {
             self.height = uiView.contentSize.height
         }
@@ -188,14 +190,33 @@ struct UITextViewWrapper: UIViewRepresentable {
             self.parent = parent
         }
 
+        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if text == "\n" {
+                parent.handleEnterKey()
+                return false
+            }
+            return true
+        }
+
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
             parent.height = textView.contentSize.height
-            parent.onTextChange(textView.text)
         }
 
         func textViewDidChangeSelection(_ textView: UITextView) {
             parent.cursorPosition = textView.selectedRange.location
+        }
+
+        @objc func decreaseIndent() {
+            parent.adjustIndent(false)
+        }
+
+        @objc func increaseIndent() {
+            parent.adjustIndent(true)
+        }
+
+        @objc func doneEditing() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }
