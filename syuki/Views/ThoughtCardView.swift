@@ -16,12 +16,13 @@ struct ThoughtCardView: View {
     @State private var cursorPosition: Int = 0
     @State private var textViewHeight: CGFloat = 50
     @State private var previousContent: String = ""
-    
+
     var body: some View {
         VStack(spacing: 10) {
             UITextViewWrapper(
                 text: $thoughtCard.content,
                 cursorPosition: $cursorPosition,
+                adjustIndent: adjustIndent,
                 onEditingChanged: {
                     // 編集状態が変更された時の処理
                     self.handleTextChange()
@@ -39,12 +40,12 @@ struct ThoughtCardView: View {
                     .foregroundColor(.gray)
                     .padding(.trailing, 8)
             }
-                .confirmationDialog("確認", isPresented: $showingOptions) {
-                    Button("削除") {
-                        let indexSet = IndexSet(integer: index)
-                        dataManager.deleteThoughtCard(at: indexSet)
-                    }
-                },
+            .confirmationDialog("確認", isPresented: $showingOptions) {
+                Button("削除") {
+                    let indexSet = IndexSet(integer: index)
+                    dataManager.deleteThoughtCard(at: indexSet)
+                }
+            },
             alignment: .topTrailing
         )
         .onAppear {
@@ -77,14 +78,14 @@ struct ThoughtCardView: View {
             if let match = matchRegex(pattern: #"^(\s*)([•◦◼])\s*"#, in: currentLine) {
                 let currentIndent = match[1]
                 let currentSymbol = match[2]
-                
+
                 // 2. 直前の行のインデントと記号を判定
                 if currentLineIndex > 0 {
                     let previousLine = String(lines[currentLineIndex - 1])
                     if let previousMatch = matchRegex(pattern: #"^(\s*)([•◦◼])\s*"#, in: previousLine) {
                         let previousIndent = previousMatch[1]
                         let previousSymbol = previousMatch[2]
-                        
+
                         // 3. 直前の行と同じインデントと記号を適用
                         if currentIndent != previousIndent || currentSymbol != previousSymbol {
                             let updatedLine = "\(previousIndent)\(previousSymbol) \(currentLine.trimmingCharacters(in: .whitespacesAndNewlines))"
@@ -173,7 +174,7 @@ struct ThoughtCardView: View {
         layoutManager.addTextContainer(textContainer)
         textViewHeight = layoutManager.usedRect(for: textContainer).height
     }
-    
+
     private func matchRegex(pattern: String, in text: String) -> [String]? {
         do {
             let regex = try NSRegularExpression(pattern: pattern)
@@ -192,8 +193,9 @@ struct ThoughtCardView: View {
 struct UITextViewWrapper: UIViewRepresentable {
     @Binding var text: String
     @Binding var cursorPosition: Int
+    var adjustIndent: (Bool) -> Void
     var onEditingChanged: () -> Void // 編集状態が変更された時に呼び出されるコールバック
-    
+
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.delegate = context.coordinator
@@ -205,6 +207,7 @@ struct UITextViewWrapper: UIViewRepresentable {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            // インデント調整ボタンを追加
             UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: context.coordinator, action: #selector(Coordinator.decreaseIndent)),
             UIBarButtonItem(image: UIImage(systemName: "chevron.right"), style: .plain, target: context.coordinator, action: #selector(Coordinator.increaseIndent)),
             UIBarButtonItem(title: "完了", style: .done, target: context.coordinator, action: #selector(Coordinator.doneEditing))
@@ -213,43 +216,41 @@ struct UITextViewWrapper: UIViewRepresentable {
         
         return textView
     }
-    
+
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = text
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-    
+
     class Coordinator: NSObject, UITextViewDelegate {
         var parent: UITextViewWrapper
-        
+
         init(_ parent: UITextViewWrapper) {
             self.parent = parent
         }
-        
+
         func textViewDidChange(_ textView: UITextView) {
             // テキストの変更を検知
             self.parent.text = textView.text
             self.parent.onEditingChanged() // 編集状態が変更されたことを通知
         }
-        
+
         func textViewDidChangeSelection(_ textView: UITextView) {
             // カーソル位置の変更を検知
             self.parent.cursorPosition = textView.selectedRange.location
         }
-        
+
         @objc func decreaseIndent() {
-            // parent（UITextViewWrapper）経由で ThoughtCardView の adjustIndent を呼び出す
-            parent.onEditingChanged() // ThoughtCardView の handleTextChange を実行
+            parent.adjustIndent(false)
         }
-        
+
         @objc func increaseIndent() {
-            // parent（UITextViewWrapper）経由で ThoughtCardView の adjustIndent を呼び出す
-            parent.onEditingChanged() // ThoughtCardView の handleTextChange を実行
+            parent.adjustIndent(true)
         }
-        
+
         @objc func doneEditing() {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
