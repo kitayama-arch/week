@@ -9,7 +9,7 @@ import SwiftUI
 import MCEmojiPicker
 
 struct GoalCardView: View {
-    @Binding var weeklyRecord: WeeklyRecord
+    @Binding var weeklyRecord: WeeklyRecord // test
     @State private var isPickerPresented: Bool = false
 
     var body: some View {
