@@ -243,6 +243,57 @@ struct UITextViewWrapper: UIViewRepresentable {
             self.parent.cursorPosition = textView.selectedRange.location
         }
 
+        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+            if text == "\n" {
+                let cursorPosition = textView.selectedRange.location
+                let lines = textView.text.split(separator: "\n", omittingEmptySubsequences: false)
+                let currentLineIndex = getCurrentLineIndex(cursorPosition: cursorPosition, in: textView.text)
+                
+                if currentLineIndex < lines.count {
+                    let currentLine = String(lines[currentLineIndex])
+                    if let match = matchRegex(pattern: #"^(\s*)([•◦◼])\s*"#, in: currentLine) {
+                        let currentIndent = match[1]
+                        let currentSymbol = match[2]
+                        let newLine = "\n\(currentIndent)\(currentSymbol) "
+                        textView.insertText(newLine)
+                        self.parent.onEditingChanged() // 編集状態が変更されたことを通知
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+
+        private func getCurrentLineIndex(cursorPosition: Int, in text: String) -> Int {
+            let lines = text.split(separator: "\n", omittingEmptySubsequences: false)
+            var currentIndex = 0
+            var characterCount = 0
+            
+            for (index, line) in lines.enumerated() {
+                characterCount += line.count + 1 // +1 for newline character
+                if characterCount > cursorPosition {
+                    currentIndex = index
+                    break
+                }
+            }
+            
+            return currentIndex
+        }
+
+        private func matchRegex(pattern: String, in text: String) -> [String]? {
+            do {
+                let regex = try NSRegularExpression(pattern: pattern)
+                let nsString = text as NSString
+                let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
+                if let match = results.first {
+                    return (0..<match.numberOfRanges).map { match.range(at: $0).location != NSNotFound ? nsString.substring(with: match.range(at: $0)) : "" }
+                }
+            } catch {
+                print("Invalid regex: \(error.localizedDescription)")
+            }
+            return nil
+        }
+
         @objc func decreaseIndent() {
             parent.adjustIndent(false)
         }
