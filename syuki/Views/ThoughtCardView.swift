@@ -42,15 +42,18 @@ struct ThoughtCardView: View {
             alignment: .topTrailing
         )
         .onAppear {
-            DispatchQueue.main.async {
-                updateTextEditorHeight()
-                isFocused = true
-                previousContent = thoughtCard.content
-            }
+            updateTextEditorHeight()
+            isFocused = true
+            previousContent = thoughtCard.content
         }
         .onChange(of: thoughtCard.content) { oldValue, newValue in
-            DispatchQueue.main.async {
-                dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+            print("onChange triggered. Old value: \(oldValue), New value: \(newValue)")
+            Task {
+                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5秒待機
+                await MainActor.run {
+                    print("Updating thought card content in DataManager")
+                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+                }
             }
         }
     }
@@ -171,11 +174,14 @@ struct UITextViewWrapper: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
+        print("updateUIView called. Current text: \(text)")
         if uiView.text != text {
+            print("Updating UITextView text. New text: \(text)")
             uiView.text = text
-        }
-        DispatchQueue.main.async {
-            self.height = uiView.contentSize.height
+            DispatchQueue.main.async {
+                self.height = uiView.contentSize.height
+                print("Updated height: \(self.height)")
+            }
         }
     }
 
@@ -199,8 +205,13 @@ struct UITextViewWrapper: UIViewRepresentable {
         }
 
         func textViewDidChange(_ textView: UITextView) {
-            parent.text = textView.text
-            parent.height = textView.contentSize.height
+            print("textViewDidChange called. New text: \(textView.text ?? "")")
+            if parent.text != textView.text {
+                parent.text = textView.text
+                parent.height = textView.contentSize.height
+                print("Updated parent text: \(parent.text)")
+                print("Updated parent height: \(parent.height)")
+            }
         }
 
         func textViewDidChangeSelection(_ textView: UITextView) {

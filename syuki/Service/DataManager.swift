@@ -67,6 +67,7 @@ class DataManager: ObservableObject {
         print("Current CoreData entities count: \(coreDataManager.readThoughtCards().count)")
     }
     
+    @MainActor
     func updateThoughtCard(thoughtCard: ThoughtCard, newContent: String) {
         print("Updating ThoughtCard with ID: \(thoughtCard.id)")
         print("Current thoughtCards: \(thoughtCards.map { $0.id })")
@@ -247,5 +248,47 @@ class DataManager: ObservableObject {
         }
         
         print("サンプルWeeklyRecordが追加されました。現在の総数: \(weeklyRecords.count)")
+    }
+    
+    func getCurrentWeeklyRecord() -> WeeklyRecord? {
+//        let calendar = Calendar.current
+        let today = Date()
+//        let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
+//        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
+
+        return weeklyRecords.first { record in
+            record.startDate <= today && record.endDate >= today
+        }
+    }
+
+    func saveWeeklyRecord(_ weeklyRecord: WeeklyRecord) {
+        if let existingEntity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) {
+            // 既存のWeeklyRecordを更新
+            coreDataManager.updateWeeklyRecord(weeklyRecord: existingEntity,
+                                               reflection: weeklyRecord.reflection,
+                                               nextWeekGoal: weeklyRecord.nextWeekGoal,
+                                               emoji: weeklyRecord.emoji)
+            
+            // 他のプロパティも更新する必要がある場合
+            existingEntity.startDate = weeklyRecord.startDate
+            existingEntity.endDate = weeklyRecord.endDate
+            existingEntity.goal = weeklyRecord.goal
+            
+            // Thoughtsの更新（必要に応じて）
+            // この部分は複雑になる可能性があるため、別のメソッドとして実装することをお勧めします
+        } else {
+            // 新しいWeeklyRecordを作成
+            _ = coreDataManager.createWeeklyRecord(startDate: weeklyRecord.startDate,
+                                                   endDate: weeklyRecord.endDate,
+                                                   goal: weeklyRecord.goal,
+                                                   emoji: weeklyRecord.emoji)
+        }
+        
+        // メモリ上のweeklyRecords配列を更新
+        if let index = weeklyRecords.firstIndex(where: { $0.id == weeklyRecord.id }) {
+            weeklyRecords[index] = weeklyRecord
+        } else {
+            weeklyRecords.append(weeklyRecord)
+        }
     }
 }
