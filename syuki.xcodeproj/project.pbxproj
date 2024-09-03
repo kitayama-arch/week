@@ -20,9 +20,20 @@
 		5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED3782C3275BB003E2E0C /* Assets.xcassets */; };
 		5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */; };
 		5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A71975C2C66DC77005BDAC2 /* DataManager.swift */; };
+		5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* SyukiTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5AA593DF2C871A940005985E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A4ED3692C3275BA003E2E0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A4ED3702C3275BA003E2E0C;
+			remoteInfo = syuki;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5A2471792C68BB9A001C3CAA /* ReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionView.swift; sourceTree = "<group>"; };
@@ -38,6 +49,8 @@
 		5A4ED3782C3275BB003E2E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5A71975C2C66DC77005BDAC2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		5AA593DB2C871A940005985E /* SyukiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyukiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AA593DD2C871A940005985E /* SyukiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyukiTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +61,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5AA593D82C871A940005985E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				5A4ED3732C3275BA003E2E0C /* syuki */,
+				5AA593DC2C871A940005985E /* SyukiTests */,
 				5A4ED3722C3275BA003E2E0C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				5A4ED3712C3275BA003E2E0C /* syuki.app */,
+				5AA593DB2C871A940005985E /* SyukiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +144,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		5AA593DC2C871A940005985E /* SyukiTests */ = {
+			isa = PBXGroup;
+			children = (
+				5AA593DD2C871A940005985E /* SyukiTests.swift */,
+			);
+			path = SyukiTests;
+			sourceTree = "<group>";
+		};
 		5AAB8A4B2C635E64002ECBC5 /* Coredata */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +184,24 @@
 			productReference = 5A4ED3712C3275BA003E2E0C /* syuki.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5AA593DA2C871A940005985E /* SyukiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "SyukiTests" */;
+			buildPhases = (
+				5AA593D72C871A940005985E /* Sources */,
+				5AA593D82C871A940005985E /* Frameworks */,
+				5AA593D92C871A940005985E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5AA593E02C871A940005985E /* PBXTargetDependency */,
+			);
+			name = SyukiTests;
+			productName = SyukiTests;
+			productReference = 5AA593DB2C871A940005985E /* SyukiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,11 +209,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					5A4ED3702C3275BA003E2E0C = {
 						CreatedOnToolsVersion = 15.3;
+					};
+					5AA593DA2C871A940005985E = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 5A4ED3702C3275BA003E2E0C;
 					};
 				};
 			};
@@ -186,6 +238,7 @@
 			projectRoot = "";
 			targets = (
 				5A4ED3702C3275BA003E2E0C /* syuki */,
+				5AA593DA2C871A940005985E /* SyukiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -197,6 +250,13 @@
 			files = (
 				5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */,
 				5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5AA593D92C871A940005985E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +282,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5AA593D72C871A940005985E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5AA593E02C871A940005985E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A4ED3702C3275BA003E2E0C /* syuki */;
+			targetProxy = 5AA593DF2C871A940005985E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		5A4ED37D2C3275BB003E2E0C /* Debug */ = {
@@ -402,6 +478,44 @@
 			};
 			name = Release;
 		};
+		5AA593E12C871A940005985E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Z3QK7D946;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.SyukiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/syuki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/syuki";
+			};
+			name = Debug;
+		};
+		5AA593E22C871A940005985E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Z3QK7D946;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.SyukiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/syuki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/syuki";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -419,6 +533,15 @@
 			buildConfigurations = (
 				5A4ED3802C3275BB003E2E0C /* Debug */,
 				5A4ED3812C3275BB003E2E0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "SyukiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5AA593E12C871A940005985E /* Debug */,
+				5AA593E22C871A940005985E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

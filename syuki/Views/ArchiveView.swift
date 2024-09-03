@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ArchiveView: View {
-    @ObservedObject private var dataManager = DataManager()
+    @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var selectedWeeklyRecord: WeeklyRecord? = nil
     
     var body: some View {

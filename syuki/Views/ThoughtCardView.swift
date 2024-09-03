@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
-    @ObservedObject var dataManager: DataManager
+    @ObservedObject var dataManager: DataManager // 共有インスタンスを受け取る(UIのみだから保持する必要がない)
     @State private var showingOptions = false
     let index: Int
     @State private var previousContent: String = ""
@@ -42,25 +42,9 @@ struct ThoughtCardView: View {
             },
             alignment: .topTrailing
         )
-        .onAppear {
-            isFocused = true
-            previousContent = thoughtCard.content
-        }
-    }
-    
-    private func getCurrentLineIndex(cursorPosition: Int, in text: String) -> Int {
-        let lines = text.split(separator: "\n", omittingEmptySubsequences: false)
-        var currentIndex = 0
-        var characterCount = 0
-        
-        for (index, line) in lines.enumerated() {
-            characterCount += line.count + 1 // +1 for newline character
-            if characterCount > cursorPosition {
-                currentIndex = index
-                break
-            }
-        }
-        return currentIndex
+        // 計算された高さと最小高さ(50)を比較し、大きい方を採用
+        // 20ピクセルの余白を追加
+        textEditorHeight = max(50, estimatedSize.height + 20)
     }
 }
 

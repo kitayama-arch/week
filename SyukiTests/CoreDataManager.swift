@@ -6,6 +6,7 @@
 //
 
 import CoreData
+@testable import syuki // アプリのターゲット名に置き換える
 
 class CoreDataManager {
     private let persistentContainer: NSPersistentContainer
@@ -21,13 +22,13 @@ class CoreDataManager {
         return container
     }()
     
-    init(inMemory: Bool = false) {
-           // 共有の persistentContainer を使用する
-           persistentContainer = CoreDataManager.sharedPersistentContainer
-           if inMemory {
-               persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-           }
-       }
+    // イニシャライザを変更
+    init() {
+        // 共有の persistentContainer を使用する
+        persistentContainer = CoreDataManager.sharedPersistentContainer
+        // テスト用の設定を追加 (必要であれば)
+        persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+    }
     
     func createThoughtCard(content:String, date:Date, items:[String]) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
         let context = persistentContainer.viewContext // managedObjectContextを取得
