@@ -151,4 +151,30 @@ class CoreDataManager {
             print("CoreDataManager: WeeklyRecordの削除に失敗しました\(error)")
         }
     }
+    func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? { 
+        let calendar = Calendar.current
+        let today = Date()
+        let startOfWeek = calendar.startOfDay(for: today)
+        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
+        
+        let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startOfWeek as NSDate, endOfWeek as NSDate)
+        
+        do {
+            let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
+            if let weeklyRecordEntity = weeklyRecords.first {
+                return weeklyRecordEntity
+            }
+        } catch {
+            print("Error fetching current week record: \(error)")
+        }
+        return nil
+    }
+}
+extension Calendar {
+    func startOfWeek(for date: Date) -> Date {
+        var components = dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+        components.weekday = firstWeekday // 週の始まりを日曜日 (1) に設定
+        return self.date(from: components)!
+    }
 }
