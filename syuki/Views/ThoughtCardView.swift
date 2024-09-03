@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
-    @ObservedObject var dataManager: DataManager
+    @ObservedObject var dataManager: DataManager // 共有インスタンスを受け取る(UIのみだから保持する必要がない)
     @State private var showingOptions = false
     let index: Int
     // テキストエディタの高さを動的に管理するState変数

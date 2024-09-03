@@ -14,6 +14,8 @@ class DataManager: ObservableObject {
     @Published var thoughtCards:[ThoughtCard] = [] // thoughtcardsが変更されたらswiftUIのview更新
     @Published var weeklyRecords: [WeeklyRecord] = []
     
+    static let shared = DataManager()
+    
     init() {
         loadThoughtCards()
         loadWeeklyRecords()

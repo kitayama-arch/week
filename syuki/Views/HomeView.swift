@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct HomeView: View {
-    @StateObject private var dataManager = DataManager()
+    @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
     
     var body: some View {
