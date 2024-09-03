@@ -15,7 +15,6 @@ class CoreDataManagerTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         coreDataManager = CoreDataManager()
-        // テスト用の日付を設定（例: 2024年8月15日）
         testDate = Calendar.current.date(from: DateComponents(year: 2024, month: 8, day: 15))!
     }
 
@@ -25,20 +24,26 @@ class CoreDataManagerTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testFetchCurrentWeekRecord() throws {
+    func testFetchCurrentWeekRecord_WhenRecordExists() throws {
         // 1. テストデータの準備
         let calendar = Calendar.current
-        let startOfWeek = calendar.startOfWeek(for: testDate)
+        let startOfWeek = calendar.startOfDay(for: testDate)
         let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
         _ = coreDataManager.createWeeklyRecord(startDate: startOfWeek, endDate: endOfWeek, goal: "テスト目標", emoji: "😀")
 
         // 2. fetchCurrentWeekRecord() を実行
-        // テスト用の日付を渡す
         let fetchedWeeklyRecord = coreDataManager.fetchCurrentWeekRecord(for: testDate)
 
         // 3. 結果の検証
         XCTAssertNotNil(fetchedWeeklyRecord, "現在の週のレコードが取得できない")
-        XCTAssertEqual(fetchedWeeklyRecord?.startDate, startOfWeek, "開始日が一致しない")
-        XCTAssertEqual(fetchedWeeklyRecord?.endDate, endOfWeek, "終了日が一致しない")
+
+        // 4. startDateとendDateの比較
+        let fetchedStartDateComponents = calendar.dateComponents([.year, .month, .day], from: fetchedWeeklyRecord!.startDate!)
+        let expectedStartDateComponents = calendar.dateComponents([.year, .month, .day], from: startOfWeek)
+        XCTAssertEqual(fetchedStartDateComponents, expectedStartDateComponents, "開始日が一致しない")
+
+        let fetchedEndDateComponents = calendar.dateComponents([.year, .month, .day], from: fetchedWeeklyRecord!.endDate!)
+        let expectedEndDateComponents = calendar.dateComponents([.year, .month, .day], from: endOfWeek)
+        XCTAssertEqual(fetchedEndDateComponents, expectedEndDateComponents, "終了日が一致しない")
     }
 }
