@@ -216,7 +216,7 @@ class DataManager: ObservableObject {
     
     func loadCurrentWeekRecord() {
         // CoreDataManager から WeeklyRecordEntity を取得
-        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord() {
+        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
             // WeeklyRecordEntity を WeeklyRecord に変換
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 // 現在の週の WeeklyRecord が取得できた場合の処理
@@ -273,7 +273,7 @@ class DataManager: ObservableObject {
         )
     }
     func checkCurrentWeekRecord() {
-        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord() {
+        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 print("現在の週のレコードが見つかりました:")
                 print("ID: \(currentWeeklyRecord.id)")

@@ -151,20 +151,22 @@ class CoreDataManager {
             print("CoreDataManager: WeeklyRecordの削除に失敗しました\(error)")
         }
     }
-    func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? { 
+    func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? {
         let calendar = Calendar.current
-        let today = Date()
-        let startOfWeek = calendar.startOfDay(for: today)
-        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
-        
+        let startOfWeek = calendar.startOfDay(for: date) // 週の開始日
+        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)! // 週の終了日
+
+        // 日付部分のみを抽出
+        let startComponents = calendar.dateComponents([.year, .month, .day], from: startOfWeek)
+        let endComponents = calendar.dateComponents([.year, .month, .day], from: endOfWeek)
+
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startOfWeek as NSDate, endOfWeek as NSDate)
-        
+        // 日付部分のみを比較する条件を設定
+        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startComponents as NSDateComponents, endComponents as NSDateComponents)
+
         do {
             let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
-            if let weeklyRecordEntity = weeklyRecords.first {
-                return weeklyRecordEntity
-            }
+            return weeklyRecords.first
         } catch {
             print("Error fetching current week record: \(error)")
         }
