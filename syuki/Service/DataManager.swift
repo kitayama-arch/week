@@ -16,7 +16,7 @@ class DataManager: ObservableObject {
     
     static let shared = DataManager()
     
-    init() {
+    private init() {
         loadThoughtCards()
         loadWeeklyRecords()
         print("Initial thoughtCards count: \(thoughtCards.count)")
