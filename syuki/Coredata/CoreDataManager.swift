@@ -153,16 +153,23 @@ class CoreDataManager {
     }
     func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? {
         let calendar = Calendar.current
-        let startOfWeek = calendar.startOfDay(for: date) // 週の開始日
-        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)! // 週の終了日
+        let startOfWeek = calendar.startOfDay(for: date)
+        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
 
         // 日付部分のみを抽出
         let startComponents = calendar.dateComponents([.year, .month, .day], from: startOfWeek)
         let endComponents = calendar.dateComponents([.year, .month, .day], from: endOfWeek)
 
+        // DateComponents を Date に変換
+        guard let startDate = calendar.date(from: startComponents),
+              let endDate = calendar.date(from: endComponents) else {
+            print("Error converting DateComponents to Date")
+            return nil
+        }
+
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
-        // 日付部分のみを比較する条件を設定
-        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startComponents as NSDateComponents, endComponents as NSDateComponents)
+        // Date オブジェクトを比較する条件を設定
+        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startDate as NSDate, endDate as NSDate)
 
         do {
             let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
