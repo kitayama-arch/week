@@ -71,7 +71,6 @@ struct ThoughtCardView: View {
             attributes: [.font: UIFont.preferredFont(forTextStyle: .body)],
             context: nil
         )
-        
         // 計算された高さと最小高さ(50)を比較し、大きい方を採用
         // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
