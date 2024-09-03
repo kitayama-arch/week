@@ -12,20 +12,17 @@ struct ThoughtCardView: View {
     @ObservedObject var dataManager: DataManager // 共有インスタンスを受け取る(UIのみだから保持する必要がない)
     @State private var showingOptions = false
     let index: Int
-    @State private var previousContent: String = ""
     @FocusState private var isFocused: Bool
     @State private var cursorPosition: Int = 0
     
     var body: some View {
         VStack(spacing: 10) {
-            UITextViewWrapper(
-                text: $thoughtCard.content,
-                cursorPosition: $cursorPosition
-            )
-            .focused($isFocused)
-            .padding(.horizontal)
-            .background(Color.white)
-            .cornerRadius(8)
+            TextEditor(text: $thoughtCard.content)
+                .focused($isFocused)
+                .padding(.horizontal)
+                .background(Color.white)
+                .cornerRadius(8)
+                .frame(height: textEditorHeight)
         }
         .padding()
         .overlay(
@@ -42,9 +39,12 @@ struct ThoughtCardView: View {
             },
             alignment: .topTrailing
         )
-        // 計算された高さと最小高さ(50)を比較し、大きい方を採用
-        // 20ピクセルの余白を追加
-        textEditorHeight = max(50, estimatedSize.height + 20)
+    }
+    
+    // TextEditorの高さを動的に計算するプロパティ
+    private var textEditorHeight: CGFloat {
+        let estimatedSize = thoughtCard.content.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+        return max(50, estimatedSize.height + 20)
     }
 }
 
@@ -56,34 +56,5 @@ struct ThoughtCardView_Previews: PreviewProvider {
         ThoughtCardView(thoughtCard: $sampleCard, dataManager: dataManager, index: 0)
             .previewLayout(.sizeThatFits)
             .padding()
-    }
-}
-
-struct UITextViewWrapper: UIViewRepresentable {
-    @Binding var text: String
-    @Binding var cursorPosition: Int
-    
-    func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
-        textView.delegate = context.coordinator
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
-        textView.isScrollEnabled = false
-        textView.backgroundColor = .clear
-        return textView
-    }
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UITextViewDelegate {
-        var parent: UITextViewWrapper
-        
-        init(_ parent: UITextViewWrapper) {
-            self.parent = parent
-        }
     }
 }
