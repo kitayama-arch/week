@@ -9,8 +9,8 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
+    @State var currentWeeklyRecord: WeeklyRecord?
     
-    let currentWeeklyRecord: WeeklyRecord?
     init(currentWeeklyRecord: WeeklyRecord? = nil) {
         self.currentWeeklyRecord = currentWeeklyRecord
     }
@@ -86,6 +86,12 @@ struct HomeView: View {
                     if dataManager.thoughtCards.isEmpty {
                         dataManager.addSampleThoughtCards()
                     }
+                    // DataManager の loadCurrentWeekRecord() を呼び出す
+                    dataManager.loadCurrentWeekRecord()
+                    currentWeeklyRecord = dataManager.weeklyRecords.first(where: { record in
+                        Calendar.current.isDate(record.startDate, inSameDayAs: Date())
+                    })
+                    
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)

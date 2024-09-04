@@ -218,18 +218,21 @@ class DataManager: ObservableObject {
     }
     
     func loadCurrentWeekRecord() {
-        // CoreDataManager から WeeklyRecordEntity を取得
-        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-            // WeeklyRecordEntity を WeeklyRecord に変換
-            if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
-                // 現在の週の WeeklyRecord が取得できた場合の処理
-                print("Current Week Record Fetched: \(currentWeeklyRecord)")
+            // 現在の週の WeeklyRecordEntity を取得
+            if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
+                // WeeklyRecordEntity を WeeklyRecord に変換
+                if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
+                    // 現在の週の WeeklyRecord のみ weeklyRecords に格納
+                    weeklyRecords = [currentWeeklyRecord]
+                } else {
+                    // 変換に失敗した場合は、空の配列を設定
+                    weeklyRecords = []
+                }
+            } else {
+                // 該当する WeeklyRecord がない場合も、空の配列を設定
+                weeklyRecords = []
             }
-        } else {
-            // 現在の週の WeeklyRecord がない場合の処理
-            print("No Current Week Record Found")
         }
-    }
     
     // WeeklyRecordEntity を WeeklyRecord に変換する共通関数
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {

@@ -692,9 +692,9 @@
     ### フェーズ7: 現在の週の記録をHomeViewに表示 (2-3日)
 
     - [ ] **`HomeView` の修正**:
-        - [ ] `WeeklyRecord` を受け取るプロパティ `currentWeeklyRecord` (Optional型) を追加
-        - [ ] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
-        - [ ] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
+        - [x] `WeeklyRecord` を受け取るプロパティ `currentWeeklyRecord` (Optional型) を追加
+        - [x] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
+        - [x] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
         - [ ] `currentWeeklyRecord` の情報 (目標、期間、絵文字) を表示
         - [ ] `currentWeeklyRecord.thoughts` から `ThoughtCard` を抽出し、`ForEach` で表示
 
