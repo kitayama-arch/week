@@ -689,12 +689,40 @@
     - [x] **`WeeklyRecordDetailView` でデータ表示**:
         - [x]  `WeeklyRecordDetailView` で、渡された `WeeklyRecord` の内容を表示する
 
-     ### フェーズ7: 現在の週の記録のみHomeViewに表示 (2-3日)
+    ### フェーズ7: 現在の週の記録をHomeViewに表示 (2-3日)
 
-    - [ ] **`DataManager` に取得ロジックを追加**:
-        - [ ]  現在の週の `WeeklyRecord` データを取得する処理を `DataManager` に追加する (例: `fetchCurrentWeekRecord()` )
-    - [ ]  **`HomeView` でデータ表示**:
-        - [ ]  `DataManager` から取得した `WeeklyRecord` データを、`HomeView` に表示する。
+    - [ ] **`HomeView` の修正**:
+        - [ ] `WeeklyRecord` を受け取るプロパティ `currentWeeklyRecord` (Optional型) を追加
+        - [ ] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
+        - [ ] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
+        - [ ] `currentWeeklyRecord` の情報 (目標、期間、絵文字) を表示
+        - [ ] `currentWeeklyRecord.thoughts` から `ThoughtCard` を抽出し、`ForEach` で表示
+
+    - [ ] **`HomeView` のプレビュー修正**:
+        - [ ] `WeeklyRecord.sampleData` を `currentWeeklyRecord` プロパティに渡す
+
+    - [ ] **`HomeView` の `onAppear` 処理**:
+        - [ ] `dataManager.loadCurrentWeekRecord()` を呼び出し、`weeklyRecords` から現在の週の `WeeklyRecord` を `currentWeeklyRecord` プロパティに代入
+
+    - [ ] **`GoalCardView`の統合**:
+        - [ ] `HomeView`の`VStack`に`GoalCardView`を追加する。
+        - [ ] `DataManager`から取得した現在の週の`WeeklyRecord`を`GoalCardView`にバインドする。
+        - [ ] `GoalCardView`に、`WeeklyRecord`の`goal`と`emoji`を表示する。
+
+    - [ ] **現在の週の思考カード表示**:
+        - [ ] `HomeView`の`ForEach`ループを更新し、`DataManager`から取得した現在の週の`WeeklyRecord`の`thoughts`プロパティに含まれる`ThoughtCard`のみを表示するように変更する。
+
+    - [ ] **`DataManager`の更新**:
+        - [ ] 既存の`loadCurrentWeekRecord()`メソッドを修正し、以下の処理を行う。
+            - [ ] `CoreDataManager`の`fetchCurrentWeekRecord()`を使って現在の週の`WeeklyRecord`を取得する。
+            - [ ] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つかった場合は、`weeklyRecords`に格納する。
+            - [ ] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからなかった場合は、`weeklyRecords`を空にする。
+
+    - [ ] **`HomeView`の更新**:
+        - [ ] `HomeView`の`onAppear`で以下の処理を行う。
+            - [ ] `DataManager`の`loadWeeklyRecords()`を呼び出し、`weeklyRecords`を更新する。
+            - [ ] `DataManager`の`fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからない場合、`createWeeklyRecord()`メソッドを使って新しい`WeeklyRecord`を作成する。
+            - [ ] 新規作成された`WeeklyRecord`を`weeklyRecords`に追加する。
 
     ### フェーズ8: データ永続化のテスト (2-3日)
     - 🎯 **目標**: `DataManager` のCRUD操作が正しく動作し、データが永続的に保存・読み込みできることを確認する
