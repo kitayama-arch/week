@@ -9,11 +9,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
-    @State var currentWeeklyRecord: WeeklyRecord?
-    
-    init(currentWeeklyRecord: WeeklyRecord? = nil) {
-        self.currentWeeklyRecord = currentWeeklyRecord
-    }
+    @State private var currentWeeklyRecord: WeeklyRecord?
     
     var body: some View {
         NavigationStack {
@@ -42,26 +38,13 @@ struct HomeView: View {
                     }
                     .padding()
                     
-                    //                    GoalCardView(weeklyRecord: <#Binding<WeeklyRecord>#>)
-                    //                        .padding(.bottom)
-                    //                        .padding(.horizontal)
-                    
                     ZStack {
                         ScrollView {
-                            ForEach(dataManager.thoughtCards.indices, id: \.self) { index in
-                                ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
-                            }
                             if let currentWeeklyRecord = currentWeeklyRecord {
-                                VStack(alignment: .leading) {
-                                    Text("今週の目標: \(currentWeeklyRecord.goal)")
-                                        .font(.headline)
-                                    Text("絵文字: \(currentWeeklyRecord.emoji)")
-                                    // currentWeeklyRecord.thoughts を ThoughtCardView で表示
-                                    ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
-                                        ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
-                                    }
-                                }
-                            } else {
+                                                           ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
+                                                               ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                                                           }
+                                                       } else {
                                 Text("今週の記録はまだありません")
                                     .padding()
                             }
@@ -83,21 +66,15 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    if dataManager.thoughtCards.isEmpty {
-                        dataManager.addSampleThoughtCards()
-                    }
-                    // DataManager の loadCurrentWeekRecord() を呼び出す
-                    dataManager.loadCurrentWeekRecord()
-                    currentWeeklyRecord = dataManager.weeklyRecords.first(where: { record in
-                        Calendar.current.isDate(record.startDate, inSameDayAs: Date())
-                    })
-                    
+                    loadCurrentWeekRecord()
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $showReflectionView) {
-                    ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
-                        .environmentObject(dataManager)
+                    if let currentWeeklyRecord = currentWeeklyRecord {
+                        ReflectionView(weeklyRecord: currentWeeklyRecord)
+                            .environmentObject(dataManager)
+                    }
                 }
             }
         }
@@ -111,8 +88,13 @@ struct HomeView: View {
         formatter.dateFormat = "MM/dd"
         return formatter.string(from: date)
     }
+    
+    private func loadCurrentWeekRecord() {
+        dataManager.loadCurrentWeekRecord()
+        currentWeeklyRecord = dataManager.weeklyRecords.first
+    }
 }
 
 #Preview {
-    HomeView(currentWeeklyRecord: WeeklyRecord.sampleData)
+    HomeView()
 }

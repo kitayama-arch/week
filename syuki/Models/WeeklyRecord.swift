@@ -34,8 +34,8 @@ class WeeklyRecord: Identifiable, ObservableObject {
 extension WeeklyRecord {
     static let sampleData: WeeklyRecord = WeeklyRecord(
         id: UUID(),
-        startDate: Date(),
-        endDate: Date(),
+        startDate: Calendar.current.startOfWeek(for: Date()), // 現在の週の開始日
+        endDate: Calendar.current.date(byAdding: .day, value: 6, to: Calendar.current.startOfWeek(for: Date()))!, // 現在の週の終了日
         thoughts: [
             ThoughtCard(content: "アイデア1", date: Date(), items: []),
             ThoughtCard(content: "アイデア2", date: Date(), items: [])
