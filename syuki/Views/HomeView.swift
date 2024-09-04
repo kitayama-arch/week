@@ -21,6 +21,27 @@ struct HomeView: View {
                 Color.gray.opacity(0.2)
                     .ignoresSafeArea()
                 VStack {
+                    // カスタムナビゲーションバー
+                    ZStack {
+                        if let currentWeeklyRecord = currentWeeklyRecord {
+                            Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                .font(.headline)
+                        } else {
+                            Text("期間")
+                                .font(.headline)
+                        }
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                showReflectionView = true
+                            }) {
+                                Image(systemName: "square.and.pencil")
+                                    .font(.largeTitle)
+                            }
+                        }
+                    }
+                    .padding()
+                    
                     //                    GoalCardView(weeklyRecord: <#Binding<WeeklyRecord>#>)
                     //                        .padding(.bottom)
                     //                        .padding(.horizontal)
@@ -30,24 +51,22 @@ struct HomeView: View {
                             ForEach(dataManager.thoughtCards.indices, id: \.self) { index in
                                 ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
                             }
-                        }
-                        if let currentWeeklyRecord = currentWeeklyRecord {
-                            VStack(alignment: .leading) {
-                                Text("今週の目標: \(currentWeeklyRecord.goal)")
-                                    .font(.headline)
-                                Text("期間: \(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                    .font(.subheadline)
-                                Text("絵文字: \(currentWeeklyRecord.emoji)")
-                                // currentWeeklyRecord.thoughts を ThoughtCardView で表示
-                                ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
-                                    ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                            if let currentWeeklyRecord = currentWeeklyRecord {
+                                VStack(alignment: .leading) {
+                                    Text("今週の目標: \(currentWeeklyRecord.goal)")
+                                        .font(.headline)
+                                    Text("絵文字: \(currentWeeklyRecord.emoji)")
+                                    // currentWeeklyRecord.thoughts を ThoughtCardView で表示
+                                    ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
+                                        ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                                    }
                                 }
+                            } else {
+                                Text("今週の記録はまだありません")
+                                    .padding()
                             }
-                            .padding()
-                        } else {
-                            Text("今週の記録はまだありません")
-                                .padding()
                         }
+                        
                         VStack {
                             Spacer()
                             HStack {
@@ -70,22 +89,6 @@ struct HomeView: View {
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) { // 左側に配置
-                        if let currentWeeklyRecord = currentWeeklyRecord {
-                            Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))") // 期間を表示
-                        } else {
-                            Text("期間") // データがない場合は「期間」と表示
-                        }
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            showReflectionView = true
-                        }) {
-                            Image(systemName: "square.and.pencil")
-                        }
-                    }
-                }
                 .navigationDestination(isPresented: $showReflectionView) {
                     ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
                         .environmentObject(dataManager)
@@ -99,7 +102,7 @@ struct HomeView: View {
     }
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "MM/dd"
         return formatter.string(from: date)
     }
 }
