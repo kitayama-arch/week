@@ -162,6 +162,7 @@ class CoreDataManager {
         }
     }
     func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? {
+        print("CoreDataManager: fetchCurrentWeekRecord() - date: \(date)")
         var calendar = Calendar.current
         calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
         let startOfWeek = calendar.startOfWeek(for: date)
@@ -182,6 +183,7 @@ class CoreDataManager {
         // Date オブジェクトを比較する条件を設定
         fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startDate as NSDate, endDate as NSDate)
         
+        
         do {
             let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
             return weeklyRecords.first
@@ -196,6 +198,7 @@ class CoreDataManager {
     }
     
     func fetchOrCreateWeeklyRecord(for date: Date) -> WeeklyRecordEntity? {
+        print("CoreDataManager: fetchOrCreateWeeklyRecord() - date: \(date)")
         if let existingRecord = fetchCurrentWeekRecord(for: date) {
             return existingRecord
         } else {
