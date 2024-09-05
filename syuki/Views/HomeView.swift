@@ -66,7 +66,12 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    loadCurrentWeekRecord()
+                    dataManager.loadCurrentWeekRecord()
+                    if let currentWeeklyRecord = currentWeeklyRecord {
+                        print("HomeView: onAppear() - currentWeeklyRecord: \(currentWeeklyRecord)")
+                    } else {
+                        print("HomeView: onAppear() - currentWeeklyRecord is nil")
+                    }
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)

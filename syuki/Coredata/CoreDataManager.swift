@@ -189,7 +189,24 @@ class CoreDataManager {
         }
         return nil
     }
+    
+    func getViewContext() -> NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+    
+    func fetchOrCreateWeeklyRecord(for date: Date) -> WeeklyRecordEntity? {
+        if let existingRecord = fetchCurrentWeekRecord(for: date) {
+            return existingRecord
+        } else {
+            let calendar = Calendar.current
+            let startOfWeek = calendar.startOfWeek(for: date)
+            let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
+            
+            return createWeeklyRecord(startDate: startOfWeek, endDate: endOfWeek, goal: "今週の目標", emoji: "😊")
+        }
+    }
 }
+
 extension Calendar {
     func startOfWeek(for date: Date) -> Date {
         var components = dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)

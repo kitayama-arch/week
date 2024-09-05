@@ -60,8 +60,23 @@ class DataManager: ObservableObject {
                 date: date,
                 items: items
             )
+            
+            // 現在の週のWeeklyRecordを取得または作成
+            if let currentWeeklyRecord = coreDataManager.fetchOrCreateWeeklyRecord(for: date) {
+                // WeeklyRecordにThoughtCardを追加
+                currentWeeklyRecord.addToThoughts(entity)
+                print("DataManager: loadCurrentWeekRecord() - weeklyRecords: \(weeklyRecords)")
+                
+                // CoreDataの更新
+                do {
+                    try coreDataManager.getViewContext().save()
+                    print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
+                } catch {
+                    print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
+                }
+            }
+            
             thoughtCards.append(newThoughtCard)
-            print("DataManager: ThoughtCardが正常に作成され、配列に追加されました。ID: \(newThoughtCard.id)")
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date), Items: \(newThoughtCard.items)")
         } else {
             print("DataManager: ThoughtCardの作成に失敗しました")
@@ -218,21 +233,21 @@ class DataManager: ObservableObject {
     }
     
     func loadCurrentWeekRecord() {
-            // 現在の週の WeeklyRecordEntity を取得
-            if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-                // WeeklyRecordEntity を WeeklyRecord に変換
-                if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
-                    // 現在の週の WeeklyRecord のみ weeklyRecords に格納
-                    weeklyRecords = [currentWeeklyRecord]
-                } else {
-                    // 変換に失敗した場合は、空の配列を設定
-                    weeklyRecords = []
-                }
+        // 現在の週の WeeklyRecordEntity を取得
+        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
+            // WeeklyRecordEntity を WeeklyRecord に変換
+            if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
+                // 現在の週の WeeklyRecord のみ weeklyRecords に格納
+                weeklyRecords = [currentWeeklyRecord]
             } else {
-                // 該当する WeeklyRecord がない場合も、空の配列を設定
+                // 変換に失敗した場合は、空の配列を設定
                 weeklyRecords = []
             }
+        } else {
+            // 該当する WeeklyRecord がない場合も、空の配列を設定
+            weeklyRecords = []
         }
+    }
     
     // WeeklyRecordEntity を WeeklyRecord に変換する共通関数
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
