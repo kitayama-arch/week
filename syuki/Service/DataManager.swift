@@ -71,6 +71,14 @@ class DataManager: ObservableObject {
                 do {
                     try coreDataManager.getViewContext().save()
                     print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
+                    
+                    // 3. weeklyRecords を更新
+                    if let index = weeklyRecords.firstIndex(where: { $0.id == currentWeeklyRecord.id }) {
+                        weeklyRecords[index] = toWeeklyRecord(from: currentWeeklyRecord) ?? weeklyRecords[index] // 既存の WeeklyRecord を更新
+                    } else {
+                        weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) // 新しい WeeklyRecord を追加
+                    }
+                    objectWillChange.send() // UIに更新を通知
                 } catch {
                     print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
                 }
@@ -239,6 +247,7 @@ class DataManager: ObservableObject {
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 // 現在の週の WeeklyRecord のみ weeklyRecords に格納
                 weeklyRecords = [currentWeeklyRecord]
+                print("DataManager: loadCurrentWeekRecord() - weeklyRecords: \(weeklyRecords)") 
             } else {
                 // 変換に失敗した場合は、空の配列を設定
                 weeklyRecords = []

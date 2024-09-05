@@ -9,7 +9,6 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
-    @State private var currentWeeklyRecord: WeeklyRecord?
     
     var body: some View {
         NavigationStack {
@@ -19,7 +18,7 @@ struct HomeView: View {
                 VStack {
                     // カスタムナビゲーションバー
                     ZStack {
-                        if let currentWeeklyRecord = currentWeeklyRecord {
+                        if let currentWeeklyRecord = dataManager.weeklyRecords.first {
                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                 .font(.headline)
                         } else {
@@ -40,11 +39,11 @@ struct HomeView: View {
                     
                     ZStack {
                         ScrollView {
-                            if let currentWeeklyRecord = currentWeeklyRecord {
-                                                           ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
-                                                               ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
-                                                           }
-                                                       } else {
+                            if let currentWeeklyRecord = dataManager.weeklyRecords.first {
+                                ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
+                                    ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
+                                }
+                            } else {
                                 Text("今週の記録はまだありません")
                                     .padding()
                             }
@@ -66,17 +65,16 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    dataManager.loadCurrentWeekRecord()
-                    if let currentWeeklyRecord = currentWeeklyRecord {
-                        print("HomeView: onAppear() - currentWeeklyRecord: \(currentWeeklyRecord)")
-                    } else {
-                        print("HomeView: onAppear() - currentWeeklyRecord is nil")
+                    if dataManager.thoughtCards.isEmpty {
+                        dataManager.addSampleThoughtCards()
                     }
+                    // DataManager の loadCurrentWeekRecord() を呼び出す
+                    dataManager.loadCurrentWeekRecord()
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $showReflectionView) {
-                    if let currentWeeklyRecord = currentWeeklyRecord {
+                    if let currentWeeklyRecord = dataManager.weeklyRecords.first {
                         ReflectionView(weeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
                     }
@@ -94,10 +92,6 @@ struct HomeView: View {
         return formatter.string(from: date)
     }
     
-    private func loadCurrentWeekRecord() {
-        dataManager.loadCurrentWeekRecord()
-        currentWeeklyRecord = dataManager.weeklyRecords.first
-    }
 }
 
 #Preview {
