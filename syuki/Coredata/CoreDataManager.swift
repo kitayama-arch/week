@@ -162,8 +162,9 @@ class CoreDataManager {
         }
     }
     func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? {
-        let calendar = Calendar.current
-        let startOfWeek = calendar.startOfDay(for: date)
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
+        let startOfWeek = calendar.startOfWeek(for: date)
         let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
         
         // 日付部分のみを抽出
@@ -198,7 +199,8 @@ class CoreDataManager {
         if let existingRecord = fetchCurrentWeekRecord(for: date) {
             return existingRecord
         } else {
-            let calendar = Calendar.current
+            var calendar = Calendar.current
+            calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
             let startOfWeek = calendar.startOfWeek(for: date)
             let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
             
@@ -210,7 +212,7 @@ class CoreDataManager {
 extension Calendar {
     func startOfWeek(for date: Date) -> Date {
         var components = dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
-        components.weekday = firstWeekday // 週の始まりを日曜日 (1) に設定
+        components.weekday = 2 // 月曜日を週の始まりに設定 (2は月曜日を表す)
         return self.date(from: components)!
     }
 }

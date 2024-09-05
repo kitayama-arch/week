@@ -73,11 +73,13 @@ class DataManager: ObservableObject {
                     print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
                     
                     // 3. weeklyRecords を更新
+                    print("DataManager: createThoughtCard() - Before: weeklyRecords: \(weeklyRecords)") // 追加: 更新前の状態
                     if let index = weeklyRecords.firstIndex(where: { $0.id == currentWeeklyRecord.id }) {
-                        weeklyRecords[index] = toWeeklyRecord(from: currentWeeklyRecord) ?? weeklyRecords[index] // 既存の WeeklyRecord を更新
+                        weeklyRecords[index] = toWeeklyRecord(from: currentWeeklyRecord) ?? weeklyRecords[index]
                     } else {
-                        weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) // 新しい WeeklyRecord を追加
+                        weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!)
                     }
+                    print("DataManager: createThoughtCard() - After: weeklyRecords: \(weeklyRecords)") // 追加: 更新後の状態
                     objectWillChange.send() // UIに更新を通知
                 } catch {
                     print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
@@ -197,8 +199,10 @@ class DataManager: ObservableObject {
     }
     
     func createNextWeeklyRecord(previousWeeklyRecord: WeeklyRecord) -> WeeklyRecord? {
-        let startDate = Calendar.current.date(byAdding: .day, value: 7, to: previousWeeklyRecord.endDate)!
-        let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
+        let startDate = calendar.date(byAdding: .day, value: 7, to: previousWeeklyRecord.endDate)!
+        let endDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
         
         guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal, emoji: previousWeeklyRecord.emoji) else {
             print("DataManager: 次の週のWeeklyRecordの作成に失敗しました")
@@ -209,7 +213,8 @@ class DataManager: ObservableObject {
     }
     
     func addSampleWeeklyRecords() {
-        let calendar = Calendar.current
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
         let today = Date()
         
         // 過去3週間分のサンプルデータを作成
@@ -246,8 +251,9 @@ class DataManager: ObservableObject {
             // WeeklyRecordEntity を WeeklyRecord に変換
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 // 現在の週の WeeklyRecord のみ weeklyRecords に格納
+                print("DataManager: loadCurrentWeekRecord() - Before: weeklyRecords: \(weeklyRecords)")
                 weeklyRecords = [currentWeeklyRecord]
-                print("DataManager: loadCurrentWeekRecord() - weeklyRecords: \(weeklyRecords)") 
+                print("DataManager: loadCurrentWeekRecord() - After: weeklyRecords: \(weeklyRecords)")
             } else {
                 // 変換に失敗した場合は、空の配列を設定
                 weeklyRecords = []
@@ -314,7 +320,7 @@ class DataManager: ObservableObject {
                 print("現在の週のレコードの変換に失敗しました")
             }
         } else {
-            print("現在の週のレコードが見つかりませんでした")
+            print("DataManager: checkCurrentWeekRecord_現在の週のレコードが見つかりませんでした")
         }
     }
 }
