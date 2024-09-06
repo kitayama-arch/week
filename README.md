@@ -696,6 +696,32 @@
         - [x] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
         - [x] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
         - [ ] `currentWeeklyRecord` の情報 (目標、期間、絵文字) を表示
+        - [ ] DataManagerにcurrentWeeklyRecordプロパティを追加 (優先度: 高)
+            - [ ] @Published var currentWeeklyRecord: WeeklyRecord? を追加
+        - [ ] loadCurrentWeekRecord()の修正 (優先度: 高)
+            - [ ] weeklyRecordsへの代入をやめ、currentWeeklyRecordに代入するように変更
+            - [ ] weeklyRecords = [currentWeeklyRecord] を削除
+            - [ ] currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) を追加
+        - [ ] createThoughtCard()の修正 (優先度: 高)
+            - [ ] weeklyRecordsへのWeeklyRecordの追加処理を削除または修正する
+            - [ ] 現在の週のWeeklyRecordはloadCurrentWeekRecord() currentWeeklyRecordで取得し、createThoughtCard()ではThoughtCardの作成とWeeklyRecordへの追加のみを行うように変更する
+            - [ ] weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) を削除する
+            - [ ] currentWeeklyRecord.thoughts.append(newThoughtCard) を追加
+        - [ ] HomeViewの修正 (優先度: 高)
+            - [ ] weeklyRecords.firstの代わりにdataManager.currentWeeklyRecordを使用する
+        - [ ] weeklyRecordsの管理方法見直しとログ出力の追加 (優先度: 中)
+            - [ ] weeklyRecordsの状態変化を詳細に追跡できるよう、デバッグログを追加する
+            - [ ] ログ出力とweeklyRecordsの実際の動作が一致することを確認する
+            - [ ] loadCurrentWeekRecord()、createThoughtCard()などのweeklyRecordsを操作する箇所に、ログ出力処理を追加する
+            - [ ] 必要に応じて、weeklyRecordsの要素数を表示するなど、デバッグに役立つ情報をログに出力する
+        - [ ] ThoughtCardの作成・更新時に、weeklyRecordのみを更新するように変更する (優先度: 高)
+            - [ ] weeklyRecords配列全体を更新するのではなく、ThoughtCardが所属するWeeklyRecordのみを更新するように変更する
+        - [ ] 冗長な処理を削減する (優先度: 中)
+            - [ ] DataManager.createThoughtCard()内で、CoreDataManager.fetchOrCreateWeeklyRecord()を呼び出す前に、現在の週のWeeklyRecordの存在確認を行うように変更する
+        - [ ] エラー処理を追加する (優先度: 中)
+            - [ ] Core Dataへのアクセスやデータの変換処理などで、エラーが発生する可能性があるため、エラーハンドリングを追加する
+        - [ ] データモデルを改善する (優先度: 低)
+            - [ ] ThoughtCardにもweeklyRecordプロパティを持たせることで、双方向の参照を可能にする
         - [ ] `currentWeeklyRecord.thoughts` から `ThoughtCard` を抽出し、`ForEach` で表示
 
     - [ ] **`HomeView` のプレビュー修正**:

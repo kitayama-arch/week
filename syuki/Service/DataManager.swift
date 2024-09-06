@@ -10,9 +10,9 @@ import CoreData
 
 class DataManager: ObservableObject {
     private let coreDataManager = CoreDataManager() // coredatamanagerのものを使えるように
-    
     @Published var thoughtCards:[ThoughtCard] = [] // thoughtcardsが変更されたらswiftUIのview更新
     @Published var weeklyRecords: [WeeklyRecord] = []
+    @Published var currentWeeklyRecord: WeeklyRecord?
     
     static let shared = DataManager()
     
@@ -250,17 +250,12 @@ class DataManager: ObservableObject {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
             // WeeklyRecordEntity を WeeklyRecord に変換
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
-                // 現在の週の WeeklyRecord のみ weeklyRecords に格納
-                print("DataManager: loadCurrentWeekRecord() - Before: weeklyRecords: \(weeklyRecords)")
-                weeklyRecords = [currentWeeklyRecord]
-                print("DataManager: loadCurrentWeekRecord() - After: weeklyRecords: \(weeklyRecords)")
+                self.currentWeeklyRecord = currentWeeklyRecord
             } else {
-                // 変換に失敗した場合は、空の配列を設定
-                weeklyRecords = []
+                self.currentWeeklyRecord = nil
             }
         } else {
-            // 該当する WeeklyRecord がない場合も、空の配列を設定
-            weeklyRecords = []
+            self.currentWeeklyRecord = nil
         }
     }
     

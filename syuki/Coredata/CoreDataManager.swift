@@ -183,9 +183,9 @@ class CoreDataManager {
         // Date オブジェクトを比較する条件を設定
         fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startDate as NSDate, endDate as NSDate)
         
-        
         do {
             let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
+            print("CoreDataManager: fetchCurrentWeekRecord() - weeklyRecords.count: \(weeklyRecords.count)")
             return weeklyRecords.first
         } catch {
             print("Error fetching current week record: \(error)")
