@@ -84,7 +84,7 @@ struct HomeView: View {
     }
     
     private func createNewThoughtCard() {
-        dataManager.createThoughtCard(content: "", date: Date(), items: [])
+        dataManager.createThoughtCard(content: "", date: Date())
     }
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()

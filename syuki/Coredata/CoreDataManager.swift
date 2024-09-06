@@ -29,14 +29,13 @@ class CoreDataManager {
            }
        }
     
-    func createThoughtCard(content:String, date:Date, items:[String]) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
+    func createThoughtCard(content:String, date:Date) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
         let context = persistentContainer.viewContext // managedObjectContextを取得
         let thoughtCardEntity = ThoughtCardEntity(context: context)
         
         thoughtCardEntity.id = UUID()
         thoughtCardEntity.content = content
         thoughtCardEntity.date = date
-        thoughtCardEntity.items = items
         
         do {
             try context.save()

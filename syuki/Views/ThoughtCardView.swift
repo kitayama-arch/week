@@ -49,7 +49,7 @@ struct ThoughtCardView: View {
 }
 
 struct ThoughtCardView_Previews: PreviewProvider {
-    @State static var sampleCard = ThoughtCard(id: UUID(), content: "サンプル", date: Date(), items: ["項目1", "項目2"])
+    @State static var sampleCard = ThoughtCard(id: UUID(), content: "サンプル", date: Date())
     
     static var previews: some View {
         ThoughtCardView(thoughtCard: $sampleCard, dataManager: DataManager.shared, index: 0)

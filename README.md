@@ -696,17 +696,17 @@
         - [x] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
         - [x] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
         - [ ] `currentWeeklyRecord` の情報 (目標、期間、絵文字) を表示
-        - [ ] DataManagerにcurrentWeeklyRecordプロパティを追加 (優先度: 高)
-            - [ ] @Published var currentWeeklyRecord: WeeklyRecord? を追加
-        - [ ] loadCurrentWeekRecord()の修正 (優先度: 高)
-            - [ ] weeklyRecordsへの代入をやめ、currentWeeklyRecordに代入するように変更
-            - [ ] weeklyRecords = [currentWeeklyRecord] を削除
-            - [ ] currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) を追加
-        - [ ] createThoughtCard()の修正 (優先度: 高)
-            - [ ] weeklyRecordsへのWeeklyRecordの追加処理を削除または修正する
-            - [ ] 現在の週のWeeklyRecordはloadCurrentWeekRecord() currentWeeklyRecordで取得し、createThoughtCard()ではThoughtCardの作成とWeeklyRecordへの追加のみを行うように変更する
-            - [ ] weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) を削除する
-            - [ ] currentWeeklyRecord.thoughts.append(newThoughtCard) を追加
+        - [x] DataManagerにcurrentWeeklyRecordプロパティを追加 (優先度: 高)
+            - [x] @Published var currentWeeklyRecord: WeeklyRecord? を追加
+        - [x] loadCurrentWeekRecord()の修正 (優先度: 高)
+            - [x] weeklyRecordsへの代入をやめ、currentWeeklyRecordに代入するように変更
+            - [x] weeklyRecords = [currentWeeklyRecord] を削除
+            - [x] currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) を追加
+        - [x] createThoughtCard()の修正 (優先度: 高)
+            - [x] weeklyRecordsへのWeeklyRecordの追加処理を削除または修正する
+            - [x] 現在の週のWeeklyRecordはloadCurrentWeekRecord() currentWeeklyRecordで取得し、createThoughtCard()ではThoughtCardの作成とWeeklyRecordへの追加のみを行うように変更する
+            - [x] weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) を削除する
+            - [x] currentWeeklyRecord.thoughts.append(newThoughtCard) を追加
         - [ ] HomeViewの修正 (優先度: 高)
             - [ ] weeklyRecords.firstの代わりにdataManager.currentWeeklyRecordを使用する
         - [ ] weeklyRecordsの管理方法見直しとログ出力の追加 (優先度: 中)

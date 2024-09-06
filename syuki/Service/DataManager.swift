@@ -27,15 +27,13 @@ class DataManager: ObservableObject {
     func loadThoughtCards() {
         let thoughtCardEntities = coreDataManager.readThoughtCards()
         thoughtCards = thoughtCardEntities.compactMap { entity -> ThoughtCard? in
-            guard let id = entity.id, // idを取得
+            guard let id = entity.id,
                   let content = entity.content,
-                  let date = entity.date,
-                  let items = entity.items else { return nil }
+                  let date = entity.date else { return nil }
             return ThoughtCard(
-                id: id,  // idを設定
+                id: id,
                 content: content,
-                date: date,
-                items: items
+                date: date
             )
         }
     }
@@ -44,12 +42,12 @@ class DataManager: ObservableObject {
         weeklyRecords = readWeeklyRecords()
     }
     
-    func createThoughtCard(content: String, date: Date, items: [String]) {
-        if let entity = coreDataManager.createThoughtCard(content: content, date: date, items: items) {
+    func createThoughtCard(content: String, date: Date) {
+        if let entity = coreDataManager.createThoughtCard(content: content, date: date) {
             guard let id = entity.id,
                   let content = entity.content,
-                  let date = entity.date,
-                  let items = entity.items else {
+                  let date = entity.date
+            else {
                 print("DataManager: ThoughtCardの作成に失敗しました:データのアンラップに失敗")
                 return
             }
@@ -58,7 +56,7 @@ class DataManager: ObservableObject {
                 id: id,
                 content: content,
                 date: date,
-                items: items
+                weeklyRecord: getWeeklyRecord(for: date)
             )
             
             // 現在の週のWeeklyRecordを取得または作成
@@ -76,8 +74,7 @@ class DataManager: ObservableObject {
             } else {
                 print("DataManager: createThoughtCard() - currentWeeklyRecord が nil です")
             }
-            thoughtCards.append(newThoughtCard)
-            print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date), Items: \(newThoughtCard.items)")
+            print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date)")
         } else {
             print("DataManager: ThoughtCardの作成に失敗しました")
         }
@@ -122,13 +119,13 @@ class DataManager: ObservableObject {
     
     func addSampleThoughtCards() {
         let sampleCards = [
-            (content: "今週の目標を立てる", date: Date(), items: ["仕事の優先順位を決める", "週末の予定を立てる"]),
-            (content: "新しいプロジェクトのアイデアを考える", date: Date().addingTimeInterval(86400), items: ["市場調査", "競合分析"]),
-            (content: "健康的な生活習慣を始める", date: Date().addingTimeInterval(172800), items: ["毎日30分運動する", "野菜を多く摂取する"])
+            (content: "今週の目標を立てる", date: Date()),
+            (content: "新しいプロジェクトのアイデアを考える", date: Date().addingTimeInterval(86400)),
+            (content: "健康的な生活習慣を始める", date: Date().addingTimeInterval(172800))
         ]
         
         for card in sampleCards {
-            createThoughtCard(content: card.content, date: card.date, items: card.items)
+            createThoughtCard(content: card.content, date: card.date)
         }
         
         print("サンプルThoughtCardが追加されました。現在の総数: \(thoughtCards.count)")
@@ -153,13 +150,11 @@ class DataManager: ObservableObject {
         let thoughtCards = thoughts.compactMap { thoughtCardEntity -> ThoughtCard? in
             guard let id = thoughtCardEntity.id,
                   let content = thoughtCardEntity.content,
-                  let date = thoughtCardEntity.date,
-                  let items = thoughtCardEntity.items else { return nil }
+                  let date = thoughtCardEntity.date else { return nil }
             return ThoughtCard(
                 id: id,
                 content: content,
-                date: date,
-                items: items
+                date: date
             )
         }
         let newWeeklyRecord = WeeklyRecord(
@@ -234,7 +229,7 @@ class DataManager: ObservableObject {
                 for j in 0..<3 {
                     let thoughtDate = calendar.date(byAdding: .day, value: j, to: startDate)!
                     let thoughtContent = "第\(3-i)週目の思考\(j+1)"
-                    let thought = ThoughtCard(id: UUID(), content: thoughtContent, date: thoughtDate, items: [])
+                    let thought = ThoughtCard(id: UUID(), content: thoughtContent, date: thoughtDate)
                     weeklyRecord.thoughts.append(thought)
                 }
                 
@@ -290,8 +285,7 @@ class DataManager: ObservableObject {
     private func toThoughtCard(from entity: ThoughtCardEntity) -> ThoughtCard? {
         guard let id = entity.id,
               let content = entity.content,
-              let date = entity.date,
-              let items = entity.items else {
+              let date = entity.date else {
             print("DataManager: ThoughtCard の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
@@ -300,7 +294,7 @@ class DataManager: ObservableObject {
             id: id,
             content: content,
             date: date,
-            items: items
+            weeklyRecord: getWeeklyRecord(for: date)
         )
     }
     func checkCurrentWeekRecord() {
@@ -316,6 +310,11 @@ class DataManager: ObservableObject {
             }
         } else {
             print("DataManager: checkCurrentWeekRecord_現在の週のレコードが見つかりませんでした")
+        }
+    }
+    private func getWeeklyRecord(for date: Date) -> WeeklyRecord? {
+        return weeklyRecords.first { record in
+            Calendar.current.isDate(date, inSameDayAs: record.startDate)
         }
     }
 }

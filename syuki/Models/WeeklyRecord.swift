@@ -37,8 +37,8 @@ extension WeeklyRecord {
         startDate: Calendar.current.startOfWeek(for: Date()), // 現在の週の開始日
         endDate: Calendar.current.date(byAdding: .day, value: 6, to: Calendar.current.startOfWeek(for: Date()))!, // 現在の週の終了日
         thoughts: [
-            ThoughtCard(content: "アイデア1", date: Date(), items: []),
-            ThoughtCard(content: "アイデア2", date: Date(), items: [])
+            ThoughtCard(content: "アイデア1", date: Date()),
+            ThoughtCard(content: "アイデア2", date: Date())
         ],
         reflection: "今週は集中できた",
         goal: "アプリを完成させる",
