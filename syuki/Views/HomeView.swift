@@ -39,7 +39,7 @@ struct HomeView: View {
                     
                     ZStack {
                         ScrollView {
-                            if let currentWeeklyRecord = dataManager.weeklyRecords.first {
+                            if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                                 ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
                                     ThoughtCardView(thoughtCard: $dataManager.thoughtCards[index], dataManager: dataManager, index: index)
                                 }
@@ -74,7 +74,7 @@ struct HomeView: View {
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $showReflectionView) {
-                    if let currentWeeklyRecord = dataManager.weeklyRecords.first {
+                    if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                         ReflectionView(weeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
                     }

@@ -62,30 +62,20 @@ class DataManager: ObservableObject {
             )
             
             // 現在の週のWeeklyRecordを取得または作成
-            if let currentWeeklyRecord = coreDataManager.fetchOrCreateWeeklyRecord(for: date) {
+            if let currentWeeklyRecord = currentWeeklyRecord {
                 // WeeklyRecordにThoughtCardを追加
-                currentWeeklyRecord.addToThoughts(entity)
+                currentWeeklyRecord.thoughts.append(newThoughtCard)
                 print("DataManager: loadCurrentWeekRecord() - weeklyRecords: \(weeklyRecords)")
-                
                 // CoreDataの更新
                 do {
                     try coreDataManager.getViewContext().save()
                     print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
-                    
-                    // 3. weeklyRecords を更新
-                    print("DataManager: createThoughtCard() - Before: weeklyRecords: \(weeklyRecords)") // 追加: 更新前の状態
-                    if let index = weeklyRecords.firstIndex(where: { $0.id == currentWeeklyRecord.id }) {
-                        weeklyRecords[index] = toWeeklyRecord(from: currentWeeklyRecord) ?? weeklyRecords[index]
-                    } else {
-                        weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!)
-                    }
-                    print("DataManager: createThoughtCard() - After: weeklyRecords: \(weeklyRecords)") // 追加: 更新後の状態
-                    objectWillChange.send() // UIに更新を通知
                 } catch {
                     print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
                 }
+            } else {
+                print("DataManager: createThoughtCard() - currentWeeklyRecord が nil です")
             }
-            
             thoughtCards.append(newThoughtCard)
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date), Items: \(newThoughtCard.items)")
         } else {
