@@ -110,6 +110,10 @@ class DataManager: ObservableObject {
     func deleteThoughtCard(at offsets: IndexSet) {
         offsets.forEach { Index in
             let thoughtCard = thoughtCards[Index]
+            if let currentWeeklyRecord = currentWeeklyRecord,
+               let thoughtIndex = currentWeeklyRecord.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
+                currentWeeklyRecord.thoughts.remove(at: thoughtIndex)
+            }
             if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
                 coreDataManager.deleteThoughtCard(thoughtCard: entity)
             }
