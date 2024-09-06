@@ -21,7 +21,7 @@ class DataManager: ObservableObject {
         loadWeeklyRecords()
         print("Initial thoughtCards count: \(thoughtCards.count)")
         print("Initial CoreData entities count: \(coreDataManager.readThoughtCards().count)")
-        checkCurrentWeekRecord() // この行を追加
+        checkCurrentWeekRecord()
     }
     
     func loadThoughtCards() {
@@ -59,8 +59,26 @@ class DataManager: ObservableObject {
                 weeklyRecord: getWeeklyRecord(for: date)
             )
             
-            // 現在の週のWeeklyRecordを取得または作成
-            if let currentWeeklyRecord = currentWeeklyRecord {
+            if currentWeeklyRecord == nil {
+                // 現在の週のWeeklyRecordが存在しない場合、新しく作成
+                if let newWeeklyRecord = coreDataManager.fetchOrCreateWeeklyRecord(for: date) {
+                    currentWeeklyRecord = toWeeklyRecord(from: newWeeklyRecord)
+                    
+                    // WeeklyRecordにThoughtCardを追加
+                    currentWeeklyRecord?.thoughts.append(newThoughtCard)  // optional chaining を使用
+                    print("DataManager: createThoughtCard() - currentWeeklyRecord.thoughts: \(currentWeeklyRecord?.thoughts ?? [])")
+                    // CoreDataの更新
+                    do {
+                        try coreDataManager.getViewContext().save()
+                        print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
+                    } catch {
+                        print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
+                    }
+                    
+                } else {
+                    print("DataManager: createThoughtCard() - WeeklyRecordの作成に失敗しました")
+                }
+            } else if let currentWeeklyRecord = currentWeeklyRecord { // else if に変更
                 // WeeklyRecordにThoughtCardを追加
                 currentWeeklyRecord.thoughts.append(newThoughtCard)
                 print("DataManager: createThoughtCard() - currentWeeklyRecord.thoughts: \(currentWeeklyRecord.thoughts)")
@@ -71,8 +89,6 @@ class DataManager: ObservableObject {
                 } catch {
                     print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
                 }
-            } else {
-                print("DataManager: createThoughtCard() - currentWeeklyRecord が nil です")
             }
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date)")
         } else {
