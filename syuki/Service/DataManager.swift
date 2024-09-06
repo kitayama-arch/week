@@ -245,7 +245,6 @@ class DataManager: ObservableObject {
     }
     
     func loadCurrentWeekRecord() {
-        // 現在の週の WeeklyRecordEntity を取得
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
             // WeeklyRecordEntity を WeeklyRecord に変換
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
@@ -268,7 +267,8 @@ class DataManager: ObservableObject {
               let reflection = entity.reflection,
               let goal = entity.goal,
               let nextWeekGoal = entity.nextWeekGoal,
-              let emoji = entity.emoji else {
+              let emoji = entity.emoji
+        else {
             print("DataManager: WeeklyRecord の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
