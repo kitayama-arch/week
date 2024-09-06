@@ -65,7 +65,7 @@ class DataManager: ObservableObject {
             if let currentWeeklyRecord = currentWeeklyRecord {
                 // WeeklyRecordにThoughtCardを追加
                 currentWeeklyRecord.thoughts.append(newThoughtCard)
-                print("DataManager: loadCurrentWeekRecord() - weeklyRecords: \(weeklyRecords)")
+                print("DataManager: createThoughtCard() - currentWeeklyRecord.thoughts: \(currentWeeklyRecord.thoughts)")
                 // CoreDataの更新
                 do {
                     try coreDataManager.getViewContext().save()
@@ -90,15 +90,24 @@ class DataManager: ObservableObject {
         print("Updating ThoughtCard with ID: \(thoughtCard.id)")
         print("Current thoughtCards: \(thoughtCards.map { $0.id })")
         print("CoreData entities: \(coreDataManager.readThoughtCards().map { $0.id })")
-        guard let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id}),
-              let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id}) else {
-            print("DataManager: 更新するThoughtCardが見つかりませんでした。ID: \(thoughtCard.id)")
-            return
-        }
         
-        coreDataManager.updateThoughtCard(thoughtCard: entity, newContent: newContent)
-        thoughtCards[index].content = newContent
-        print("DataManager: ThoughtCardが正常に更新されました。ID: \(thoughtCard.id)")
+        // currentWeeklyRecord から ThoughtCard を検索
+        if let currentWeeklyRecord = currentWeeklyRecord,
+           let index = currentWeeklyRecord.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
+            
+            // currentWeeklyRecord の ThoughtCard を更新
+            currentWeeklyRecord.thoughts[index].content = newContent
+            
+            // Core Data の更新
+            if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == currentWeeklyRecord.thoughts[index].id }) {
+                coreDataManager.updateThoughtCard(thoughtCard: entity, newContent: newContent)
+            } else {
+                print("DataManager: 更新するThoughtCardのエンティティが見つかりませんでした。ID: \(thoughtCard.id)")
+            }
+            print("DataManager: ThoughtCardが正常に更新されました。ID: \(thoughtCard.id)")
+        } else {
+            print("DataManager: 更新するThoughtCardが見つかりませんでした。ID: \(thoughtCard.id)")
+        }
     }
     
     func deleteThoughtCard(at offsets: IndexSet) {
