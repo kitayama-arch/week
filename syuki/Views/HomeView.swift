@@ -18,7 +18,7 @@ struct HomeView: View {
                 VStack {
                     // カスタムナビゲーションバー
                     ZStack {
-                        if let currentWeeklyRecord = dataManager.weeklyRecords.first {
+                        if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                 .font(.headline)
                         } else {

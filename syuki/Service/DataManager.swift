@@ -241,6 +241,7 @@ class DataManager: ObservableObject {
             // WeeklyRecordEntity を WeeklyRecord に変換
             if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 self.currentWeeklyRecord = currentWeeklyRecord
+                print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord: \(currentWeeklyRecord)")
             } else {
                 self.currentWeeklyRecord = nil
             }
