@@ -86,6 +86,9 @@ class DataManager: ObservableObject {
                 do {
                     try coreDataManager.getViewContext().save()
                     print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
+                    DispatchQueue.main.async {
+                        self.thoughtCards.append(newThoughtCard) // <- メインスレッドで実行
+                    }
                 } catch {
                     print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
                 }
