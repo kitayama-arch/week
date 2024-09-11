@@ -74,6 +74,9 @@ struct HomeView: View {
                     if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                         ReflectionView(weeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
+                            .onDisappear { // ReflectionView が消えるときに実行
+                                                dataManager.loadCurrentWeekRecord() // currentWeeklyRecord を再読み込み
+                                            }
                     }
                 }
             }
