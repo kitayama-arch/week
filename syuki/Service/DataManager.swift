@@ -140,20 +140,6 @@ class DataManager: ObservableObject {
         thoughtCards.remove(atOffsets: offsets)
     }
     
-    func addSampleThoughtCards() {
-        let sampleCards = [
-            (content: "今週の目標を立てる", date: Date()),
-            (content: "新しいプロジェクトのアイデアを考える", date: Date().addingTimeInterval(86400)),
-            (content: "健康的な生活習慣を始める", date: Date().addingTimeInterval(172800))
-        ]
-        
-        for card in sampleCards {
-            createThoughtCard(content: card.content, date: card.date)
-        }
-        
-        print("サンプルThoughtCardが追加されました。現在の総数: \(thoughtCards.count)")
-    }
-    
     func createWeeklyRecord(startDate: Date, endDate: Date, goal: String, emoji: String) -> WeeklyRecord? {
         guard let entity = coreDataManager.createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal, emoji: emoji) else {
             print("DataManager: WeeklyRecordの作成に失敗しました")
@@ -227,39 +213,6 @@ class DataManager: ObservableObject {
         }
         print("DataManager: 次の週のWeeklyRecordが正常に作成されました。ID: \(newWeeklyRecord.id)")
         return newWeeklyRecord
-    }
-    
-    func addSampleWeeklyRecords() {
-        var calendar = Calendar.current
-        calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
-        let today = Date()
-        
-        // 過去3週間分のサンプルデータを作成
-        for i in 0..<3 {
-            let endDate = calendar.date(byAdding: .day, value: -7 * i, to: today)!
-            let startDate = calendar.date(byAdding: .day, value: -6, to: endDate)!
-            
-            let goal = "第\(3-i)週目の目標"
-            let reflection = "第\(3-i)週目の振り返り"
-            let nextWeekGoal = "第\(4-i)週目の目標"
-            let emoji = "😀"  // サンプル絵文字
-            
-            if let weeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: goal, emoji: emoji) {
-                weeklyRecord.reflection = reflection
-                weeklyRecord.nextWeekGoal = nextWeekGoal
-                
-                // サンプルの思考カードを追加
-                for j in 0..<3 {
-                    let thoughtDate = calendar.date(byAdding: .day, value: j, to: startDate)!
-                    let thoughtContent = "第\(3-i)週目の思考\(j+1)"
-                    let thought = ThoughtCard(id: UUID(), content: thoughtContent, date: thoughtDate)
-                    weeklyRecord.thoughts.append(thought)
-                }
-                
-                weeklyRecords.append(weeklyRecord)
-            }
-        }
-        print("サンプルWeeklyRecordが追加されました。現在の総数: \(weeklyRecords.count)")
     }
     
     func loadCurrentWeekRecord() {

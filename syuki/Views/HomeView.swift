@@ -65,9 +65,6 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    if dataManager.thoughtCards.isEmpty {
-                        dataManager.addSampleThoughtCards()
-                    }
                     // DataManager の loadCurrentWeekRecord() を呼び出す
                     dataManager.loadCurrentWeekRecord()
                 }

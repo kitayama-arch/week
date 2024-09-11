@@ -31,7 +31,7 @@ struct ArchiveView: View {
         }
         .onAppear {
             if dataManager.weeklyRecords.isEmpty {
-                dataManager.addSampleWeeklyRecords()
+//                dataManager.addSampleWeeklyRecords()
             }
         }
     }
