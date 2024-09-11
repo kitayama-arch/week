@@ -67,6 +67,7 @@ struct HomeView: View {
                 .onAppear {
                     // DataManager の loadCurrentWeekRecord() を呼び出す
                     dataManager.loadCurrentWeekRecord()
+                    print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])") // デバッグ出力
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
