@@ -23,6 +23,9 @@ struct ThoughtCardView: View {
                 .background(Color.white)
                 .cornerRadius(8)
                 .frame(height: textEditorHeight)
+                .onChange(of: thoughtCard.content) { oldValue, newValue in // 引数を2個に変更
+                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+                }
         }
         .padding()
         .overlay(
@@ -31,12 +34,12 @@ struct ThoughtCardView: View {
                     .foregroundColor(.gray)
                     .padding(.trailing, 8)
             }
-            .confirmationDialog("確認", isPresented: $showingOptions) {
-                Button("削除") {
-                    let indexSet = IndexSet(integer: index)
-                    dataManager.deleteThoughtCard(at: indexSet)
-                }
-            },
+                .confirmationDialog("確認", isPresented: $showingOptions) {
+                    Button("削除") {
+                        let indexSet = IndexSet(integer: index)
+                        dataManager.deleteThoughtCard(at: indexSet)
+                    }
+                },
             alignment: .topTrailing
         )
     }

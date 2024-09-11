@@ -105,13 +105,18 @@ class DataManager: ObservableObject {
         print("Current thoughtCards: \(thoughtCards.map { $0.id })")
         print("CoreData entities: \(coreDataManager.readThoughtCards().map { $0.id })")
         
+        // 最新の currentWeeklyRecord を取得
+        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
+            currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity)
+        }
+
         // currentWeeklyRecord から ThoughtCard を検索
         if let currentWeeklyRecord = currentWeeklyRecord,
            let index = currentWeeklyRecord.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
-            
+
             // currentWeeklyRecord の ThoughtCard を更新
             currentWeeklyRecord.thoughts[index].content = newContent
-            
+
             // Core Data の更新
             if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == currentWeeklyRecord.thoughts[index].id }) {
                 coreDataManager.updateThoughtCard(thoughtCard: entity, newContent: newContent)
