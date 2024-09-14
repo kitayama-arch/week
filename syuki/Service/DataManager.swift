@@ -42,8 +42,25 @@ class DataManager: ObservableObject {
         weeklyRecords = readWeeklyRecords()
     }
     
+    // 修正1: ThoughtCardEntityとWeeklyRecordEntityの関連付け
     func createThoughtCard(content: String, date: Date) {
-        if let entity = coreDataManager.createThoughtCard(content: content, date: date) {
+        // 現在のWeeklyRecordEntityを取得
+        var weeklyRecordEntity: WeeklyRecordEntity?
+        if let currentWeeklyRecord = currentWeeklyRecord {
+            weeklyRecordEntity = coreDataManager.readWeeklyRecord(withId: currentWeeklyRecord.id)
+        } else {
+            // 存在しない場合は新規作成
+            if let newWeeklyRecordEntity = coreDataManager.fetchOrCreateWeeklyRecord(for: date) {
+                currentWeeklyRecord = toWeeklyRecord(from: newWeeklyRecordEntity)
+                weeklyRecordEntity = newWeeklyRecordEntity
+            } else {
+                print("DataManager: createThoughtCard() - WeeklyRecordの作成に失敗しました")
+                return
+            }
+        }
+
+        // ThoughtCardEntityの作成と関連付け
+        if let entity = coreDataManager.createThoughtCard(content: content, date: date, weeklyRecord: weeklyRecordEntity) {
             guard let id = entity.id,
                   let content = entity.content,
                   let date = entity.date
@@ -59,38 +76,14 @@ class DataManager: ObservableObject {
                 weeklyRecord: getWeeklyRecord(for: date)
             )
             
-            if currentWeeklyRecord == nil {
-                // 現在の週のWeeklyRecordが存在しない場合、新しく作成
-                if let newWeeklyRecord = coreDataManager.fetchOrCreateWeeklyRecord(for: date) {
-                    currentWeeklyRecord = toWeeklyRecord(from: newWeeklyRecord)
-                    currentWeeklyRecord?.thoughts.append(newThoughtCard)
-                    print("DataManager: createThoughtCard() - currentWeeklyRecord.thoughts: \(currentWeeklyRecord?.thoughts ?? [])")
-                    // CoreDataの更新
-                    do {
-                        try coreDataManager.getViewContext().save()
-                        print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
-                        DispatchQueue.main.async {
-                            self.thoughtCards.append(newThoughtCard)
-                        }
-                    } catch {
-                        print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
-                    }
-                } else {
-                    print("DataManager: createThoughtCard() - WeeklyRecordの作成に失敗しました")
-                }
-            } else if let currentWeeklyRecord = currentWeeklyRecord {
-                currentWeeklyRecord.thoughts.append(newThoughtCard)
-                do {
-                    try coreDataManager.getViewContext().save()
-                    print("DataManager: ThoughtCardが正常に作成され、WeeklyRecordに追加されました。ID: \(newThoughtCard.id)")
-                    DispatchQueue.main.async {
-                        self.thoughtCards.append(newThoughtCard)
-                    }
-                } catch {
-                    print("DataManager: WeeklyRecordの更新に失敗しました: \(error)")
-                }
-                print("DataManager: createThoughtCard() - currentWeeklyRecord.thoughts: \(currentWeeklyRecord.thoughts)")
+            // currentWeeklyRecordのthoughtsに追加
+            currentWeeklyRecord?.thoughts.append(newThoughtCard)
+
+            // SwiftUIのビューを更新
+            DispatchQueue.main.async {
+                self.thoughtCards.append(newThoughtCard)
             }
+
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date)")
         } else {
             print("DataManager: ThoughtCardの作成に失敗しました")
@@ -227,78 +220,68 @@ class DataManager: ObservableObject {
         }
     }
     
-    // WeeklyRecordEntity を WeeklyRecord に変換する共通関数
+    // 修正3: 強制アンラップの回避
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
         guard let id = entity.id,
               let startDate = entity.startDate,
               let endDate = entity.endDate,
-              let thoughts = entity.thoughts as? Set<ThoughtCardEntity>,
-              let reflection = entity.reflection,
               let goal = entity.goal,
-              let nextWeekGoal = entity.nextWeekGoal,
-              let emoji = entity.emoji
-        else {
+              let emoji = entity.emoji else {
             print("DataManager: WeeklyRecord の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
-        
-        let thoughtCards = thoughts.compactMap { self.toThoughtCard(from: $0, weeklyRecordEntity: entity)}
-            
-            return WeeklyRecord(
-                id: id,
-                startDate: startDate,
-                endDate: endDate,
-                thoughts: thoughtCards,
-                reflection: reflection,
-                goal: goal,
-                nextWeekGoal: nextWeekGoal,
-                emoji: emoji
-            )
+
+        let reflection = entity.reflection ?? ""
+        let nextWeekGoal = entity.nextWeekGoal ?? ""
+        let thoughtsSet = entity.thoughts as? Set<ThoughtCardEntity> ?? []
+        let thoughtCards = thoughtsSet.compactMap { self.toThoughtCard(from: $0)}
+
+        return WeeklyRecord(
+            id: id,
+            startDate: startDate,
+            endDate: endDate,
+            thoughts: thoughtCards,
+            reflection: reflection,
+            goal: goal,
+            nextWeekGoal: nextWeekGoal,
+            emoji: emoji
+        )
+    }
+    
+    private func toThoughtCard(from entity: ThoughtCardEntity) -> ThoughtCard? {
+        guard let id = entity.id,
+              let content = entity.content,
+              let date = entity.date else {
+            print("DataManager: ThoughtCard の変換に失敗しました: データのアンラップに失敗")
+            return nil
         }
-        // ThoughtCardEntity を ThoughtCard に変換する関数
-        private func toThoughtCard(from entity: ThoughtCardEntity, weeklyRecordEntity: WeeklyRecordEntity) -> ThoughtCard? {
-            guard let id = entity.id,
-                  let content = entity.content,
-                  let date = entity.date else {
-                print("DataManager: ThoughtCard の変換に失敗しました: データのアンラップに失敗")
-                return nil
-            }
-            let weeklyRecord = WeeklyRecord(
-                id: weeklyRecordEntity.id!,
-                startDate: weeklyRecordEntity.startDate!,
-                endDate: weeklyRecordEntity.endDate!,
-                thoughts: [], // thoughts は空の配列で初期化
-                reflection: weeklyRecordEntity.reflection!,
-                goal: weeklyRecordEntity.goal!,
-                nextWeekGoal: weeklyRecordEntity.nextWeekGoal!,
-                emoji: weeklyRecordEntity.emoji!
-            )
-            
-            return ThoughtCard(
-                id: id,
-                content: content,
-                date: date,
-                weeklyRecord: weeklyRecord
-            )
-        }
-        func checkCurrentWeekRecord() {
-            if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-                if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
-                    print("現在の週のレコードが見つかりました:")
-                    print("ID: \(currentWeeklyRecord.id)")
-                    print("開始日: \(currentWeeklyRecord.startDate)")
-                    print("終了日: \(currentWeeklyRecord.endDate)")
-                    print("目標: \(currentWeeklyRecord.goal)")
-                } else {
-                    print("現在の週のレコードの変換に失敗しました")
-                }
+
+        return ThoughtCard(
+            id: id,
+            content: content,
+            date: date
+        )
+    }
+    
+    func checkCurrentWeekRecord() {
+        if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
+            if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
+                print("現在の週のレコードが見つかりました:")
+                print("ID: \(currentWeeklyRecord.id)")
+                print("開始日: \(currentWeeklyRecord.startDate)")
+                print("終了日: \(currentWeeklyRecord.endDate)")
+                print("目標: \(currentWeeklyRecord.goal)")
             } else {
-                print("DataManager: checkCurrentWeekRecord_現在の週のレコードが見つかりませんでした")
+                print("現在の週のレコードの変換に失敗しました")
             }
-        }
-        private func getWeeklyRecord(for date: Date) -> WeeklyRecord? {
-            return weeklyRecords.first { record in
-                Calendar.current.isDate(date, inSameDayAs: record.startDate)
-            }
+        } else {
+            print("DataManager: checkCurrentWeekRecord_現在の週のレコードが見つかりませんでした")
         }
     }
+    
+    private func getWeeklyRecord(for date: Date) -> WeeklyRecord? {
+        return weeklyRecords.first { record in
+            Calendar.current.isDate(date, inSameDayAs: record.startDate)
+        }
+    }
+}

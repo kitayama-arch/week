@@ -29,13 +29,18 @@ class CoreDataManager {
            }
        }
     
-    func createThoughtCard(content:String, date:Date) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
+    func createThoughtCard(content:String, date:Date, weeklyRecord: WeeklyRecordEntity?) -> ThoughtCardEntity? { // CoredataManagerではThoughtCardEntityを管理。swiftではThoughtCard
         let context = persistentContainer.viewContext // managedObjectContextを取得
         let thoughtCardEntity = ThoughtCardEntity(context: context)
         
         thoughtCardEntity.id = UUID()
         thoughtCardEntity.content = content
         thoughtCardEntity.date = date
+        
+        if let weeklyRecord = weeklyRecord {
+            thoughtCardEntity.weeklyRecord = weeklyRecord
+            weeklyRecord.addToThoughts(thoughtCardEntity)
+        }
         
         do {
             try context.save()
@@ -162,28 +167,18 @@ class CoreDataManager {
     }
     func fetchCurrentWeekRecord(for date: Date) -> WeeklyRecordEntity? {
         print("CoreDataManager: fetchCurrentWeekRecord() - date: \(date)")
+        let context = persistentContainer.viewContext
         var calendar = Calendar.current
         calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
         let startOfWeek = calendar.startOfWeek(for: date)
         let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
         
-        // 日付部分のみを抽出
-        let startComponents = calendar.dateComponents([.year, .month, .day], from: startOfWeek)
-        let endComponents = calendar.dateComponents([.year, .month, .day], from: endOfWeek)
-        
-        // DateComponents を Date に変換
-        guard let startDate = calendar.date(from: startComponents),
-              let endDate = calendar.date(from: endComponents) else {
-            print("Error converting DateComponents to Date")
-            return nil
-        }
-        
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
         // Date オブジェクトを比較する条件を設定
-        fetchRequest.predicate = NSPredicate(format: "startDate == %@ AND endDate == %@", startDate as NSDate, endDate as NSDate)
+        fetchRequest.predicate = NSPredicate(format: "(startDate <= %@) AND (endDate >= %@)", date as NSDate, date as NSDate)
         
         do {
-            let weeklyRecords = try persistentContainer.viewContext.fetch(fetchRequest)
+            let weeklyRecords = try context.fetch(fetchRequest)
             print("CoreDataManager: fetchCurrentWeekRecord() - weeklyRecords.count: \(weeklyRecords.count)")
             return weeklyRecords.first
         } catch {
