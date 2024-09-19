@@ -170,8 +170,6 @@ class CoreDataManager {
         let context = persistentContainer.viewContext
         var calendar = Calendar.current
         calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
-        let startOfWeek = calendar.startOfWeek(for: date)
-        let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
         
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
         // Date オブジェクトを比較する条件を設定

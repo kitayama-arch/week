@@ -31,11 +31,14 @@ struct HomeView: View {
                                 showReflectionView = true
                             }) {
                                 Image(systemName: "square.and.pencil")
-                                    .font(.largeTitle)
+                                    .font(.title)
                             }
+                            .padding(.horizontal)
                         }
                     }
-                    .padding()
+                    if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
+                        GoalCardView(weeklyRecord: .constant(currentWeeklyRecord)) // ここに GoalCardView を配置
+                    }
                     
                     ZStack {
                         ScrollView {
@@ -76,8 +79,8 @@ struct HomeView: View {
                         ReflectionView(weeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
                             .onDisappear { // ReflectionView が消えるときに実行
-                                                dataManager.loadCurrentWeekRecord() // currentWeeklyRecord を再読み込み
-                                            }
+                                dataManager.loadCurrentWeekRecord() // currentWeeklyRecord を再読み込み
+                            }
                     }
                 }
             }
