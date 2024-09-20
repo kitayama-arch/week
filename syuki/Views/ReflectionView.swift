@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReflectionView: View {
-    @ObservedObject var weeklyRecord: WeeklyRecord
+    @ObservedObject var currentWeeklyRecord: WeeklyRecord
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.dismiss) private var dismiss
     
@@ -18,21 +18,21 @@ struct ReflectionView: View {
                 .ignoresSafeArea()
             ScrollView {
                 VStack {
-                    GoalView(goal: weeklyRecord.goal)
-                    ThoughtsListView(thoughts: weeklyRecord.thoughts)
-                    ReflectionInputView(reflection: $weeklyRecord.reflection)
-                    NextGoalCardView(nextWeekGoal: $weeklyRecord.nextWeekGoal)
+                    GoalView(goal: currentWeeklyRecord.goal)
+                    ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
+                    ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
+                    NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal)
                         .padding(.horizontal)
                     Spacer()
                     Button("保存") {
-                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
-                        dismiss() // dismissを使って画面を閉じる
+                        dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
+                        dismiss()
                     }
                 }
-                .navigationTitle("今週の振り返り") // ナビゲーションバーのタイトルを設定
-                .navigationBarTitleDisplayMode(.inline)
             }
         }
+        .navigationTitle("今週の振り返り")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -78,7 +78,7 @@ struct ReflectionInputView: View {
     @State private var textEditorHeight: CGFloat = 50
     
     var body: some View {
-        TextEditor(text: $reflection)
+        TextEditor(text:$reflection)
             .frame(height: max(50, textEditorHeight))
             .padding(.horizontal )
             .background(Color.white)
@@ -108,5 +108,6 @@ struct ReflectionInputView: View {
 }
 
 #Preview {
-    ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
+    ReflectionView(currentWeeklyRecord: WeeklyRecord.sampleData)
+        .environmentObject(DataManager.shared)
 }

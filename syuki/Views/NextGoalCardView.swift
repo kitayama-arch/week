@@ -9,6 +9,7 @@ import SwiftUI
 import MCEmojiPicker
 
 struct NextGoalCardView: View {
+    @EnvironmentObject var dataManager: DataManager
     @Binding var nextWeekGoal: String
     @State private var selectedEmoji: String = "💡" // 選択された絵文字を保持
     @State private var isPickerPresented: Bool = false // 絵文字ピッカーの表示状態を管理

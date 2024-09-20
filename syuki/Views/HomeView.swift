@@ -77,11 +77,13 @@ struct HomeView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(isPresented: $showReflectionView) {
                     if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
-                        ReflectionView(weeklyRecord: currentWeeklyRecord)
+                        ReflectionView(currentWeeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
-                            .onDisappear { // ReflectionView が消えるときに実行
-                                dataManager.loadCurrentWeekRecord() // currentWeeklyRecord を再読み込み
+                            .onDisappear {
+                                dataManager.loadCurrentWeekRecord()
                             }
+                    } else {
+                        Text("データがありません")
                     }
                 }
             }
