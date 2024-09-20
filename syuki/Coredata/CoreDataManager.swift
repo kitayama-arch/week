@@ -140,12 +140,13 @@ class CoreDataManager {
         }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, emoji: String) {
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, goal: String, emoji: String) {
         let context = persistentContainer.viewContext
         
         weeklyRecord.reflection = reflection
         weeklyRecord.nextWeekGoal = nextWeekGoal
-        weeklyRecord.emoji = emoji  // 絵文字を更新
+        weeklyRecord.goal = goal
+        weeklyRecord.emoji = emoji
         
         do {
             try context.save()

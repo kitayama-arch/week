@@ -176,12 +176,18 @@ class DataManager: ObservableObject {
         return weeklyRecordEntites.compactMap { toWeeklyRecord(from: $0) }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecord, reflection: String, nextWeekGoal: String, emoji: String) {
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecord) {
         guard let entity = coreDataManager.readWeeklyRecord(withId: weeklyRecord.id) else {
             print("DataManager: 更新する WeeklyRecord が見つかりませんでした。ID: \(weeklyRecord.id)")
             return
         }
-        coreDataManager.updateWeeklyRecord(weeklyRecord: entity, reflection: reflection, nextWeekGoal: nextWeekGoal, emoji: emoji)
+        coreDataManager.updateWeeklyRecord(
+            weeklyRecord: entity,
+            reflection: weeklyRecord.reflection,
+            nextWeekGoal: weeklyRecord.nextWeekGoal,
+            goal: weeklyRecord.goal,
+            emoji: weeklyRecord.emoji
+        )
     }
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
@@ -220,7 +226,6 @@ class DataManager: ObservableObject {
         }
     }
     
-    // 修正3: 強制アンラップの回避
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
         guard let id = entity.id,
               let startDate = entity.startDate,

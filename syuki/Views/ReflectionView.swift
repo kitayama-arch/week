@@ -25,8 +25,7 @@ struct ReflectionView: View {
                         .padding(.horizontal)
                     Spacer()
                     Button("保存") {
-                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord, reflection: weeklyRecord.reflection, nextWeekGoal: weeklyRecord.nextWeekGoal, emoji: weeklyRecord.emoji
-                        )
+                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
                         dismiss() // dismissを使って画面を閉じる
                     }
                 }

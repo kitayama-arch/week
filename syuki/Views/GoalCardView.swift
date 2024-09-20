@@ -9,8 +9,9 @@ import SwiftUI
 import MCEmojiPicker
 
 struct GoalCardView: View {
-    @Binding var weeklyRecord: WeeklyRecord // test
+    @ObservedObject var weeklyRecord: WeeklyRecord
     @State private var isPickerPresented: Bool = false
+    @EnvironmentObject var dataManager: DataManager 
 
     var body: some View {
         ZStack {
@@ -25,15 +26,23 @@ struct GoalCardView: View {
                         .font(.largeTitle)
                 }
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $weeklyRecord.emoji)
+                .onChange(of: weeklyRecord.emoji) { oldValue, newValue in
+                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
+                    }
                 Divider()
                     .frame(height: 40)
                 TextField("今週の目標を入力", text: $weeklyRecord.goal)
+                    .onChange(of: weeklyRecord.goal) { oldValue, newValue in
+                        dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
+                    }
             }
             .padding(.horizontal)
         }
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    GoalCardView(weeklyRecord: .constant(WeeklyRecord.sampleData))
+    GoalCardView(weeklyRecord: WeeklyRecord.sampleData)
+        .environmentObject(DataManager.shared)
 }

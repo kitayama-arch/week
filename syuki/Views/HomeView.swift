@@ -37,7 +37,8 @@ struct HomeView: View {
                         }
                     }
                     if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
-                        GoalCardView(weeklyRecord: .constant(currentWeeklyRecord)) // ここに GoalCardView を配置
+                        GoalCardView(weeklyRecord: currentWeeklyRecord)
+                            .environmentObject(dataManager)
                     }
                     
                     ZStack {
