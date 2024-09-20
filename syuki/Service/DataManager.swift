@@ -188,6 +188,7 @@ class DataManager: ObservableObject {
             goal: weeklyRecord.goal,
             emoji: weeklyRecord.emoji
         )
+        print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)") // デバッグログを追加
     }
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
@@ -196,6 +197,7 @@ class DataManager: ObservableObject {
             return
         }
         coreDataManager.deleteWeeklyRecord(weeklyRecord: entity)
+        print("DataManager: WeeklyRecord が正常に削除されました。ID: \(weeklyRecord.id)") // デバッグログを追加
     }
     
     func createNextWeeklyRecord(previousWeeklyRecord: WeeklyRecord) -> WeeklyRecord? {
