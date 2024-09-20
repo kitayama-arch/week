@@ -217,9 +217,19 @@ class DataManager: ObservableObject {
     func loadCurrentWeekRecord() {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
             // WeeklyRecordEntity を WeeklyRecord に変換
-            if let currentWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
-                self.currentWeeklyRecord = currentWeeklyRecord
-                print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord: \(currentWeeklyRecord)")
+            if let newWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
+                if let currentWeeklyRecord = self.currentWeeklyRecord {
+                    // 既存のインスタンスのプロパティを更新
+                    currentWeeklyRecord.update(from: newWeeklyRecord)
+                } else {
+                    // 新しいインスタンスを割り当て
+                    self.currentWeeklyRecord = newWeeklyRecord
+                }
+                if let currentWeeklyRecord = self.currentWeeklyRecord {
+                    print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord: \(currentWeeklyRecord)")
+                } else {
+                    print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord is nil")
+                }
             } else {
                 self.currentWeeklyRecord = nil
             }
@@ -227,6 +237,7 @@ class DataManager: ObservableObject {
             self.currentWeeklyRecord = nil
         }
     }
+
     
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
         guard let id = entity.id,

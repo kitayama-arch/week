@@ -27,6 +27,14 @@ class WeeklyRecord: Identifiable, ObservableObject {
         self.nextWeekGoal = nextWeekGoal
         self.emoji = emoji
     }
+    func update(from newRecord: WeeklyRecord) {
+            self.thoughts = newRecord.thoughts
+            self.reflection = newRecord.reflection
+            self.goal = newRecord.goal
+            self.nextWeekGoal = newRecord.nextWeekGoal
+            self.emoji = newRecord.emoji
+            // 必要に応じて他のプロパティも更新
+        }
 }
 
 // テスト用のダミーデータ
