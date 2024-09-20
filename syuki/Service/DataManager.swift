@@ -143,7 +143,8 @@ class DataManager: ObservableObject {
               let reflection = entity.reflection,
               let goal = entity.goal,
               let nextWeekGoal = entity.nextWeekGoal,
-              let emoji = entity.emoji else {
+              let emoji = entity.emoji,
+              let nextWeekEmoji = entity.nextWeekEmoji else {
             print("DataManager: WeeklyRecordの作成に失敗しました: データのアンラップに失敗")
             return nil
         }
@@ -165,7 +166,8 @@ class DataManager: ObservableObject {
             reflection: reflection,
             goal: goal,
             nextWeekGoal: nextWeekGoal,
-            emoji: emoji
+            emoji: emoji,
+            nextWeekEmoji: nextWeekEmoji
         )
         return newWeeklyRecord
     }
@@ -186,7 +188,8 @@ class DataManager: ObservableObject {
             reflection: weeklyRecord.reflection,
             nextWeekGoal: weeklyRecord.nextWeekGoal,
             goal: weeklyRecord.goal,
-            emoji: weeklyRecord.emoji
+            emoji: weeklyRecord.emoji,
+            nextWeekEmoji: weeklyRecord.nextWeekEmoji
         )
         print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)") // デバッグログを追加
     }
@@ -216,13 +219,11 @@ class DataManager: ObservableObject {
     
     func loadCurrentWeekRecord() {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-            // WeeklyRecordEntity を WeeklyRecord に変換
+            // 現在の週の WeeklyRecord が存在する場合
             if let newWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 if let currentWeeklyRecord = self.currentWeeklyRecord {
-                    // 既存のインスタンスのプロパティを更新
                     currentWeeklyRecord.update(from: newWeeklyRecord)
                 } else {
-                    // 新しいインスタンスを割り当て
                     self.currentWeeklyRecord = newWeeklyRecord
                 }
                 if let currentWeeklyRecord = self.currentWeeklyRecord {
@@ -234,7 +235,34 @@ class DataManager: ObservableObject {
                 self.currentWeeklyRecord = nil
             }
         } else {
-            self.currentWeeklyRecord = nil
+            // 現在の週の WeeklyRecord が存在しない場合、新しく作成する
+            if let previousWeeklyRecordEntity = coreDataManager.fetchPreviousWeekRecord(before: Date()),
+               let previousWeeklyRecord = toWeeklyRecord(from: previousWeeklyRecordEntity),
+               let newWeeklyRecord = createNextWeeklyRecord(previousWeeklyRecord: previousWeeklyRecord) {
+                self.currentWeeklyRecord = newWeeklyRecord
+                if let currentWeeklyRecord = self.currentWeeklyRecord {
+                    print("DataManager: 新しい週の WeeklyRecord を作成しました: \(currentWeeklyRecord)")
+                } else {
+                    print("DataManager: 新しい週の WeeklyRecord の作成に失敗しました")
+                }
+            } else {
+                // 前の週のレコードが存在しない場合、デフォルトの値で新しい WeeklyRecord を作成する
+                let startDate = Date() // ここで適切な開始日を設定する必要があります
+                let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
+                let defaultGoal = ""
+                let defaultEmoji = "😊"
+                if let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: defaultGoal, emoji: defaultEmoji) {
+                    self.currentWeeklyRecord = newWeeklyRecord
+                    if let currentWeeklyRecord = self.currentWeeklyRecord {
+                        print("DataManager: デフォルトの値で新しい WeeklyRecord を作成しました: \(currentWeeklyRecord)")
+                    } else {
+                        print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
+                    }
+                } else {
+                    self.currentWeeklyRecord = nil
+                    print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
+                }
+            }
         }
     }
 
@@ -251,6 +279,7 @@ class DataManager: ObservableObject {
 
         let reflection = entity.reflection ?? ""
         let nextWeekGoal = entity.nextWeekGoal ?? ""
+        let nextWeekEmoji = entity.nextWeekEmoji ?? ""
         let thoughtsSet = entity.thoughts as? Set<ThoughtCardEntity> ?? []
         let thoughtCards = thoughtsSet.compactMap { self.toThoughtCard(from: $0) }
             .sorted(by: { $0.date < $1.date })
@@ -263,7 +292,8 @@ class DataManager: ObservableObject {
             reflection: reflection,
             goal: goal,
             nextWeekGoal: nextWeekGoal,
-            emoji: emoji
+            emoji: emoji,
+            nextWeekEmoji: nextWeekEmoji
         )
     }
     

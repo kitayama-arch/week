@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WeeklyRecord: Identifiable, ObservableObject {
+class WeeklyRecord: Identifiable, ObservableObject, CustomStringConvertible {
     let id: UUID
     let startDate: Date
     let endDate: Date
@@ -16,8 +16,13 @@ class WeeklyRecord: Identifiable, ObservableObject {
     @Published var goal: String
     @Published var nextWeekGoal: String
     @Published var emoji: String
+    @Published var nextWeekEmoji: String
     
-    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String, emoji: String) {
+    var description: String {
+            return "WeeklyRecord(id: \(id), startDate: \(startDate), endDate: \(endDate), goal: \(goal), emoji: \(emoji), nextWeekGoal: \(nextWeekGoal), nextWeekEmoji: \(nextWeekEmoji))"
+        }
+    
+    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String, emoji: String, nextWeekEmoji: String) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
@@ -26,6 +31,7 @@ class WeeklyRecord: Identifiable, ObservableObject {
         self.goal = goal
         self.nextWeekGoal = nextWeekGoal
         self.emoji = emoji
+        self.nextWeekEmoji = nextWeekEmoji
     }
     func update(from newRecord: WeeklyRecord) {
             self.thoughts = newRecord.thoughts
@@ -33,7 +39,7 @@ class WeeklyRecord: Identifiable, ObservableObject {
             self.goal = newRecord.goal
             self.nextWeekGoal = newRecord.nextWeekGoal
             self.emoji = newRecord.emoji
-            // 必要に応じて他のプロパティも更新
+            self.nextWeekEmoji = newRecord.nextWeekEmoji
         }
 }
 
@@ -51,7 +57,8 @@ extension WeeklyRecord {
         reflection: "今週は集中できた",
         goal: "アプリを完成させる",
         nextWeekGoal: "新しい機能を追加する",
-        emoji: "😀"
+        emoji: "😀", 
+        nextWeekEmoji: "💡"
     )
 }
 #endif

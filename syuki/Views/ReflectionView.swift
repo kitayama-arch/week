@@ -23,7 +23,7 @@ struct ReflectionView: View {
                     ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
                         .padding()
                     ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
-                    NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal)
+                    NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal, nextWeekEmoji: $currentWeeklyRecord.nextWeekEmoji)
                         .padding(.horizontal)
                     Spacer()
                     Button("保存") {

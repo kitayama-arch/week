@@ -100,7 +100,8 @@ class CoreDataManager {
         weeklyRecordEntity.thoughts = []
         weeklyRecordEntity.reflection = ""
         weeklyRecordEntity.nextWeekGoal = ""
-        weeklyRecordEntity.emoji = emoji  // 絵文字を保存
+        weeklyRecordEntity.emoji = emoji
+        weeklyRecordEntity.nextWeekEmoji = emoji  // 初期値として現在の絵文字を設定
         
         do {
             try context.save()
@@ -140,13 +141,14 @@ class CoreDataManager {
         }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, goal: String, emoji: String) {
+    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, goal: String, emoji: String, nextWeekEmoji: String) {
         let context = persistentContainer.viewContext
         
         weeklyRecord.reflection = reflection
         weeklyRecord.nextWeekGoal = nextWeekGoal
         weeklyRecord.goal = goal
         weeklyRecord.emoji = emoji
+        weeklyRecord.nextWeekEmoji = nextWeekEmoji
         
         do {
             try context.save()
@@ -203,6 +205,24 @@ class CoreDataManager {
             return createWeeklyRecord(startDate: startOfWeek, endDate: endOfWeek, goal: "今週の目標", emoji: "😊")
         }
     }
+    func fetchPreviousWeekRecord(before date: Date) -> WeeklyRecordEntity? {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
+        
+        // 日付の範囲を設定（ここでは、現在の日付よりも前の週を対象）
+        fetchRequest.predicate = NSPredicate(format: "endDate < %@", date as NSDate)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "endDate", ascending: false)]
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results.first
+        } catch {
+            print("CoreDataManager: 前の週のレコードの取得に失敗しました: \(error)")
+            return nil
+        }
+    }
+
 }
 
 extension Calendar {
