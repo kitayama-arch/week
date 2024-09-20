@@ -18,7 +18,7 @@ struct ReflectionView: View {
                 .ignoresSafeArea()
             ScrollView {
                 VStack {
-                    GoalView(goal: currentWeeklyRecord.goal)
+                    GoalView(goal: currentWeeklyRecord.goal, emoji: currentWeeklyRecord.emoji)
                     ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
                     ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
                     NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal)
@@ -38,11 +38,23 @@ struct ReflectionView: View {
 
 struct GoalView: View {
     let goal: String
+    let emoji: String
     
     var body: some View {
-        Text("今週の目標:\(goal)")
-            .font(.headline)
-            .padding()
+        ZStack {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.white)
+                .frame(height: 60)
+            HStack {
+                Text("\(emoji)")
+                Divider()
+                    .frame(height: 40)
+                Text("\(goal)")
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+        .padding(.horizontal)
     }
 }
 
@@ -52,7 +64,7 @@ struct ThoughtsListView: View {
     var body: some View {
         ZStack {
             VStack {
-                ForEach(thoughts) { thought in
+                ForEach(thoughts, id: \.id) { thought in
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.white)
