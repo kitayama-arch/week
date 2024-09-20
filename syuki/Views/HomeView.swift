@@ -69,9 +69,8 @@ struct HomeView: View {
                     }
                 }
                 .onAppear {
-                    // DataManager の loadCurrentWeekRecord() を呼び出す
                     dataManager.loadCurrentWeekRecord()
-                    print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])") // デバッグ出力
+                    print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")
                 }
                 .navigationTitle("")
                 .navigationBarTitleDisplayMode(.inline)
@@ -79,6 +78,9 @@ struct HomeView: View {
                     if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                         ReflectionView(currentWeeklyRecord: currentWeeklyRecord)
                             .environmentObject(dataManager)
+                            .onAppear {
+                                dataManager.loadCurrentWeekRecord()
+                            }
                             .onDisappear {
                                 dataManager.loadCurrentWeekRecord()
                             }
