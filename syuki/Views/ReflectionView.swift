@@ -19,7 +19,9 @@ struct ReflectionView: View {
             ScrollView {
                 VStack {
                     GoalView(goal: currentWeeklyRecord.goal, emoji: currentWeeklyRecord.emoji)
+                        .padding()
                     ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
+                        .padding()
                     ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
                     NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal)
                         .padding(.horizontal)
@@ -54,7 +56,6 @@ struct GoalView: View {
             }
             .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 
@@ -79,7 +80,6 @@ struct ThoughtsListView: View {
                     }
                 }
             }
-            .padding(.horizontal)
         }
         
     }

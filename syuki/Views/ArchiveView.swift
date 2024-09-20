@@ -49,11 +49,13 @@ struct WeeklyRecordDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                 
-                Text("期間: \(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
+                Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
+                    .padding()
+                
+                GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                 
                 ThoughtsListView(thoughts: weeklyRecord.thoughts)
                 
