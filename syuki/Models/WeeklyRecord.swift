@@ -17,12 +17,13 @@ class WeeklyRecord: Identifiable, ObservableObject, CustomStringConvertible {
     @Published var nextWeekGoal: String
     @Published var emoji: String
     @Published var nextWeekEmoji: String
+    @Published var isReflectionCompleted: Bool
     
     var description: String {
             return "WeeklyRecord(id: \(id), startDate: \(startDate), endDate: \(endDate), goal: \(goal), emoji: \(emoji), nextWeekGoal: \(nextWeekGoal), nextWeekEmoji: \(nextWeekEmoji))"
         }
     
-    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String, emoji: String, nextWeekEmoji: String) {
+    init(id: UUID, startDate: Date, endDate: Date, thoughts: [ThoughtCard], reflection: String, goal: String, nextWeekGoal: String, emoji: String, nextWeekEmoji: String, isReflectionCompleted: Bool = false ) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
@@ -32,6 +33,7 @@ class WeeklyRecord: Identifiable, ObservableObject, CustomStringConvertible {
         self.nextWeekGoal = nextWeekGoal
         self.emoji = emoji
         self.nextWeekEmoji = nextWeekEmoji
+        self.isReflectionCompleted = isReflectionCompleted
     }
     func update(from newRecord: WeeklyRecord) {
             self.thoughts = newRecord.thoughts

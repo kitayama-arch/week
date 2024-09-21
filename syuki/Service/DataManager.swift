@@ -189,7 +189,8 @@ class DataManager: ObservableObject {
             nextWeekGoal: weeklyRecord.nextWeekGoal,
             goal: weeklyRecord.goal,
             emoji: weeklyRecord.emoji,
-            nextWeekEmoji: weeklyRecord.nextWeekEmoji
+            nextWeekEmoji: weeklyRecord.nextWeekEmoji,
+            isReflecitonCompleted: weeklyRecord.isReflectionCompleted
         )
         print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)") // デバッグログを追加
     }
@@ -280,6 +281,7 @@ class DataManager: ObservableObject {
         let reflection = entity.reflection ?? ""
         let nextWeekGoal = entity.nextWeekGoal ?? ""
         let nextWeekEmoji = entity.nextWeekEmoji ?? ""
+        let isReflectionCompleted = entity.isReflectionCompleted
         let thoughtsSet = entity.thoughts as? Set<ThoughtCardEntity> ?? []
         let thoughtCards = thoughtsSet.compactMap { self.toThoughtCard(from: $0) }
             .sorted(by: { $0.date < $1.date })
@@ -293,7 +295,8 @@ class DataManager: ObservableObject {
             goal: goal,
             nextWeekGoal: nextWeekGoal,
             emoji: emoji,
-            nextWeekEmoji: nextWeekEmoji
+            nextWeekEmoji: nextWeekEmoji,
+            isReflectionCompleted: isReflectionCompleted
         )
     }
     

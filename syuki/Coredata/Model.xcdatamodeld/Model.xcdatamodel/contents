@@ -11,6 +11,7 @@
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goal" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isReflectionCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nextWeekEmoji" optional="YES" attributeType="String"/>
         <attribute name="nextWeekGoal" optional="YES" attributeType="String"/>
         <attribute name="reflection" optional="YES" attributeType="String"/>

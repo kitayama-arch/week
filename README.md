@@ -695,7 +695,6 @@
         - [x] `WeeklyRecord` を受け取るプロパティ `currentWeeklyRecord` (Optional型) を追加
         - [x] `init()` を追加し、`currentWeeklyRecord` パラメータにデフォルト値 `nil` を設定
         - [x] `body` 内で `if let` を使用し、`currentWeeklyRecord` が `nil` でない場合にのみデータを表示
-        - [ ] `currentWeeklyRecord` の情報 (目標、期間、絵文字) を表示
         - [x] DataManagerにcurrentWeeklyRecordプロパティを追加 (優先度: 高)
             - [x] @Published var currentWeeklyRecord: WeeklyRecord? を追加
         - [x] loadCurrentWeekRecord()の修正 (優先度: 高)
@@ -707,48 +706,47 @@
             - [x] 現在の週のWeeklyRecordはloadCurrentWeekRecord() currentWeeklyRecordで取得し、createThoughtCard()ではThoughtCardの作成とWeeklyRecordへの追加のみを行うように変更する
             - [x] weeklyRecords.append(toWeeklyRecord(from: currentWeeklyRecord)!) を削除する
             - [x] currentWeeklyRecord.thoughts.append(newThoughtCard) を追加
-        - [ ] HomeViewの修正 (優先度: 高)
-            - [ ] weeklyRecords.firstの代わりにdataManager.currentWeeklyRecordを使用する
-        - [ ] weeklyRecordsの管理方法見直しとログ出力の追加 (優先度: 中)
-            - [ ] weeklyRecordsの状態変化を詳細に追跡できるよう、デバッグログを追加する
-            - [ ] ログ出力とweeklyRecordsの実際の動作が一致することを確認する
-            - [ ] loadCurrentWeekRecord()、createThoughtCard()などのweeklyRecordsを操作する箇所に、ログ出力処理を追加する
-            - [ ] 必要に応じて、weeklyRecordsの要素数を表示するなど、デバッグに役立つ情報をログに出力する
-        - [ ] ThoughtCardの作成・更新時に、weeklyRecordのみを更新するように変更する (優先度: 高)
-            - [ ] weeklyRecords配列全体を更新するのではなく、ThoughtCardが所属するWeeklyRecordのみを更新するように変更する
-        - [ ] 冗長な処理を削減する (優先度: 中)
-            - [ ] DataManager.createThoughtCard()内で、CoreDataManager.fetchOrCreateWeeklyRecord()を呼び出す前に、現在の週のWeeklyRecordの存在確認を行うように変更する
-        - [ ] エラー処理を追加する (優先度: 中)
-            - [ ] Core Dataへのアクセスやデータの変換処理などで、エラーが発生する可能性があるため、エラーハンドリングを追加する
-        - [ ] データモデルを改善する (優先度: 低)
-            - [ ] ThoughtCardにもweeklyRecordプロパティを持たせることで、双方向の参照を可能にする
-        - [ ] `currentWeeklyRecord.thoughts` から `ThoughtCard` を抽出し、`ForEach` で表示
+        - [x] HomeViewの修正 (優先度: 高)
+            - [x] weeklyRecords.firstの代わりにdataManager.currentWeeklyRecordを使用する
+        - [x] weeklyRecordsの管理方法見直しとログ出力の追加 (優先度: 中)
+            - [x] weeklyRecordsの状態変化を詳細に追跡できるよう、デバッグログを追加する
+            - [x] ログ出力とweeklyRecordsの実際の動作が一致することを確認する
+            - [x] loadCurrentWeekRecord()、createThoughtCard()などのweeklyRecordsを操作する箇所に、ログ出力処理を追加する
+            - [x] 必要に応じて、weeklyRecordsの要素数を表示するなど、デバッグに役立つ情報をログに出力する
+        - [x] ThoughtCardの作成・更新時に、weeklyRecordのみを更新するように変更する (優先度: 高)
+            - [x] weeklyRecords配列全体を更新するのではなく、ThoughtCardが所属するWeeklyRecordのみを更新するように変更する
+        - [x] 冗長な処理を削減する (優先度: 中)
+            - [x] DataManager.createThoughtCard()内で、CoreDataManager.fetchOrCreateWeeklyRecord()を呼び出す前に、現在の週のWeeklyRecordの存在確認を行うように変更する
+        - [x] エラー処理を追加する (優先度: 中)
+            - [x] Core Dataへのアクセスやデータの変換処理などで、エラーが発生する可能性があるため、エラーハンドリングを追加する
+        - [x] データモデルを改善する (優先度: 低)
+            - [x] ThoughtCardにもweeklyRecordプロパティを持たせることで、双方向の参照を可能にする
+        - [x] `currentWeeklyRecord.thoughts` から `ThoughtCard` を抽出し、`ForEach` で表示
 
-    - [ ] **`HomeView` のプレビュー修正**:
-        - [ ] `WeeklyRecord.sampleData` を `currentWeeklyRecord` プロパティに渡す
+    - [x] **`HomeView` のプレビュー修正**:
+        - [x] `WeeklyRecord.sampleData` を `currentWeeklyRecord` プロパティに渡す
 
-    - [ ] **`HomeView` の `onAppear` 処理**:
-        - [ ] `dataManager.loadCurrentWeekRecord()` を呼び出し、`weeklyRecords` から現在の週の `WeeklyRecord` を `currentWeeklyRecord` プロパティに代入
+    - [x] **`HomeView` の `onAppear` 処理**:
+        - [x] `dataManager.loadCurrentWeekRecord()` を呼び出し、`weeklyRecords` から現在の週の `WeeklyRecord` を `currentWeeklyRecord` プロパティに代入
 
-    - [ ] **`GoalCardView`の統合**:
-        - [ ] `HomeView`の`VStack`に`GoalCardView`を追加する。
-        - [ ] `DataManager`から取得した現在の週の`WeeklyRecord`を`GoalCardView`にバインドする。
-        - [ ] `GoalCardView`に、`WeeklyRecord`の`goal`と`emoji`を表示する。
+    - [x] **`GoalCardView`の統合**:
+        - [x] `HomeView`の`VStack`に`GoalCardView`を追加する。
+        - [x] `DataManager`から取得した現在の週の`WeeklyRecord`を`GoalCardView`にバインドする。
+        - [x] `GoalCardView`に、`WeeklyRecord`の`goal`と`emoji`を表示する。
+    - [x] **現在の週の思考カード表示**:
+        - [x] `HomeView`の`ForEach`ループを更新し、`DataManager`から取得した現在の週の`WeeklyRecord`の`thoughts`プロパティに含まれる`ThoughtCard`のみを表示するように変更する。
 
-    - [ ] **現在の週の思考カード表示**:
-        - [ ] `HomeView`の`ForEach`ループを更新し、`DataManager`から取得した現在の週の`WeeklyRecord`の`thoughts`プロパティに含まれる`ThoughtCard`のみを表示するように変更する。
+    - [x] **`DataManager`の更新**:
+        - [x] 既存の`loadCurrentWeekRecord()`メソッドを修正し、以下の処理を行う。
+            - [x] `CoreDataManager`の`fetchCurrentWeekRecord()`を使って現在の週の`WeeklyRecord`を取得する。
+            - [x] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つかった場合は、`weeklyRecords`に格納する。
+            - [x] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからなかった場合は、`weeklyRecords`を空にする。
 
-    - [ ] **`DataManager`の更新**:
-        - [ ] 既存の`loadCurrentWeekRecord()`メソッドを修正し、以下の処理を行う。
-            - [ ] `CoreDataManager`の`fetchCurrentWeekRecord()`を使って現在の週の`WeeklyRecord`を取得する。
-            - [ ] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つかった場合は、`weeklyRecords`に格納する。
-            - [ ] `fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからなかった場合は、`weeklyRecords`を空にする。
-
-    - [ ] **`HomeView`の更新**:
-        - [ ] `HomeView`の`onAppear`で以下の処理を行う。
-            - [ ] `DataManager`の`loadWeeklyRecords()`を呼び出し、`weeklyRecords`を更新する。
-            - [ ] `DataManager`の`fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからない場合、`createWeeklyRecord()`メソッドを使って新しい`WeeklyRecord`を作成する。
-            - [ ] 新規作成された`WeeklyRecord`を`weeklyRecords`に追加する。
+    - [x] **`HomeView`の更新**:
+        - [x] `HomeView`の`onAppear`で以下の処理を行う。
+            - [x] `DataManager`の`loadWeeklyRecords()`を呼び出し、`weeklyRecords`を更新する。
+            - [x] `DataManager`の`fetchCurrentWeekRecord()`で`WeeklyRecord`が見つからない場合、`createWeeklyRecord()`メソッドを使って新しい`WeeklyRecord`を作成する。
+            - [x] 新規作成された`WeeklyRecord`を`weeklyRecords`に追加する。
 
     ### フェーズ8: データ永続化のテスト (2-3日)
     - 🎯 **目標**: `DataManager` のCRUD操作が正しく動作し、データが永続的に保存・読み込みできることを確認する
