@@ -21,7 +21,7 @@ class DataManager: ObservableObject {
         loadWeeklyRecords()
         print("Initial thoughtCards count: \(thoughtCards.count)")
         print("Initial CoreData entities count: \(coreDataManager.readThoughtCards().count)")
-        checkCurrentWeekRecord()
+        loadCurrentWeekRecord()
     }
     
     func loadThoughtCards() {
@@ -117,18 +117,21 @@ class DataManager: ObservableObject {
         }
     }
     
-    func deleteThoughtCard(at offsets: IndexSet) {
-        offsets.forEach { Index in
-            let thoughtCard = thoughtCards[Index]
-            if let currentWeeklyRecord = currentWeeklyRecord,
-               let thoughtIndex = currentWeeklyRecord.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
-                currentWeeklyRecord.thoughts.remove(at: thoughtIndex)
-            }
-            if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
-                coreDataManager.deleteThoughtCard(thoughtCard: entity)
-            }
+    func deleteThoughtCard(thoughtCard: ThoughtCard) {
+        // Core Data から削除
+        if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
+            coreDataManager.deleteThoughtCard(thoughtCard: entity)
         }
-        thoughtCards.remove(atOffsets: offsets)
+
+        // currentWeeklyRecord の thoughts から削除
+        if let index = currentWeeklyRecord?.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
+            currentWeeklyRecord?.thoughts.remove(at: index)
+        }
+
+        // 必要に応じて thoughtCards 配列からも削除
+        if let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id }) {
+            thoughtCards.remove(at: index)
+        }
     }
     
     func createWeeklyRecord(startDate: Date, endDate: Date, goal: String, emoji: String) -> WeeklyRecord? {

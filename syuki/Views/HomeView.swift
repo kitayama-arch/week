@@ -54,8 +54,7 @@ struct HomeView: View {
                                 ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
                                     ThoughtCardView(
                                         thoughtCard: $dataManager.thoughtCards[index],
-                                        dataManager: dataManager,
-                                        index: index
+                                        dataManager: dataManager
                                     )
                                 }
                             }

@@ -11,7 +11,6 @@ struct ThoughtCardView: View {
     @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
     @ObservedObject var dataManager: DataManager // 共有インスタンスを受け取る(UIのみだから保持する必要がない)
     @State private var showingOptions = false
-    let index: Int
     @FocusState private var isFocused: Bool
     @State private var cursorPosition: Int = 0
     
@@ -36,8 +35,7 @@ struct ThoughtCardView: View {
             }
                 .confirmationDialog("確認", isPresented: $showingOptions) {
                     Button("削除") {
-                        let indexSet = IndexSet(integer: index)
-                        dataManager.deleteThoughtCard(at: indexSet)
+                        dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
                     }
                 },
             alignment: .topTrailing
@@ -55,7 +53,7 @@ struct ThoughtCardView_Previews: PreviewProvider {
     @State static var sampleCard = ThoughtCard(id: UUID(), content: "サンプル", date: Date())
     
     static var previews: some View {
-        ThoughtCardView(thoughtCard: $sampleCard, dataManager: DataManager.shared, index: 0)
+        ThoughtCardView(thoughtCard: $sampleCard, dataManager: DataManager.shared)
             .previewLayout(.sizeThatFits)
             .padding()
     }
