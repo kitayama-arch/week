@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
+    @State private var showArchiveView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
 
     var body: some View {
@@ -25,6 +26,14 @@ struct HomeView: View {
                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                 .font(.headline)
                             HStack {
+                                Button {
+                                    showArchiveView = true
+                                } label: {
+                                    Image(systemName: "tray")
+                                        .font(.title)
+                                }
+                                .padding()
+
                                 Spacer()
                                 Button(action: {
                                     reflectionWeeklyRecord = currentWeeklyRecord
@@ -110,13 +119,16 @@ struct HomeView: View {
                     Text("データがありません")
                 }
             }
+            .navigationDestination(isPresented: $showArchiveView) {
+                ArchiveView()
+            }
         }
     }
 
     private func createNewThoughtCard() {
         dataManager.createThoughtCard(content: "", date: Date())
     }
-
+    
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"

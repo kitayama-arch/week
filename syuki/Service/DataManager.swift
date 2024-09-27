@@ -190,7 +190,7 @@ class DataManager: ObservableObject {
             goal: weeklyRecord.goal,
             emoji: weeklyRecord.emoji,
             nextWeekEmoji: weeklyRecord.nextWeekEmoji,
-            isReflecitonCompleted: weeklyRecord.isReflectionCompleted
+            isReflectionCompleted: weeklyRecord.isReflectionCompleted
         )
         print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)") // デバッグログを追加
     }

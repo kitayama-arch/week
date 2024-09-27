@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="ThoughtCardEntity" representedClassName="ThoughtCardEntity" syncable="YES" codeGenerationType="class">
+    <entity name="ThoughtCardEntity" representedClassName="ThoughtCardEntity" syncable="YES">
         <attribute name="content" attributeType="String"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="weeklyRecord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeeklyRecordEntity" inverseName="thoughts" inverseEntity="WeeklyRecordEntity"/>
     </entity>
-    <entity name="WeeklyRecordEntity" representedClassName="WeeklyRecordEntity" syncable="YES" codeGenerationType="class">
+    <entity name="WeeklyRecordEntity" representedClassName="WeeklyRecordEntity" syncable="YES">
         <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goal" optional="YES" attributeType="String"/>
