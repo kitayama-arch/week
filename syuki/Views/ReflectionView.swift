@@ -26,7 +26,8 @@ struct ReflectionView: View {
                     NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal, nextWeekEmoji: $currentWeeklyRecord.nextWeekEmoji)
                         .padding(.horizontal)
                     Spacer()
-                    Button("保存") {
+                    Button("振り返りを保存") {
+                        currentWeeklyRecord.isReflectionCompleted = true
                         dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
                         dismiss()
                     }

@@ -141,23 +141,30 @@ class CoreDataManager {
         }
     }
     
-    func updateWeeklyRecord(weeklyRecord: WeeklyRecordEntity, reflection: String, nextWeekGoal: String, goal: String, emoji: String, nextWeekEmoji: String, isReflecitonCompleted: Bool) {
+    func updateWeeklyRecord(
+        weeklyRecord: WeeklyRecordEntity,
+        reflection: String,
+        nextWeekGoal: String,
+        goal: String,
+        emoji: String,
+        nextWeekEmoji: String,
+        isReflectionCompleted: Bool
+    ) {
         let context = persistentContainer.viewContext
-        
         weeklyRecord.reflection = reflection
         weeklyRecord.nextWeekGoal = nextWeekGoal
         weeklyRecord.goal = goal
         weeklyRecord.emoji = emoji
         weeklyRecord.nextWeekEmoji = nextWeekEmoji
-        weeklyRecord.isReflectionCompleted = isReflecitonCompleted
-        
+        weeklyRecord.isReflectionCompleted = isReflectionCompleted
         do {
             try context.save()
-            print("CoreDataManager: WeeklyRecordが正常に更新されました。ID: \(weeklyRecord.id?.uuidString ?? "Unknown")")
+            print("CoreDataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id?.uuidString ?? "Unknown")")
         } catch {
-            print("CoreDataManager: WeeklyRecordの更新に失敗しました: \(error)")
+            print("CoreDataManager: WeeklyRecord の更新に失敗しました: \(error)")
         }
     }
+
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecordEntity) {
         let context = persistentContainer.viewContext
@@ -210,7 +217,7 @@ class CoreDataManager {
         let context = persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
         
-        // 日付の範囲を設定（ここでは、現在の日付よりも前の週を対象）
+        // 日付の範囲を設定（現在の日付よりも前の週を対象）
         fetchRequest.predicate = NSPredicate(format: "endDate < %@", date as NSDate)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "endDate", ascending: false)]
         fetchRequest.fetchLimit = 1
@@ -223,7 +230,6 @@ class CoreDataManager {
             return nil
         }
     }
-
 }
 
 extension Calendar {
