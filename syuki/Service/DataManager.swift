@@ -347,4 +347,12 @@ class DataManager: ObservableObject {
         let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
         return calendar.date(from: components)!
     }
+    
+    func getPreviousWeeklyRecord() -> WeeklyRecord? {
+        if let previousWeeklyRecordEntity = coreDataManager.fetchPreviousWeekRecord(before: Date()),
+           let previousWeeklyRecord = toWeeklyRecord(from: previousWeeklyRecordEntity) {
+            return previousWeeklyRecord
+        }
+        return nil
+    }
 }

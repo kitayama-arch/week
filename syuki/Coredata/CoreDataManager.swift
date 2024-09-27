@@ -203,7 +203,7 @@ class CoreDataManager {
             let startOfWeek = calendar.startOfWeek(for: date)
             let endOfWeek = calendar.date(byAdding: .day, value: 6, to: startOfWeek)!
             
-            return createWeeklyRecord(startDate: startOfWeek, endDate: endOfWeek, goal: "今週の目標", emoji: "😊")
+            return createWeeklyRecord(startDate: startOfWeek, endDate: endOfWeek, goal: "", emoji: "😊")
         }
     }
     func fetchPreviousWeekRecord(before date: Date) -> WeeklyRecordEntity? {
