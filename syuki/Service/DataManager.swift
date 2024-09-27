@@ -205,60 +205,63 @@ class DataManager: ObservableObject {
     }
     
     func createNextWeeklyRecord(previousWeeklyRecord: WeeklyRecord) -> WeeklyRecord? {
-        var calendar = Calendar.current
-        calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
-        let startDate = calendar.date(byAdding: .day, value: 7, to: previousWeeklyRecord.endDate)!
-        let endDate = calendar.date(byAdding: .day, value: 6, to: startDate)!
-        
-        guard let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: previousWeeklyRecord.nextWeekGoal, emoji: previousWeeklyRecord.emoji) else {
-            print("DataManager: 次の週のWeeklyRecordの作成に失敗しました")
+        let startDate = getStartOfWeek(for: Date())
+        let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
+
+        guard let newWeeklyRecord = createWeeklyRecord(
+            startDate: startDate,
+            endDate: endDate,
+            goal: previousWeeklyRecord.nextWeekGoal,
+            emoji: previousWeeklyRecord.nextWeekEmoji
+        ) else {
+            print("DataManager: 次の週の WeeklyRecord の作成に失敗しました")
             return nil
         }
-        print("DataManager: 次の週のWeeklyRecordが正常に作成されました。ID: \(newWeeklyRecord.id)")
+        print("DataManager: 次の週の WeeklyRecord が正常に作成されました。ID: \(newWeeklyRecord.id)")
         return newWeeklyRecord
     }
+
     
     func loadCurrentWeekRecord() {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-            // 現在の週の WeeklyRecord が存在する場合
+            // パターン4, 5: 現在の週の WeeklyRecord が存在する場合
             if let newWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 if let currentWeeklyRecord = self.currentWeeklyRecord {
                     currentWeeklyRecord.update(from: newWeeklyRecord)
                 } else {
                     self.currentWeeklyRecord = newWeeklyRecord
                 }
-                if let currentWeeklyRecord = self.currentWeeklyRecord {
-                    print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord: \(currentWeeklyRecord)")
-                } else {
-                    print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord is nil")
-                }
+                print("DataManager: loadCurrentWeekRecord() - currentWeeklyRecord: \(String(describing: self.currentWeeklyRecord))")
             } else {
                 self.currentWeeklyRecord = nil
             }
         } else {
-            // 現在の週の WeeklyRecord が存在しない場合、新しく作成する
+            // 現在の週の WeeklyRecord が存在しない場合
             if let previousWeeklyRecordEntity = coreDataManager.fetchPreviousWeekRecord(before: Date()),
-               let previousWeeklyRecord = toWeeklyRecord(from: previousWeeklyRecordEntity),
-               let newWeeklyRecord = createNextWeeklyRecord(previousWeeklyRecord: previousWeeklyRecord) {
-                self.currentWeeklyRecord = newWeeklyRecord
-                if let currentWeeklyRecord = self.currentWeeklyRecord {
-                    print("DataManager: 新しい週の WeeklyRecord を作成しました: \(currentWeeklyRecord)")
+               let previousWeeklyRecord = toWeeklyRecord(from: previousWeeklyRecordEntity) {
+                if previousWeeklyRecord.isReflectionCompleted {
+                    // パターン2: 前の週の振り返りが完了している場合、新しい WeeklyRecord を作成
+                    if let newWeeklyRecord = createNextWeeklyRecord(previousWeeklyRecord: previousWeeklyRecord) {
+                        self.currentWeeklyRecord = newWeeklyRecord
+                        print("DataManager: 新しい週の WeeklyRecord を作成しました: \(String(describing: self.currentWeeklyRecord))")
+                    } else {
+                        self.currentWeeklyRecord = nil
+                        print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
+                    }
                 } else {
-                    print("DataManager: 新しい週の WeeklyRecord の作成に失敗しました")
+                    // パターン3: 前の週の振り返りが未完了の場合、currentWeeklyRecord を nil に設定
+                    self.currentWeeklyRecord = nil
+                    print("DataManager: 前の週の振り返りが未完了のため、currentWeeklyRecord は nil です")
                 }
             } else {
-                // 前の週のレコードが存在しない場合、デフォルトの値で新しい WeeklyRecord を作成する
-                let startDate = Date() // ここで適切な開始日を設定する必要があります
+                // パターン1: 前の週の WeeklyRecord が存在しない場合、デフォルトの WeeklyRecord を作成
+                let startDate = getStartOfWeek(for: Date())
                 let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
                 let defaultGoal = ""
                 let defaultEmoji = "😊"
                 if let newWeeklyRecord = createWeeklyRecord(startDate: startDate, endDate: endDate, goal: defaultGoal, emoji: defaultEmoji) {
                     self.currentWeeklyRecord = newWeeklyRecord
-                    if let currentWeeklyRecord = self.currentWeeklyRecord {
-                        print("DataManager: デフォルトの値で新しい WeeklyRecord を作成しました: \(currentWeeklyRecord)")
-                    } else {
-                        print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
-                    }
+                    print("DataManager: デフォルトの値で新しい WeeklyRecord を作成しました: \(String(describing: self.currentWeeklyRecord))")
                 } else {
                     self.currentWeeklyRecord = nil
                     print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
@@ -266,6 +269,7 @@ class DataManager: ObservableObject {
             }
         }
     }
+
 
     
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
@@ -335,5 +339,12 @@ class DataManager: ObservableObject {
         return weeklyRecords.first { record in
             Calendar.current.isDate(date, inSameDayAs: record.startDate)
         }
+    }
+    
+    func getStartOfWeek(for date: Date) -> Date {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // 月曜日を週の開始日に設定
+        let components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
+        return calendar.date(from: components)!
     }
 }
