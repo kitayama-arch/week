@@ -12,7 +12,7 @@ struct HomeView: View {
     @State private var showReflectionView = false
     @State private var showArchiveView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
-
+    
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
         return Binding<[ThoughtCard]>(
@@ -20,7 +20,7 @@ struct HomeView: View {
             set: { dataManager.currentWeeklyRecord?.thoughts = $0 }
         )
     }
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -30,33 +30,35 @@ struct HomeView: View {
                     // currentWeeklyRecord が存在する場合：通常のコンテンツを表示
                     VStack {
                         // カスタムナビゲーションバー
-                        ZStack {
-                            Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                .font(.headline)
-                            HStack {
-                                Button {
-                                    showArchiveView = true
-                                } label: {
-                                    Image(systemName: "tray")
-                                        .font(.title)
+                        VStack {
+                            ZStack {
+                                Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                    .font(.headline)
+                                HStack {
+                                    Button {
+                                        showArchiveView = true
+                                    } label: {
+                                        Image(systemName: "tray")
+                                            .font(.title)
+                                    }
+                                    .padding()
+                                    
+                                    Spacer()
+                                    Button(action: {
+                                        reflectionWeeklyRecord = currentWeeklyRecord
+                                        showReflectionView = true
+                                    }) {
+                                        Image(systemName: "square.and.pencil")
+                                            .font(.title)
+                                    }
+                                    .padding(.horizontal)
                                 }
-                                .padding()
-
-                                Spacer()
-                                Button(action: {
-                                    reflectionWeeklyRecord = currentWeeklyRecord
-                                    showReflectionView = true
-                                }) {
-                                    Image(systemName: "square.and.pencil")
-                                        .font(.title)
-                                }
-                                .padding(.horizontal)
                             }
+                            GoalCardView(weeklyRecord: currentWeeklyRecord)
+                                .environmentObject(dataManager)
+                            
                         }
-                        // 目標カードの表示
-                        GoalCardView(weeklyRecord: currentWeeklyRecord)
-                            .environmentObject(dataManager)
-                        // 思考カードのリスト表示
+
                         ZStack {
                             ScrollView {
                                 if let thoughtsBinding = thoughtsBinding {
@@ -70,6 +72,14 @@ struct HomeView: View {
                                     Text("今週の記録がありません")
                                 }
                             }
+                            .mask(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.black, Color.black, Color.black,
+                                                            Color.black.opacity(0)]),
+                                    startPoint: .init(x: 0.5, y: 0.1),
+                                            endPoint: .init(x: 0.5, y: 0)
+                                )
+                            )
                             // 新しい思考カードを追加するボタン
                             VStack {
                                 Spacer()
@@ -135,7 +145,7 @@ struct HomeView: View {
             }
         }
     }
-
+    
     private func createNewThoughtCard() {
         dataManager.createThoughtCard(content: "", date: Date())
     }

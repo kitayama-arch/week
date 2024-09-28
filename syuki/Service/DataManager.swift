@@ -286,7 +286,6 @@ class DataManager: ObservableObject {
             print("DataManager: WeeklyRecord の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
-        
         let reflection = entity.reflection ?? ""
         let nextWeekGoal = entity.nextWeekGoal ?? ""
         let nextWeekEmoji = entity.nextWeekEmoji ?? ""
@@ -294,7 +293,6 @@ class DataManager: ObservableObject {
         let thoughtsSet = entity.thoughts as? Set<ThoughtCardEntity> ?? []
         let thoughtCards = thoughtsSet.compactMap { self.toThoughtCard(from: $0) }
             .sorted(by: { $0.date < $1.date })
-        
         return WeeklyRecord(
             id: id,
             startDate: startDate,
