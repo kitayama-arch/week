@@ -22,30 +22,24 @@ struct ThoughtCardView: View {
                 .background(Color.white)
                 .cornerRadius(8)
                 .frame(height: textEditorHeight)
-                .onChange(of: thoughtCard.content) { oldValue, newValue in // 引数を2個に変更
+                .onChange(of: thoughtCard.content) { oldValue, newValue in
                     dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
                 }
+                .onLongPressGesture {
+                    showingOptions = true
+                }
         }
-        .padding()
-        .overlay(
-            Button(action: { showingOptions = true }) {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 8)
+        .confirmationDialog("確認", isPresented: $showingOptions) {
+            Button("削除") {
+                dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
             }
-                .confirmationDialog("確認", isPresented: $showingOptions) {
-                    Button("削除") {
-                        dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
-                    }
-                },
-            alignment: .topTrailing
-        )
+        }
+        .padding(10)
     }
-    
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {
         let estimatedSize = thoughtCard.content.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
-        return max(50, estimatedSize.height + 20)
+        return max(50, estimatedSize.height + 50)
     }
 }
 

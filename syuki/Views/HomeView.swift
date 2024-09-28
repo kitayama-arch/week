@@ -56,7 +56,7 @@ struct HomeView: View {
                             }
                             GoalCardView(weeklyRecord: currentWeeklyRecord)
                                 .environmentObject(dataManager)
-                            
+
                         }
 
                         ZStack {
