@@ -25,16 +25,21 @@ struct ThoughtCardView: View {
                 .onChange(of: thoughtCard.content) { oldValue, newValue in
                     dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
                 }
-                .onLongPressGesture {
-                    showingOptions = true
-                }
         }
-        .confirmationDialog("確認", isPresented: $showingOptions) {
-            Button("削除") {
-                dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
+        .padding()
+        .overlay(
+            Button(action: { showingOptions = true }) {
+                Image(systemName: "ellipsis")
+                    .foregroundColor(.gray)
+                    .padding(.trailing, 8)
             }
-        }
-        .padding(10)
+                    .confirmationDialog("確認", isPresented: $showingOptions) {
+                        Button("削除") {
+                            dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
+                        }
+                    },
+            alignment: .topTrailing
+                )
     }
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {
