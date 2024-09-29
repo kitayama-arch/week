@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var showReflectionView = false
     @State private var showArchiveView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
+    @State private var focusedThoughtCardID: UUID?
     
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -64,7 +65,8 @@ struct HomeView: View {
                                 ForEach(Array(currentWeeklyRecord.thoughts.enumerated()), id: \.element.id) { index, thoughtCard in
                                     ThoughtCardView(
                                         thoughtCard: thoughtCard,
-                                        dataManager: dataManager
+                                        dataManager: dataManager,
+                                        focusedThoughtCardID: $focusedThoughtCardID
                                     )
                                 }
                             }
@@ -116,6 +118,15 @@ struct HomeView: View {
                     }
                 }
             }
+            .onReceive(dataManager.$shouldFocusNewCard) { shouldFocus in // shouldFocusNewCard を監視
+                        if shouldFocus, let currentWeeklyRecord = dataManager.currentWeeklyRecord {
+                            // 新しいカードの ID を取得
+                            focusedThoughtCardID = currentWeeklyRecord.thoughts.last?.id
+
+                            // shouldFocusNewCard を false に戻す
+                            dataManager.shouldFocusNewCard = false
+                        }
+                    }
             .onAppear {
                 dataManager.loadCurrentWeekRecord()
                 print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")

@@ -13,6 +13,7 @@ struct ThoughtCardView: View {
     @State private var showingOptions = false
     @FocusState private var isFocused: Bool
     @State private var cursorPosition: Int = 0
+    @Binding var focusedThoughtCardID: UUID?
     
     var body: some View {
         ZStack {
@@ -24,9 +25,14 @@ struct ThoughtCardView: View {
                     .padding(.leading, 8)
                     .background(Color.white)
                     .cornerRadius(8)
-                    .frame(width: .infinity, height: textEditorHeight)
+                    .frame(maxWidth: .infinity, minHeight: textEditorHeight)
+                    .focused($isFocused)
                     .onChange(of: thoughtCard.content) { oldValue, newValue in
                         dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+                    }
+                    .onAppear {
+                        isFocused = focusedThoughtCardID == thoughtCard.id
+                        focusedThoughtCardID = nil // フォーカス処理が完了したら nil に戻す
                     }
                 VStack {
                     Button(action: { showingOptions = true }) {
@@ -55,9 +61,10 @@ struct ThoughtCardView: View {
 
 struct ThoughtCardView_Previews: PreviewProvider {
     @State static var sampleCard = ThoughtCard(id: UUID(), content: "サンプル", date: Date())
+    @State static var focusedThoughtCardID: UUID?
     
     static var previews: some View {
-        ThoughtCardView(thoughtCard: sampleCard, dataManager: DataManager.shared)
+        ThoughtCardView(thoughtCard: sampleCard, dataManager: DataManager.shared, focusedThoughtCardID: $focusedThoughtCardID)
             .previewLayout(.sizeThatFits)
             .padding()
     }

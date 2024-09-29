@@ -13,6 +13,7 @@ class DataManager: ObservableObject {
     @Published var thoughtCards:[ThoughtCard] = [] // thoughtcardsが変更されたらswiftUIのview更新
     @Published var weeklyRecords: [WeeklyRecord] = []
     @Published var currentWeeklyRecord: WeeklyRecord?
+    @Published var shouldFocusNewCard: Bool = false
     
     static let shared = DataManager()
     
@@ -83,6 +84,7 @@ class DataManager: ObservableObject {
             DispatchQueue.main.async {
                 self.thoughtCards.append(newThoughtCard)
             }
+            shouldFocusNewCard = true
             
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date)")
         } else {
