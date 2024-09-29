@@ -2,7 +2,7 @@
 //  ThoughtCardEntity+CoreDataProperties.swift
 //  syuki
 //
-//  Created by Ta-MacbookAir on 2024/09/28.
+//  Created by Ta-MacbookAir on 2024/09/29.
 //
 //
 

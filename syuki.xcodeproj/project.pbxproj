@@ -19,11 +19,11 @@
 		5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3762C3275BA003E2E0C /* HomeView.swift */; };
 		5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED3782C3275BB003E2E0C /* Assets.xcassets */; };
 		5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */; };
+		5A63CF822CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CF802CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift */; };
+		5A63CF832CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A63CF812CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift */; };
 		5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A71975C2C66DC77005BDAC2 /* DataManager.swift */; };
 		5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */; };
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
-		5A9ECF0A2CA7265800E28E7F /* ThoughtCardEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF062CA7265800E28E7F /* ThoughtCardEntity+CoreDataClass.swift */; };
-		5A9ECF0B2CA7265800E28E7F /* ThoughtCardEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF072CA7265800E28E7F /* ThoughtCardEntity+CoreDataProperties.swift */; };
 		5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* SyukiTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
@@ -52,11 +52,11 @@
 		5A4ED3762C3275BA003E2E0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5A4ED3782C3275BB003E2E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5A63CF802CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThoughtCardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		5A63CF812CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThoughtCardEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5A71975C2C66DC77005BDAC2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		5A9ECF062CA7265800E28E7F /* ThoughtCardEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThoughtCardEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		5A9ECF072CA7265800E28E7F /* ThoughtCardEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThoughtCardEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5AA593DB2C871A940005985E /* SyukiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyukiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA593DD2C871A940005985E /* SyukiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyukiTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -163,10 +163,10 @@
 		5AAB8A4B2C635E64002ECBC5 /* Coredata */ = {
 			isa = PBXGroup;
 			children = (
+				5A63CF802CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift */,
+				5A63CF812CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift */,
 				5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */,
 				5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */,
-				5A9ECF062CA7265800E28E7F /* ThoughtCardEntity+CoreDataClass.swift */,
-				5A9ECF072CA7265800E28E7F /* ThoughtCardEntity+CoreDataProperties.swift */,
 				5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */,
 				5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */,
 			);
@@ -280,6 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */,
+				5A63CF822CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift in Sources */,
+				5A63CF832CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift in Sources */,
 				5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */,
 				5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */,
 				5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */,
@@ -293,8 +295,6 @@
 				5A4ED3752C3275BA003E2E0C /* syukiApp.swift in Sources */,
 				5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */,
 				5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */,
-				5A9ECF0A2CA7265800E28E7F /* ThoughtCardEntity+CoreDataClass.swift in Sources */,
-				5A9ECF0B2CA7265800E28E7F /* ThoughtCardEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

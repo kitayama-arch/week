@@ -96,24 +96,29 @@ class DataManager: ObservableObject {
     func updateThoughtCard(thoughtCard: ThoughtCard, newContent: String) {
         print("Updating ThoughtCard with ID: \(thoughtCard.id)")
         print("Current thoughtCards: \(thoughtCards.map { $0.id })")
-        print("CoreData entities: \(coreDataManager.readThoughtCards().map { $0.id })")
         
+        // ThoughtCardEntity を直接フェッチ
+        let context = coreDataManager.getViewContext()
+        let fetchRequest: NSFetchRequest<ThoughtCardEntity> = ThoughtCardEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", thoughtCard.id as CVarArg)
+        fetchRequest.fetchLimit = 1
         
-        // 引数で渡された thoughtCard を使って更新
-        if let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id }) { // thoughtCards から検索
-            
-            // thoughtCards の ThoughtCard を更新
-            thoughtCards[index].content = newContent
-            
-            // Core Data の更新
-            if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
-                coreDataManager.updateThoughtCard(thoughtCard: entity, newContent: newContent)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let entity = results.first {
+                entity.content = newContent
+                try context.save()
+                print("DataManager: ThoughtCardが正常に更新されました。ID: \(thoughtCard.id)")
+                
+                // DataManager の thoughtCards を更新
+                if let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id }) {
+                    thoughtCards[index].content = newContent
+                }
             } else {
                 print("DataManager: 更新するThoughtCardのエンティティが見つかりませんでした。ID: \(thoughtCard.id)")
             }
-            print("DataManager: ThoughtCardが正常に更新されました。ID: \(thoughtCard.id)")
-        } else {
-            print("DataManager: 更新するThoughtCardが見つかりませんでした。ID: \(thoughtCard.id)")
+        } catch {
+            print("DataManager: ThoughtCardの更新に失敗しました: \(error)")
         }
     }
     
