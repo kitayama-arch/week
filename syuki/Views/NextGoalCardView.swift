@@ -29,7 +29,7 @@ struct NextGoalCardView: View {
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji) // 修飾子を追加
                 Divider()
                     .frame(height: 40)
-                TextField("来週の目標を入力", text: $nextWeekGoal) // TextFieldを追加
+                TextField("来週の目標を入力してください", text: $nextWeekGoal) // TextFieldを追加
             }
             .padding(.horizontal)
         }

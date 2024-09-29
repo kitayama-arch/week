@@ -31,7 +31,7 @@ struct GoalCardView: View {
                 }
                 Divider()
                     .frame(height: 40)
-                TextField("今週の目標を入力", text: $weeklyRecord.goal)
+                TextField("今週の目標を入力してください", text: $weeklyRecord.goal)
                     .onChange(of: weeklyRecord.goal) { oldValue, newValue in
                         dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
                     }

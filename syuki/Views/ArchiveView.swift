@@ -31,7 +31,7 @@ struct ArchiveView: View {
         }
         .onAppear {
             if dataManager.weeklyRecords.isEmpty {
-//                dataManager.addSampleWeeklyRecords()
+                //                dataManager.addSampleWeeklyRecords()
             }
         }
     }
@@ -48,38 +48,39 @@ struct WeeklyRecordDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading) {
                 
                 Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
-                    .padding()
-                
+                    .padding(.vertical)
+                Text("目標")
+                    .font(.headline)
                 GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                 
-                ThoughtsListView(thoughts: weeklyRecord.thoughts)
-                
-                VStack(alignment: .leading) {
-                    Text("振り返り:")
-                        .font(.headline)
-                    Text(weeklyRecord.reflection)
+                Text("記録")
+                    .font(.headline)
+                if weeklyRecord.thoughts.isEmpty {
+                    Text("記録はありません")
+                        .foregroundColor(.secondary)
                         .padding()
-                        .background(Color.white)
-                        .cornerRadius(8)
+                } else {
+                    ThoughtsListView(thoughts: weeklyRecord.thoughts)
                 }
                 
-                VStack(alignment: .leading) {
-                    Text("次週の目標:")
-                        .font(.headline)
-                    Text(weeklyRecord.nextWeekGoal)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(8)
-                }
-                Spacer()
+                Text("振り返り")
+                    .font(.headline)
+                Text(weeklyRecord.reflection)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                
+                Text("次週の目標")
+                    .font(.headline)
+                GoalView(goal: weeklyRecord.nextWeekGoal, emoji: weeklyRecord.nextWeekEmoji)
             }
             .padding(.horizontal)
-            .frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .leading)
             
         }
         .background(Color.gray.opacity(0.2))

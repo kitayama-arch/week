@@ -20,10 +20,13 @@ struct ReflectionView: View {
                 VStack(alignment: .leading) {
                     GoalView(goal: currentWeeklyRecord.goal, emoji: currentWeeklyRecord.emoji)
                     Text("記録")
+                        .font(.headline)
                     ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
                     Text("振り返り")
+                        .font(.headline)
                     ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
                     Text("来週の目標")
+                        .font(.headline)
                     NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal, nextWeekEmoji: $currentWeeklyRecord.nextWeekEmoji)
                     Spacer()
                 }
@@ -101,7 +104,7 @@ struct ReflectionInputView: View {
             .cornerRadius(8)
             .overlay(alignment: .topLeading) {
                           if reflection.isEmpty {
-                              Text("今週の振り返りを入力")
+                              Text("どんな一週間でしたか？")
                                   .foregroundStyle(.placeholder)
                                   .allowsHitTesting(false)
                                   .padding(.horizontal, 11)
