@@ -17,21 +17,23 @@ struct ReflectionView: View {
             Color.gray.opacity(0.2)
                 .ignoresSafeArea()
             ScrollView {
-                VStack {
+                VStack(alignment: .leading) {
                     GoalView(goal: currentWeeklyRecord.goal, emoji: currentWeeklyRecord.emoji)
-                        .padding()
+                    Text("記録")
                     ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
-                        .padding()
+                    Text("振り返り")
                     ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
+                    Text("来週の目標")
                     NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal, nextWeekEmoji: $currentWeeklyRecord.nextWeekEmoji)
-                        .padding(.horizontal)
                     Spacer()
-                    Button("振り返りを保存") {
-                        currentWeeklyRecord.isReflectionCompleted = true
-                        dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
-                        dataManager.loadWeeklyRecords()
-                        dismiss()
-                    }
+                }
+                .padding(.horizontal)
+                Spacer()
+                Button("振り返りを保存") {
+                    currentWeeklyRecord.isReflectionCompleted = true
+                    dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
+                    dataManager.loadWeeklyRecords()
+                    dismiss()
                 }
             }
         }
@@ -94,15 +96,23 @@ struct ReflectionInputView: View {
     var body: some View {
         TextEditor(text:$reflection)
             .frame(height: max(50, textEditorHeight))
-            .padding(.horizontal )
+            .padding(.leading, 8)
             .background(Color.white)
             .cornerRadius(8)
+            .overlay(alignment: .topLeading) {
+                          if reflection.isEmpty {
+                              Text("今週の振り返りを入力")
+                                  .foregroundStyle(.placeholder)
+                                  .allowsHitTesting(false)
+                                  .padding(.horizontal, 11)
+                                  .padding(.vertical, 8)
+                          }
+                      }
             .onChange(of: reflection) { oldValue, newValue in
                 withAnimation {
                     updateTextEditorHeight()
                 }
             }
-            .padding(.horizontal)
     }
     private func updateTextEditorHeight() {
         // 画面幅からパディングを引いたサイズを計算

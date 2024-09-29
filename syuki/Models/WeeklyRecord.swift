@@ -59,9 +59,9 @@ extension WeeklyRecord {
             ThoughtCard(content: "アイデア1", date: Date()),
             ThoughtCard(content: "アイデア2", date: Date())
         ],
-        reflection: "今週は集中できた",
+        reflection: "",
         goal: "アプリを完成させる",
-        nextWeekGoal: "新しい機能を追加する",
+        nextWeekGoal: "",
         emoji: "😀", 
         nextWeekEmoji: "💡"
     )
