@@ -15,31 +15,35 @@ struct ThoughtCardView: View {
     @State private var cursorPosition: Int = 0
     
     var body: some View {
-        VStack(spacing: 10) {
-            TextEditor(text: $thoughtCard.content)
-                .focused($isFocused)
-                .padding(.horizontal)
-                .background(Color.white)
-                .cornerRadius(8)
-                .frame(height: textEditorHeight)
-                .onChange(of: thoughtCard.content) { oldValue, newValue in
-                    dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
-                }
-        }
-        .padding()
-        .overlay(
-            Button(action: { showingOptions = true }) {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(.gray)
-                    .padding(.trailing, 8)
-            }
+        ZStack {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.white)
+            HStack {
+                TextEditor(text: $thoughtCard.content)
+                    .focused($isFocused)
+                    .padding(.leading, 8)
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .frame(width: .infinity, height: textEditorHeight)
+                    .onChange(of: thoughtCard.content) { oldValue, newValue in
+                        dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
+                    }
+                VStack {
+                    Button(action: { showingOptions = true }) {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.gray)
+                            .padding(10)
+                    }
                     .confirmationDialog("確認", isPresented: $showingOptions) {
                         Button("削除") {
                             dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
                         }
-                    },
-            alignment: .topTrailing
-                )
+                    }
+                    Spacer()
+                }
+            }
+        }
+        .padding()
     }
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {
