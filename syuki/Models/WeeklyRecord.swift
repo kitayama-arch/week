@@ -35,14 +35,17 @@ class WeeklyRecord: Identifiable, ObservableObject, CustomStringConvertible {
         self.nextWeekEmoji = nextWeekEmoji
         self.isReflectionCompleted = isReflectionCompleted
     }
-    func update(from newRecord: WeeklyRecord) {
-            self.thoughts = newRecord.thoughts
-            self.reflection = newRecord.reflection
-            self.goal = newRecord.goal
-            self.nextWeekGoal = newRecord.nextWeekGoal
-            self.emoji = newRecord.emoji
-            self.nextWeekEmoji = newRecord.nextWeekEmoji
-        }
+    
+    func update(from newWeeklyRecord: WeeklyRecord) {
+        self.thoughts = newWeeklyRecord.thoughts
+        self.reflection = newWeeklyRecord.reflection
+        self.goal = newWeeklyRecord.goal
+        self.nextWeekGoal = newWeeklyRecord.nextWeekGoal
+        self.emoji = newWeeklyRecord.emoji
+        self.nextWeekEmoji = newWeeklyRecord.nextWeekEmoji
+        self.isReflectionCompleted = newWeeklyRecord.isReflectionCompleted
+    }
+
 }
 
 // テスト用のダミーデータ

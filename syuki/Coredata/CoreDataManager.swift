@@ -181,15 +181,19 @@ class CoreDataManager {
         let context = persistentContainer.viewContext
         var calendar = Calendar.current
         calendar.firstWeekday = 2 // 月曜日を週の始まりに設定
-        
+
         let fetchRequest: NSFetchRequest<WeeklyRecordEntity> = WeeklyRecordEntity.fetchRequest()
-        // Date オブジェクトを比較する条件を設定
-        fetchRequest.predicate = NSPredicate(format: "(startDate <= %@) AND (endDate >= %@)", date as NSDate, date as NSDate)
-        
+
         do {
             let weeklyRecords = try context.fetch(fetchRequest)
             print("CoreDataManager: fetchCurrentWeekRecord() - weeklyRecords.count: \(weeklyRecords.count)")
-            return weeklyRecords.first
+            for record in weeklyRecords {
+                if let startDate = record.startDate {
+                    if calendar.isDate(date, equalTo: startDate, toGranularity: .weekOfYear) {
+                        return record
+                    }
+                }
+            }
         } catch {
             print("Error fetching current week record: \(error)")
         }

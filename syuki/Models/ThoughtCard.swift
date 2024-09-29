@@ -5,11 +5,11 @@
 //  Created by Ta-MacbookAir on 2024/07/02.
 //
 
-import Foundation
+import SwiftUI
 
-struct ThoughtCard: Identifiable {
-    let id: UUID // UUID型のidを持つ
-    var content: String
+class ThoughtCard: Identifiable, ObservableObject {
+    let id: UUID
+    @Published var content: String
     let date: Date
     weak var weeklyRecord: WeeklyRecord?
 

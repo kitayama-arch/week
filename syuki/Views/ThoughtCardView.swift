@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ThoughtCardView: View {
-    @Binding var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
+    @ObservedObject var thoughtCard: ThoughtCard // 親ビューからバインディングされたThoughtCardデータ
     @ObservedObject var dataManager: DataManager // 共有インスタンスを受け取る(UIのみだから保持する必要がない)
     @State private var showingOptions = false
     @FocusState private var isFocused: Bool
@@ -52,7 +52,7 @@ struct ThoughtCardView_Previews: PreviewProvider {
     @State static var sampleCard = ThoughtCard(id: UUID(), content: "サンプル", date: Date())
     
     static var previews: some View {
-        ThoughtCardView(thoughtCard: $sampleCard, dataManager: DataManager.shared)
+        ThoughtCardView(thoughtCard: sampleCard, dataManager: DataManager.shared)
             .previewLayout(.sizeThatFits)
             .padding()
     }

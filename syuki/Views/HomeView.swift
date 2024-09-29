@@ -56,28 +56,24 @@ struct HomeView: View {
                             }
                             GoalCardView(weeklyRecord: currentWeeklyRecord)
                                 .environmentObject(dataManager)
-
+                            
                         }
-
+                        
                         ZStack {
                             ScrollView {
-                                if let thoughtsBinding = thoughtsBinding {
-                                    ForEach(thoughtsBinding) { $thoughtCard in
-                                        ThoughtCardView(
-                                            thoughtCard: $thoughtCard,
-                                            dataManager: dataManager
-                                        )
-                                    }
-                                } else {
-                                    Text("今週の記録がありません")
+                                ForEach(Array(currentWeeklyRecord.thoughts.enumerated()), id: \.element.id) { index, thoughtCard in
+                                    ThoughtCardView(
+                                        thoughtCard: thoughtCard,
+                                        dataManager: dataManager
+                                    )
                                 }
                             }
                             .mask(
                                 LinearGradient(
                                     gradient: Gradient(colors: [Color.black, Color.black, Color.black,
-                                                            Color.black.opacity(0)]),
+                                                                Color.black.opacity(0)]),
                                     startPoint: .init(x: 0.5, y: 0.1),
-                                            endPoint: .init(x: 0.5, y: 0)
+                                    endPoint: .init(x: 0.5, y: 0)
                                 )
                             )
                             // 新しい思考カードを追加するボタン
