@@ -43,12 +43,13 @@ struct ThoughtCardView: View {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 10)
     }
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {
         let estimatedSize = thoughtCard.content.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
-        return max(50, estimatedSize.height + 50)
+        return max(50, estimatedSize.height + 20)
     }
 }
 
