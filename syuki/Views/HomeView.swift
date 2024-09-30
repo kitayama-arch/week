@@ -36,33 +36,40 @@ struct HomeView: View {
                         // カスタムナビゲーションバー
                         VStack {
                             ZStack {
-                                Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                    .font(.system(.headline, design: .rounded))
-                                    .foregroundColor(.gray)
-                                    .overlay(
-                                        Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                            .font(.system(.headline, design: .rounded))
-                                            .foregroundColor(.white)
-                                            .opacity(0.21)
-                                            .offset(x: 0.5, y: 0.5)
-                                    )
-                                    .overlay(
-                                        Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                            .font(.system(.headline, design: .rounded))
-                                            .foregroundColor(.white)
-                                            .opacity(0.2)
-                                            .offset(x: -0.5, y: -0.5)
-                                    )
-                                HStack {
-                                    HStack(spacing: 20) { // スペーシングを追加
-                                        Button {
-                                            showArchiveView = true
-                                        } label: {
-                                            Image(systemName: "archivebox")
-                                                .font(.title)
-                                                .foregroundStyle(.gray.opacity(0.8))
+                                VStack(spacing: 5) {
+                                    Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                        .font(.system(.headline, design: .rounded))
+                                        .foregroundColor(.gray)
+                                        .overlay(
+                                            Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                                .font(.system(.headline, design: .rounded))
+                                                .foregroundColor(.white)
+                                                .opacity(0.21)
+                                                .offset(x: 0.5, y: 0.5)
+                                        )
+                                        .overlay(
+                                            Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                                .font(.system(.headline, design: .rounded))
+                                                .foregroundColor(.white)
+                                                .opacity(0.2)
+                                                .offset(x: -0.5, y: -0.5)
+                                        )
+                                    HStack(spacing: 8) {
+                                        ForEach(0..<7) { index in
+                                            if index == getCurrentDayIndex() {
+                                                Capsule()
+                                                    .fill(Color.accentColor)
+                                                    .frame(width: 24, height: 6)
+                                            } else {
+                                                Circle()
+                                                    .fill(Color.gray.opacity(0.3))
+                                                    .frame(width: 6, height: 6)
+                                            }
                                         }
-                                        
+                                    }
+                                }
+                                HStack {
+                                    HStack(spacing: 10) { // スペーシングを追加
                                         Button {
                                             showSettingView = true
                                         } label: {
@@ -70,31 +77,38 @@ struct HomeView: View {
                                                 .font(.title)
                                                 .foregroundStyle(.gray.opacity(0.8))
                                         }
+                                        Button {
+                                            showArchiveView = true
+                                        } label: {
+                                            Image(systemName: "archivebox")
+                                                .font(.title)
+                                                .foregroundStyle(.gray.opacity(0.8))
+                                        }
                                     }
                                     
                                     Spacer()
                                     Button(action: {
-//                                        if isSunday {
-                                            reflectionWeeklyRecord = currentWeeklyRecord
-                                            showReflectionView = true
-//                                        } else {
-//                                            showAlert = true
-//                                        
+                                        //                                        if isSunday {
+                                        reflectionWeeklyRecord = currentWeeklyRecord
+                                        showReflectionView = true
+                                        //                                        } else {
+                                        //                                            showAlert = true
+                                        //
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
                                             .padding(.vertical, 8)
                                             .padding(.horizontal, 10)
                                             .foregroundColor(.white.opacity(0.95))
-//                                            .background(
-//                                                LinearGradient(
-//                                                    gradient: Gradient(colors: [
-//                                                     Color.accentColor.opacity(0.8),Color.accentColor
-//                                                    ]),
-//                                                    startPoint: .top,
-//                                                    endPoint: .bottom
-//                                                )
-//                                            )
+                                        //                                            .background(
+                                        //                                                LinearGradient(
+                                        //                                                    gradient: Gradient(colors: [
+                                        //                                                     Color.accentColor.opacity(0.8),Color.accentColor
+                                        //                                                    ]),
+                                        //                                                    startPoint: .top,
+                                        //                                                    endPoint: .bottom
+                                        //                                                )
+                                        //                                            )
                                             .background(
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
@@ -105,7 +119,7 @@ struct HomeView: View {
                                                     endPoint: .bottom
                                                 )
                                             )
-                                            
+                                        
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .stroke(Color.white.opacity(0.5), lineWidth: 1)
@@ -113,7 +127,7 @@ struct HomeView: View {
                                             .cornerRadius(12)
                                     }
                                     .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
-//                                            .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
+                                    //                                            .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                                 }
                                 .padding(.horizontal)
                             }
@@ -249,6 +263,12 @@ struct HomeView: View {
         let calendar = Calendar.current
         let today = calendar.component(.weekday, from: Date())
         isSunday = today == 1 // 日曜日は1
+    }
+    private func getCurrentDayIndex() -> Int {
+        let calendar = Calendar.current
+        let today = calendar.component(.weekday, from: Date())
+        // 日曜日が0、月曜日が1、...、土曜日が6となるように調整
+        return (today + 5) % 7
     }
 }
 
