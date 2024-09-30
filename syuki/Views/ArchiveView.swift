@@ -8,30 +8,46 @@
 import SwiftUI
 
 struct ArchiveView: View {
-    @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
+    @ObservedObject private var dataManager = DataManager.shared
     @State private var selectedWeeklyRecord: WeeklyRecord? = nil
     
     var body: some View {
-        NavigationView {
-            List(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
-                VStack(alignment: .leading) {
-                    Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
-                        .font(.headline)
-                    Text("目標: \(weeklyRecord.goal)")
-                        .font(.subheadline)
+        ZStack {
+            Color.gray.opacity(0.1)
+                .ignoresSafeArea()
+            
+            VStack {
+                List(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        
+                        HStack {
+                            Text(weeklyRecord.emoji)
+                                .font(.title2)
+                            Text(weeklyRecord.goal)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        selectedWeeklyRecord = weeklyRecord
+                    }
                 }
-                .onTapGesture {
-                    selectedWeeklyRecord = weeklyRecord
-                }
+                .scrollContentBackground(.hidden)
+
             }
-            .navigationTitle("アーカイブ")
-            .sheet(item: $selectedWeeklyRecord) { record in
-                WeeklyRecordDetailView(weeklyRecord: record)
-            }
+        }
+        .navigationTitle("アーカイブ")
+        .sheet(item: $selectedWeeklyRecord) { record in
+            WeeklyRecordDetailView(weeklyRecord: record)
         }
         .onAppear {
             if dataManager.weeklyRecords.isEmpty {
-                //                dataManager.addSampleWeeklyRecords()
+                // データがない場合の処理（必要に応じて）
             }
         }
     }
@@ -48,44 +64,58 @@ struct WeeklyRecordDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading) {
-                
+            VStack(alignment: .leading, spacing: 20) {
                 Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+                    .font(.system(.headline, design: .rounded))
+                    .foregroundColor(.gray)
                     .padding(.vertical)
-                Text("目標")
-                    .font(.headline)
-                GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                 
-                Text("記録")
-                    .font(.headline)
-                if weeklyRecord.thoughts.isEmpty {
-                    Text("記録はありません")
-                        .foregroundColor(.secondary)
-                        .padding()
-                } else {
-                    ThoughtsListView(thoughts: weeklyRecord.thoughts)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("目標")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                    GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                 }
                 
-                Text("振り返り")
-                    .font(.headline)
-                Text(weeklyRecord.reflection)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                    )
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("記録")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
+                    if weeklyRecord.thoughts.isEmpty {
+                        Text("記録はありません")
+                            .foregroundColor(.secondary)
+                            .padding()
+                    } else {
+                        ThoughtsListView(thoughts: weeklyRecord.thoughts)
+                    }
+                }
                 
-                Text("次週の目標")
-                    .font(.headline)
-                GoalView(goal: weeklyRecord.nextWeekGoal, emoji: weeklyRecord.nextWeekEmoji)
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("振り返り")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
+                    Text(weeklyRecord.reflection)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                        )
+                }
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("次週の目標")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
+                    GoalView(goal: weeklyRecord.nextWeekGoal, emoji: weeklyRecord.nextWeekEmoji)
+                }
             }
             .padding(.horizontal)
-            
         }
         .background(Color.gray.opacity(0.1))
         .navigationTitle("週間記録詳細")
