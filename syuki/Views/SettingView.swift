@@ -50,7 +50,7 @@ struct SettingView: View {
         .navigationTitle("設定")
     }
     
-    private func settingSection<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
+    private func settingSection<Content: View>(title: LocalizedStringResource, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title)
                 .font(.headline)
@@ -69,13 +69,13 @@ struct SettingView: View {
         }
     }
     
-    private func settingLink(icon: String, text: String, url: String) -> some View {
+    private func settingLink(icon: String, text: LocalizedStringResource, url: String) -> some View {
         Link(destination: URL(string: url)!) {
             settingRow(icon: icon, text: text)
         }
     }
     
-    private func settingRow(icon: String, text: String) -> some View {
+    private func settingRow(icon: String, text: LocalizedStringResource) -> some View {
         HStack {
             Image(systemName: icon)
                 .foregroundColor(.accentColor)

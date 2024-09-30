@@ -32,6 +32,7 @@
 		5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* SyukiTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
+		5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		5AA593DD2C871A940005985E /* SyukiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyukiTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5D21D4518524F2E8944D630D /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
 		61E1B10B29F268AD86832FEE /* Pods_syuki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_syuki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1991ACE666F4A913D2B5BDC /* Pods-SyukiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyukiTests.release.xcconfig"; path = "Target Support Files/Pods-SyukiTests/Pods-SyukiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		5A4ED3682C3275BA003E2E0C = {
 			isa = PBXGroup;
 			children = (
+				5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */,
 				5A4ED3732C3275BA003E2E0C /* syuki */,
 				5AA593DC2C871A940005985E /* SyukiTests */,
 				5A4ED3722C3275BA003E2E0C /* Products */,
@@ -281,11 +284,12 @@
 			};
 			buildConfigurationList = 5A4ED36C2C3275BA003E2E0C /* Build configuration list for PBXProject "syuki" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 5A4ED3682C3275BA003E2E0C;
 			packageReferences = (
@@ -308,6 +312,7 @@
 			files = (
 				5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */,
 				5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */,
+				5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */,
 				5A2463212CAB24C400B02F0A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
