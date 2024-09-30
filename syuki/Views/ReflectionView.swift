@@ -34,13 +34,31 @@ struct ReflectionView: View {
                 }
                 .padding(.horizontal)
                 Spacer()
-                Button("振り返りを保存") {
+                Button(action: {
                     weeklyRecord.isReflectionCompleted = true
                     dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
                     dataManager.loadWeeklyRecords()
                     dataManager.loadCurrentWeekRecord()
                     dismiss()
+                }) {
+                    Text("保存")
+                        .font(.headline)
+                        .foregroundColor(.white.opacity(0.95))
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 20)
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [
+                                    Color.accentColor.opacity(0.8),Color.accentColor
+                                ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .clipShape(.capsule)
+                        .shadow(color: .accent.opacity(0.7), radius: 5, x: 0.0, y: 0.0)
                 }
+                .padding(.vertical)
             }
         }
         .navigationTitle("振り返り")

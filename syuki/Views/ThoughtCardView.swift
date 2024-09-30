@@ -19,11 +19,7 @@ struct ThoughtCardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                )
-                .animation(.smooth, value: textEditorHeight) 
+                
             HStack {
                 TextEditor(text: $thoughtCard.content)
                     .focused($isFocused)
@@ -55,6 +51,11 @@ struct ThoughtCardView: View {
                 }
             }
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+        )
+        .animation(.smooth, value: textEditorHeight) 
         .padding(.horizontal)
         .padding(.top, 10)
     }
