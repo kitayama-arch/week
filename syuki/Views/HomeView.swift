@@ -42,14 +42,14 @@ struct HomeView: View {
                                         .overlay(
                                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                                 .font(.system(.headline, design: .rounded))
-                                                .foregroundColor(.white)
+                                                .foregroundColor(.BW)
                                                 .opacity(0.21)
                                                 .offset(x: 0.5, y: 0.5)
                                         )
                                         .overlay(
                                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                                 .font(.system(.headline, design: .rounded))
-                                                .foregroundColor(.white)
+                                                .foregroundColor(.BW)
                                                 .opacity(0.2)
                                                 .offset(x: -0.5, y: -0.5)
                                         )
@@ -102,7 +102,7 @@ struct HomeView: View {
                                         //                                            .background(
                                         //                                                LinearGradient(
                                         //                                                    gradient: Gradient(colors: [
-                                        //                                                     Color.accentColor.opacity(0.8),Color.accentColor
+                                        //                                                        Color.accentColor.opacity(0.8),Color.accentColor
                                         //                                                    ]),
                                         //                                                    startPoint: .top,
                                         //                                                    endPoint: .bottom
@@ -111,14 +111,13 @@ struct HomeView: View {
                                             .background(
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
-                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.8),
-                                                        isSunday ? Color.accentColor : Color.gray
+                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
                                                     ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
                                                 )
                                             )
-                                        
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 12)
                                                     .stroke(Color.white.opacity(0.5), lineWidth: 1)
@@ -126,7 +125,7 @@ struct HomeView: View {
                                             .cornerRadius(12)
                                     }
                                     .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
-                                    //                                            .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
+//                                    .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                                 }
                                 .padding(.horizontal)
                             }
@@ -174,7 +173,7 @@ struct HomeView: View {
                                                 )
                                             )
                                     }
-                                    .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                                    .shadow(color: .accent.opacity(0.7), radius: 15, x: 0.0, y: 0.0)
                                     .padding()
                                 }
                             }
