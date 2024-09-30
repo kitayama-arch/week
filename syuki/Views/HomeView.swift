@@ -31,7 +31,6 @@ struct HomeView: View {
                 Color.gray.opacity(0.1)
                     .ignoresSafeArea()
                 if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
-                    // currentWeeklyRecord が存在する場合：通常のコンテンツを表示
                     VStack {
                         // カスタムナビゲーションバー
                         VStack {
@@ -180,6 +179,9 @@ struct HomeView: View {
                                 }
                             }
                         }
+                        // AdMobBannerViewをここに追加
+                        AdMobBannerView()
+                            .frame(width: 320, height: 50)  // バナーの高さを調整
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
@@ -202,6 +204,8 @@ struct HomeView: View {
                                 .cornerRadius(10)
                         }
                         Spacer()
+                        AdMobBannerView()
+                            .frame(width: 320, height: 50)  // バナーの高さを調整
                     }
                 }
             }

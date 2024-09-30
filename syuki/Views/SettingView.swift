@@ -14,11 +14,6 @@ struct SettingView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Text("設定")
-                    .font(.system(.headline, design: .rounded))
-                    .foregroundColor(.gray)
-                    .padding(.top)
-                
                 ScrollView {
                     VStack(spacing: 20) {
                         settingSection(title: "フィードバック") {
@@ -52,6 +47,7 @@ struct SettingView: View {
                 }
             }
         }
+        .navigationTitle("設定")
     }
     
     private func settingSection<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
