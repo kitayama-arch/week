@@ -5,6 +5,9 @@
       location = "group:syuki.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:syuki 2.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>

@@ -164,7 +164,7 @@ struct HomeView: View {
                                             .font(.system(size: 75))
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle (
-                                                Color(.white).opacity(0.8),
+                                                Color(.white),
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
                                                         Color.accentColor.opacity(0.8),Color.accentColor
@@ -179,7 +179,6 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        // AdMobBannerViewをここに追加
                         AdMobBannerView()
                             .frame(width: 320, height: 50)  // バナーの高さを調整
                     }
@@ -188,7 +187,9 @@ struct HomeView: View {
                     VStack {
                         Spacer()
                         Text("前の週の振り返りがまだ完了していません。")
-                            .font(.title)
+                            .font(.system(.title, design: .rounded))
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
                             .padding()
                         Button(action: {
                             if let previousWeeklyRecord = dataManager.getPreviousWeeklyRecord() {
@@ -197,16 +198,29 @@ struct HomeView: View {
                             }
                         }) {
                             Text("振り返りを行う")
-                                .font(.title2)
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .font(.headline)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 20)
+                                .foregroundColor(.white.opacity(0.95))
+                                .background(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                )
+                                .cornerRadius(12)
                         }
+                        .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                         Spacer()
                         AdMobBannerView()
                             .frame(width: 320, height: 50)  // バナーの高さを調整
                     }
+                    .padding()
                 }
             }
             .onReceive(dataManager.$shouldFocusNewCard) { shouldFocus in // shouldFocusNewCard を監視
