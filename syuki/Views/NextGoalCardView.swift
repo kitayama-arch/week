@@ -31,9 +31,13 @@ struct NextGoalCardView: View {
                         .font(.largeTitle)
                         .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                 }
-                .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji) // 修飾子を追加
-                Divider()
-                    .frame(height: 40)
+                .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji)
+                
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(width: 1.5, height: 40)
+                    .cornerRadius(1)
+                
                 TextField("来週の目標を入力してください", text: $nextWeekGoal) // TextFieldを追加
             }
             .padding(.horizontal)

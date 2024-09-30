@@ -90,8 +90,12 @@ struct GoalView: View {
                 Text("\(emoji)")
                     .font(.largeTitle)
                     .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
-                Divider()
-                    .frame(height: 40)
+                
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(width: 1.5, height: 40)
+                    .cornerRadius(1)
+                
                 Text("\(goal)")
                 Spacer()
             }
@@ -135,7 +139,7 @@ struct ReflectionInputView: View {
     var body: some View {
         TextField("どんな一週間でしたか？", text: $reflection, axis: .vertical)
             .textFieldStyle(PlainTextFieldStyle())
-            .padding(8)
+            .padding()
             .background(Color.white)
             .cornerRadius(8)
             .overlay(

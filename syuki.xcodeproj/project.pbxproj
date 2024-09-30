@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07B1C7CD2A517565E6A10E35 /* Pods_SyukiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E38F3B1472936240EA8AC734 /* Pods_SyukiTests.framework */; };
+		197E2AA6A3063A3FBF0CC456 /* Pods_syuki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E1B10B29F268AD86832FEE /* Pods_syuki.framework */; };
 		5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */; };
 		5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2471792C68BB9A001C3CAA /* ReflectionView.swift */; };
 		5A24717C2C6A0B0A001C3CAA /* WeeklyRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24717B2C6A0B0A001C3CAA /* WeeklyRecord.swift */; };
@@ -24,6 +26,7 @@
 		5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A71975C2C66DC77005BDAC2 /* DataManager.swift */; };
 		5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */; };
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
+		5AA486CE2CAB034F00E8D943 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AA486CD2CAB034F00E8D943 /* Localizable.xcstrings */; };
 		5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* SyukiTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0313BB9AAAF3379C3A14A9FE /* Pods-syuki.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.release.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.release.xcconfig"; sourceTree = "<group>"; };
+		58C7DC082F7E2E77D6B3EC47 /* Pods-SyukiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyukiTests.debug.xcconfig"; path = "Target Support Files/Pods-SyukiTests/Pods-SyukiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A2463192CAB0BB400B02F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5A2471792C68BB9A001C3CAA /* ReflectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionView.swift; sourceTree = "<group>"; };
 		5A24717B2C6A0B0A001C3CAA /* WeeklyRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyRecord.swift; sourceTree = "<group>"; };
 		5A24717D2C6B4D2D001C3CAA /* NextGoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextGoalCardView.swift; sourceTree = "<group>"; };
@@ -57,10 +63,15 @@
 		5A71975C2C66DC77005BDAC2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		5AA486CD2CAB034F00E8D943 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5AA593DB2C871A940005985E /* SyukiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyukiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA593DD2C871A940005985E /* SyukiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyukiTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5D21D4518524F2E8944D630D /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
+		61E1B10B29F268AD86832FEE /* Pods_syuki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_syuki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1991ACE666F4A913D2B5BDC /* Pods-SyukiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyukiTests.release.xcconfig"; path = "Target Support Files/Pods-SyukiTests/Pods-SyukiTests.release.xcconfig"; sourceTree = "<group>"; };
+		E38F3B1472936240EA8AC734 /* Pods_SyukiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SyukiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
+				197E2AA6A3063A3FBF0CC456 /* Pods_syuki.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +88,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B1C7CD2A517565E6A10E35 /* Pods_SyukiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083537DDD0D5AF9B8EFB50F8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				58C7DC082F7E2E77D6B3EC47 /* Pods-SyukiTests.debug.xcconfig */,
+				B1991ACE666F4A913D2B5BDC /* Pods-SyukiTests.release.xcconfig */,
+				5D21D4518524F2E8944D630D /* Pods-syuki.debug.xcconfig */,
+				0313BB9AAAF3379C3A14A9FE /* Pods-syuki.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		5A2BEDF72C32B42D00D2307F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,9 +131,12 @@
 		5A4ED3682C3275BA003E2E0C = {
 			isa = PBXGroup;
 			children = (
+				5AA486CD2CAB034F00E8D943 /* Localizable.xcstrings */,
 				5A4ED3732C3275BA003E2E0C /* syuki */,
 				5AA593DC2C871A940005985E /* SyukiTests */,
 				5A4ED3722C3275BA003E2E0C /* Products */,
+				083537DDD0D5AF9B8EFB50F8 /* Pods */,
+				7A72DF551DBE518CE958C6E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +152,7 @@
 		5A4ED3732C3275BA003E2E0C /* syuki */ = {
 			isa = PBXGroup;
 			children = (
+				5A2463192CAB0BB400B02F0A /* Info.plist */,
 				5A4ED3742C3275BA003E2E0C /* syukiApp.swift */,
 				5A4ED3782C3275BB003E2E0C /* Assets.xcassets */,
 				5A4ED37A2C3275BB003E2E0C /* Preview Content */,
@@ -173,6 +201,15 @@
 			path = Coredata;
 			sourceTree = "<group>";
 		};
+		7A72DF551DBE518CE958C6E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E38F3B1472936240EA8AC734 /* Pods_SyukiTests.framework */,
+				61E1B10B29F268AD86832FEE /* Pods_syuki.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,9 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A4ED37F2C3275BB003E2E0C /* Build configuration list for PBXNativeTarget "syuki" */;
 			buildPhases = (
+				65EAC4D8C18293C9C651699C /* [CP] Check Pods Manifest.lock */,
 				5A4ED36D2C3275BA003E2E0C /* Sources */,
 				5A4ED36E2C3275BA003E2E0C /* Frameworks */,
 				5A4ED36F2C3275BA003E2E0C /* Resources */,
+				DC034A91FCA53C3740932FED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,6 +239,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "SyukiTests" */;
 			buildPhases = (
+				36043A944A0B60B8DB25755A /* [CP] Check Pods Manifest.lock */,
 				5AA593D72C871A940005985E /* Sources */,
 				5AA593D82C871A940005985E /* Frameworks */,
 				5AA593D92C871A940005985E /* Resources */,
@@ -222,7 +262,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					5A4ED3702C3275BA003E2E0C = {
 						CreatedOnToolsVersion = 15.3;
@@ -240,6 +280,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 5A4ED3682C3275BA003E2E0C;
 			packageReferences = (
@@ -262,6 +303,7 @@
 			files = (
 				5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */,
 				5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */,
+				5AA486CE2CAB034F00E8D943 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +315,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		36043A944A0B60B8DB25755A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SyukiTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65EAC4D8C18293C9C651699C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-syuki-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC034A91FCA53C3740932FED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5A4ED36D2C3275BA003E2E0C /* Sources */ = {
@@ -322,6 +428,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -376,6 +483,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -385,6 +493,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -432,12 +541,14 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		5A4ED3802C3275BB003E2E0C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D21D4518524F2E8944D630D /* Pods-syuki.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -446,7 +557,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = syuki/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -467,6 +580,7 @@
 		};
 		5A4ED3812C3275BB003E2E0C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0313BB9AAAF3379C3A14A9FE /* Pods-syuki.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,7 +589,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = syuki/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -496,6 +612,7 @@
 		};
 		5AA593E12C871A940005985E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58C7DC082F7E2E77D6B3EC47 /* Pods-SyukiTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -515,6 +632,7 @@
 		};
 		5AA593E22C871A940005985E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1991ACE666F4A913D2B5BDC /* Pods-SyukiTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

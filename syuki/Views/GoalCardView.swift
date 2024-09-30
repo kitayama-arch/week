@@ -34,8 +34,12 @@ struct GoalCardView: View {
                 .onChange(of: weeklyRecord.emoji) { oldValue, newValue in
                     dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
                 }
-                Divider()
-                    .frame(height: 40)
+                
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .frame(width: 1.5, height: 40)
+                    .cornerRadius(1)
+                
                 TextField("今週の目標を入力してください", text: $weeklyRecord.goal)
                     .onChange(of: weeklyRecord.goal) { oldValue, newValue in
                         dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
