@@ -37,24 +37,38 @@ struct HomeView: View {
                             ZStack {
                                 Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                     .font(.system(.headline, design: .rounded))
-                                    .foregroundStyle(.placeholder)
+                                    .foregroundColor(.gray)
+                                    .overlay(
+                                        Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                            .font(.system(.headline, design: .rounded))
+                                            .foregroundColor(.white)
+                                            .opacity(0.21)
+                                            .offset(x: 0.5, y: 0.5)
+                                    )
+                                    .overlay(
+                                        Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
+                                            .font(.system(.headline, design: .rounded))
+                                            .foregroundColor(.white)
+                                            .opacity(0.2)
+                                            .offset(x: -0.5, y: -0.5)
+                                    )
                                 HStack {
                                     Button {
                                         showArchiveView = true
                                     } label: {
                                         Image(systemName: "archivebox")
                                             .font(.title)
-                                            .foregroundStyle(.gray)
+                                            .foregroundStyle(.gray.opacity(0.8))
                                     }
                                     
                                     Spacer()
                                     Button(action: {
-                                        if isSunday {
+//                                        if isSunday {
                                             reflectionWeeklyRecord = currentWeeklyRecord
                                             showReflectionView = true
-                                        } else {
-                                            showAlert = true
-                                        }
+//                                        } else {
+//                                            showAlert = true
+//                                        
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
@@ -87,8 +101,8 @@ struct HomeView: View {
                                             )
                                             .cornerRadius(12)
                                     }
-                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .clear, radius: 5, x: 0.0, y: 0.0)
-//                                            .shadow(color: .accent.opacity(0.7), radius: 5, x: 0.0, y: 0.0)
+                                    .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
+//                                            .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                                 }
                                 .padding(.horizontal)
                             }

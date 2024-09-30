@@ -21,11 +21,18 @@ struct ReflectionView: View {
                     GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                     Text("記録")
                         .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
                     ThoughtsListView(thoughts: weeklyRecord.thoughts)
                     Text("振り返り")
                         .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
                     ReflectionInputView(reflection: $weeklyRecord.reflection)
-                    
+                    Text("来週の目標")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.top)
                     NextGoalCardView(
                         nextWeekGoal: $weeklyRecord.nextWeekGoal,
                         nextWeekEmoji: $weeklyRecord.nextWeekEmoji
@@ -56,7 +63,7 @@ struct ReflectionView: View {
                             )
                         )
                         .clipShape(.capsule)
-                        .shadow(color: .accent.opacity(0.7), radius: 5, x: 0.0, y: 0.0)
+                        .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                 }
                 .padding(.vertical)
             }
@@ -82,6 +89,7 @@ struct GoalView: View {
             HStack {
                 Text("\(emoji)")
                     .font(.largeTitle)
+                    .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                 Divider()
                     .frame(height: 40)
                 Text("\(goal)")
@@ -125,7 +133,7 @@ struct ReflectionInputView: View {
     @Binding var reflection: String
     
     var body: some View {
-        TextField("振り返りを入力してください", text: $reflection, axis: .vertical)
+        TextField("どんな一週間でしたか？", text: $reflection, axis: .vertical)
             .textFieldStyle(PlainTextFieldStyle())
             .padding(8)
             .background(Color.white)

@@ -29,6 +29,7 @@ struct NextGoalCardView: View {
                 }) {
                     Text(nextWeekEmoji)
                         .font(.largeTitle)
+                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                 }
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji) // 修飾子を追加
                 Divider()

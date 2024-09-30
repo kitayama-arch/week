@@ -28,6 +28,7 @@ struct GoalCardView: View {
                 }) {
                     Text(weeklyRecord.emoji)
                         .font(.largeTitle)
+                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                 }
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $weeklyRecord.emoji)
                 .onChange(of: weeklyRecord.emoji) { oldValue, newValue in
