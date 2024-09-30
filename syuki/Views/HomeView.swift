@@ -13,6 +13,8 @@ struct HomeView: View {
     @State private var showArchiveView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
     @State private var focusedThoughtCardID: UUID?
+    @State private var isSunday: Bool = false
+    @State private var showAlert = false
     
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -34,7 +36,8 @@ struct HomeView: View {
                         VStack {
                             ZStack {
                                 Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
-                                    .font(.headline)
+                                    .font(.system(.headline, design: .rounded))
+                                    .foregroundStyle(.placeholder)
                                 HStack {
                                     Button {
                                         showArchiveView = true
@@ -43,19 +46,51 @@ struct HomeView: View {
                                             .font(.title)
                                             .foregroundStyle(.gray)
                                     }
-                                    .padding()
                                     
                                     Spacer()
                                     Button(action: {
-                                        reflectionWeeklyRecord = currentWeeklyRecord
-                                        showReflectionView = true
+                                        if isSunday {
+                                            reflectionWeeklyRecord = currentWeeklyRecord
+                                            showReflectionView = true
+                                        } else {
+                                            showAlert = true
+                                        }
                                     }) {
-                                        Image(systemName: "square.and.pencil")
-                                            .font(.title)
-                                            .foregroundStyle(.gray)
+                                        Text("振り返り")
+                                            .font(.headline)
+                                            .padding(.vertical, 8)
+                                            .padding(.horizontal, 10)
+                                            .foregroundColor(.white.opacity(0.95))
+//                                            .background(
+//                                                LinearGradient(
+//                                                    gradient: Gradient(colors: [
+//                                                     Color.accentColor.opacity(0.8),Color.accentColor
+//                                                    ]),
+//                                                    startPoint: .top,
+//                                                    endPoint: .bottom
+//                                                )
+//                                            )
+                                            .background(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [
+                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.8),
+                                                        isSunday ? Color.accentColor : Color.gray
+                                                    ]),
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
+                                                )
+                                            )
+                                            
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                            )
+                                            .cornerRadius(12)
                                     }
-                                    .padding(.horizontal)
+                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .clear, radius: 5, x: 0.0, y: 0.0)
+//                                            .shadow(color: .accent.opacity(0.7), radius: 5, x: 0.0, y: 0.0)
                                 }
+                                .padding(.horizontal)
                             }
                             GoalCardView(weeklyRecord: currentWeeklyRecord)
                                 .environmentObject(dataManager)
@@ -89,7 +124,7 @@ struct HomeView: View {
                                     }) {
                                         Image(systemName: "plus.circle.fill")
                                             .font(.system(size: 50))
-                                    }
+                                        .foregroundColor(.accent)                                    }
                                     .padding()
                                 }
                             }
@@ -130,6 +165,7 @@ struct HomeView: View {
             }
             .onAppear {
                 dataManager.loadCurrentWeekRecord()
+                updateIsSunday()
                 print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")
             }
             .navigationTitle("")
@@ -151,6 +187,11 @@ struct HomeView: View {
             .navigationDestination(isPresented: $showArchiveView) {
                 ArchiveView()
             }
+            .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("日曜日になると振り返ることができます。")
+            }
         }
     }
     
@@ -162,6 +203,12 @@ struct HomeView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
         return formatter.string(from: date)
+    }
+    
+    private func updateIsSunday() {
+        let calendar = Calendar.current
+        let today = calendar.component(.weekday, from: Date())
+        isSunday = today == 1 // 日曜日は1
     }
 }
 
