@@ -11,6 +11,7 @@ struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
     @State private var showArchiveView = false
+    @State private var showSettingView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
     @State private var focusedThoughtCardID: UUID?
     @State private var isSunday: Bool = false
@@ -53,12 +54,22 @@ struct HomeView: View {
                                             .offset(x: -0.5, y: -0.5)
                                     )
                                 HStack {
-                                    Button {
-                                        showArchiveView = true
-                                    } label: {
-                                        Image(systemName: "archivebox")
-                                            .font(.title)
-                                            .foregroundStyle(.gray.opacity(0.8))
+                                    HStack(spacing: 20) { // スペーシングを追加
+                                        Button {
+                                            showArchiveView = true
+                                        } label: {
+                                            Image(systemName: "archivebox")
+                                                .font(.title)
+                                                .foregroundStyle(.gray.opacity(0.8))
+                                        }
+                                        
+                                        Button {
+                                            showSettingView = true
+                                        } label: {
+                                            Image(systemName: "gearshape")
+                                                .font(.title)
+                                                .foregroundStyle(.gray.opacity(0.8))
+                                        }
                                     }
                                     
                                     Spacer()
@@ -212,6 +223,9 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $showArchiveView) {
                 ArchiveView()
+            }
+            .navigationDestination(isPresented: $showSettingView) {
+                SettingView()
             }
             .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
