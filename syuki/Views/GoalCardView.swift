@@ -16,7 +16,7 @@ struct GoalCardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white)
+                .fill(Color.card)
                 .frame(height: 60)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -36,7 +36,7 @@ struct GoalCardView: View {
                 }
                 
                 Rectangle()
-                    .fill(Color.gray.opacity(0.3))
+                    .fill(Color.card)
                     .frame(width: 1.5, height: 40)
                     .cornerRadius(1)
                 

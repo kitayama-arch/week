@@ -18,13 +18,14 @@ struct ThoughtCardView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white)
+                .fill(Color.card)
                 
             HStack {
                 TextEditor(text: $thoughtCard.content)
+                    .scrollContentBackground(Visibility.hidden)
                     .focused($isFocused)
                     .padding(.leading, 8)
-                    .background(Color.white)
+                    .background(Color.card)
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity, minHeight: textEditorHeight)
                     .focused($isFocused)
@@ -57,7 +58,7 @@ struct ThoughtCardView: View {
         )
         .animation(.smooth, value: textEditorHeight) 
         .padding(.horizontal)
-        .padding(.top, 10)
+        .padding(.top, 15)
     }
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {

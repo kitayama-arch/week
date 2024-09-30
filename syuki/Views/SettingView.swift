@@ -10,7 +10,7 @@ import SwiftUI
 struct SettingView: View {
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.1)
+            Color.background
                 .ignoresSafeArea()
             
             VStack {
@@ -48,6 +48,7 @@ struct SettingView: View {
             }
         }
         .navigationTitle("設定")
+        .foregroundColor(.primary)
     }
     
     private func settingSection<Content: View>(title: LocalizedStringResource, @ViewBuilder content: () -> Content) -> some View {
@@ -60,7 +61,7 @@ struct SettingView: View {
                 content()
             }
             .padding()
-            .background(Color.white)
+            .background(Color.card)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -78,8 +79,8 @@ struct SettingView: View {
     private func settingRow(icon: String, text: LocalizedStringResource) -> some View {
         HStack {
             Image(systemName: icon)
-                .foregroundColor(.accentColor)
                 .frame(width: 30)
+                .foregroundColor(.primary) // この行を追加
             Text(text)
             Spacer()
             Image(systemName: "chevron.right")

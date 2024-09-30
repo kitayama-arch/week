@@ -28,7 +28,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray.opacity(0.1)
+                Color.background
                     .ignoresSafeArea()
                 if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                     VStack {

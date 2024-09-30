@@ -14,7 +14,7 @@ struct ReflectionView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.2)
+            Color.background
                 .ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading) {
@@ -80,7 +80,7 @@ struct GoalView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.white)
+                .fill(Color.card)
                 .frame(height: 60)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
@@ -113,7 +113,7 @@ struct ThoughtsListView: View {
                 ForEach(thoughts, id: \.id) { thought in
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.white)
+                            .fill(Color.card)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.3), lineWidth: 1)
@@ -121,7 +121,7 @@ struct ThoughtsListView: View {
                         HStack {
                             Text(thought.content)
                                 .padding()
-                                .background(Color.white)
+                                .background(Color.card)
                                 .cornerRadius(8)
                             Spacer()
                         }
@@ -140,7 +140,7 @@ struct ReflectionInputView: View {
         TextField("どんな一週間でしたか？", text: $reflection, axis: .vertical)
             .textFieldStyle(PlainTextFieldStyle())
             .padding()
-            .background(Color.white)
+            .background(Color.card)
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)

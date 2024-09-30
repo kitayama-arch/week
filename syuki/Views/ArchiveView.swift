@@ -13,7 +13,7 @@ struct ArchiveView: View {
     
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.1)
+            Color.background
                 .ignoresSafeArea()
             
             VStack {
@@ -36,6 +36,7 @@ struct ArchiveView: View {
                     .onTapGesture {
                         selectedWeeklyRecord = weeklyRecord
                     }
+                    .listRowBackground(Color.card)
                 }
                 .scrollContentBackground(.hidden)
 
@@ -99,7 +100,7 @@ struct WeeklyRecordDetailView: View {
                     Text(weeklyRecord.reflection)
                         .padding()
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color.white)
+                        .background(Color.card)
                         .cornerRadius(8)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
@@ -117,7 +118,7 @@ struct WeeklyRecordDetailView: View {
             }
             .padding(.horizontal)
         }
-        .background(Color.gray.opacity(0.1))
+        .background(Color.background)
         .navigationTitle("週間記録詳細")
     }
     
