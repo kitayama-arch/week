@@ -137,8 +137,20 @@ struct HomeView: View {
                                         createNewThoughtCard()
                                     }) {
                                         Image(systemName: "plus.circle.fill")
-                                            .font(.system(size: 50))
-                                        .foregroundColor(.accent)                                    }
+                                            .font(.system(size: 75))
+                                            .symbolRenderingMode(.palette)
+                                            .foregroundStyle (
+                                                Color(.white).opacity(0.8),
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [
+                                                        Color.accentColor.opacity(0.8),Color.accentColor
+                                                    ]),
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
+                                                )
+                                            )
+                                    }
+                                    .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                                     .padding()
                                 }
                             }
