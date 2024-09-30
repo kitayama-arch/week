@@ -87,9 +87,13 @@ struct GoalView: View {
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 )
             HStack {
-                Text("\(emoji)")
-                    .font(.largeTitle)
-                    .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                ZStack {
+                    Text("\(emoji)")
+                        .font(.largeTitle)
+                        .blur(radius: 10).opacity(0.5)
+                    Text("\(emoji)")
+                        .font(.largeTitle)
+                }
                 
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))

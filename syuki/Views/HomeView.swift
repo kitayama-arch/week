@@ -38,19 +38,19 @@ struct HomeView: View {
                                 VStack(spacing: 5) {
                                     Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                         .font(.system(.headline, design: .rounded))
-                                        .foregroundColor(.gray)
+                                        .foregroundStyle(.gray.opacity(0.8))
                                         .overlay(
                                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                                 .font(.system(.headline, design: .rounded))
                                                 .foregroundColor(.BW)
-                                                .opacity(0.21)
+                                                .opacity(0.11)
                                                 .offset(x: 0.5, y: 0.5)
                                         )
                                         .overlay(
                                             Text("\(formatDate(currentWeeklyRecord.startDate)) - \(formatDate(currentWeeklyRecord.endDate))")
                                                 .font(.system(.headline, design: .rounded))
                                                 .foregroundColor(.BW)
-                                                .opacity(0.2)
+                                                .opacity(0.1)
                                                 .offset(x: -0.5, y: -0.5)
                                         )
                                     HStack(spacing: 8) {

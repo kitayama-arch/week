@@ -26,9 +26,13 @@ struct GoalCardView: View {
                 Button(action: {
                     isPickerPresented.toggle()
                 }) {
-                    Text(weeklyRecord.emoji)
-                        .font(.largeTitle)
-                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                    ZStack {
+                        Text(weeklyRecord.emoji)
+                            .blur(radius: 10).opacity(0.5)
+                            .font(.largeTitle)
+                        Text(weeklyRecord.emoji)
+                            .font(.largeTitle)
+                    }
                 }
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $weeklyRecord.emoji)
                 .onChange(of: weeklyRecord.emoji) { oldValue, newValue in
@@ -36,7 +40,7 @@ struct GoalCardView: View {
                 }
                 
                 Rectangle()
-                    .fill(Color.card)
+                    .fill(Color.gray.opacity(0.3))
                     .frame(width: 1.5, height: 40)
                     .cornerRadius(1)
                 

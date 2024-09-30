@@ -27,14 +27,18 @@ struct NextGoalCardView: View {
                 Button(action: {
                     isPickerPresented.toggle()
                 }) {
-                    Text(nextWeekEmoji)
-                        .font(.largeTitle)
-                        .shadow(color: .gray.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                    ZStack {
+                        Text(nextWeekEmoji)
+                            .blur(radius: 10).opacity(0.5)
+                            .font(.largeTitle)
+                        Text(nextWeekEmoji)
+                            .font(.largeTitle)
+                    }
                 }
                 .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji)
                 
                 Rectangle()
-                    .fill(Color.card)
+                    .fill(Color.gray.opacity(0.3))
                     .frame(width: 1.5, height: 40)
                     .cornerRadius(1)
                 
