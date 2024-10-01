@@ -20,14 +20,15 @@ struct ThoughtCardView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.card)
             
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Spacer()
                     Button(action: { showingOptions = true }) {
                         Image(systemName: "ellipsis")
                             .foregroundColor(.gray)
                             .padding(.top, 10)
-                            .padding(.trailing, 10)
+                            .padding(.horizontal, 10)
+                            .padding(.bottom, 4)
                         
                     }
                     .confirmationDialog("確認", isPresented: $showingOptions) {
