@@ -58,6 +58,16 @@
         }
       }
     },
+    "それまでの間、日々の出来事や思考を記録してみてください。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In the meantime, record your daily events and thoughts."
+          }
+        }
+      }
+    },
     "どんな一週間でしたか？" : {
       "localizations" : {
         "en" : {
@@ -94,6 +104,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Send Feedback"
+          }
+        }
+      }
+    },
+    "プライバシーポリシー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         }
       }
@@ -174,16 +194,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conduct Review"
-          }
-        }
-      }
-    },
-    "それまでの間、日々の出来事や思考を記録してみてください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In the meantime, record your daily events and thoughts."
           }
         }
       }
