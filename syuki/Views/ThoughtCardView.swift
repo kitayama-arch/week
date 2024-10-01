@@ -31,21 +31,20 @@ struct ThoughtCardView: View {
                         
                     }
                     .confirmationDialog("確認", isPresented: $showingOptions) {
-                        Button("削除") {
+                        Button("削除", role: .destructive) {
                             dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
                         }
                     }
                 }
-                TextEditor(text: $thoughtCard.content)
-                    .scrollContentBackground(Visibility.hidden)
-                    .focused($isFocused)
-                    .padding(.horizontal, 8)
-                    .padding(.top, 2)
+                TextField("入力してください...", text: $thoughtCard.content, axis: .vertical)
+                    .textFieldStyle(PlainTextFieldStyle())
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 10)
                     .background(Color.clear)
                     .cornerRadius(8)
-                    .frame(maxWidth: .infinity, minHeight: textEditorHeight)
                     .font(.subheadline)
                     .focused($isFocused)
+                    .ignoresSafeArea(.keyboard)
                     .onChange(of: thoughtCard.content) { oldValue, newValue in
                         dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
                     }
@@ -53,21 +52,14 @@ struct ThoughtCardView: View {
                         isFocused = focusedThoughtCardID == thoughtCard.id
                         focusedThoughtCardID = nil // フォーカス処理が完了したら nil に戻す
                     }
-//                    .animation(.smooth, value: textEditorHeight)
             }
         }
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
-        .animation(.smooth, value: textEditorHeight)
         .padding(.horizontal)
         .padding(.top, 15)
-    }
-    // TextEditorの高さを動的に計算するプロパティ
-    private var textEditorHeight: CGFloat {
-        let estimatedSize = thoughtCard.content.size(withAttributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
-        return max(50, estimatedSize.height + 20)
     }
 }
 
