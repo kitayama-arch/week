@@ -30,6 +30,11 @@ struct HomeView: View {
             ZStack {
                 Color.background
                     .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        UIApplication.shared.closeKeyboard()
+                        print("背景がタップされました")
+                    }
                 if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                     VStack {
                         // カスタムナビゲーションバー
@@ -87,12 +92,12 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-//                                        if isSunday {
-                                            reflectionWeeklyRecord = currentWeeklyRecord
-                                            showReflectionView = true
-//                                        } else {
-//                                            showAlert = true
-//                                        }
+                                        //                                        if isSunday {
+                                        reflectionWeeklyRecord = currentWeeklyRecord
+                                        showReflectionView = true
+                                        //                                        } else {
+                                        //                                            showAlert = true
+                                        //                                        }
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
@@ -141,7 +146,19 @@ struct HomeView: View {
                                         dataManager: dataManager,
                                         focusedThoughtCardID: $focusedThoughtCardID
                                     )
+                                    .padding(.horizontal)
+                                    .padding(.top, 15)
                                 }
+                                .background(
+                                    GeometryReader { geometry in
+                                        Color.clear
+                                            .contentShape(Rectangle())
+                                            .onTapGesture {
+                                                UIApplication.shared.closeKeyboard()
+                                                print("カード間の空白部分がタップされました")
+                                            }
+                                    }
+                                )
                             }
                             .mask(
                                 LinearGradient(
@@ -174,7 +191,7 @@ struct HomeView: View {
                                             )
                                     }
                                     .shadow(color: .accent.opacity(0.7), radius: 15, x: 0.0, y: 0.0)
-                                    .padding()
+                                    .padding(.trailing)
                                 }
                             }
                         }
@@ -287,6 +304,12 @@ struct HomeView: View {
         let today = calendar.component(.weekday, from: Date())
         // 日曜日が0、月曜日が1、...、土曜日が6となるように調整
         return (today + 5) % 7
+    }
+}
+
+extension UIApplication {
+    func closeKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
