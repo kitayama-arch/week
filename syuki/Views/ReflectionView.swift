@@ -140,6 +140,7 @@ struct ThoughtsListView: View {
 
 struct ReflectionInputView: View {
     @Binding var reflection: String
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         TextField("どんな一週間でしたか？", text: $reflection, axis: .vertical)
@@ -151,6 +152,7 @@ struct ReflectionInputView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color.gray.opacity(0.3), lineWidth: 1)
             )
+            .focused($isFocused)
     }
 }
 

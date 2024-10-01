@@ -87,12 +87,12 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                        if isSunday {
+//                                        if isSunday {
                                             reflectionWeeklyRecord = currentWeeklyRecord
                                             showReflectionView = true
-                                        } else {
-                                            showAlert = true
-                                        }
+//                                        } else {
+//                                            showAlert = true
+//                                        }
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
@@ -160,7 +160,7 @@ struct HomeView: View {
                                         createNewThoughtCard()
                                     }) {
                                         Image(systemName: "plus.circle.fill")
-                                            .font(.system(size: 75))
+                                            .font(.system(size: 60))
                                             .symbolRenderingMode(.palette)
                                             .foregroundStyle (
                                                 Color(.white),
@@ -178,6 +178,7 @@ struct HomeView: View {
                                 }
                             }
                         }
+                        Spacer()
                         AdMobBannerView()
                             .frame(width: 320, height: 50)  // バナーの高さを調整
                     }
@@ -217,7 +218,7 @@ struct HomeView: View {
                         .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                         Spacer()
                         AdMobBannerView()
-                            .frame(width: 320, height: 50)  // バナーの高さを調整
+                            .frame(width: 320, height: 50)
                     }
                     .padding()
                 }
