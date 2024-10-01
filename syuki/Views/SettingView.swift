@@ -8,6 +8,21 @@
 import SwiftUI
 
 struct SettingView: View {
+    // フィードバックとプライバシーポリシーのURLを定義
+    private let feedbackURL: String
+    private let privacyPolicyURL: String
+    
+    init() {
+        // 言語に応じてURLを設定
+        if Locale.current.language.languageCode?.identifier == "ja" {
+            self.feedbackURL = "https://forms.gle/P37hSuQbonvAzck99"
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1TB3gt3BGwQ_46jsZKmcbZ1t2JEePWX_b/view?usp=sharing"
+        } else {
+            self.feedbackURL = "https://forms.gle/zXyNryof6r4DzmmLA"
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1ovqcwN1tmFF6T-CNS_3K6lUM5AVorHs_/view?usp=sharing"
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.background
@@ -17,12 +32,12 @@ struct SettingView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         settingSection(title: "フィードバック") {
-                            settingLink(icon: "square.and.pencil", text: "フィードバックを送信", urlKey: "feedback_form_url")
+                            settingLink(icon: "square.and.pencil", text: "フィードバックを送信", url: feedbackURL)
                         }
                         
                         settingSection(title: "開発者情報") {
-                            settingLink(icon: "globe", text: "開発者のウェブサイト", urlKey: "developer_website_url")
-                            settingLink(icon: "bird", text: "開発者のTwitter", urlKey: "developer_twitter_url")
+                            settingLink(icon: "globe", text: "開発者のウェブサイト", url: "https://example.com")
+                            settingLink(icon: "bird", text: "開発者のTwitter", url: "https://twitter.com/developer")
                         }
                         
                         settingSection(title: "アプリについて") {
@@ -34,7 +49,7 @@ struct SettingView: View {
                                 settingRow(icon: "star", text: "アプリを評価する")
                             }
                             
-                            settingLink(icon: "lock.shield", text: "プライバシーポリシー", urlKey: "privacy_policy_url")
+                            settingLink(icon: "lock.shield", text: "プライバシーポリシー", url: privacyPolicyURL)
                             
                             HStack {
                                 Text("バージョン")
@@ -72,8 +87,8 @@ struct SettingView: View {
         }
     }
     
-    private func settingLink(icon: String, text: LocalizedStringResource, urlKey: String) -> some View {
-        Link(destination: URL(string: NSLocalizedString(urlKey, comment: ""))!) {
+    private func settingLink(icon: String, text: LocalizedStringResource, url: String) -> some View {
+        Link(destination: URL(string: url)!) {
             settingRow(icon: icon, text: text)
         }
     }
