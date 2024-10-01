@@ -59,8 +59,6 @@ struct ThoughtCardView: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
-        .padding(.horizontal)
-        .padding(.top, 15)
     }
 }
 
