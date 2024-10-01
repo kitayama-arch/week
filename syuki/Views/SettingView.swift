@@ -17,12 +17,12 @@ struct SettingView: View {
                 ScrollView {
                     VStack(spacing: 20) {
                         settingSection(title: "フィードバック") {
-                            settingLink(icon: "square.and.pencil", text: "フィードバックを送信", url: "https://forms.gle/your-google-form-url")
+                            settingLink(icon: "square.and.pencil", text: "フィードバックを送信", urlKey: "feedback_form_url")
                         }
                         
                         settingSection(title: "開発者情報") {
-                            settingLink(icon: "globe", text: "開発者のウェブサイト", url: "https://example.com")
-                            settingLink(icon: "bird", text: "開発者のTwitter", url: "https://twitter.com/developer")
+                            settingLink(icon: "globe", text: "開発者のウェブサイト", urlKey: "developer_website_url")
+                            settingLink(icon: "bird", text: "開発者のTwitter", urlKey: "developer_twitter_url")
                         }
                         
                         settingSection(title: "アプリについて") {
@@ -33,6 +33,8 @@ struct SettingView: View {
                             }) {
                                 settingRow(icon: "star", text: "アプリを評価する")
                             }
+                            
+                            settingLink(icon: "lock.shield", text: "プライバシーポリシー", urlKey: "privacy_policy_url")
                             
                             HStack {
                                 Text("バージョン")
@@ -70,8 +72,8 @@ struct SettingView: View {
         }
     }
     
-    private func settingLink(icon: String, text: LocalizedStringResource, url: String) -> some View {
-        Link(destination: URL(string: url)!) {
+    private func settingLink(icon: String, text: LocalizedStringResource, urlKey: String) -> some View {
+        Link(destination: URL(string: NSLocalizedString(urlKey, comment: ""))!) {
             settingRow(icon: icon, text: text)
         }
     }
