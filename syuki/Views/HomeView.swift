@@ -87,12 +87,12 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                                if isSunday {
-                                        reflectionWeeklyRecord = currentWeeklyRecord
-                                        showReflectionView = true
-                                    } else {
-                                        showAlert = true
-                                    }
+                                        if isSunday {
+                                            reflectionWeeklyRecord = currentWeeklyRecord
+                                            showReflectionView = true
+                                        } else {
+                                            showAlert = true
+                                        }
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
@@ -125,7 +125,7 @@ struct HomeView: View {
                                             .cornerRadius(12)
                                     }
                                     .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
-//                                    .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
+                                    //                                    .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                                 }
                                 .padding(.horizontal)
                             }
