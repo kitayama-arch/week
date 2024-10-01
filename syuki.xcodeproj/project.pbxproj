@@ -19,6 +19,7 @@
 		5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539352C33CBB700C3AB8D /* GoalCardView.swift */; };
 		5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539372C33D03700C3AB8D /* ThoughtCard.swift */; };
 		5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */; };
+		5A4B02E12CAC10DC00497E79 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B02E02CAC10DC00497E79 /* TutorialView.swift */; };
 		5A4ED3752C3275BA003E2E0C /* syukiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3742C3275BA003E2E0C /* syukiApp.swift */; };
 		5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3762C3275BA003E2E0C /* HomeView.swift */; };
 		5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED3782C3275BB003E2E0C /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		5A3539352C33CBB700C3AB8D /* GoalCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalCardView.swift; sourceTree = "<group>"; };
 		5A3539372C33D03700C3AB8D /* ThoughtCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCard.swift; sourceTree = "<group>"; };
 		5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCardView.swift; sourceTree = "<group>"; };
+		5A4B02E02CAC10DC00497E79 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		5A4ED3712C3275BA003E2E0C /* syuki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = syuki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4ED3742C3275BA003E2E0C /* syukiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = syukiApp.swift; sourceTree = "<group>"; };
 		5A4ED3762C3275BA003E2E0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
 				5A24631C2CAB16E500B02F0A /* SettingView.swift */,
 				5A24631E2CAB212F00B02F0A /* BannerView.swift */,
+				5A4B02E02CAC10DC00497E79 /* TutorialView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				5A63CF832CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift in Sources */,
 				5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */,
 				5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */,
+				5A4B02E12CAC10DC00497E79 /* TutorialView.swift in Sources */,
 				5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */,
 				5A24717E2C6B4D2D001C3CAA /* NextGoalCardView.swift in Sources */,
 				5A24631F2CAB212F00B02F0A /* BannerView.swift in Sources */,
