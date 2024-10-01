@@ -178,12 +178,12 @@
         }
       }
     },
-    "日曜日になると振り返ることができます。" : {
+    "それまでの間、日々の出来事や思考を記録してみてください。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You can review on Sunday."
+            "value" : "In the meantime, record your daily events and thoughts."
           }
         }
       }

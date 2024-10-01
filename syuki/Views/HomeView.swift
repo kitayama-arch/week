@@ -87,12 +87,12 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                        //                                        if isSunday {
+                                                if isSunday {
                                         reflectionWeeklyRecord = currentWeeklyRecord
                                         showReflectionView = true
-                                        //                                        } else {
-                                        //                                            showAlert = true
-                                        //
+                                    } else {
+                                        showAlert = true
+                                    }
                                     }) {
                                         Text("振り返り")
                                             .font(.headline)
@@ -261,7 +261,7 @@ struct HomeView: View {
             .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text("日曜日になると振り返ることができます。")
+                Text("それまでの間、日々の出来事や思考を記録してみてください。")
             }
         }
     }
