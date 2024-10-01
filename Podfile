@@ -6,6 +6,8 @@ target 'syuki' do
   use_frameworks!
 
   pod 'Google-Mobile-Ads-SDK'
+
+  pod 'FirebaseAnalytics'
   
   # Pods for syuki
 
