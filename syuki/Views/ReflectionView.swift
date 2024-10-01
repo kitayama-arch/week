@@ -126,6 +126,7 @@ struct ThoughtsListView: View {
                             Text(thought.content)
                                 .padding()
                                 .background(Color.card)
+                                .font(.subheadline)
                                 .cornerRadius(8)
                             Spacer()
                         }

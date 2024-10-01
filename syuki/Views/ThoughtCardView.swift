@@ -19,15 +19,32 @@ struct ThoughtCardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.card)
-                
-            HStack {
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: { showingOptions = true }) {
+                        Image(systemName: "ellipsis")
+                            .foregroundColor(.gray)
+                            .padding(.top, 10)
+                            .padding(.trailing, 10)
+                        
+                    }
+                    .confirmationDialog("確認", isPresented: $showingOptions) {
+                        Button("削除") {
+                            dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
+                        }
+                    }
+                }
                 TextEditor(text: $thoughtCard.content)
                     .scrollContentBackground(Visibility.hidden)
                     .focused($isFocused)
-                    .padding(.leading, 8)
-                    .background(Color.card)
+                    .padding(.horizontal, 8)
+                    .padding(.top, 2)
+                    .background(Color.clear)
                     .cornerRadius(8)
                     .frame(maxWidth: .infinity, minHeight: textEditorHeight)
+                    .font(.subheadline)
                     .focused($isFocused)
                     .onChange(of: thoughtCard.content) { oldValue, newValue in
                         dataManager.updateThoughtCard(thoughtCard: thoughtCard, newContent: newValue)
@@ -36,27 +53,14 @@ struct ThoughtCardView: View {
                         isFocused = focusedThoughtCardID == thoughtCard.id
                         focusedThoughtCardID = nil // フォーカス処理が完了したら nil に戻す
                     }
-                    .animation(.smooth, value: textEditorHeight) 
-                VStack {
-                    Button(action: { showingOptions = true }) {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(.gray)
-                            .padding(10)
-                    }
-                    .confirmationDialog("確認", isPresented: $showingOptions) {
-                        Button("削除") {
-                            dataManager.deleteThoughtCard(thoughtCard: thoughtCard)
-                        }
-                    }
-                    Spacer()
-                }
+//                    .animation(.smooth, value: textEditorHeight)
             }
         }
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(Color.gray.opacity(0.3), lineWidth: 1)
         )
-        .animation(.smooth, value: textEditorHeight) 
+        .animation(.smooth, value: textEditorHeight)
         .padding(.horizontal)
         .padding(.top, 15)
     }
