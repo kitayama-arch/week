@@ -149,16 +149,6 @@ struct HomeView: View {
                                     .padding(.horizontal)
                                     .padding(.top, 15)
                                 }
-                                .background(
-                                    GeometryReader { geometry in
-                                        Color.clear
-                                            .contentShape(Rectangle())
-                                            .onTapGesture {
-                                                UIApplication.shared.closeKeyboard()
-                                                print("カード間の空白部分がタップされました")
-                                            }
-                                    }
-                                )
                             }
                             .mask(
                                 LinearGradient(
@@ -194,6 +184,10 @@ struct HomeView: View {
                                     .padding(.trailing)
                                 }
                             }
+                        }
+                        .onTapGesture {
+                            UIApplication.shared.closeKeyboard()
+                            print("カード間の空白部分がタップされました")
                         }
                         Spacer()
                         AdMobBannerView()
