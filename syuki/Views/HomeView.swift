@@ -125,7 +125,7 @@ struct HomeView: View {
                                             )
                                             .overlay(
                                                 RoundedRectangle(cornerRadius: 12)
-                                                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                                    .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
                                             )
                                             .cornerRadius(12)
                                     }
@@ -140,6 +140,7 @@ struct HomeView: View {
                         
                         ZStack {
                             ScrollView {
+                                Spacer()
                                 ForEach(Array(currentWeeklyRecord.thoughts.enumerated()), id: \.element.id) { index, thoughtCard in
                                     ThoughtCardView(
                                         thoughtCard: thoughtCard,
@@ -147,7 +148,7 @@ struct HomeView: View {
                                         focusedThoughtCardID: $focusedThoughtCardID
                                     )
                                     .padding(.horizontal)
-                                    .padding(.top, 15)
+                                    .padding(.top, 5)
                                 }
                             }
                             .mask(
@@ -222,7 +223,7 @@ struct HomeView: View {
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
                                 )
                                 .cornerRadius(12)
                         }
