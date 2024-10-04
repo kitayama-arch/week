@@ -22,10 +22,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 @main
 struct syukiApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @AppStorage("hasSeenTutorial") private var hasSeenTutorial = false
+    @State private var showTutorial = false
     
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .onAppear {
+                    if !hasSeenTutorial {
+                        showTutorial = true
+                    }
+                }
+                .fullScreenCover(isPresented: $showTutorial) {
+                    TutorialView()
+                        .onDisappear {
+                            hasSeenTutorial = true
+                        }
+                }
         }
     }
 }
