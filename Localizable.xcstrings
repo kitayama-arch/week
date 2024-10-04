@@ -58,15 +58,8 @@
         }
       }
     },
-    "それまでの間、日々の出来事や思考を記録してみてください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In the meantime, record your daily events and thoughts."
-          }
-        }
-      }
+    "それまでの間日々の出来事や思考を記録してみてください。" : {
+
     },
     "チュートリアルを表示" : {
 
@@ -154,15 +147,8 @@
         }
       }
     },
-    "前の週の振り返りがまだ完了していません。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The review for the previous week is not yet complete."
-          }
-        }
-      }
+    "前の週の振り返がまだ完了していません。" : {
+
     },
     "始める" : {
 
