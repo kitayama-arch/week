@@ -104,32 +104,25 @@ struct HomeView: View {
                                         Text("振り返り")
                                             .font(.headline)
                                             .padding(.vertical, 8)
-                                            .padding(.horizontal, 10)
+                                            .padding(.horizontal, 16) // 横幅を少し広げました
                                             .foregroundColor(.white.opacity(0.95))
-                                        //                                            .background(
-                                        //                                                LinearGradient(
-                                        //                                                    gradient: Gradient(colors: [
-                                        //                                                        Color.accentColor.opacity(0.8),Color.accentColor
-                                        //                                                    ]),
-                                        //                                                    startPoint: .top,
-                                        //                                                    endPoint: .bottom
-                                        //                                                )
-                                        //                                            )
                                             .background(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
-                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
-                                                    ]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom
-                                                )
+                                                Capsule()
+                                                    .fill(
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [
+                                                                isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                                isSunday ? Color.accentColor : Color.gray.opacity(0.6)
+                                                            ]),
+                                                            startPoint: .top,
+                                                            endPoint: .bottom
+                                                        )
+                                                    )
                                             )
                                             .overlay(
-                                                RoundedRectangle(cornerRadius: 12)
+                                                Capsule()
                                                     .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
                                             )
-                                            .cornerRadius(12)
                                     }
                                     .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
                                     //                                    .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
@@ -201,7 +194,7 @@ struct HomeView: View {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
                     VStack {
                         Spacer()
-                        Text("前の週の振り返りがまだ完了していません。")
+                        Text("前の週の振り返���がまだ完了していません。")
                             .font(.system(.title, design: .rounded))
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
@@ -277,7 +270,7 @@ struct HomeView: View {
             .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text("それまでの間、日々の出来事や思考を記録してみてください。")
+                Text("それまでの間���日々の出来事や思考を記録してみてください。")
             }
         }
     }
