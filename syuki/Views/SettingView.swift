@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @State private var showTutorial = false
     // フィードバックとプライバシーポリシーのURLを定義
     private let feedbackURL: String
     private let privacyPolicyURL: String
@@ -51,6 +52,12 @@ struct SettingView: View {
                             
                             settingLink(icon: "lock.shield", text: "プライバシーポリシー", url: privacyPolicyURL)
                             
+                            Button(action: {
+                                showTutorial = true
+                            }) {
+                                settingRow(icon: "info.circle", text: "チュートリアルを表示")
+                            }
+                            
                             HStack {
                                 Text("バージョン")
                                 Spacer()
@@ -66,6 +73,9 @@ struct SettingView: View {
         }
         .navigationTitle("設定")
         .foregroundColor(.primary)
+        .fullScreenCover(isPresented: $showTutorial) {
+            TutorialView()
+        }
     }
     
     private func settingSection<Content: View>(title: LocalizedStringResource, @ViewBuilder content: () -> Content) -> some View {
