@@ -25,7 +25,7 @@ struct ThoughtCardView: View {
                     Spacer()
                     Button(action: { showingOptions = true }) {
                         Image(systemName: "ellipsis")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.gray.opacity(0.5))
                             .padding(.top, 10)
                             .padding(.horizontal, 10)
                             .padding(.bottom, 4)
