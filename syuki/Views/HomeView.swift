@@ -125,7 +125,7 @@ struct HomeView: View {
                                             )
                                     }
                                     .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
-                                    //                                    .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
+                                    //   .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                                 }
                                 .padding(.horizontal)
                             }
@@ -194,7 +194,7 @@ struct HomeView: View {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
                     VStack {
                         Spacer()
-                        Text("前の週の振り返���がまだ完了していません。")
+                        Text("前の週の振り返がまだ完了していません。")
                             .font(.system(.title, design: .rounded))
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
@@ -270,7 +270,7 @@ struct HomeView: View {
             .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text("それまでの間���日々の出来事や思考を記録してみてください。")
+                Text("それまでの間日々の出来事や思考を記録してみてください。")
             }
         }
     }

@@ -67,8 +67,8 @@ struct TutorialView: View {
 struct TutorialPage: Identifiable {
     let id = UUID()
     let image: String
-    let title: String
-    let description: String
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
 }
 
 struct TutorialPageView: View {
