@@ -16,6 +16,8 @@ struct HomeView: View {
     @State private var focusedThoughtCardID: UUID?
     @State private var isSunday: Bool = false
     @State private var showAlert = false
+    @State private var isButtonPressed = false // 新しいステート変数を追加
+    @State private var buttonScale: CGFloat = 1.0
     
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -165,7 +167,7 @@ struct HomeView: View {
                                 HStack {
                                     Spacer()
                                     Button(action: {
-                                        createNewThoughtCard()
+                                        buttonTapped()
                                     }) {
                                         Image(systemName: "plus.circle.fill")
                                             .font(.system(size: 60))
@@ -181,6 +183,7 @@ struct HomeView: View {
                                                 )
                                             )
                                     }
+                                    .scaleEffect(buttonScale)
                                     .shadow(color: .accent.opacity(0.7), radius: 15, x: 0.0, y: 0.0)
                                     .padding(.trailing)
                                 }
@@ -276,6 +279,22 @@ struct HomeView: View {
             } message: {
                 Text("それまでの間、日々の出来事や思考を記録してみてください。")
             }
+        }
+    }
+    
+    private func buttonTapped() {
+        withAnimation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0.1)) {
+            buttonScale = 0.8
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0.1)) {
+                buttonScale = 1.0
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            createNewThoughtCard()
         }
     }
     
