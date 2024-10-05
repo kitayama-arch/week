@@ -28,6 +28,12 @@
         }
       }
     },
+    "Syukiと共に、意識的な1週間を過ごしましょう。" : {
+
+    },
+    "Syukiを使えば、「気づいたら一週間経ってた」がなくなります。" : {
+
+    },
     "アーカイブ" : {
       "localizations" : {
         "en" : {
@@ -57,6 +63,9 @@
           }
         }
       }
+    },
+    "いい生活はいい一週間から" : {
+
     },
     "それまでの間日々の出来事や思考を記録してみてください。" : {
 
@@ -114,6 +123,9 @@
         }
       }
     },
+    "ようこそ！Syukiの世界へ" : {
+
+    },
     "今週の目標を入力してください" : {
       "localizations" : {
         "en" : {
@@ -153,12 +165,15 @@
     "始める" : {
 
     },
+    "少しでも前に進む" : {
+
+    },
     "振り返り" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Review"
+            "value" : "Reflect"
           }
         }
       }
@@ -168,7 +183,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Review data is not available"
+            "value" : "Reflect data is not available"
           }
         }
       }
@@ -178,7 +193,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Review is only possible on Sundays"
+            "value" : "Reflect is only possible on Sundays"
           }
         }
       }
@@ -225,6 +240,15 @@
           }
         }
       }
+    },
+    "毎日の出来事、アイデア、感情など、どんなことでも自由に書き留めましょう。思いついたときに、気軽に記録してみましょう。" : {
+
+    },
+    "毎週日曜日は、Syukiで一週間を振り返る日。\n良かったこと、次週への改善策などをゆっくり整理し、自分の成長を確認しましょう。" : {
+
+    },
+    "流れる日々を記録する" : {
+
     },
     "目標" : {
       "localizations" : {
@@ -276,6 +300,9 @@
         }
       }
     },
+    "週の目標を設定し、一歩ずつ前進しましょう。小さな進歩が大きな変化を生み出します。" : {
+
+    },
     "週間記録詳細" : {
       "localizations" : {
         "en" : {
@@ -285,6 +312,9 @@
           }
         }
       }
+    },
+    "過去の自分と比べる" : {
+
     },
     "開発者のTwitter" : {
       "localizations" : {
