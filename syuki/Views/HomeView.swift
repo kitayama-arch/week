@@ -104,7 +104,7 @@ struct HomeView: View {
                                         Text("振り返り")
                                             .font(.headline)
                                             .padding(.vertical, 8)
-                                            .padding(.horizontal, 16) // 横幅を少し広げました
+                                            .padding(.horizontal, 16)
                                             .foregroundColor(.white.opacity(0.95))
                                             .background(
                                                 Capsule()
