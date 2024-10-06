@@ -148,7 +148,7 @@ struct HomeView: View {
                                             .padding(.top, 5)
                                             .id(index)
                                         }
-                                        Spacer()
+                                        Spacer(minLength: 120)
                                     }
                                     .onAppear {
                                         scrollProxy = proxy
