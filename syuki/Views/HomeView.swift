@@ -16,7 +16,7 @@ struct HomeView: View {
     @State private var focusedThoughtCardID: UUID?
     @State private var isSunday: Bool = false
     @State private var showAlert = false
-    @State private var isButtonPressed = false // 新しいステート変数を追加
+    @State private var isButtonPressed = false
     @State private var buttonScale: CGFloat = 1.0
     @State private var isKeyboardVisible = false
 
@@ -76,7 +76,7 @@ struct HomeView: View {
                                     }
                                 }
                                 HStack {
-                                    HStack(spacing: 10) { 
+                                    HStack(spacing: 10) {
                                         Button {
                                             showSettingView = true
                                         } label: {
@@ -105,9 +105,12 @@ struct HomeView: View {
                                         Capsule()
                                             .fill(
                                                 LinearGradient(
+//                                                    gradient: Gradient(colors: [
+//                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+//                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
+//                                                    ]),
                                                     gradient: Gradient(colors: [
-                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
-                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
+                                                        Color.gray.opacity(0.4), Color.gray.opacity(0.6)
                                                     ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
@@ -120,7 +123,8 @@ struct HomeView: View {
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: .accent.opacity(0.7), radius: 12, x: 0.0, y: 4)
+                                    .shadow(color: .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
+//                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
                             }
@@ -149,32 +153,42 @@ struct HomeView: View {
                                     endPoint: .init(x: 0.5, y: 0)
                                 )
                             )
-                            // 新しい思考カードを追加するボタン
                             VStack {
                                 Spacer()
+                                HStack {
+                                    Spacer()
+                                    //自動スクロールボタン
+                                }
                                 HStack {
                                     Spacer()
                                     Button(action: {
                                         buttonTapped()
                                     }) {
-                                        Image(systemName: "plus.circle.fill")
-                                            .font(.system(size: 60))
-                                            .symbolRenderingMode(.palette)
-                                            .foregroundStyle (
-                                                Color(.white),
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [
-                                                        Color.accentColor.opacity(0.8),Color.accentColor
-                                                    ]),
-                                                    startPoint: .top,
-                                                    endPoint: .bottom
+                                        ZStack {
+                                            Capsule()
+                                                .fill(.ultraThinMaterial.opacity(0.95))
+                                                .frame(width: 120, height: 60)
+                                                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
+                                                .overlay(
+                                                    Capsule()
+                                                        .stroke(
+                                                            LinearGradient(
+                                                                gradient: Gradient(colors: [.white.opacity(0.6), .white.opacity(0.2)]),
+                                                                startPoint: .topLeading,
+                                                                endPoint: .bottomTrailing
+                                                            ),
+                                                            lineWidth: 0.5
+                                                        )
                                                 )
-                                            )
+                                            
+                                            Image(systemName: "plus")
+                                                .font(.system(size: 30, weight: .medium))
+                                                .foregroundColor(.white)
+                                        }
+                                        .scaleEffect(buttonScale)
+                                        .padding(.trailing)
+                                        .opacity(isKeyboardVisible ? 0.5 : 1.0)
                                     }
-                                    .scaleEffect(buttonScale)
-                                    .shadow(color: .accent.opacity(0.7), radius: 15, x: 0.0, y: 0.0)
-                                    .padding(.trailing)
-                                    .opacity(isKeyboardVisible ? 0.5 : 1.0) // キーボードが表示されているときは不透明度を0.5に設定
                                 }
                             }
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
@@ -196,7 +210,7 @@ struct HomeView: View {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
                     VStack {
                         Spacer()
-                        Text("前の週の振り返がまだ完了していません。")
+                        Text("前の週の振り返りがまだ完了していません。")
                             .font(.system(.title, design: .rounded))
                             .foregroundColor(.gray)
                             .multilineTextAlignment(.center)
