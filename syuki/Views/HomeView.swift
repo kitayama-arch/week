@@ -111,7 +111,7 @@ struct HomeView: View {
 //                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
 //                                                    ]),
                                                     gradient: Gradient(colors: [
-                                                        Color.gray.opacity(0.4), Color.gray.opacity(0.6)
+                                                        Color.grayout.opacity(0.8), Color.grayout.opacity(1)
                                                     ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
@@ -120,11 +120,11 @@ struct HomeView: View {
                                             .overlay(
                                                 Text("振り返り")
                                                     .font(.headline)
-                                                    .foregroundColor(.white.opacity(0.95))
+                                                    .foregroundColor(.white.opacity(0.9))
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
+                                    .shadow(color: .grayout.opacity(0.5), radius: 12, x: 0.0, y: 4)
 //                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
