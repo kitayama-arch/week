@@ -17,10 +17,10 @@ struct SettingView: View {
         // 言語に応じてURLを設定
         if Locale.current.language.languageCode?.identifier == "ja" {
             self.feedbackURL = "https://forms.gle/P37hSuQbonvAzck99"
-            self.privacyPolicyURL = "https://drive.google.com/file/d/1TB3gt3BGwQ_46jsZKmcbZ1t2JEePWX_b/view?usp=sharing"
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1J3rL7Rr3k_HTctSGwDrCEgn8i-EH_RzY/view?usp=sharing"
         } else {
             self.feedbackURL = "https://forms.gle/zXyNryof6r4DzmmLA"
-            self.privacyPolicyURL = "https://drive.google.com/file/d/1ovqcwN1tmFF6T-CNS_3K6lUM5AVorHs_/view?usp=sharing"
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1mVGyMKKtu-DF2D9O2AsIMT8YcfHlvW7W/view?usp=sharing"
         }
     }
     
