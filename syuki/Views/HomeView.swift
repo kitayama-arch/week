@@ -238,7 +238,7 @@ struct HomeView: View {
                         }
                         Spacer()
                         AdMobBannerView()
-                            .frame(width: 320, height: 50)  // バナーの高さを調整
+                            .frame(width: 320, height: 50)
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
