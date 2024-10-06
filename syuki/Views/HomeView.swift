@@ -19,6 +19,7 @@ struct HomeView: View {
     @State private var isButtonPressed = false
     @State private var buttonScale: CGFloat = 1.0
     @State private var isKeyboardVisible = false
+    @State private var scrollProxy: ScrollViewProxy?
 
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -134,15 +135,23 @@ struct HomeView: View {
                         
                         ZStack {
                             ScrollView {
-                                Spacer()
-                                ForEach(Array(currentWeeklyRecord.thoughts.enumerated()), id: \.element.id) { index, thoughtCard in
-                                    ThoughtCardView(
-                                        thoughtCard: thoughtCard,
-                                        dataManager: dataManager,
-                                        focusedThoughtCardID: $focusedThoughtCardID
-                                    )
-                                    .padding(.horizontal)
-                                    .padding(.top, 5)
+                                ScrollViewReader { proxy in
+                                    VStack {
+                                        Spacer()
+                                        ForEach(Array(currentWeeklyRecord.thoughts.enumerated()), id: \.element.id) { index, thoughtCard in
+                                            ThoughtCardView(
+                                                thoughtCard: thoughtCard,
+                                                dataManager: dataManager,
+                                                focusedThoughtCardID: $focusedThoughtCardID
+                                            )
+                                            .padding(.horizontal)
+                                            .padding(.top, 5)
+                                            .id(index)
+                                        }
+                                    }
+                                    .onAppear {
+                                        scrollProxy = proxy
+                                    }
                                 }
                             }
                             .mask(
@@ -153,42 +162,55 @@ struct HomeView: View {
                                     endPoint: .init(x: 0.5, y: 0)
                                 )
                             )
+                            
                             VStack {
                                 Spacer()
                                 HStack {
                                     Spacer()
-                                    //自動スクロールボタン
-                                }
-                                HStack {
-                                    Spacer()
-                                    Button(action: {
-                                        buttonTapped()
-                                    }) {
-                                        ZStack {
-                                            Capsule()
-                                                .fill(.ultraThinMaterial.opacity(0.95))
-                                                .frame(width: 120, height: 60)
-                                                .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
-                                                .overlay(
-                                                    Capsule()
-                                                        .stroke(
-                                                            LinearGradient(
-                                                                gradient: Gradient(colors: [.white.opacity(0.6), .white.opacity(0.2)]),
-                                                                startPoint: .topLeading,
-                                                                endPoint: .bottomTrailing
-                                                            ),
-                                                            lineWidth: 0.5
-                                                        )
-                                                )
-                                            
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 30, weight: .medium))
-                                                .foregroundColor(.white)
+                                    VStack(spacing: 10) {
+                                        Button(action: {
+                                            withAnimation {
+                                                scrollProxy?.scrollTo(currentWeeklyRecord.thoughts.count - 1, anchor: .bottom)
+                                            }
+                                        }) {
+                                            Image(systemName: "arrow.down.circle.fill")
+                                                .font(.system(size: 40))
+                                                .foregroundColor(.accentColor)
+                                                .background(Color.white.opacity(0.8))
+                                                .clipShape(Circle())
                                         }
-                                        .scaleEffect(buttonScale)
-                                        .padding(.trailing)
-                                        .opacity(isKeyboardVisible ? 0.5 : 1.0)
+                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                                        
+                                        Button(action: {
+                                            buttonTapped()
+                                        }) {
+                                            ZStack {
+                                                Capsule()
+                                                    .fill(.ultraThinMaterial.opacity(0.95))
+                                                    .frame(width: 120, height: 60)
+                                                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
+                                                    .overlay(
+                                                        Capsule()
+                                                            .stroke(
+                                                                LinearGradient(
+                                                                    gradient: Gradient(colors: [.white.opacity(0.6), .white.opacity(0.2)]),
+                                                                    startPoint: .topLeading,
+                                                                    endPoint: .bottomTrailing
+                                                                ),
+                                                                lineWidth: 0.5
+                                                            )
+                                                    )
+                                                
+                                                Image(systemName: "plus")
+                                                    .font(.system(size: 30, weight: .medium))
+                                                    .foregroundColor(.white)
+                                            }
+                                            .scaleEffect(buttonScale)
+                                            .padding(.trailing)
+                                            .opacity(isKeyboardVisible ? 0.5 : 1.0)
+                                        }
                                     }
+                                    .padding(.trailing)
                                 }
                             }
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
