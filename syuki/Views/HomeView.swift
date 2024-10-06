@@ -18,7 +18,8 @@ struct HomeView: View {
     @State private var showAlert = false
     @State private var isButtonPressed = false // 新しいステート変数を追加
     @State private var buttonScale: CGFloat = 1.0
-    
+    @State private var isKeyboardVisible = false
+
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
         return Binding<[ThoughtCard]>(
@@ -75,7 +76,7 @@ struct HomeView: View {
                                     }
                                 }
                                 HStack {
-                                    HStack(spacing: 10) { // スペーシングを追加
+                                    HStack(spacing: 10) { 
                                         Button {
                                             showSettingView = true
                                         } label: {
@@ -101,31 +102,25 @@ struct HomeView: View {
                                         //                                            showAlert = true
                                         //                                        }
                                     }) {
-                                        Text("振り返り")
-                                            .font(.headline)
-                                            .padding(.vertical, 8)
-                                            .padding(.horizontal, 16)
-                                            .foregroundColor(.white.opacity(0.95))
-                                            .background(
-                                                Capsule()
-                                                    .fill(
-                                                        LinearGradient(
-                                                            gradient: Gradient(colors: [
-                                                                isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
-                                                                isSunday ? Color.accentColor : Color.gray.opacity(0.6)
-                                                            ]),
-                                                            startPoint: .top,
-                                                            endPoint: .bottom
-                                                        )
-                                                    )
+                                        Capsule()
+                                            .fill(
+                                                LinearGradient(
+                                                    gradient: Gradient(colors: [
+                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
+                                                    ]),
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
+                                                )
                                             )
                                             .overlay(
-                                                Capsule()
-                                                    .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
+                                                Text("振り返り")
+                                                    .font(.headline)
+                                                    .foregroundColor(.white.opacity(0.95))
                                             )
+                                            .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: isSunday ? .accent.opacity(0.6) : .clear, radius: 10, x: 0.0, y: 0.0)
-                                    //   .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
+                                    .shadow(color: .accent.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
                             }
@@ -179,7 +174,14 @@ struct HomeView: View {
                                     .scaleEffect(buttonScale)
                                     .shadow(color: .accent.opacity(0.7), radius: 15, x: 0.0, y: 0.0)
                                     .padding(.trailing)
+                                    .opacity(isKeyboardVisible ? 0.5 : 1.0) // キーボードが表示されているときは不透明度を0.5に設定
                                 }
+                            }
+                            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+                                isKeyboardVisible = true
+                            }
+                            .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+                                isKeyboardVisible = false
                             }
                         }
                         .onTapGesture {

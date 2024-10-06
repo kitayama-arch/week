@@ -55,7 +55,7 @@ struct TutorialView: View {
                         .padding()
                         .padding(.horizontal, 20)
                         .background(Color.accentColor)
-                        .clipShape(Capsule()) // ここを変更
+                        .clipShape(Capsule())
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 20)
