@@ -19,10 +19,26 @@ struct ReflectionView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
-                    Text("記録")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.top)
+                    HStack {
+                        Text("記録")
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Text("\(weeklyRecord.thoughts.count)")
+                            .font(.system(.headline, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                            .clipShape(Capsule())
+                    }
+                    .padding(.top)
                     ThoughtsListView(thoughts: weeklyRecord.thoughts)
                     Text("振り返り")
                         .font(.headline)

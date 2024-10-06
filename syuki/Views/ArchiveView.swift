@@ -79,10 +79,26 @@ struct WeeklyRecordDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("記録")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.top)
+                    HStack {
+                        Text("記録")
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                        Text("\(weeklyRecord.thoughts.count)")
+                            .font(.system(.headline, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 4)
+                            .background(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            )
+                            .clipShape(Capsule())
+                    }
+                    .padding(.top)
+                    
                     if weeklyRecord.thoughts.isEmpty {
                         Text("記録はありません")
                             .foregroundColor(.secondary)
