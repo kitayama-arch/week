@@ -167,51 +167,58 @@ struct HomeView: View {
                                 Spacer()
                                 HStack {
                                     Spacer()
-                                    VStack(spacing: 10) {
-                                        Button(action: {
-                                            withAnimation {
-                                                scrollProxy?.scrollTo(currentWeeklyRecord.thoughts.count - 1, anchor: .bottom)
-                                            }
-                                        }) {
-                                            Image(systemName: "arrow.down.circle.fill")
-                                                .font(.system(size: 40))
-                                                .foregroundColor(.accentColor)
-                                                .background(Color.white.opacity(0.8))
-                                                .clipShape(Circle())
-                                        }
-                                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
-                                        
-                                        Button(action: {
-                                            buttonTapped()
-                                        }) {
-                                            ZStack {
-                                                Capsule()
-                                                    .fill(.ultraThinMaterial.opacity(0.95))
-                                                    .frame(width: 120, height: 60)
-                                                    .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
-                                                    .overlay(
-                                                        Capsule()
-                                                            .stroke(
-                                                                LinearGradient(
-                                                                    gradient: Gradient(colors: [.white.opacity(0.6), .white.opacity(0.2)]),
-                                                                    startPoint: .topLeading,
-                                                                    endPoint: .bottomTrailing
-                                                                ),
-                                                                lineWidth: 0.5
-                                                            )
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .fill(.ultraThinMaterial.opacity(0.95))
+                                            .frame(width: 60, height: 130)
+                                            .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 30)
+                                                    .stroke(
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [.white.opacity(0.6), .white.opacity(0.2)]),
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        ),
+                                                        lineWidth: 0.5
                                                     )
-                                                
-                                                Image(systemName: "plus")
-                                                    .font(.system(size: 30, weight: .medium))
-                                                    .foregroundColor(.white)
+                                            )
+                                        
+                                        VStack(spacing: 10) {
+                                            Button(action: {
+                                                withAnimation {
+                                                    scrollProxy?.scrollTo(currentWeeklyRecord.thoughts.count - 1, anchor: .bottom)
+                                                }
+                                            }) {
+                                                ZStack {
+                                                    Circle()
+                                                        .fill(Color.clear)
+                                                        .frame(width: 60, height: 60)
+                                                    Image(systemName: "arrowtriangle.down.fill")
+                                                        .font(.system(size: 30))
+                                                        .foregroundColor(.white)
+                                                }
                                             }
-                                            .scaleEffect(buttonScale)
-                                            .padding(.trailing)
-                                            .opacity(isKeyboardVisible ? 0.5 : 1.0)
+                                            
+                                            Button(action: {
+                                                buttonTapped()
+                                            }) {
+                                                ZStack {
+                                                    Circle()
+                                                        .fill(Color.accentColor)  // アクセントカラーの背景を追加
+                                                        .frame(width: 50, height: 50)  // プラスボタンの背景サイズを調整
+                                                    Image(systemName: "plus")
+                                                        .font(.system(size: 30, weight: .medium))
+                                                        .foregroundColor(.white)
+                                                }
+                                            }
                                         }
                                     }
-                                    .padding(.trailing)
+                                    .frame(width: 60, height: 130)  // ZStackのサイズを明示的に指定
+                                    .scaleEffect(buttonScale)
+                                    .opacity(isKeyboardVisible ? 0.8 : 1.0)
                                 }
+                                .padding(.trailing, 5)
                             }
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
                                 isKeyboardVisible = true
