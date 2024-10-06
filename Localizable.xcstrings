@@ -18,6 +18,9 @@
       },
       "shouldTranslate" : false
     },
+    "%lld" : {
+
+    },
     "OK" : {
       "localizations" : {
         "en" : {
