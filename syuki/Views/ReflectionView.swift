@@ -53,7 +53,7 @@ struct ReflectionView: View {
                         nextWeekGoal: $weeklyRecord.nextWeekGoal,
                         nextWeekEmoji: $weeklyRecord.nextWeekEmoji
                     )
-                    Spacer()
+                    Spacer(minLength: 300)
                 }
                 .padding(.horizontal)
                 Spacer()
