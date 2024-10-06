@@ -148,6 +148,7 @@ struct HomeView: View {
                                             .padding(.top, 5)
                                             .id(index)
                                         }
+                                        Spacer()
                                     }
                                     .onAppear {
                                         scrollProxy = proxy
@@ -168,8 +169,8 @@ struct HomeView: View {
                                 HStack {
                                     Spacer()
                                     ZStack {
-                                        RoundedRectangle(cornerRadius: 30)
-                                            .fill(.ultraThinMaterial.opacity(0.95))
+                                        Capsule()
+                                            .fill(.ultraThinMaterial.opacity(0.9))
                                             .frame(width: 60, height: 130)
                                             .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
                                             .overlay(
@@ -197,6 +198,8 @@ struct HomeView: View {
                                                     Image(systemName: "arrowtriangle.down.fill")
                                                         .font(.system(size: 30))
                                                         .foregroundColor(.white)
+                                                        .scaleEffect(1.0, anchor: .center)
+                                                        .scaleEffect(y: 0.8, anchor: .center)
                                                 }
                                             }
                                             
@@ -204,9 +207,11 @@ struct HomeView: View {
                                                 buttonTapped()
                                             }) {
                                                 ZStack {
-                                                    Circle()
-                                                        .fill(Color.accentColor)  // アクセントカラーの背景を追加
-                                                        .frame(width: 50, height: 50)  // プラスボタンの背景サイズを調整
+                                                    Image("gradient")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 50, height: 50)
+                                                        .clipShape(Circle())
                                                     Image(systemName: "plus")
                                                         .font(.system(size: 30, weight: .medium))
                                                         .foregroundColor(.white)
@@ -216,7 +221,7 @@ struct HomeView: View {
                                     }
                                     .frame(width: 60, height: 130)  // ZStackのサイズを明示的に指定
                                     .scaleEffect(buttonScale)
-                                    .opacity(isKeyboardVisible ? 0.8 : 1.0)
+                                    .opacity(isKeyboardVisible ? 0.7 : 1.0)
                                 }
                                 .padding(.trailing, 5)
                             }
