@@ -59,6 +59,14 @@ class CoreDataManager {
         do {
             let thoughtCards = try context.fetch(fetchRequest)
             print("CoreDataManager: 取得したThoughtCardの数: \(thoughtCards.count)")
+            print("ThoughtCardEntity IDs:")
+            thoughtCards.forEach { card in
+                if let id = card.id {
+                    print(" - \(id.uuidString)")
+                } else {
+                    print(" - No ID")
+                }
+            }
             return thoughtCards
         } catch {
             print("ThoughtCardの取得に失敗しました:\(error)")
@@ -84,8 +92,9 @@ class CoreDataManager {
         
         do {
             try context.save()
+            print("CoreDataManager: ThoughtCardが正常に削除されました。ID: \(thoughtCard.id?.uuidString ?? "Unknown")")
         } catch {
-            print("ThoughtCardの削除に失敗しました\(error)")
+            print("CoreDataManager: ThoughtCardの削除に失敗しました。Error: \(error)")
         }
     }
     

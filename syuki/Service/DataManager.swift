@@ -125,20 +125,43 @@ class DataManager: ObservableObject {
     }
     
     func deleteThoughtCard(thoughtCard: ThoughtCard) {
-        // Core Data から削除
-        if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
-            coreDataManager.deleteThoughtCard(thoughtCard: entity)
+        let context = coreDataManager.getViewContext()
+        let fetchRequest: NSFetchRequest<ThoughtCardEntity> = ThoughtCardEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", thoughtCard.id as CVarArg)
+        fetchRequest.fetchLimit = 1
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let entity = results.first {
+                if let id = entity.id {
+                    print("DataManager: Attempting to delete ThoughtCard with ID: \(id.uuidString)")
+                    context.delete(entity)
+                    try context.save()
+                    print("CoreDataManager: ThoughtCard deleted successfully. ID: \(id.uuidString)")
+                } else {
+                    print("DataManager: Attempting to delete ThoughtCard with ID: Unknown")
+                    context.delete(entity)
+                    try context.save()
+                    print("CoreDataManager: ThoughtCard deleted successfully. ID: Unknown")
+                }
+            } else {
+                print("DataManager: ThoughtCardEntity with ID: \(thoughtCard.id) not found in Core Data.")
+            }
+        } catch {
+            print("CoreDataManager: Failed to delete ThoughtCard: \(error)")
         }
         
-        // currentWeeklyRecord の thoughts から削除
+        // DataManagerの配列から削除
         if let index = currentWeeklyRecord?.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
             currentWeeklyRecord?.thoughts.remove(at: index)
         }
-        
-        // 必要に応じて thoughtCards 配列からも削除
         if let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id }) {
             thoughtCards.remove(at: index)
         }
+        
+        // ThoughtCardsを再読み込みして確認
+        loadThoughtCards()
+        print("DataManager: Reloaded ThoughtCards. Current count: \(thoughtCards.count)")
     }
     
     func createWeeklyRecord(startDate: Date, endDate: Date, goal: String, emoji: String) -> WeeklyRecord? {
@@ -236,7 +259,7 @@ class DataManager: ObservableObject {
     
     func loadCurrentWeekRecord() {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
-            // パターン4, 5: 現在の週の WeeklyRecord が存在する場合
+            // 現在の週のレコードが存在する場合
             if let newWeeklyRecord = toWeeklyRecord(from: weeklyRecordEntity) {
                 if let currentWeeklyRecord = self.currentWeeklyRecord {
                     currentWeeklyRecord.update(from: newWeeklyRecord)
@@ -248,11 +271,11 @@ class DataManager: ObservableObject {
                 self.currentWeeklyRecord = nil
             }
         } else {
-            // 現在の週の WeeklyRecord が存在しない場合
+            // 現在の週のレコードが存在しない場合
             if let previousWeeklyRecordEntity = coreDataManager.fetchPreviousWeekRecord(before: Date()),
                let previousWeeklyRecord = toWeeklyRecord(from: previousWeeklyRecordEntity) {
                 if previousWeeklyRecord.isReflectionCompleted {
-                    // パターン2: 前の週の振り返りが完了している場合、新しい WeeklyRecord を作成
+                    // 前の週の振り返りが完了している場合、新しい週のレコードを作成
                     if let newWeeklyRecord = createNextWeeklyRecord(previousWeeklyRecord: previousWeeklyRecord) {
                         self.currentWeeklyRecord = newWeeklyRecord
                         print("DataManager: 新しい週の WeeklyRecord を作成しました: \(String(describing: self.currentWeeklyRecord))")
@@ -261,12 +284,11 @@ class DataManager: ObservableObject {
                         print("DataManager: 新しい WeeklyRecord の作成に失敗しました")
                     }
                 } else {
-                    // パターン3: 前の週の振り返りが未完了の場合、currentWeeklyRecord を nil に設定
                     self.currentWeeklyRecord = nil
                     print("DataManager: 前の週の振り返りが未完了のため、currentWeeklyRecord は nil です")
                 }
             } else {
-                // パターン1: 前の週の WeeklyRecord が存在しない場合、デフォルトの WeeklyRecord を作成
+                // 前の週のレコードが存在しない場合、デフォルトのレコードを作成
                 let startDate = getStartOfWeek(for: Date())
                 let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
                 let defaultGoal = ""

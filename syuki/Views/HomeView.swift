@@ -119,14 +119,14 @@ struct HomeView: View {
                 }
             }
             .onReceive(dataManager.$shouldFocusNewCard) { shouldFocus in // shouldFocusNewCard を監視
-                        if shouldFocus, let currentWeeklyRecord = dataManager.currentWeeklyRecord {
-                            // 新しいカードの ID を取得
-                            focusedThoughtCardID = currentWeeklyRecord.thoughts.last?.id
-
-                            // shouldFocusNewCard を false に戻す
-                            dataManager.shouldFocusNewCard = false
-                        }
-                    }
+                if shouldFocus, let currentWeeklyRecord = dataManager.currentWeeklyRecord {
+                    // 新しいカードの ID を取得
+                    focusedThoughtCardID = currentWeeklyRecord.thoughts.last?.id
+                    
+                    // shouldFocusNewCard を false に戻す
+                    dataManager.shouldFocusNewCard = false
+                }
+            }
             .onAppear {
                 dataManager.loadCurrentWeekRecord()
                 print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")
@@ -134,8 +134,8 @@ struct HomeView: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(isPresented: $showReflectionView) {
-                if let reflectionWeeklyRecord = reflectionWeeklyRecord {
-                    ReflectionView(currentWeeklyRecord: reflectionWeeklyRecord)
+                if let weeklyRecordToReflect = reflectionWeeklyRecord ?? dataManager.currentWeeklyRecord {
+                    ReflectionView(weeklyRecord: weeklyRecordToReflect)
                         .environmentObject(dataManager)
                         .onAppear {
                             dataManager.loadCurrentWeekRecord()
@@ -144,7 +144,7 @@ struct HomeView: View {
                             dataManager.loadCurrentWeekRecord()
                         }
                 } else {
-                    Text("データがありません")
+                    Text("振り返りデータが利用できません")
                 }
             }
             .navigationDestination(isPresented: $showArchiveView) {

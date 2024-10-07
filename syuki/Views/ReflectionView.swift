@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ReflectionView: View {
-    @ObservedObject var currentWeeklyRecord: WeeklyRecord
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.dismiss) private var dismiss
+    @State var weeklyRecord: WeeklyRecord
     
     var body: some View {
         ZStack {
@@ -18,29 +18,32 @@ struct ReflectionView: View {
                 .ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading) {
-                    GoalView(goal: currentWeeklyRecord.goal, emoji: currentWeeklyRecord.emoji)
+                    GoalView(goal: weeklyRecord.goal, emoji: weeklyRecord.emoji)
                     Text("記録")
                         .font(.headline)
-                    ThoughtsListView(thoughts: currentWeeklyRecord.thoughts)
+                    ThoughtsListView(thoughts: weeklyRecord.thoughts)
                     Text("振り返り")
                         .font(.headline)
-                    ReflectionInputView(reflection: $currentWeeklyRecord.reflection)
-                    Text("来週の目標")
-                        .font(.headline)
-                    NextGoalCardView(nextWeekGoal: $currentWeeklyRecord.nextWeekGoal, nextWeekEmoji: $currentWeeklyRecord.nextWeekEmoji)
+                    ReflectionInputView(reflection: $weeklyRecord.reflection)
+
+                    NextGoalCardView(
+                        nextWeekGoal: $weeklyRecord.nextWeekGoal,
+                        nextWeekEmoji: $weeklyRecord.nextWeekEmoji
+                    )
                     Spacer()
                 }
                 .padding(.horizontal)
                 Spacer()
                 Button("振り返りを保存") {
-                    currentWeeklyRecord.isReflectionCompleted = true
-                    dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
+                    weeklyRecord.isReflectionCompleted = true
+                    dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
                     dataManager.loadWeeklyRecords()
+                    dataManager.loadCurrentWeekRecord()
                     dismiss()
                 }
             }
         }
-        .navigationTitle("今週の振り返り")
+        .navigationTitle("振り返り")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -135,6 +138,8 @@ struct ReflectionInputView: View {
 }
 
 #Preview {
-    ReflectionView(currentWeeklyRecord: WeeklyRecord.sampleData)
-        .environmentObject(DataManager.shared)
+    let sampleDataManager = DataManager.shared
+    sampleDataManager.currentWeeklyRecord = WeeklyRecord.sampleData
+    return ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
+        .environmentObject(sampleDataManager)
 }
