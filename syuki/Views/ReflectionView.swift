@@ -65,21 +65,22 @@ struct ReflectionView: View {
                     dismiss()
                 }) {
                     Text("保存")
-                        .font(.headline)
+                        .font(.title2.bold())
                         .foregroundColor(.white.opacity(0.95))
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 20)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
                         .background(
                             LinearGradient(
                                 gradient: Gradient(colors: [
-                                    Color.accentColor.opacity(0.8),Color.accentColor
+                                    Color.accentColor.opacity(0.8), Color.accentColor
                                 ]),
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
                         )
-                        .clipShape(.capsule)
+                        .clipShape(Capsule())
                         .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                        .padding(.horizontal, 40)
                 }
                 .padding(.vertical)
             }
