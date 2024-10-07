@@ -23,6 +23,7 @@ struct ThoughtCardView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                 )
+                .animation(.smooth, value: textEditorHeight) 
             HStack {
                 TextEditor(text: $thoughtCard.content)
                     .focused($isFocused)
@@ -38,6 +39,7 @@ struct ThoughtCardView: View {
                         isFocused = focusedThoughtCardID == thoughtCard.id
                         focusedThoughtCardID = nil // フォーカス処理が完了したら nil に戻す
                     }
+                    .animation(.smooth, value: textEditorHeight) 
                 VStack {
                     Button(action: { showingOptions = true }) {
                         Image(systemName: "ellipsis")
@@ -54,7 +56,7 @@ struct ThoughtCardView: View {
             }
         }
         .padding(.horizontal)
-        .padding(.vertical, 10)
+        .padding(.top, 10)
     }
     // TextEditorの高さを動的に計算するプロパティ
     private var textEditorHeight: CGFloat {

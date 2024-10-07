@@ -87,7 +87,7 @@ struct WeeklyRecordDetailView: View {
             .padding(.horizontal)
             
         }
-        .background(Color.gray.opacity(0.2))
+        .background(Color.gray.opacity(0.1))
         .navigationTitle("週間記録詳細")
     }
     

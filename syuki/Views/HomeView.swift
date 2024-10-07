@@ -41,6 +41,7 @@ struct HomeView: View {
                                     } label: {
                                         Image(systemName: "archivebox")
                                             .font(.title)
+                                            .foregroundStyle(.gray)
                                     }
                                     .padding()
                                     
@@ -51,6 +52,7 @@ struct HomeView: View {
                                     }) {
                                         Image(systemName: "square.and.pencil")
                                             .font(.title)
+                                            .foregroundStyle(.gray)
                                     }
                                     .padding(.horizontal)
                                 }
