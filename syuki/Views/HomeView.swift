@@ -170,7 +170,7 @@ struct HomeView: View {
                                     Spacer()
                                     ZStack {
                                         Capsule()
-                                            .fill(.ultraThinMaterial.opacity(0.9))
+                                            .fill(.ultraThinMaterial.opacity(0.75))
                                             .frame(width: 60, height: 130)
                                             .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 0)
                                             .overlay(
