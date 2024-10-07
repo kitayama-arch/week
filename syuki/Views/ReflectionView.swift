@@ -25,7 +25,7 @@ struct ReflectionView: View {
                     Text("振り返り")
                         .font(.headline)
                     ReflectionInputView(reflection: $weeklyRecord.reflection)
-
+                    
                     NextGoalCardView(
                         nextWeekGoal: $weeklyRecord.nextWeekGoal,
                         nextWeekEmoji: $weeklyRecord.nextWeekEmoji
@@ -79,14 +79,13 @@ struct ThoughtsListView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.white)
-                            .frame(height: 60)
                         HStack {
                             Text(thought.content)
+                                .padding()
                                 .background(Color.white)
                                 .cornerRadius(8)
                             Spacer()
                         }
-                        .padding(.horizontal)
                     }
                 }
             }
@@ -106,14 +105,14 @@ struct ReflectionInputView: View {
             .background(Color.white)
             .cornerRadius(8)
             .overlay(alignment: .topLeading) {
-                          if reflection.isEmpty {
-                              Text("どんな一週間でしたか？")
-                                  .foregroundStyle(.placeholder)
-                                  .allowsHitTesting(false)
-                                  .padding(.horizontal, 11)
-                                  .padding(.vertical, 8)
-                          }
-                      }
+                if reflection.isEmpty {
+                    Text("どんな一週間でしたか？")
+                        .foregroundStyle(.placeholder)
+                        .allowsHitTesting(false)
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 8)
+                }
+            }
             .onChange(of: reflection) { oldValue, newValue in
                 withAnimation {
                     updateTextEditorHeight()

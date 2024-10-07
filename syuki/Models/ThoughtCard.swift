@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class ThoughtCard: Identifiable, ObservableObject {
+@Observable class ThoughtCard: Identifiable, ObservableObject {
     let id: UUID
-    @Published var content: String
+    var content: String
     let date: Date
     weak var weeklyRecord: WeeklyRecord?
 
