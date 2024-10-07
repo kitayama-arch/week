@@ -19,9 +19,25 @@ struct ArchiveView: View {
             VStack {
                 List(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
-                            .font(.headline)
-                            .foregroundColor(.primary)
+                        HStack {
+                            Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Text("\(weeklyRecord.thoughts.count)")
+                                .font(.system(.headline, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 4)
+                                .background(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
+                                .clipShape(Capsule())
+                        }
                         
                         HStack {
                             Text(weeklyRecord.emoji)
