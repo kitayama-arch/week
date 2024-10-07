@@ -104,15 +104,6 @@ struct ReflectionInputView: View {
             .padding(.leading, 8)
             .background(Color.white)
             .cornerRadius(8)
-            .overlay(alignment: .topLeading) {
-                if reflection.isEmpty {
-                    Text("どんな一週間でしたか？")
-                        .foregroundStyle(.placeholder)
-                        .allowsHitTesting(false)
-                        .padding(.horizontal, 11)
-                        .padding(.vertical, 8)
-                }
-            }
             .onChange(of: reflection) { oldValue, newValue in
                 withAnimation {
                     updateTextEditorHeight()
@@ -120,18 +111,13 @@ struct ReflectionInputView: View {
             }
     }
     private func updateTextEditorHeight() {
-        // 画面幅からパディングを引いたサイズを計算
         let size = CGSize(width: UIScreen.main.bounds.width - 40, height: .infinity)
-        // テキストの実際の高さを計算
         let estimatedSize = reflection.boundingRect(
             with: size,
             options: .usesLineFragmentOrigin,
             attributes: [.font: UIFont.preferredFont(forTextStyle: .body)],
             context: nil
         )
-        
-        // 計算された高さと最小高さ(50)を比較し、大きい方を採用
-        // 20ピクセルの余白を追加
         textEditorHeight = max(50, estimatedSize.height + 20)
     }
 }
