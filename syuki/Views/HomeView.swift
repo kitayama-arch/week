@@ -106,13 +106,13 @@ struct HomeView: View {
                                         Capsule()
                                             .fill(
                                                 LinearGradient(
-//                                                    gradient: Gradient(colors: [
-//                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
-//                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
-//                                                    ]),
                                                     gradient: Gradient(colors: [
-                                                        Color.grayout.opacity(0.8), Color.grayout.opacity(1)
+                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
                                                     ]),
+//                                                    gradient: Gradient(colors: [
+//                                                        Color.grayout.opacity(0.8), Color.grayout.opacity(1)
+//                                                    ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
                                                 )
@@ -124,8 +124,8 @@ struct HomeView: View {
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: .grayout.opacity(0.5), radius: 12, x: 0.0, y: 4)
-//                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
+//                                    .shadow(color: .grayout.opacity(0.5), radius: 12, x: 0.0, y: 4)
+                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
                             }
@@ -223,7 +223,7 @@ struct HomeView: View {
                                     .scaleEffect(buttonScale)
                                     .opacity(isKeyboardVisible ? 0.7 : 1.0)
                                 }
-                                .padding(.trailing, 5)
+                                .padding()
                             }
                             .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
                                 isKeyboardVisible = true
@@ -236,6 +236,7 @@ struct HomeView: View {
                             UIApplication.shared.closeKeyboard()
                             print("カード間の空白部分がタップされました")
                         }
+                        .ignoresSafeArea(.all, edges: .bottom) // この行を追加
 //                        Spacer()
 //                        AdMobBannerView()
 //                            .frame(width: 320, height: 50)
@@ -257,21 +258,23 @@ struct HomeView: View {
                         }) {
                             Text("振り返りを行う")
                                 .font(.headline)
+                                .foregroundColor(.white.opacity(0.95))
                                 .padding(.vertical, 12)
                                 .padding(.horizontal, 20)
-                                .foregroundColor(.white.opacity(0.95))
                                 .background(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
+                                    Capsule()
+                                        .fill(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
                                 )
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
+                                    Capsule()
                                         .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
                                 )
-                                .cornerRadius(12)
                         }
                         .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                         Spacer()
