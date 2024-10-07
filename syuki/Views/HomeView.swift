@@ -25,7 +25,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.gray.opacity(0.2)
+                Color.gray.opacity(0.1)
                     .ignoresSafeArea()
                 if let currentWeeklyRecord = dataManager.currentWeeklyRecord {
                     // currentWeeklyRecord が存在する場合：通常のコンテンツを表示
@@ -39,7 +39,7 @@ struct HomeView: View {
                                     Button {
                                         showArchiveView = true
                                     } label: {
-                                        Image(systemName: "tray")
+                                        Image(systemName: "archivebox")
                                             .font(.title)
                                     }
                                     .padding()

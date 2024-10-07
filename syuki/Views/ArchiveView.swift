@@ -75,6 +75,10 @@ struct WeeklyRecordDetailView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Color.white)
                     .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
                 
                 Text("次週の目標")
                     .font(.headline)

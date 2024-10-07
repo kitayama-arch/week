@@ -18,6 +18,10 @@ struct GoalCardView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white)
                 .frame(height: 60)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
             HStack {
                 Button(action: {
                     isPickerPresented.toggle()

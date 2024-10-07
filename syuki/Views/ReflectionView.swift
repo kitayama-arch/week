@@ -57,8 +57,13 @@ struct GoalView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white)
                 .frame(height: 60)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
             HStack {
                 Text("\(emoji)")
+                    .font(.largeTitle)
                 Divider()
                     .frame(height: 40)
                 Text("\(goal)")
@@ -79,6 +84,10 @@ struct ThoughtsListView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                            )
                         HStack {
                             Text(thought.content)
                                 .padding()
@@ -96,29 +105,17 @@ struct ThoughtsListView: View {
 
 struct ReflectionInputView: View {
     @Binding var reflection: String
-    @State private var textEditorHeight: CGFloat = 50
     
     var body: some View {
-        TextEditor(text:$reflection)
-            .frame(height: max(50, textEditorHeight))
-            .padding(.leading, 8)
+        TextField("振り返りを入力してください", text: $reflection, axis: .vertical)
+            .textFieldStyle(PlainTextFieldStyle())
+            .padding(8)
             .background(Color.white)
             .cornerRadius(8)
-            .onChange(of: reflection) { oldValue, newValue in
-                withAnimation {
-                    updateTextEditorHeight()
-                }
-            }
-    }
-    private func updateTextEditorHeight() {
-        let size = CGSize(width: UIScreen.main.bounds.width - 40, height: .infinity)
-        let estimatedSize = reflection.boundingRect(
-            with: size,
-            options: .usesLineFragmentOrigin,
-            attributes: [.font: UIFont.preferredFont(forTextStyle: .body)],
-            context: nil
-        )
-        textEditorHeight = max(50, estimatedSize.height + 20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+            )
     }
 }
 

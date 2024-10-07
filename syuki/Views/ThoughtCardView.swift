@@ -19,6 +19,10 @@ struct ThoughtCardView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
                 .fill(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                )
             HStack {
                 TextEditor(text: $thoughtCard.content)
                     .focused($isFocused)
