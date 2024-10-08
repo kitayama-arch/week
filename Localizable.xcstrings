@@ -74,6 +74,7 @@
 
     },
     "どんな一週間でしたか？" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -151,7 +152,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please enter..."
+            "value" : "Type something..."
           }
         }
       }
