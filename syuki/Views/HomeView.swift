@@ -20,7 +20,7 @@ struct HomeView: View {
     @State private var buttonScale: CGFloat = 1.0
     @State private var isKeyboardVisible = false
     @State private var scrollProxy: ScrollViewProxy?
-
+    
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
         return Binding<[ThoughtCard]>(
@@ -96,12 +96,12 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                        //                                        if isSunday {
-                                        reflectionWeeklyRecord = currentWeeklyRecord
-                                        showReflectionView = true
-                                        //                                        } else {
-                                        //                                            showAlert = true
-                                        //                                        }
+                                        if isSunday {
+                                            reflectionWeeklyRecord = currentWeeklyRecord
+                                            showReflectionView = true
+                                        } else {
+                                            showAlert = true
+                                        }
                                     }) {
                                         Capsule()
                                             .fill(
@@ -110,9 +110,9 @@ struct HomeView: View {
                                                         isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
                                                         isSunday ? Color.accentColor : Color.gray.opacity(0.6)
                                                     ]),
-//                                                    gradient: Gradient(colors: [
-//                                                        Color.grayout.opacity(0.8), Color.grayout.opacity(1)
-//                                                    ]),
+                                                    //                                                    gradient: Gradient(colors: [
+                                                    //                                                        Color.grayout.opacity(0.8), Color.grayout.opacity(1)
+                                                    //                                                    ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
                                                 )
@@ -124,7 +124,7 @@ struct HomeView: View {
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-//                                    .shadow(color: .grayout.opacity(0.5), radius: 12, x: 0.0, y: 4)
+                                    //                                    .shadow(color: .grayout.opacity(0.5), radius: 12, x: 0.0, y: 4)
                                     .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
@@ -236,10 +236,10 @@ struct HomeView: View {
                             UIApplication.shared.closeKeyboard()
                             print("カード間の空白部分がタップされました")
                         }
-                        .ignoresSafeArea(.all, edges: .bottom) // この行を追加
-//                        Spacer()
-//                        AdMobBannerView()
-//                            .frame(width: 320, height: 50)
+                        .ignoresSafeArea(.container, edges: .bottom) // この行を追加
+                        //                        Spacer()
+                        //                        AdMobBannerView()
+                        //                            .frame(width: 320, height: 50)
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
