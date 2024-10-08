@@ -32,7 +32,14 @@
       }
     },
     "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With week,\nyou'll never say \"A week has passed without me noticing\" again."
+          }
+        }
+      }
     },
     "アーカイブ" : {
       "localizations" : {
@@ -65,13 +72,34 @@
       }
     },
     "いい生活は、いい一週間から。" : {
-
+  "localizations" : {
+    "en" : {
+      "stringUnit" : {
+        "state" : "translated",
+        "value" : "A good life starts with a good week."
+      }
+    }
+      }
     },
     "それまでの間日々の出来事や思考を記録してみてください。" : {
-
+      "localizations" : {
+      "en" : {
+      "stringUnit" : {
+        "state" : "translated",
+        "value" : "Try recording your daily events and thoughts until then."
+      }
+        }
+      }
     },
     "チュートリアルを表示" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Tutorial"
+          }
+        }
+      }
     },
     "どんな一週間でしたか？" : {
       "extractionState" : "stale",
@@ -124,8 +152,15 @@
         }
       }
     },
-    "ようこそ！weekの世界へ" : {
-
+    "weekへようこそ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to the world of week!"
+          }
+        }
+      }
     },
     "今週の目標を入力してください" : {
       "localizations" : {
@@ -157,8 +192,15 @@
         }
       }
     },
-    "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません" : {
-
+    "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Events, ideas, feelings,\nfeel free to jot down anything.\nYou don't need to record daily like a diary"
+          }
+        }
+      }
     },
     "削除" : {
       "localizations" : {
@@ -171,13 +213,34 @@
       }
     },
     "前の週の振り返りがまだ完了していません。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The reflection for the previous week is not yet complete."
+          }
+        }
+      }
     },
     "始める" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
     },
     "少しでも前に進む" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move forward, even if just a little"
+          }
+        }
+      }
     },
     "振り返り" : {
       "localizations" : {
@@ -240,7 +303,14 @@
       }
     },
     "次へ" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        }
+      }
     },
     "次週の目標" : {
       "localizations" : {
@@ -253,10 +323,24 @@
       }
     },
     "毎週日曜日は、weekで一週間を振り返る日。\n良かったこと、次週への改善策などを\nゆっくり整理し、自分の成長を確認しましょう。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every Sunday is the day to reflect on the week with week.\nTake your time to organize what went well,\nimprovements for next week, and confirm your growth."
+          }
+        }
+      }
     },
     "流れる日々を記録する" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record the flowing days"
+          }
+        }
+      }
     },
     "目標" : {
       "localizations" : {
@@ -309,7 +393,14 @@
       }
     },
     "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set a goal for the week and move forward step by step.\nSmall progress leads to big changes."
+          }
+        }
+      }
     },
     "週間記録詳細" : {
       "localizations" : {
@@ -322,7 +413,14 @@
       }
     },
     "過去の自分と比べる" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compare with your past self"
+          }
+        }
+      }
     },
     "開発者のTwitter" : {
       "localizations" : {
