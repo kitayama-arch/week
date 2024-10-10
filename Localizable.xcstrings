@@ -31,6 +31,16 @@
         }
       }
     },
+    "weekへようこそ" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to the world of week!"
+          }
+        }
+      }
+    },
     "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。" : {
       "localizations" : {
         "en" : {
@@ -72,22 +82,22 @@
       }
     },
     "いい生活は、いい一週間から。" : {
-  "localizations" : {
-    "en" : {
-      "stringUnit" : {
-        "state" : "translated",
-        "value" : "A good life starts with a good week."
-      }
-    }
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A good life starts with a good week."
+          }
+        }
       }
     },
     "それまでの間日々の出来事や思考を記録してみてください。" : {
       "localizations" : {
-      "en" : {
-      "stringUnit" : {
-        "state" : "translated",
-        "value" : "Try recording your daily events and thoughts until then."
-      }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try recording your daily events and thoughts until then."
+          }
         }
       }
     },
@@ -102,7 +112,6 @@
       }
     },
     "どんな一週間でしたか？" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -148,16 +157,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy Policy"
-          }
-        }
-      }
-    },
-    "weekへようこそ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Welcome to the world of week!"
           }
         }
       }
