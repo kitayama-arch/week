@@ -21,6 +21,26 @@
     "%lld" : {
 
     },
+    "¥5,000/年" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¥5,000/year"
+          }
+        }
+      }
+    },
+    "¥500/月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¥500/month"
+          }
+        }
+      }
+    },
     "OK" : {
       "localizations" : {
         "en" : {
@@ -87,6 +107,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A good life starts with a good week."
+          }
+        }
+      }
+    },
+    "サブスクリプション内容" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscription Details"
+          }
+        }
+      }
+    },
+    "サブスクリプション期間" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscription Period"
           }
         }
       }
@@ -161,6 +201,36 @@
         }
       }
     },
+    "プレミアムにアップグレード" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade to Premium"
+          }
+        }
+      }
+    },
+    "プレミアムプラン" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Plan"
+          }
+        }
+      }
+    },
+    "プレミアム機能" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium Features"
+          }
+        }
+      }
+    },
     "今週の目標を入力してください" : {
       "localizations" : {
         "en" : {
@@ -197,6 +267,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Events, ideas, feelings,\nfeel free to jot down anything.\nYou don't need to record daily like a diary"
+          }
+        }
+      }
+    },
+    "利用規約" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Service"
           }
         }
       }
@@ -241,6 +321,26 @@
         }
       }
     },
+    "年額プラン" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annual Plan"
+          }
+        }
+      }
+    },
+    "広告の削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Ads"
+          }
+        }
+      }
+    },
     "振り返り" : {
       "localizations" : {
         "en" : {
@@ -277,6 +377,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conduct Review"
+          }
+        }
+      }
+    },
+    "月額プラン" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monthly Plan"
           }
         }
       }
@@ -417,6 +527,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compare with your past self"
+          }
+        }
+      }
+    },
+    "選択したプランに応じて、1ヶ月または1年間の自動更新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto-renews for 1 month or 1 year depending on the selected plan"
+          }
+        }
+      }
+    },
+    "閉じる" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
           }
         }
       }
