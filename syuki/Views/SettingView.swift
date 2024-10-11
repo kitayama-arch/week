@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @State private var showTutorial = false
+    @State private var showPurchaseView = false
     // フィードバックとプライバシーポリシーのURLを定義
     private let feedbackURL: String
     private let privacyPolicyURL: String
@@ -16,6 +17,7 @@ struct SettingView: View {
     init() {
         // 言語に応じてURLを設定
         if Locale.current.language.languageCode?.identifier == "ja" {
+            
             self.feedbackURL = "https://forms.gle/P37hSuQbonvAzck99"
             self.privacyPolicyURL = "https://drive.google.com/file/d/1J3rL7Rr3k_HTctSGwDrCEgn8i-EH_RzY/view?usp=sharing"
         } else {
@@ -32,6 +34,8 @@ struct SettingView: View {
             VStack {
                 ScrollView {
                     VStack(spacing: 20) {
+                        premiumSection
+                        
                         settingSection(title: "フィードバック") {
                             settingLink(icon: "square.and.pencil", text: "フィードバックを送信", url: feedbackURL)
                         }
@@ -75,6 +79,40 @@ struct SettingView: View {
         .foregroundColor(.primary)
         .fullScreenCover(isPresented: $showTutorial) {
             TutorialView()
+        }
+        .sheet(isPresented: $showPurchaseView) {
+            PurchaseView()
+        }
+    }
+    
+    private var premiumSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("プレミアム機能")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            
+            VStack {
+                Button(action: {
+                    showPurchaseView = true
+                }) {
+                    HStack {
+                        Image(systemName: "star.circle")
+                            .frame(width: 30)
+                        Text("プレミアムにアップグレード")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.footnote)
+                    }
+                    .padding(.vertical, 8)
+                    .foregroundColor(.white)
+                }
+            }
+            .padding()
+            .background(
+                LinearGradient(gradient: Gradient(colors: [Color.accentColor, Color.accentColor.opacity(0.8)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .cornerRadius(8)
+            .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
         }
     }
     

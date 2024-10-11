@@ -34,6 +34,9 @@
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 		5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */; };
+		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
+		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
+		5AE391CF2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */; };
 		5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */; };
 		5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DC02CAB614C00181F51 /* Color.xcassets */; };
 		80654727A7C84872FDB8D884 /* Pods_SyukiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */; };
@@ -80,6 +83,9 @@
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
+		5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "week - 1週間を記録する日記.storekit"; sourceTree = "<group>"; };
 		5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5AFA1DC02CAB614C00181F51 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */,
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
 				2BFC667D44EC045C8E056A82 /* Pods_syuki.framework in Frameworks */,
 			);
@@ -131,6 +138,7 @@
 				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
 				5A24631C2CAB16E500B02F0A /* SettingView.swift */,
 				5A24631E2CAB212F00B02F0A /* BannerView.swift */,
+				5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */,
 				5A4B02E02CAC10DC00497E79 /* TutorialView.swift */,
 			);
 			path = Views;
@@ -197,6 +205,7 @@
 			children = (
 				5A71975C2C66DC77005BDAC2 /* DataManager.swift */,
 				5A6157A02CAEF780006C4F67 /* KeyboardResponder.swift */,
+				5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -225,6 +234,7 @@
 		9A543FC3A3433BCDC5BBD582 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */,
 				7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */,
 				F82500D618D5D74BCD844911 /* Pods_syuki.framework */,
 			);
@@ -329,6 +339,7 @@
 				5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */,
 				5A2463212CAB24C400B02F0A /* PrivacyInfo.xcprivacy in Resources */,
 				5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */,
+				5AE391CF2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */,
 				5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */,
 				5A63CF822CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift in Sources */,
 				5A63CF832CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift in Sources */,
