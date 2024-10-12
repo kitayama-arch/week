@@ -337,21 +337,6 @@ struct ProductView: View {
             Text(product.displayPrice)
                 .font(.subheadline)
                 .foregroundColor(.blue)
-            if let period = product.subscription?.subscriptionPeriod {
-                Text("\(period.value) \(periodUnitString(period.unit))")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {
-        switch unit {
-        case .day: return "日"
-        case .week: return "週間"
-        case .month: return "ヶ月"
-        case .year: return "年"
-        @unknown default: return "不明"
         }
     }
 }

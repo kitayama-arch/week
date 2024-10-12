@@ -328,7 +328,7 @@ struct HomeView: View {
             .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text("それまでの間日々の出来事や思考を記録してみてください。")
+                Text("それまでの間、日々の出来事や思考を\n記録してみてください。")
             }
         }
     }
