@@ -20,6 +20,7 @@ struct HomeView: View {
     @State private var buttonScale: CGFloat = 1.0
     @State private var isKeyboardVisible = false
     @State private var scrollProxy: ScrollViewProxy?
+    @EnvironmentObject private var sceneDelegate: SceneDelegate
     
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -237,9 +238,11 @@ struct HomeView: View {
                             print("カード間の空白部分がタップされました")
                         }
                         .ignoresSafeArea(.container, edges: .bottom)
-                                                Spacer()
-                                                AdMobBannerView()
-                                                    .frame(width: 320, height: 50)
+                        if !sceneDelegate.isPremium {
+                            Spacer()
+                            AdMobBannerView()
+                                .frame(width: 320, height: 50)
+                        }
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
@@ -278,8 +281,10 @@ struct HomeView: View {
                         }
                         .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                         Spacer()
-                        AdMobBannerView()
-                            .frame(width: 320, height: 50)
+                        if !sceneDelegate.isPremium {
+                            AdMobBannerView()
+                                .frame(width: 320, height: 50)
+                        }
                     }
                     .padding()
                 }

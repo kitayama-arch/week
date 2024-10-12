@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     @Published var isPremium = false
-    @Published var currentPlan: String = "無料プラン"
+    @Published var currentPlan: String = NSLocalizedString("無料プラン", comment: "Free plan")
     
     override init() {
         super.init()
@@ -61,7 +61,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
             print("SceneDelegate: 有効なサブスクリプションが見つかりません。特典を無効化します")
             disablePrivilege()
             isPremium = false
-            currentPlan = "無料プラン"
+            currentPlan = NSLocalizedString("無料プラン", comment: "Free plan")
         }
         print("SceneDelegate: 現在の状態 - isPremium: \(isPremium), currentPlan: \(currentPlan)")
     }
@@ -81,11 +81,11 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     private func getPlanName(for productId: String) -> String {
         switch productId {
         case "com.gmail.iura.smh.week.monthly":
-            return "月額プラン"
+            return NSLocalizedString("月額プラン", comment: "Monthly plan")
         case "com.gmail.iura.smh.week.yearly":
-            return "年額プラン"
+            return NSLocalizedString("年額プラン", comment: "Yearly plan")
         default:
-            return "不明なプラン"
+            return NSLocalizedString("不明なプラン", comment: "Unknown plan")
         }
     }
     
@@ -104,7 +104,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
                         print("SceneDelegate: 払い戻しされたトランザクション")
                         disablePrivilege()
                         isPremium = false
-                        currentPlan = "無料プラン"
+                        currentPlan = NSLocalizedString("無料プラン", comment: "Free plan")
                     } else if let expirationDate = transaction.expirationDate {
                         if Date() < expirationDate {
                             if !transaction.isUpgraded {
@@ -119,7 +119,7 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
                             print("SceneDelegate: 期限切れのトランザクション")
                             disablePrivilege()
                             isPremium = false
-                            currentPlan = "無料プラン"
+                            currentPlan = NSLocalizedString("無料プラン", comment: "Free plan")
                         }
                     } else {
                         print("SceneDelegate: 有効期限のないトランザクション")

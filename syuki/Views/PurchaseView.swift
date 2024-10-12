@@ -18,6 +18,16 @@ struct PurchaseView: View {
     @State private var products: [Product] = []
     @State private var isLoading = false
     @State private var errorMessage: ErrorMessage?
+    private let privacyPolicyURL: String
+    
+    init() {
+        // 言語に応じてURLを設定
+        if Locale.current.language.languageCode?.identifier == "ja" {
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1J3rL7Rr3k_HTctSGwDrCEgn8i-EH_RzY/view?usp=sharing"
+        } else {
+            self.privacyPolicyURL = "https://drive.google.com/file/d/1mVGyMKKtu-DF2D9O2AsIMT8YcfHlvW7W/view?usp=sharing"
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -127,7 +137,7 @@ struct PurchaseView: View {
 
     private var termsAndPrivacy: some View {
         VStack {
-            Link("プライバシーポリシー", destination: URL(string: "https://drive.google.com/file/d/1J3rL7Rr3k_HTctSGwDrCEgn8i-EH_RzY/view?usp=drive_link")!)
+            Link("プライバシーポリシー", destination: URL(string: privacyPolicyURL)!)
             Link("利用規約", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
         }
         .font(.footnote)
@@ -217,17 +227,17 @@ struct PurchaseView: View {
     private func getErrorMessage(error: Error) -> String {
         switch error {
         case SubscribeError.userCancelled:
-            return "ユーザーによって購入がキャンセルされました"
+            return NSLocalizedString("ユーザーによって購入がキャンセルされました", comment: "User cancelled purchase error")
         case SubscribeError.pending:
-            return "購入が保留されています"
+            return NSLocalizedString("購入が保留されています", comment: "Purchase pending error")
         case SubscribeError.productUnavailable:
-            return "指定した商品が無効です"
+            return NSLocalizedString("指定した商品が無効です", comment: "Product unavailable error")
         case SubscribeError.purchaseNotAllowed:
-            return "OSの支払い機能が無効化されています"
+            return NSLocalizedString("OSの支払い機能が無効化されています", comment: "Purchase not allowed error")
         case SubscribeError.failedVerification:
-            return "トランザクションデータの署名が不正です"
+            return NSLocalizedString("トランザクションデータの署名が不正です", comment: "Failed verification error")
         default:
-            return "不明なエラーが発生しました"
+            return NSLocalizedString("不明なエラーが発生しました", comment: "Unknown error")
         }
     }
     
@@ -277,17 +287,17 @@ enum SubscribeError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .userCancelled:
-            return "ユーザーによって購入がキャンセルされました"
+            return NSLocalizedString("ユーザーによって購入がキャンセルされました", comment: "User cancelled purchase error")
         case .pending:
-            return "購入は保留中です"
+            return NSLocalizedString("購入は保留中です", comment: "Purchase pending error")
         case .productUnavailable:
-            return "指定した商品が無効です"
+            return NSLocalizedString("指定した商品が無効です", comment: "Product unavailable error")
         case .purchaseNotAllowed:
-            return "OSの支払い機能が無効化されています"
+            return NSLocalizedString("OSの支払い機能が無効化されています", comment: "Purchase not allowed error")
         case .failedVerification:
-            return "トランザクションの検証に失敗しました"
+            return NSLocalizedString("トランザクションの検証に失敗しました", comment: "Failed verification error")
         case .otherError:
-            return "購入中に予期せぬエラーが発生しました"
+            return NSLocalizedString("購入中に予期せぬエラーが発生しました", comment: "Other purchase error")
         }
     }
 }
