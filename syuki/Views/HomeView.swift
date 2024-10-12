@@ -21,6 +21,7 @@ struct HomeView: View {
     @State private var isKeyboardVisible = false
     @State private var scrollProxy: ScrollViewProxy?
     @EnvironmentObject private var sceneDelegate: SceneDelegate
+    @State private var shouldScrollToBottom = false
     
     private var thoughtsBinding: Binding<[ThoughtCard]>? {
         guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
@@ -153,6 +154,15 @@ struct HomeView: View {
                                     }
                                     .onAppear {
                                         scrollProxy = proxy
+                                        shouldScrollToBottom = true
+                                    }
+                                    .onChange(of: shouldScrollToBottom) { oldValue, newValue in
+                                        if newValue {
+                                            withAnimation {
+                                                proxy.scrollTo(currentWeeklyRecord.thoughts.count - 1, anchor: .bottom)
+                                            }
+                                            shouldScrollToBottom = false
+                                        }
                                     }
                                 }
                             }
@@ -302,6 +312,7 @@ struct HomeView: View {
                 dataManager.loadCurrentWeekRecord()
                 updateIsSunday()
                 print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")
+                shouldScrollToBottom = true
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
