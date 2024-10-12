@@ -37,6 +37,7 @@
 		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
 		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
 		5AE391CF2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */; };
+		5AE391D12CB9433D00C87DF7 /* subscriptions.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5AE391D02CB9433D00C87DF7 /* subscriptions.storekit */; };
 		5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */; };
 		5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DC02CAB614C00181F51 /* Color.xcassets */; };
 		80654727A7C84872FDB8D884 /* Pods_SyukiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */; };
@@ -86,6 +87,7 @@
 		5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "week - 1週間を記録する日記.storekit"; sourceTree = "<group>"; };
+		5AE391D02CB9433D00C87DF7 /* subscriptions.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = subscriptions.storekit; sourceTree = "<group>"; };
 		5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5AFA1DC02CAB614C00181F51 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				5A71975C2C66DC77005BDAC2 /* DataManager.swift */,
 				5A6157A02CAEF780006C4F67 /* KeyboardResponder.swift */,
 				5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */,
+				5AE391D02CB9433D00C87DF7 /* subscriptions.storekit */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */,
+				5AE391D12CB9433D00C87DF7 /* subscriptions.storekit in Resources */,
 				5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */,
 				5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */,
 				5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */,
@@ -610,12 +614,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7Z3QK7D946;
+				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -634,7 +637,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.week;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = week;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -651,12 +653,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 7Z3QK7D946;
+				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -675,7 +676,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.week;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = week;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

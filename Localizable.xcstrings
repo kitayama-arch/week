@@ -22,6 +22,7 @@
 
     },
     "¥5,000/年" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -32,6 +33,7 @@
       }
     },
     "¥500/月" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -322,6 +324,7 @@
       }
     },
     "年額プラン" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -382,6 +385,7 @@
       }
     },
     "月額プラン" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -450,6 +454,9 @@
           }
         }
       }
+    },
+    "現在のプラン" : {
+
     },
     "目標" : {
       "localizations" : {

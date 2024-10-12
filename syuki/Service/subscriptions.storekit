@@ -9,7 +9,7 @@
       }
     ]
   },
-  "identifier" : "3459E94B",
+  "identifier" : "691582BB",
   "nonRenewingSubscriptions" : [
 
   ],
@@ -17,10 +17,11 @@
 
   ],
   "settings" : {
-    "_applicationInternalID" : "6736693039",
-    "_developerTeamID" : "7Z3QK7D946",
+    "_compatibilityTimeRate" : {
+      "3" : 6,
+      "5" : 1004
+    },
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 750328629.55351996,
     "_locale" : "ja",
     "_storefront" : "JPN",
     "_storeKitErrors" : [
@@ -69,15 +70,16 @@
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
-    ]
+    ],
+    "_timeRate" : 1005
   },
   "subscriptionGroups" : [
     {
-      "id" : "21556398",
+      "id" : "40C4996D",
       "localizations" : [
 
       ],
-      "name" : "メインサブスクリプション",
+      "name" : "mainsub",
       "subscriptions" : [
         {
           "adHocOffers" : [
@@ -86,27 +88,22 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "2.99",
+          "displayPrice" : "500",
           "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "6736732985",
+          "internalID" : "93A6D25F",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "1ヶ月間のプランです。",
-              "displayName" : "月プラン",
-              "locale" : "ja"
-            },
-            {
-              "description" : "1-month plan",
-              "displayName" : "monthly",
+              "description" : "",
+              "displayName" : "",
               "locale" : "en_US"
             }
           ],
           "productID" : "com.gmail.iura.smh.week.monthly",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "monthly",
-          "subscriptionGroupID" : "21556398",
+          "referenceName" : "月プラン",
+          "subscriptionGroupID" : "40C4996D",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
 
@@ -119,27 +116,22 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "34.99",
+          "displayPrice" : "5000",
           "familyShareable" : false,
-          "groupNumber" : 2,
-          "internalID" : "6736733238",
+          "groupNumber" : 1,
+          "internalID" : "DEFEE1B1",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "1年間のプランです。",
-              "displayName" : "年プラン",
-              "locale" : "ja"
-            },
-            {
-              "description" : "1-year plan",
-              "displayName" : "yearly",
+              "description" : "",
+              "displayName" : "",
               "locale" : "en_US"
             }
           ],
           "productID" : "com.gmail.iura.smh.week.yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "yearly",
-          "subscriptionGroupID" : "21556398",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "年プラン",
+          "subscriptionGroupID" : "40C4996D",
           "type" : "RecurringSubscription",
           "winbackOffers" : [
 
