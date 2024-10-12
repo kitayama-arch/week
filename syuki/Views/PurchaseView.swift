@@ -86,21 +86,15 @@ struct PurchaseView: View {
                 await purchaseProduct(product)
             }
         }) {
-            VStack(alignment: .leading, spacing: 5) {
-                Text(product.displayName)
-                    .font(.headline)
-                Text(product.displayPrice)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(Color.card)
-            .cornerRadius(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.accentColor, lineWidth: 2)
-            )
+            ProductView(product: product)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(Color.card)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.accentColor, lineWidth: 2)
+                )
         }
         .buttonStyle(PlainButtonStyle())
     }
@@ -113,15 +107,8 @@ struct PurchaseView: View {
                 .foregroundColor(.primary)
             
             SubscriptionFeature(icon: "xmark.circle.fill", text: "広告の削除")
-            
-            Text("サブスクリプション期間")
-                .font(.headline)
-                .foregroundColor(.primary)
-                .padding(.top, 10)
-            Text("選択したプランに応じて、1ヶ月または1年間の自動更新")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(Color.card)
         .cornerRadius(10)
@@ -220,7 +207,7 @@ struct PurchaseView: View {
     private func getErrorMessage(error: Error) -> String {
         switch error {
         case SubscribeError.userCancelled:
-            return "ユーザーによって購入がキャンセルされました"
+            return "ユーザーによって購入がキャンセ���されました"
         case SubscribeError.pending:
             return "購入が保留されています"
         case SubscribeError.productUnavailable:
@@ -308,6 +295,38 @@ struct ErrorMessage: Identifiable {
     let id = UUID()
     let title: String
     let message: String
+}
+
+struct ProductView: View {
+    let product: Product
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(product.displayName)
+                .font(.headline)
+            Text(product.description)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            Text(product.displayPrice)
+                .font(.subheadline)
+                .foregroundColor(.blue)
+            if let period = product.subscription?.subscriptionPeriod {
+                Text("\(period.value) \(periodUnitString(period.unit))")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {
+        switch unit {
+        case .day: return "日"
+        case .week: return "週間"
+        case .month: return "ヶ月"
+        case .year: return "年"
+        @unknown default: return "不明"
+        }
+    }
 }
 
 #Preview {
