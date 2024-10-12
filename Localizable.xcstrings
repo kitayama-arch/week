@@ -19,7 +19,14 @@
       "shouldTranslate" : false
     },
     "%lld" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld %@" : {
       "localizations" : {
@@ -59,6 +66,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "OSの支払い機能が無効化されています" : {
+      "comment" : "Purchase not allowed error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The OS payment feature is disabled"
           }
         }
       }
@@ -164,6 +182,28 @@
         }
       }
     },
+    "トランザクションデータの署名が不正です" : {
+      "comment" : "Failed verification error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The transaction data signature is invalid"
+          }
+        }
+      }
+    },
+    "トランザクションの検証に失敗しました" : {
+      "comment" : "Failed verification error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to verify the transaction"
+          }
+        }
+      }
+    },
     "どんな一週間でしたか？" : {
       "localizations" : {
         "en" : {
@@ -240,6 +280,39 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Premium Features"
+          }
+        }
+      }
+    },
+    "ユーザーによって購入がキャンセルされました" : {
+      "comment" : "User cancelled purchase error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase was cancelled by the user"
+          }
+        }
+      }
+    },
+    "不明なエラーが発生しました" : {
+      "comment" : "Unknown error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error occurred"
+          }
+        }
+      }
+    },
+    "不明なプラン" : {
+      "comment" : "Unknown plan",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown Plan"
           }
         }
       }
@@ -335,12 +408,12 @@
       }
     },
     "年額プラン" : {
-      "extractionState" : "stale",
+      "comment" : "Yearly plan",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Annual Plan"
+            "value" : "Yearly Plan"
           }
         }
       }
@@ -351,6 +424,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remove Ads"
+          }
+        }
+      }
+    },
+    "指定した商品が無効です" : {
+      "comment" : "Product unavailable error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The specified product is invalid"
           }
         }
       }
@@ -396,7 +480,7 @@
       }
     },
     "月額プラン" : {
-      "extractionState" : "stale",
+      "comment" : "Monthly plan",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -466,8 +550,26 @@
         }
       }
     },
+    "無料プラン" : {
+      "comment" : "Free plan",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free Plan"
+          }
+        }
+      }
+    },
     "現在のプラン" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Plan"
+          }
+        }
+      }
     },
     "目標" : {
       "localizations" : {
@@ -519,8 +621,48 @@
         }
       }
     },
+    "購入が保留されています" : {
+      "comment" : "Purchase pending error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase is pending"
+          }
+        }
+      }
+    },
+    "購入は保留中です" : {
+      "comment" : "Purchase pending error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The purchase is pending"
+          }
+        }
+      }
+    },
     "購入を復元" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchase"
+          }
+        }
+      }
+    },
+    "購入中に予期せぬエラーが発生しました" : {
+      "comment" : "Other purchase error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unexpected error occurred during purchase"
+          }
+        }
+      }
     },
     "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。" : {
       "localizations" : {
