@@ -36,13 +36,8 @@ struct SettingView: View {
                     VStack(spacing: 20) {
                         premiumSection
                         
-                        settingSection(title: "フィードバック") {
+                        settingSection(title: "ご意見・ご要望") {
                             settingLink(icon: "square.and.pencil", text: "フィードバックを送信", url: feedbackURL)
-                        }
-                        
-                        settingSection(title: "開発者情報") {
-                            settingLink(icon: "globe", text: "開発者のウェブサイト", url: "https://example.com")
-                            settingLink(icon: "bird", text: "開発者のTwitter", url: "https://twitter.com/developer")
                         }
                         
                         settingSection(title: "アプリについて") {

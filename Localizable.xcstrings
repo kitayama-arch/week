@@ -28,16 +28,6 @@
         }
       }
     },
-    "%lld %@" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$@"
-          }
-        }
-      }
-    },
     "¥5,000/年" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -141,6 +131,9 @@
         }
       }
     },
+    "ご意見・ご要望" : {
+
+    },
     "サブスクリプション内容" : {
       "localizations" : {
         "en" : {
@@ -162,7 +155,7 @@
         }
       }
     },
-    "それまでの間日々の出来事や思考を記録してみてください。" : {
+    "それまでの間、日々の出来事や思考を\n記録してみてください。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -220,16 +213,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
-          }
-        }
-      }
-    },
-    "フィードバック" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback"
           }
         }
       }
@@ -716,6 +699,7 @@
       }
     },
     "開発者のTwitter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -726,6 +710,7 @@
       }
     },
     "開発者のウェブサイト" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -736,6 +721,7 @@
       }
     },
     "開発者情報" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
