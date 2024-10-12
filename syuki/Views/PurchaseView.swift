@@ -30,6 +30,7 @@ struct PurchaseView: View {
                         currentPlanView
                         subscriptionPlans
                         subscriptionDetails
+                        restoreButton
                         termsAndPrivacy
                     }
                     .padding()
@@ -54,7 +55,6 @@ struct PurchaseView: View {
         }
         .task {
             await loadProducts()
-            observeTransactionUpdates()
         }
     }
     
@@ -115,6 +115,16 @@ struct PurchaseView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
     
+    private var restoreButton: some View {
+        Button("購入を復元") {
+            Task {
+                await restorePurchases()
+            }
+        }
+        .font(.headline)
+        .foregroundColor(.blue)
+    }
+
     private var termsAndPrivacy: some View {
         VStack {
             Link("プライバシーポリシー", destination: URL(string: "https://drive.google.com/file/d/1J3rL7Rr3k_HTctSGwDrCEgn8i-EH_RzY/view?usp=drive_link")!)
@@ -207,7 +217,7 @@ struct PurchaseView: View {
     private func getErrorMessage(error: Error) -> String {
         switch error {
         case SubscribeError.userCancelled:
-            return "ユーザーによって購入がキャンセ���されました"
+            return "ユーザーによって購入がキャンセルされました"
         case SubscribeError.pending:
             return "購入が保留されています"
         case SubscribeError.productUnavailable:
@@ -221,31 +231,38 @@ struct PurchaseView: View {
         }
     }
     
-    private func observeTransactionUpdates() {
-        Task(priority: .background) {
-            for await verificationResult in StoreKit.Transaction.updates {
-                guard case .verified(let transaction) = verificationResult else {
-                    continue
-                }
+    private func restorePurchases() async {
+        isLoading = true
+        defer { isLoading = false }
 
-                if transaction.revocationDate != nil {
-                    // 払い戻しされてるので特典削除
-                    await MainActor.run {
-                        disablePrivilege()
-                    }
-                } else if let expirationDate = transaction.expirationDate,
-                          Date() < expirationDate, // 有効期限内
-                          !transaction.isUpgraded // アップグレードされていない
-                {
-                    // 有効なサブスクリプションなのでproductIdに対応した特典を有効にする
-                    await MainActor.run {
-                        enablePrivilege(productId: transaction.productID)
+        do {
+            try await AppStore.sync()
+
+            var restoredSubscription = false
+            for productId in productIdList {
+                let verificationResult = await Transaction.currentEntitlement(for: productId)
+                if case .verified(let transaction) = verificationResult {
+                    if transaction.revocationDate == nil,
+                       let expirationDate = transaction.expirationDate,
+                       Date() < expirationDate {
+                        restoredSubscription = true
+                        sceneDelegate.enablePrivilege(productId: productId)
+                        break
                     }
                 }
-
-                await transaction.finish()
             }
+
+            if restoredSubscription {
+                showResultMessage("購入が復元されました。", isError: false)
+            } else {
+                showResultMessage("復元可能な購入がありません。", isError: true)
+            }
+        } catch {
+            showResultMessage("購入の復元に失敗しました: \(error.localizedDescription)", isError: true)
         }
+
+        // 購読状態を更新
+        await sceneDelegate.updateSubscriptionStatus()
     }
 }
 

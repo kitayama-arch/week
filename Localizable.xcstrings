@@ -21,6 +21,16 @@
     "%lld" : {
 
     },
+    "%lld %@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
     "¥5,000/年" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -124,6 +134,7 @@
       }
     },
     "サブスクリプション期間" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -508,6 +519,9 @@
         }
       }
     },
+    "購入を復元" : {
+
+    },
     "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。" : {
       "localizations" : {
         "en" : {
@@ -539,6 +553,7 @@
       }
     },
     "選択したプランに応じて、1ヶ月または1年間の自動更新" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

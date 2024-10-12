@@ -236,10 +236,10 @@ struct HomeView: View {
                             UIApplication.shared.closeKeyboard()
                             print("カード間の空白部分がタップされました")
                         }
-                        .ignoresSafeArea(.container, edges: .bottom) // この行を追加
-                        //                        Spacer()
-                        //                        AdMobBannerView()
-                        //                            .frame(width: 320, height: 50)
+                        .ignoresSafeArea(.container, edges: .bottom)
+                                                Spacer()
+                                                AdMobBannerView()
+                                                    .frame(width: 320, height: 50)
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
