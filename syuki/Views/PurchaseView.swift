@@ -106,7 +106,6 @@ struct PurchaseView: View {
                         .stroke(Color.accentColor, lineWidth: 2)
                 )
         }
-        .buttonStyle(PlainButtonStyle())
     }
     
     private var subscriptionDetails: some View {
@@ -220,7 +219,7 @@ struct PurchaseView: View {
     }
     
     private func showResultMessage(_ message: String, isError: Bool = false) {
-        let title = isError ? "エラー" : "成功"
+        let title = isError ? "エラ��" : "成功"
         errorMessage = ErrorMessage(title: title, message: message)
     }
     
@@ -328,15 +327,43 @@ struct ProductView: View {
     let product: Product
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(product.displayName)
                 .font(.headline)
+                .foregroundColor(.primary)
+            
             Text(product.description)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-            Text(product.displayPrice)
-                .font(.subheadline)
-                .foregroundColor(.blue)
+            
+            HStack {
+                Text(product.displayPrice)
+                    .font(.subheadline)
+                    .foregroundColor(.blue)
+                
+                Spacer()
+                
+                if let period = product.subscription?.subscriptionPeriod {
+                    Text("\(period.value) \(periodUnitString(period.unit))")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+    }
+    
+    private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {
+        switch unit {
+        case .day:
+            return NSLocalizedString("日", comment: "Subscription period unit: day")
+        case .week:
+            return NSLocalizedString("週間", comment: "Subscription period unit: week")
+        case .month:
+            return NSLocalizedString("ヶ月", comment: "Subscription period unit: month")
+        case .year:
+            return NSLocalizedString("年", comment: "Subscription period unit: year")
+        @unknown default:
+            return NSLocalizedString("", comment: "Unknown subscription period unit")
         }
     }
 }

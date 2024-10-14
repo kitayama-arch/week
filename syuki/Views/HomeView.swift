@@ -226,7 +226,7 @@ struct HomeView: View {
                                             }
                                         }
                                     }
-                                    .frame(width: 60, height: 130)  // ZStackのサイズを明示的に指定
+                                    .frame(width: 60, height: 130)
                                     .scaleEffect(buttonScale)
                                     .opacity(isKeyboardVisible ? 0.7 : 1.0)
                                 }

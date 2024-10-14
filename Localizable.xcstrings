@@ -2,6 +2,7 @@
   "sourceLanguage" : "ja",
   "strings" : {
     "" : {
+      "comment" : "Unknown subscription period unit",
       "shouldTranslate" : false
     },
     "%@" : {
@@ -28,24 +29,12 @@
         }
       }
     },
-    "¥5,000/年" : {
-      "extractionState" : "stale",
+    "%lld %@" : {
       "localizations" : {
-        "en" : {
+        "ja" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "¥5,000/year"
-          }
-        }
-      }
-    },
-    "¥500/月" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "¥500/month"
+            "state" : "new",
+            "value" : "%1$lld %2$@"
           }
         }
       }
@@ -131,6 +120,17 @@
         }
       }
     },
+    "ヶ月" : {
+      "comment" : "Subscription period unit: month",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "month"
+          }
+        }
+      }
+    },
     "ご意見・ご要望" : {
       "localizations" : {
         "en" : {
@@ -147,17 +147,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Subscription Details"
-          }
-        }
-      }
-    },
-    "サブスクリプション期間" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Subscription Period"
           }
         }
       }
@@ -397,6 +386,17 @@
         }
       }
     },
+    "年" : {
+      "comment" : "Subscription period unit: year",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "year"
+          }
+        }
+      }
+    },
     "年額プラン" : {
       "comment" : "Yearly plan",
       "localizations" : {
@@ -465,6 +465,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Conduct Review"
+          }
+        }
+      }
+    },
+    "日" : {
+      "comment" : "Subscription period unit: day",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "day"
           }
         }
       }
@@ -664,6 +675,17 @@
         }
       }
     },
+    "週間" : {
+      "comment" : "Subscription period unit: week",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "week"
+          }
+        }
+      }
+    },
     "週間記録詳細" : {
       "localizations" : {
         "en" : {
@@ -684,56 +706,12 @@
         }
       }
     },
-    "選択したプランに応じて、1ヶ月または1年間の自動更新" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Auto-renews for 1 month or 1 year depending on the selected plan"
-          }
-        }
-      }
-    },
     "閉じる" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Close"
-          }
-        }
-      }
-    },
-    "開発者のTwitter" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Developer's Twitter"
-          }
-        }
-      }
-    },
-    "開発者のウェブサイト" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Developer's Website"
-          }
-        }
-      }
-    },
-    "開発者情報" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Developer Information"
           }
         }
       }
