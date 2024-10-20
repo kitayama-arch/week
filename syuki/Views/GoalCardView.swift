@@ -56,6 +56,17 @@ struct GoalCardView: View {
 }
 
 #Preview {
-    GoalCardView(weeklyRecord: WeeklyRecord.sampleData)
+    let sampleWeeklyRecord = WeeklyRecord(
+        id: UUID(),
+        startDate: Date(),
+        endDate: Date().addingTimeInterval(7*24*60*60),
+        thoughts: [],
+        reflection: "",
+        goal: "アプリを完成させる",
+        nextWeekGoal: "",
+        emoji: "😀",
+        nextWeekEmoji: "💡"
+    )
+    return GoalCardView(weeklyRecord: sampleWeeklyRecord)
         .environmentObject(DataManager.shared)
 }

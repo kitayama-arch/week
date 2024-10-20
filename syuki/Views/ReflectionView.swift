@@ -175,7 +175,21 @@ struct ReflectionInputView: View {
 
 #Preview {
     let sampleDataManager = DataManager.shared
-    sampleDataManager.currentWeeklyRecord = WeeklyRecord.sampleData
-    return ReflectionView(weeklyRecord: WeeklyRecord.sampleData)
+    let sampleWeeklyRecord = WeeklyRecord(
+        id: UUID(),
+        startDate: Date(),
+        endDate: Date().addingTimeInterval(7*24*60*60),
+        thoughts: [
+            ThoughtCard(content: "アイデア1", date: Date()),
+            ThoughtCard(content: "アイデア2", date: Date())
+        ],
+        reflection: "",
+        goal: "アプリを完成させる",
+        nextWeekGoal: "",
+        emoji: "😀",
+        nextWeekEmoji: "💡"
+    )
+    sampleDataManager.currentWeeklyRecord = sampleWeeklyRecord
+    return ReflectionView(weeklyRecord: sampleWeeklyRecord)
         .environmentObject(sampleDataManager)
 }
