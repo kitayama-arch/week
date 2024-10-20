@@ -132,7 +132,14 @@
       }
     },
     "ご意見・ご要望" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feedback and Requests"
+          }
+        }
+      }
     },
     "サブスクリプション内容" : {
       "localizations" : {
