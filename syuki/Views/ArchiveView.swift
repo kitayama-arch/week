@@ -17,6 +17,10 @@ struct ArchiveView: View {
                 .ignoresSafeArea()
             
             VStack {
+                // ContributionGraphViewを追加
+                ContributionGraphView()
+                    .padding(.horizontal)
+                
                 List(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
@@ -55,7 +59,6 @@ struct ArchiveView: View {
                     .listRowBackground(Color.card)
                 }
                 .scrollContentBackground(.hidden)
-
             }
         }
         .navigationTitle("アーカイブ")

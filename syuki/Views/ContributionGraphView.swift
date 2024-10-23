@@ -36,16 +36,24 @@ struct ContributionGraphView: View {
     var body: some View {
         let calendar = Calendar.current
         let today = Date()
-        let startDate = calendar.date(byAdding: .day, value: -49, to: today)!
+        // 表示する週数を12週間に増やす（84日分）
+        let startDate = calendar.date(byAdding: .day, value: -83, to: today)!
         
-        LazyVGrid(columns: Array(repeating: GridItem(.fixed(20)), count: 7), spacing: 4) {
-                ForEach(0..<49) { index in
-                    if let date = calendar.date(byAdding: .day, value: index, to: startDate) {
-                        let count = getContributionCount(for: date)
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(getColor(for: count))
-                            .frame(width: 20, height: 20)
-                    }
+        LazyVGrid(columns: Array(repeating: GridItem(.fixed(20)), count: 12), spacing: 4) {
+            // 12列×7行のグリッドを作成（84マス）
+            ForEach(0..<84) { index in
+                // インデックスを行と列に変換
+                let row = index % 7
+                let col = index / 7
+                // 新しいインデックスを計算（右下から左上に向かって）
+                let newIndex = col + (6 - row) * 12
+                
+                if let date = calendar.date(byAdding: .day, value: newIndex, to: startDate) {
+                    let count = getContributionCount(for: date)
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(getColor(for: count))
+                        .frame(width: 20, height: 20)
+                }
             }
         }
         .padding()
