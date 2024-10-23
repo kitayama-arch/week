@@ -244,11 +244,11 @@ struct HomeView: View {
                             print("カード間の空白部分がタップされました")
                         }
                         .ignoresSafeArea(.container, edges: .bottom)
-                        if !sceneDelegate.isPremium {
-                            Spacer()
-                            AdMobBannerView()
-                                .frame(width: 320, height: 50)
-                        }
+//                        if !sceneDelegate.isPremium {
+//                            Spacer()
+//                            AdMobBannerView()
+//                                .frame(width: 320, height: 50)
+//                        }
                     }
                 } else {
                     // currentWeeklyRecord が nil の場合：振り返り未完了の状態を表示
