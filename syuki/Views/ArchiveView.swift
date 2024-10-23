@@ -16,49 +16,54 @@ struct ArchiveView: View {
             Color.background
                 .ignoresSafeArea()
             
-            VStack {
-                // ContributionGraphViewを追加
-                ContributionGraphView()
-                    .padding(.horizontal)
-                
-                List(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack {
-                            Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                            Spacer()
-                            Text("\(weeklyRecord.thoughts.count)")
-                                .font(.system(.headline, design: .rounded))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 4)
-                                .background(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
-                                )
-                                .clipShape(Capsule())
-                        }
-                        
-                        HStack {
-                            Text(weeklyRecord.emoji)
-                                .font(.title2)
-                            Text(weeklyRecord.goal)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+            ScrollView {
+                VStack(spacing: 16) {
+                    ContributionGraphView()
+                        .padding(.horizontal)
+                    
+                    LazyVStack(spacing: 8) {
+                        ForEach(dataManager.weeklyRecords.sorted(by: { $0.startDate > $1.startDate })) { weeklyRecord in
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack {
+                                    Text("\(formatDate(weeklyRecord.startDate)) - \(formatDate(weeklyRecord.endDate))")
+                                        .font(.headline)
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    Text("\(weeklyRecord.thoughts.count)")
+                                        .font(.system(.headline, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 4)
+                                        .background(
+                                            LinearGradient(
+                                                gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                        .clipShape(Capsule())
+                                }
+                                
+                                HStack {
+                                    Text(weeklyRecord.emoji)
+                                        .font(.title2)
+                                    Text(weeklyRecord.goal)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding()
+                            .background(Color.card)
+                            .cornerRadius(10)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedWeeklyRecord = weeklyRecord
+                            }
+                            .padding(.horizontal)
                         }
                     }
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        selectedWeeklyRecord = weeklyRecord
-                    }
-                    .listRowBackground(Color.card)
                 }
-                .scrollContentBackground(.hidden)
+                .padding(.vertical)
             }
         }
         .navigationTitle("アーカイブ")
