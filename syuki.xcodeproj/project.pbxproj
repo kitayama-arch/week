@@ -34,6 +34,7 @@
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 		5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */; };
+		5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */; };
 		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
 		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
 		5AE391CF2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */; };
@@ -84,6 +85,7 @@
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
 		5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5AE391CE2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "week - 1週間を記録する日記.storekit"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				5A24631E2CAB212F00B02F0A /* BannerView.swift */,
 				5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */,
 				5A4B02E02CAC10DC00497E79 /* TutorialView.swift */,
+				5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				5A63CF822CA95D790022D52D /* ThoughtCardEntity+CoreDataClass.swift in Sources */,
 				5A63CF832CA95D790022D52D /* ThoughtCardEntity+CoreDataProperties.swift in Sources */,
 				5A24717A2C68BB9A001C3CAA /* ReflectionView.swift in Sources */,
+				5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */,
 				5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */,
 				5A4B02E12CAC10DC00497E79 /* TutorialView.swift in Sources */,
 				5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */,
@@ -490,6 +494,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_ID_SUFFIX = .debug;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -555,6 +560,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_ID_SUFFIX = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -634,7 +640,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.week;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -673,7 +679,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.week;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
