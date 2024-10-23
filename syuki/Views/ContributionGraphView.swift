@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContributionGraphView: View {
     @ObservedObject private var dataManager = DataManager.shared
-    @State private var isUnlocked = false
+    @EnvironmentObject private var sceneDelegate: SceneDelegate
+    @State private var showPurchaseView = false
     
     private func getContributionCount(for date: Date) -> Int {
         return dataManager.weeklyRecords.flatMap { record in
@@ -58,7 +59,7 @@ struct ContributionGraphView: View {
             .padding()
             
             // ブラーとテキスト
-            if !isUnlocked {
+            if !sceneDelegate.isPremium {
                 ZStack {
                     // 右から左へのグラデーションブラー
                     Rectangle()
@@ -81,7 +82,6 @@ struct ContributionGraphView: View {
                         .background(
                             Capsule()
                                 .fill(Color.BW.opacity(0.6))
-//                                .shadow(radius: 2)
                         )
                 }
             }
@@ -89,9 +89,12 @@ struct ContributionGraphView: View {
         .background(Color.card)
         .cornerRadius(8)
         .onTapGesture {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                isUnlocked.toggle()
+            if !sceneDelegate.isPremium {
+                showPurchaseView = true
             }
+        }
+        .sheet(isPresented: $showPurchaseView) {
+            PurchaseView()
         }
     }
 }
