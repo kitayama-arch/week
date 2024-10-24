@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct SettingView: View {
     @State private var showTutorial = false
@@ -13,6 +14,7 @@ struct SettingView: View {
     // フィードバックとプライバシーポリシーのURLを定義
     private let feedbackURL: String
     private let privacyPolicyURL: String
+    @Environment(\.requestReview) var requestReview
     
     init() {
         // 言語に応じてURLを設定
@@ -42,9 +44,7 @@ struct SettingView: View {
                         
                         settingSection(title: "アプリについて") {
                             Button(action: {
-                                if let url = URL(string: "itms-apps://itunes.apple.com/app/idYOUR_APP_ID") {
-                                    UIApplication.shared.open(url)
-                                }
+                                requestReview()
                             }) {
                                 settingRow(icon: "star", text: "アプリを評価する")
                             }
