@@ -116,6 +116,8 @@ struct PurchaseView: View {
                 .foregroundColor(.primary)
             
             SubscriptionFeature(icon: "xmark.circle.fill", text: "広告の削除")
+            SubscriptionFeature(icon: "lock.open.fill", text: "グラフ機能のアンロック")
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
