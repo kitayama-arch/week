@@ -101,4 +101,5 @@ struct ContributionGraphView: View {
 
 #Preview {
     ContributionGraphView()
+        .environmentObject(SceneDelegate())
 }
