@@ -92,7 +92,12 @@
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "93A6D25F",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "displayPrice" : "0.99",
+            "internalID" : "9B447C47",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1M"
+          },
           "localizations" : [
             {
               "description" : "",

@@ -35,16 +35,16 @@ struct PurchaseView: View {
                 Color.background
                     .ignoresSafeArea()
                 
-                ScrollView {
-                    VStack(spacing: 20) {
-                        currentPlanView
-                        subscriptionPlans
-                        subscriptionDetails
-                        restoreButton
-                        termsAndPrivacy
+                VStack(spacing: 20) {
+                    currentPlanView
+                    subscriptionDetails
+                    Spacer()
+                    ForEach(products) { product in
+                        SubscriptionButton(product: product)
                     }
-                    .padding()
+                    termsAndPrivacy
                 }
+                .padding()
                 
                 if isLoading {
                     ProgressView()
@@ -101,10 +101,6 @@ struct PurchaseView: View {
                 .padding()
                 .background(Color.card)
                 .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.accentColor, lineWidth: 2)
-                )
         }
     }
     
@@ -115,8 +111,13 @@ struct PurchaseView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
             
-            SubscriptionFeature(icon: "xmark.circle.fill", text: "広告の削除")
+            SubscriptionFeature(icon: "xmark.circle.fill", text: "すべての広告の削除")
             SubscriptionFeature(icon: "lock.open.fill", text: "グラフ機能のアンロック")
+            Image("glaph")
+                .resizable()
+                .cornerRadius(4)
+                .scaledToFit()
+                .frame(height: 200)
             
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -126,28 +127,32 @@ struct PurchaseView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
     
-    private var restoreButton: some View {
-        Button("購入を復元") {
-            Task {
-                await restorePurchases()
-            }
-        }
-        .font(.headline)
-        .foregroundColor(.blue)
-    }
-
     private var termsAndPrivacy: some View {
-        VStack {
+        HStack {
+            Button("購入を復元") {
+                Task {
+                    await restorePurchases()
+                }
+            }
+            Divider()
+                .frame(height: 10)
             Link("プライバシーポリシー", destination: URL(string: privacyPolicyURL)!)
+            Divider()
+                .frame(height: 10)
             Link("利用規約", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
         }
         .font(.footnote)
-        .foregroundColor(.blue)
     }
     
     private func loadProducts() async {
         do {
-            products = try await Product.products(for: productIdList)
+            var loadedProducts = try await Product.products(for: productIdList)
+            // 月額プランを先頭に持ってくるようにソート
+            loadedProducts.sort { product1, product2 in
+                // 月額プランのIDを含む製品を優先（yearlyを含まないものを先に）
+                !product1.id.contains("yearly") && product2.id.contains("yearly")
+            }
+            products = loadedProducts
         } catch {
             errorMessage = ErrorMessage(title: "エラー", message: "製品の読み込みに失敗しました: \(error.localizedDescription)")
         }
@@ -221,7 +226,7 @@ struct PurchaseView: View {
     }
     
     private func showResultMessage(_ message: String, isError: Bool = false) {
-        let title = isError ? "エラ��" : "成功"
+        let title = isError ? "Error" : "成功"
         errorMessage = ErrorMessage(title: title, message: message)
     }
     
@@ -367,6 +372,72 @@ struct ProductView: View {
         @unknown default:
             return NSLocalizedString("", comment: "Unknown subscription period unit")
         }
+    }
+}
+
+struct SubscriptionButton: View {
+    let product: Product
+    
+    var body: some View {
+        Button(action: {}) {
+            if product.id.contains("yearly") {
+                ZStack(alignment: .topTrailing) {
+                    VStack(spacing: 8) {
+                        Text("１ヶ月の無料トライアルを開始")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        
+                        Text("1か月無料。その後、\(product.displayPrice)/年")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                Color.accentColor.opacity(0.8), Color.accentColor
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .clipShape(Capsule())
+                    .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
+                    
+                    Text("2ヶ月分お得")
+                        .font(.caption2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(
+                            Color.red
+                        )
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                        )
+                        .offset(x: -10, y: -5)
+                }
+            } else {
+                // 月額プラン用の既存のデザイン
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("月間プランを開始")
+                            .font(.headline)
+                    }
+                    Text("\(product.displayPrice)/ヶ月")
+                        .font(.subheadline)
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.card)
+                .clipShape(Capsule())
+            }
+        }
+        .buttonStyle(.plain)
     }
 }
 

@@ -19,6 +19,16 @@
       },
       "shouldTranslate" : false
     },
+    "%@/ヶ月" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@/month"
+          }
+        }
+      }
+    },
     "%lld" : {
       "localizations" : {
         "en" : {
@@ -35,6 +45,36 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
+    "1か月無料。その後、%@/年" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 month free, then %@/year"
+          }
+        }
+      }
+    },
+    "１ヶ月の無料トライアルを開始" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start 1-Month Free Trial"
+          }
+        }
+      }
+    },
+    "2ヶ月分お得" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get 2 months free!"
           }
         }
       }
@@ -61,7 +101,14 @@
       }
     },
     "Tap to Unlock" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap to Unlock"
+          }
+        }
+      }
     },
     "weekへようこそ" : {
       "localizations" : {
@@ -123,6 +170,16 @@
         }
       }
     },
+    "グラフ機能のアンロック" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock Graph Feature"
+          }
+        }
+      }
+    },
     "ヶ月" : {
       "comment" : "Subscription period unit: month",
       "localizations" : {
@@ -150,6 +207,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Subscription Details"
+          }
+        }
+      }
+    },
+    "すべての広告の削除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove All Ads"
           }
         }
       }
@@ -411,16 +478,6 @@
         }
       }
     },
-    "広告の削除" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove Ads"
-          }
-        }
-      }
-    },
     "指定した商品が無効です" : {
       "comment" : "Product unavailable error",
       "localizations" : {
@@ -479,6 +536,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "day"
+          }
+        }
+      }
+    },
+    "月間プランを開始" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Monthly Plan"
           }
         }
       }
