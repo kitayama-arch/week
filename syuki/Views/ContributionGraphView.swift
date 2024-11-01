@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContributionGraphView: View {
     @ObservedObject private var dataManager = DataManager.shared
+    @State private var isUnlocked = false
     
     private func getContributionCount(for date: Date) -> Int {
         return dataManager.weeklyRecords.flatMap { record in
@@ -38,25 +39,60 @@ struct ContributionGraphView: View {
         let today = Date()
         let startDate = calendar.date(byAdding: .day, value: -83, to: today)!
         
-        LazyVGrid(columns: Array(repeating: GridItem(.fixed(20)), count: 12), spacing: 4) {
-            ForEach(0..<84) { index in
-                // インデックスを行と列に変換
-                let row = index / 12  // 何行目か（0-6）
-                let col = index % 12  // 何列目か（0-11）
-                
-                // 日付を計算（上から下、左から右に進む）
-                let dayOffset = col * 7 + row
-                if let date = calendar.date(byAdding: .day, value: dayOffset, to: startDate) {
-                    let count = getContributionCount(for: date)
-                    RoundedRectangle(cornerRadius: 2)
-                        .fill(getColor(for: count))
-                        .frame(width: 20, height: 20)
+        ZStack {
+            // 既存のグラフ
+            LazyVGrid(columns: Array(repeating: GridItem(.fixed(20)), count: 12), spacing: 4) {
+                ForEach(0..<84) { index in
+                    let row = index / 12
+                    let col = index % 12
+                    let dayOffset = col * 7 + row
+                    
+                    if let date = calendar.date(byAdding: .day, value: dayOffset, to: startDate) {
+                        let count = getContributionCount(for: date)
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(getColor(for: count))
+                            .frame(width: 20, height: 20)
+                    }
+                }
+            }
+            .padding()
+            
+            // ブラーとテキスト
+            if !isUnlocked {
+                ZStack {
+                    // 右から左へのグラデーションブラー
+                    Rectangle()
+                        .fill(Color.card.opacity(0.98))
+                        .blur(radius: 3)
+                        .mask(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.black,Color.black,Color.black,Color.black,Color.black,Color.black,
+                                                          Color.black.opacity(0)]),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                    
+                    Text("Tap to Unlock")
+                        .font(.system(.headline, design: .rounded))
+                        .foregroundStyle(.primary)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 10)
+                        .background(
+                            Capsule()
+                                .fill(Color.BW.opacity(0.6))
+//                                .shadow(radius: 2)
+                        )
                 }
             }
         }
-        .padding()
         .background(Color.card)
         .cornerRadius(8)
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                isUnlocked.toggle()
+            }
+        }
     }
 }
 
