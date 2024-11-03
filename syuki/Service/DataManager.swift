@@ -58,7 +58,7 @@ class DataManager: ObservableObject {
                 return
             }
         }
-
+        
         // ThoughtCardEntityの作成と関連付け
         if let entity = coreDataManager.createThoughtCard(content: content, date: date, weeklyRecord: weeklyRecordEntity) {
             guard let id = entity.id,
@@ -78,12 +78,12 @@ class DataManager: ObservableObject {
             
             // currentWeeklyRecordのthoughtsに追加
             currentWeeklyRecord?.thoughts.append(newThoughtCard)
-
+            
             // SwiftUIのビューを更新
             DispatchQueue.main.async {
                 self.thoughtCards.append(newThoughtCard)
             }
-
+            
             print("Created ThoughtCard details - ID: \(newThoughtCard.id), Content: \(newThoughtCard.content), Date: \(newThoughtCard.date)")
         } else {
             print("DataManager: ThoughtCardの作成に失敗しました")
@@ -122,12 +122,12 @@ class DataManager: ObservableObject {
         if let entity = coreDataManager.readThoughtCards().first(where: { $0.id == thoughtCard.id }) {
             coreDataManager.deleteThoughtCard(thoughtCard: entity)
         }
-
+        
         // currentWeeklyRecord の thoughts から削除
         if let index = currentWeeklyRecord?.thoughts.firstIndex(where: { $0.id == thoughtCard.id }) {
             currentWeeklyRecord?.thoughts.remove(at: index)
         }
-
+        
         // 必要に応じて thoughtCards 配列からも削除
         if let index = thoughtCards.firstIndex(where: { $0.id == thoughtCard.id }) {
             thoughtCards.remove(at: index)
@@ -195,7 +195,9 @@ class DataManager: ObservableObject {
             nextWeekEmoji: weeklyRecord.nextWeekEmoji,
             isReflectionCompleted: weeklyRecord.isReflectionCompleted
         )
-        print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)") // デバッグログを追加
+        print("DataManager: WeeklyRecord が正常に更新されました。ID: \(weeklyRecord.id)")
+        print("DataManager: updateWeeklyRecord() - reflection: \(weeklyRecord.reflection)") // 振り返り内容
+        print("DataManager: updateWeeklyRecord() - nextWeekGoal: \(weeklyRecord.nextWeekGoal)") // 次週の目標
     }
     
     func deleteWeeklyRecord(weeklyRecord: WeeklyRecord) {
@@ -210,7 +212,7 @@ class DataManager: ObservableObject {
     func createNextWeeklyRecord(previousWeeklyRecord: WeeklyRecord) -> WeeklyRecord? {
         let startDate = getStartOfWeek(for: Date())
         let endDate = Calendar.current.date(byAdding: .day, value: 6, to: startDate)!
-
+        
         guard let newWeeklyRecord = createWeeklyRecord(
             startDate: startDate,
             endDate: endDate,
@@ -223,7 +225,7 @@ class DataManager: ObservableObject {
         print("DataManager: 次の週の WeeklyRecord が正常に作成されました。ID: \(newWeeklyRecord.id)")
         return newWeeklyRecord
     }
-
+    
     
     func loadCurrentWeekRecord() {
         if let weeklyRecordEntity = coreDataManager.fetchCurrentWeekRecord(for: Date()) {
@@ -272,8 +274,8 @@ class DataManager: ObservableObject {
             }
         }
     }
-
-
+    
+    
     
     private func toWeeklyRecord(from entity: WeeklyRecordEntity) -> WeeklyRecord? {
         guard let id = entity.id,
@@ -284,7 +286,7 @@ class DataManager: ObservableObject {
             print("DataManager: WeeklyRecord の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
-
+        
         let reflection = entity.reflection ?? ""
         let nextWeekGoal = entity.nextWeekGoal ?? ""
         let nextWeekEmoji = entity.nextWeekEmoji ?? ""
@@ -292,7 +294,7 @@ class DataManager: ObservableObject {
         let thoughtsSet = entity.thoughts as? Set<ThoughtCardEntity> ?? []
         let thoughtCards = thoughtsSet.compactMap { self.toThoughtCard(from: $0) }
             .sorted(by: { $0.date < $1.date })
-
+        
         return WeeklyRecord(
             id: id,
             startDate: startDate,
@@ -314,7 +316,7 @@ class DataManager: ObservableObject {
             print("DataManager: ThoughtCard の変換に失敗しました: データのアンラップに失敗")
             return nil
         }
-
+        
         return ThoughtCard(
             id: id,
             content: content,

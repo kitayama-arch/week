@@ -29,6 +29,7 @@ struct ReflectionView: View {
                     Button("振り返りを保存") {
                         currentWeeklyRecord.isReflectionCompleted = true
                         dataManager.updateWeeklyRecord(weeklyRecord: currentWeeklyRecord)
+                        dataManager.loadWeeklyRecords()
                         dismiss()
                     }
                 }
