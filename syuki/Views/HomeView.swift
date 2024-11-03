@@ -13,6 +13,14 @@ struct HomeView: View {
     @State private var showArchiveView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
 
+    private var thoughtsBinding: Binding<[ThoughtCard]>? {
+        guard let currentWeeklyRecord = dataManager.currentWeeklyRecord else { return nil }
+        return Binding<[ThoughtCard]>(
+            get: { currentWeeklyRecord.thoughts },
+            set: { dataManager.currentWeeklyRecord?.thoughts = $0 }
+        )
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -51,11 +59,15 @@ struct HomeView: View {
                         // 思考カードのリスト表示
                         ZStack {
                             ScrollView {
-                                ForEach(currentWeeklyRecord.thoughts.indices, id: \.self) { index in
-                                    ThoughtCardView(
-                                        thoughtCard: $dataManager.thoughtCards[index],
-                                        dataManager: dataManager
-                                    )
+                                if let thoughtsBinding = thoughtsBinding {
+                                    ForEach(thoughtsBinding) { $thoughtCard in
+                                        ThoughtCardView(
+                                            thoughtCard: $thoughtCard,
+                                            dataManager: dataManager
+                                        )
+                                    }
+                                } else {
+                                    Text("今週の記録がありません")
                                 }
                             }
                             // 新しい思考カードを追加するボタン
