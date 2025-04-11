@@ -13,6 +13,12 @@ class CoreDataManager {
     // 共有の persistentContainer を追加
     static let sharedPersistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
+        
+        // NSPersistentHistoryTrackingKeyを追加
+        let storeDescription = container.persistentStoreDescriptions.first
+        storeDescription?.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        storeDescription?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        
         container.loadPersistentStores { description, error in
             if let error = error {
                 fatalError("Unable to load persistent stores: \(error)")
