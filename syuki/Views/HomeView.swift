@@ -246,8 +246,8 @@ struct HomeView: View {
                         .ignoresSafeArea(.container, edges: .bottom)
                         if !sceneDelegate.isPremium {
                             Spacer()
-                            AdMobBannerView()
-                                .frame(width: 320, height: 50)
+                            // AdMobBannerView()
+                            //     .frame(width: 320, height: 50)
                         }
                     }
                 } else {
@@ -288,8 +288,8 @@ struct HomeView: View {
                         .shadow(color: .accent.opacity(0.6), radius: 10, x: 0.0, y: 0.0)
                         Spacer()
                         if !sceneDelegate.isPremium {
-                            AdMobBannerView()
-                                .frame(width: 320, height: 50)
+                            // AdMobBannerView()
+                            //     .frame(width: 320, height: 50)
                         }
                     }
                     .padding()
