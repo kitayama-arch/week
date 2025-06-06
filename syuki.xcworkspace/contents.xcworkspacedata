@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:syuki/SwiftData/ThoughtCardEntity.swift">
+   </FileRef>
+   <FileRef
+      location = "group:syuki/SwiftData/WeeklyRecordEntity.swift">
+   </FileRef>
+   <FileRef
       location = "group:syuki.xcodeproj">
    </FileRef>
    <FileRef

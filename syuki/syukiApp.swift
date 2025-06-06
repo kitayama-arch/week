@@ -9,6 +9,10 @@ import SwiftUI
 import FirebaseCore
 import GoogleMobileAds
 import StoreKit
+import SwiftData
+import CoreData
+
+// 自作ファイルをインポート
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -145,14 +149,35 @@ struct syukiApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("isPremium") private var isPremium = false
     
+    // SwiftDataのモデルコンテナを設定
+    let modelContainer: ModelContainer = {
+        do {
+            // 最もシンプルな初期化方法を使用
+            return try ModelContainer(for: ThoughtCardEntity.self, WeeklyRecordEntity.self)
+        } catch {
+            fatalError("モデルコンテナの初期化に失敗しました: \(error)")
+        }
+    }()
+    
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environmentObject(sceneDelegate)  // この行を追加
+                .environmentObject(sceneDelegate)
                 .onAppear {
                     if !hasSeenTutorial {
                         showTutorial = true
                     }
+                    
+                    // CoreDataからSwiftDataへのデータ移行を実行
+                    // 一時的にコメントアウトして、ビルドエラーを解消
+                    /*
+                    Task {
+                        print("SwiftDataへの移行を開始します")
+                        
+                        // 必要に応じて後で移行ロジックを実装
+                        print("SwiftDataへの移行は手動で実行する必要があります")
+                    }
+                    */
                 }
                 .fullScreenCover(isPresented: $showTutorial) {
                     TutorialView()
@@ -169,5 +194,6 @@ struct syukiApp: App {
                     }
                 }
         }
+        .modelContainer(modelContainer)  // SwiftDataのモデルコンテナを設定
     }
 }
