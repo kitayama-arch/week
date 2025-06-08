@@ -1,4 +1,4 @@
-- **Syukiアプリ要件定義書**
+- **weekアプリ要件定義書**
     
     ### appstore
     【こんな方におすすめ】
@@ -32,7 +32,7 @@
     
     ### 概要
     
-    Syukiは、ユーザーがぼーっと思考を書き連ね、週単位で振り返りと目標設定を行うアプリです。記録をアーカイブし、次週の目標を設定することで、日記が続かない人でも自己成長を促進します。
+    weekは、ユーザーがぼーっと思考を書き連ね、週単位で振り返りと目標設定を行うアプリです。記録をアーカイブし、次週の目標を設定することで、日記が続かない人でも自己成長を促進します。
     
     流れる日々を記録する
     
@@ -88,7 +88,7 @@
     
 
 
-    これらの動画傾向から、ターゲットユーザーは短時間で価値のある情報や体験を得たいという欲求を持っていることがわかります。Syukiアプリは、このような短時間で効果的な自己振り返りと成長の機会を提供することで、ユーザーのニーズに応えることができるでしょう。
+    これらの動画傾向から、ターゲットユーザーは短時間で価値のある情報や体験を得たいという欲求を持っていることがわかります。weekアプリは、このような短時間で効果的な自己振り返りと成長の機会を提供することで、ユーザーのニーズに応えることができるでしょう。
     
     ### 使用シーン
     
@@ -168,7 +168,7 @@
         
         ```
         +--------------------------------------------------+
-        | Syuki                                            |
+        | week                                            |
         +--------------------------------------------------+
         | 今週の目標                                       |
         | [今週の目標を入力するカード]                      |
@@ -317,9 +317,9 @@
     
     # スプリント1: 基本構造とホーム画面
     
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -330,9 +330,9 @@
     
     # スプリント2: 思考カード機能の追加
     
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -348,9 +348,9 @@
     
     # スプリント3: Core Data統合と振り返り機能
     
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -367,15 +367,15 @@
     │   ├── Services/
     │   │   └── DataManager.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
     
     # スプリント4: アーカイブ機能とユーティリティの追加
     
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   |── Preview Content/
@@ -396,15 +396,15 @@
     │   │   ├── DateFormatter.swift
     │   │   └── Constants.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
     
     # スプリント5: 設定機能とテストの追加
     
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -426,20 +426,20 @@
     │   │   ├── DateFormatter.swift
     │   │   └── Constants.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
-    ├── SyukiTests/
-    └── SyukiUITests/
+    ├── weekTests/
+    └── weekUITests/
     
     ## スプリントごとのディレクトリ構成
     
     ### スプリント1: 基本構造とホーム画面
     
     ```
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -455,9 +455,9 @@
     ### スプリント2: 思考カード機能の追加
     
     ```
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -480,9 +480,9 @@
     ### スプリント3: 振り返り機能の実装
     
     ```
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -500,8 +500,8 @@
     │   ├── Services/
     │   │   └── DataManager.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
     
     ```
@@ -513,9 +513,9 @@
     ### スプリント4: アーカイブ機能とユーティリティ
     
     ```
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -536,8 +536,8 @@
     │   │   ├── DateFormatter.swift
     │   │   └── Constants.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
     
     ```
@@ -547,9 +547,9 @@
     ### スプリント5: 設定機能とテストの追加
     
     ```
-    Syuki/
-    ├── Syuki/
-    │   ├── SyukiApp.swift
+    week/
+    ├── week/
+    │   ├── weekApp.swift
     │   ├── Info.plist
     │   ├── Assets.xcassets/
     │   ├── Preview Content/
@@ -571,16 +571,16 @@
     │   │   ├── DateFormatter.swift
     │   │   └── Constants.swift
     │   └── CoreData/
-    │       ├── Syuki.xcdatamodeld/
-    │       │   └── Syuki.xcdatamodel
+    │       ├── week.xcdatamodeld/
+    │       │   └── week.xcdatamodel
     │       └── CoreDataManager.swift
-    ├── SyukiTests/      // 追加
-    └── SyukiUITests/    // 追加
+    ├── weekTests/      // 追加
+    └── weekUITests/    // 追加
     
     ```
     
     - `SettingsView` が追加
-    - テスト用のディレクトリ `SyukiTests` と `SyukiUITests` が追加
+    - テスト用のディレクトリ `weekTests` と `weekUITests` が追加
     
     ### スプリント6: 最終調整とリリース準備
     
@@ -589,7 +589,7 @@
     
 - Todo
     
-    # Syukiアプリ 開発TODOリスト
+    # weekアプリ 開発TODOリスト
     
     ## スプリント1: 基本構造とホーム画面 (1-2週間)
     
@@ -937,4 +937,4 @@
    - ASMR（音響）を使った癒し効果のある動画
    - 短い瞑想やマインドフルネス練習の動画
 
-これらの動画傾向から、ターゲットユーザーは短時間で価値のある情報や体験を得たいという欲求を持っていることがわかります。Syukiアプリは、このような短時間で効果的な自己振り返りと成長の機会を提供することで、ユーザーのニーズに応えることができるでしょう。
+これらの動画傾向から、ターゲットユーザーは短時間で価値のある情報や体験を得たいという欲求を持っていることがわかります。weekアプリは、このような短時間で効果的な自己振り返りと成長の機会を提供することで、ユーザーのニーズに応えることができるでしょう。
