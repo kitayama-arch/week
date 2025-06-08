@@ -56,6 +56,12 @@ playground.xcworkspace
 # Firebase
 GoogleService-Info.plist
 
+# Documentation and design files
+docs/
+
+# StoreKit configuration files
+*.storekit
+
 # Carthage
 Carthage/Build/
 
@@ -71,3 +77,5 @@ fastlane/test_output
 
 # Code Injection
 iOSInjectionProject/
+
+CLAUDE.md
