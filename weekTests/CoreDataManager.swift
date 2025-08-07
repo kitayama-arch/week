@@ -1,12 +1,12 @@
 //
 //  CoreDataManager.swift
-//  syuki
+//  week
 //
 //  Created by Ta-MacbookAir on 2024/08/07.
 //
 
 import CoreData
-@testable import syuki // アプリのターゲット名に置き換える
+@testable import week // アプリのターゲット名に置き換える
 
 class CoreDataManager {
     private let persistentContainer: NSPersistentContainer
