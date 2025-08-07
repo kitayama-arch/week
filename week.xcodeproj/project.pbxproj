@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BFC667D44EC045C8E056A82 /* Pods_syuki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F82500D618D5D74BCD844911 /* Pods_syuki.framework */; };
+		3C518B7674550B17AB9142ED /* Pods_week.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F98B8256F278CD6AF0ADDD /* Pods_week.framework */; };
 		5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */; };
 		5A24631D2CAB16E500B02F0A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24631C2CAB16E500B02F0A /* SettingView.swift */; };
 		5A24631F2CAB212F00B02F0A /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24631E2CAB212F00B02F0A /* BannerView.swift */; };
@@ -30,7 +30,7 @@
 		5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A71975C2C66DC77005BDAC2 /* DataManager.swift */; };
 		5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */; };
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
-		5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* SyukiTests.swift */; };
+		5AA593DE2C871A940005985E /* weekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* weekTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 		5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */; };
@@ -41,7 +41,7 @@
 		5AE391D12CB9433D00C87DF7 /* subscriptions.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 5AE391D02CB9433D00C87DF7 /* subscriptions.storekit */; };
 		5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */; };
 		5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DC02CAB614C00181F51 /* Color.xcassets */; };
-		80654727A7C84872FDB8D884 /* Pods_SyukiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */; };
+		B8859F9ED05B62534C0BB0F2 /* Pods_weekTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F7593BBBC24728268D094D /* Pods_weekTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +57,8 @@
 /* Begin PBXFileReference section */
 		06192DC1F459C975FC6878EA /* Pods-SyukiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyukiTests.release.xcconfig"; path = "Target Support Files/Pods-SyukiTests/Pods-SyukiTests.release.xcconfig"; sourceTree = "<group>"; };
 		0F60D18E1FD0A24227394D40 /* Pods-syuki.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.release.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.release.xcconfig"; sourceTree = "<group>"; };
+		52F98B8256F278CD6AF0ADDD /* Pods_week.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_week.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58F7593BBBC24728268D094D /* Pods_weekTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_weekTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A2463192CAB0BB400B02F0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		5A24631C2CAB16E500B02F0A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		5A24631E2CAB212F00B02F0A /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 		5A3539372C33D03700C3AB8D /* ThoughtCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCard.swift; sourceTree = "<group>"; };
 		5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCardView.swift; sourceTree = "<group>"; };
 		5A4B02E02CAC10DC00497E79 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
-		5A4ED3712C3275BA003E2E0C /* syuki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = syuki.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A4ED3712C3275BA003E2E0C /* week.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4ED3742C3275BA003E2E0C /* syukiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = syukiApp.swift; sourceTree = "<group>"; };
 		5A4ED3762C3275BA003E2E0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5A4ED3782C3275BB003E2E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,8 +82,8 @@
 		5A71975C2C66DC77005BDAC2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		5AA593DB2C871A940005985E /* SyukiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyukiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AA593DD2C871A940005985E /* SyukiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyukiTests.swift; sourceTree = "<group>"; };
+		5AA593DB2C871A940005985E /* weekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = weekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AA593DD2C871A940005985E /* weekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -93,9 +95,11 @@
 		5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5AFA1DC02CAB614C00181F51 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
-		7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SyukiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E01471588EA58CD23D448AE /* Pods-weekTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weekTests.release.xcconfig"; path = "Target Support Files/Pods-weekTests/Pods-weekTests.release.xcconfig"; sourceTree = "<group>"; };
+		B04899E32BFAC4EA5F6ED580 /* Pods-weekTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weekTests.debug.xcconfig"; path = "Target Support Files/Pods-weekTests/Pods-weekTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC1D53B22A3444DF0A29A96B /* Pods-week.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-week.debug.xcconfig"; path = "Target Support Files/Pods-week/Pods-week.debug.xcconfig"; sourceTree = "<group>"; };
 		C28D2C9D27A6E4A32BD94ACA /* Pods-SyukiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SyukiTests.debug.xcconfig"; path = "Target Support Files/Pods-SyukiTests/Pods-SyukiTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F82500D618D5D74BCD844911 /* Pods_syuki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_syuki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E95ADD019F06B792FB6FB95E /* Pods-week.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-week.release.xcconfig"; path = "Target Support Files/Pods-week/Pods-week.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +109,7 @@
 			files = (
 				5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */,
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
-				2BFC667D44EC045C8E056A82 /* Pods_syuki.framework in Frameworks */,
+				3C518B7674550B17AB9142ED /* Pods_week.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80654727A7C84872FDB8D884 /* Pods_SyukiTests.framework in Frameworks */,
+				B8859F9ED05B62534C0BB0F2 /* Pods_weekTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +131,10 @@
 				06192DC1F459C975FC6878EA /* Pods-SyukiTests.release.xcconfig */,
 				6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */,
 				0F60D18E1FD0A24227394D40 /* Pods-syuki.release.xcconfig */,
+				BC1D53B22A3444DF0A29A96B /* Pods-week.debug.xcconfig */,
+				E95ADD019F06B792FB6FB95E /* Pods-week.release.xcconfig */,
+				B04899E32BFAC4EA5F6ED580 /* Pods-weekTests.debug.xcconfig */,
+				6E01471588EA58CD23D448AE /* Pods-weekTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -162,8 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */,
-				5A4ED3732C3275BA003E2E0C /* syuki */,
-				5AA593DC2C871A940005985E /* SyukiTests */,
+				5A4ED3732C3275BA003E2E0C /* week */,
+				5AA593DC2C871A940005985E /* weekTests */,
 				5A4ED3722C3275BA003E2E0C /* Products */,
 				100BBDF69853109B3B852254 /* Pods */,
 				9A543FC3A3433BCDC5BBD582 /* Frameworks */,
@@ -173,13 +181,13 @@
 		5A4ED3722C3275BA003E2E0C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5A4ED3712C3275BA003E2E0C /* syuki.app */,
-				5AA593DB2C871A940005985E /* SyukiTests.xctest */,
+				5A4ED3712C3275BA003E2E0C /* week.app */,
+				5AA593DB2C871A940005985E /* weekTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5A4ED3732C3275BA003E2E0C /* syuki */ = {
+		5A4ED3732C3275BA003E2E0C /* week */ = {
 			isa = PBXGroup;
 			children = (
 				5A2463202CAB24C400B02F0A /* PrivacyInfo.xcprivacy */,
@@ -194,7 +202,7 @@
 				5A2BEDF82C32B43400D2307F /* Models */,
 				5AAB8A4B2C635E64002ECBC5 /* Coredata */,
 			);
-			path = syuki;
+			path = week;
 			sourceTree = "<group>";
 		};
 		5A4ED37A2C3275BB003E2E0C /* Preview Content */ = {
@@ -216,12 +224,12 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		5AA593DC2C871A940005985E /* SyukiTests */ = {
+		5AA593DC2C871A940005985E /* weekTests */ = {
 			isa = PBXGroup;
 			children = (
-				5AA593DD2C871A940005985E /* SyukiTests.swift */,
+				5AA593DD2C871A940005985E /* weekTests.swift */,
 			);
-			path = SyukiTests;
+			path = weekTests;
 			sourceTree = "<group>";
 		};
 		5AAB8A4B2C635E64002ECBC5 /* Coredata */ = {
@@ -241,8 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */,
-				7D6EA8D6BC82FFD894A6A627 /* Pods_SyukiTests.framework */,
-				F82500D618D5D74BCD844911 /* Pods_syuki.framework */,
+				52F98B8256F278CD6AF0ADDD /* Pods_week.framework */,
+				58F7593BBBC24728268D094D /* Pods_weekTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,9 +258,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5A4ED3702C3275BA003E2E0C /* syuki */ = {
+		5A4ED3702C3275BA003E2E0C /* week */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A4ED37F2C3275BB003E2E0C /* Build configuration list for PBXNativeTarget "syuki" */;
+			buildConfigurationList = 5A4ED37F2C3275BB003E2E0C /* Build configuration list for PBXNativeTarget "week" */;
 			buildPhases = (
 				D546F58021568A7EB71A0447 /* [CP] Check Pods Manifest.lock */,
 				5A4ED36D2C3275BA003E2E0C /* Sources */,
@@ -265,17 +273,17 @@
 			);
 			dependencies = (
 			);
-			name = syuki;
+			name = week;
 			packageProductDependencies = (
 				5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */,
 			);
 			productName = syuki;
-			productReference = 5A4ED3712C3275BA003E2E0C /* syuki.app */;
+			productReference = 5A4ED3712C3275BA003E2E0C /* week.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5AA593DA2C871A940005985E /* SyukiTests */ = {
+		5AA593DA2C871A940005985E /* weekTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "SyukiTests" */;
+			buildConfigurationList = 5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "weekTests" */;
 			buildPhases = (
 				E8E654C102E5C062075B39A1 /* [CP] Check Pods Manifest.lock */,
 				5AA593D72C871A940005985E /* Sources */,
@@ -287,9 +295,9 @@
 			dependencies = (
 				5AA593E02C871A940005985E /* PBXTargetDependency */,
 			);
-			name = SyukiTests;
+			name = weekTests;
 			productName = SyukiTests;
-			productReference = 5AA593DB2C871A940005985E /* SyukiTests.xctest */;
+			productReference = 5AA593DB2C871A940005985E /* weekTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -328,8 +336,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5A4ED3702C3275BA003E2E0C /* syuki */,
-				5AA593DA2C871A940005985E /* SyukiTests */,
+				5A4ED3702C3275BA003E2E0C /* week */,
+				5AA593DA2C871A940005985E /* weekTests */,
 			);
 		};
 /* End PBXProject section */
@@ -366,15 +374,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C615A30A614002E6C4D45763 /* [CP] Copy Pods Resources */ = {
@@ -383,15 +391,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-syuki/Pods-syuki-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D546F58021568A7EB71A0447 /* [CP] Check Pods Manifest.lock */ = {
@@ -409,7 +417,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-syuki-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-week-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -431,7 +439,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SyukiTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-weekTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -474,7 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AA593DE2C871A940005985E /* SyukiTests.swift in Sources */,
+				5AA593DE2C871A940005985E /* weekTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +491,7 @@
 /* Begin PBXTargetDependency section */
 		5AA593E02C871A940005985E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5A4ED3702C3275BA003E2E0C /* syuki */;
+			target = 5A4ED3702C3275BA003E2E0C /* week */;
 			targetProxy = 5AA593DF2C871A940005985E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -616,19 +624,19 @@
 		};
 		5A4ED3802C3275BB003E2E0C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */;
+			baseConfigurationReference = BC1D53B22A3444DF0A29A96B /* Pods-week.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"week/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = syuki/Info.plist;
+				INFOPLIST_FILE = week/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = week;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -655,19 +663,19 @@
 		};
 		5A4ED3812C3275BB003E2E0C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F60D18E1FD0A24227394D40 /* Pods-syuki.release.xcconfig */;
+			baseConfigurationReference = E95ADD019F06B792FB6FB95E /* Pods-week.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"syuki/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"week/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = syuki/Info.plist;
+				INFOPLIST_FILE = week/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = week;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -695,7 +703,7 @@
 		};
 		5AA593E12C871A940005985E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C28D2C9D27A6E4A32BD94ACA /* Pods-SyukiTests.debug.xcconfig */;
+			baseConfigurationReference = B04899E32BFAC4EA5F6ED580 /* Pods-weekTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -704,18 +712,18 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.SyukiTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.weekTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/syuki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/syuki";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/week.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/week";
 			};
 			name = Debug;
 		};
 		5AA593E22C871A940005985E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06192DC1F459C975FC6878EA /* Pods-SyukiTests.release.xcconfig */;
+			baseConfigurationReference = 6E01471588EA58CD23D448AE /* Pods-weekTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -724,12 +732,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.SyukiTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmail.iura.smh.weekTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/syuki.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/syuki";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/week.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/week";
 			};
 			name = Release;
 		};
@@ -745,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A4ED37F2C3275BB003E2E0C /* Build configuration list for PBXNativeTarget "syuki" */ = {
+		5A4ED37F2C3275BB003E2E0C /* Build configuration list for PBXNativeTarget "week" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5A4ED3802C3275BB003E2E0C /* Debug */,
@@ -754,7 +762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "SyukiTests" */ = {
+		5AA593E32C871A940005985E /* Build configuration list for PBXNativeTarget "weekTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AA593E12C871A940005985E /* Debug */,
