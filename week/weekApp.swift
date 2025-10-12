@@ -14,9 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       #if RELEASE
+       #if DEBUG
        FirebaseApp.configure()
        #endif
+      print("FirebaseApp count: \(FirebaseApp.allApps?.count ?? 0)")
       GADMobileAds.sharedInstance().start(completionHandler: nil)
       return true
   }

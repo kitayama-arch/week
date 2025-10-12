@@ -20,7 +20,7 @@
 		5A3539382C33D03700C3AB8D /* ThoughtCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3539372C33D03700C3AB8D /* ThoughtCard.swift */; };
 		5A35393C2C33D09D00C3AB8D /* ThoughtCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */; };
 		5A4B02E12CAC10DC00497E79 /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B02E02CAC10DC00497E79 /* TutorialView.swift */; };
-		5A4ED3752C3275BA003E2E0C /* syukiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3742C3275BA003E2E0C /* syukiApp.swift */; };
+		5A4ED3752C3275BA003E2E0C /* weekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3742C3275BA003E2E0C /* weekApp.swift */; };
 		5A4ED3772C3275BA003E2E0C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4ED3762C3275BA003E2E0C /* HomeView.swift */; };
 		5A4ED3792C3275BB003E2E0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED3782C3275BB003E2E0C /* Assets.xcassets */; };
 		5A4ED37C2C3275BB003E2E0C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */; };
@@ -72,7 +72,7 @@
 		5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCardView.swift; sourceTree = "<group>"; };
 		5A4B02E02CAC10DC00497E79 /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		5A4ED3712C3275BA003E2E0C /* week.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = week.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A4ED3742C3275BA003E2E0C /* syukiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = syukiApp.swift; sourceTree = "<group>"; };
+		5A4ED3742C3275BA003E2E0C /* weekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekApp.swift; sourceTree = "<group>"; };
 		5A4ED3762C3275BA003E2E0C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5A4ED3782C3275BB003E2E0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A4ED37B2C3275BB003E2E0C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 				5A2463202CAB24C400B02F0A /* PrivacyInfo.xcprivacy */,
 				5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */,
 				5A2463192CAB0BB400B02F0A /* Info.plist */,
-				5A4ED3742C3275BA003E2E0C /* syukiApp.swift */,
+				5A4ED3742C3275BA003E2E0C /* weekApp.swift */,
 				5A4ED3782C3275BB003E2E0C /* Assets.xcassets */,
 				5AFA1DC02CAB614C00181F51 /* Color.xcassets */,
 				5A4ED37A2C3275BB003E2E0C /* Preview Content */,
@@ -376,9 +376,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -393,9 +397,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -472,7 +480,7 @@
 				5A3539342C33CA0400C3AB8D /* ArchiveView.swift in Sources */,
 				5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */,
 				5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */,
-				5A4ED3752C3275BA003E2E0C /* syukiApp.swift in Sources */,
+				5A4ED3752C3275BA003E2E0C /* weekApp.swift in Sources */,
 				5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */,
 				5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */,
 			);

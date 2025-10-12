@@ -55,6 +55,7 @@ playground.xcworkspace
 
 # Firebase
 GoogleService-Info.plist
+GoogleService-Info_old.plist
 
 # Carthage
 Carthage/Build/
