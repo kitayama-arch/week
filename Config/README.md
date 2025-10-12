@@ -1,10 +1,32 @@
-# Config Secrets
+# Config - Firebase設定ファイル
 
-Place the real `GoogleService-Info.plist` obtained from Firebase in this directory as `Config/GoogleService-Info.plist`.
+このディレクトリには、Firebaseから取得した実際の `GoogleService-Info.plist` を配置します。
 
-For local development:
-1. Download the plist from the Firebase console for the `com.gmail.iura.smh.week` app.
-2. Save it as `Config/GoogleService-Info.plist` (this path is ignored by git).
-3. Xcode will copy it into the app bundle via the build phase script (`scripts/copy-google-service-info.sh`).
+## ローカル開発の手順
 
-Do not commit the actual plist file. Instead, update `Config/GoogleService-Info.plist.example` if the structure changes so teammates know which keys are required.
+1. **Firebase Consoleからダウンロード**
+   - https://console.firebase.google.com/
+   - プロジェクト: `syuki-fa3ab`
+   - アプリ: `com.gmail.iura.smh.week`
+   - 「GoogleService-Info.plist」をダウンロード
+
+2. **ファイルを配置**
+   - ダウンロードしたファイルを `Config/GoogleService-Info.plist` として保存
+   - このパスは `.gitignore` で除外されているため、Git追跡されません
+
+3. **ビルド時の処理**
+   - Xcodeのビルドフェーズで `scripts/copy-google-service-info.sh` が自動実行されます
+   - このスクリプトが `Config/GoogleService-Info.plist` をアプリバンドルにコピーします
+
+## 注意事項
+
+⚠️ **実際のplistファイルをコミットしないでください**
+
+- APIキーなどの秘密情報が含まれています
+- 必要に応じて `Config/GoogleService-Info.plist.example` を更新し、必要なキーの構造を共有してください
+
+## トラブルシューティング
+
+### ビルドエラー: "Missing Config/GoogleService-Info.plist"
+
+上記の手順1-2を実行して、ファイルを配置してください。
