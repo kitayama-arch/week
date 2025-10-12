@@ -33,7 +33,6 @@
 		5AA593DE2C871A940005985E /* weekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* weekTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
-		5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */; };
 		5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */; };
 		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
 		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
@@ -86,7 +85,6 @@
 		5AA593DD2C871A940005985E /* weekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
 		5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseView.swift; sourceTree = "<group>"; };
 		5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -191,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				5A2463202CAB24C400B02F0A /* PrivacyInfo.xcprivacy */,
-				5ABDAB392CABA12200392A44 /* GoogleService-Info.plist */,
 				5A2463192CAB0BB400B02F0A /* Info.plist */,
 				5A4ED3742C3275BA003E2E0C /* weekApp.swift */,
 				5A4ED3782C3275BB003E2E0C /* Assets.xcassets */,
@@ -268,6 +265,7 @@
 				5A4ED36F2C3275BA003E2E0C /* Resources */,
 				C615A30A614002E6C4D45763 /* [CP] Copy Pods Resources */,
 				03B328867FC8E16737FD9472 /* [CP] Embed Pods Frameworks */,
+				5A9095E52E9C223200B18DC2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -388,6 +386,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-week/Pods-week-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		5A9095E52E9C223200B18DC2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Config/GoogleService-Info.plist",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME).app/GoogleService-Info.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nbash \"${SRCROOT}/scripts/copy-google-service-info.sh\"\n";
 		};
 		C615A30A614002E6C4D45763 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
