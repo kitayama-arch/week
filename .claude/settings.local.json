@@ -3,7 +3,9 @@
     "allow": [
       "Bash(find:*)",
       "Bash(git rm:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git merge:*)",
+      "Bash(pod install)"
     ],
     "deny": []
   }

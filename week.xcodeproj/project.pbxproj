@@ -30,7 +30,6 @@
 		5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A71975C2C66DC77005BDAC2 /* DataManager.swift */; };
 		5A9ECF082CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */; };
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
-		5AA593DE2C871A940005985E /* weekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA593DD2C871A940005985E /* weekTests.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
 		5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */; };
@@ -82,7 +81,6 @@
 		5A9ECF042CA7265800E28E7F /* WeeklyRecordEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeeklyRecordEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		5AA593DB2C871A940005985E /* weekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = weekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5AA593DD2C871A940005985E /* weekTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weekTests.swift; sourceTree = "<group>"; };
 		5AAB8A492C635DE7002ECBC5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphView.swift; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 			children = (
 				5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */,
 				5A4ED3732C3275BA003E2E0C /* week */,
-				5AA593DC2C871A940005985E /* weekTests */,
 				5A4ED3722C3275BA003E2E0C /* Products */,
 				100BBDF69853109B3B852254 /* Pods */,
 				9A543FC3A3433BCDC5BBD582 /* Frameworks */,
@@ -219,14 +216,6 @@
 				5AE391D02CB9433D00C87DF7 /* subscriptions.storekit */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		5AA593DC2C871A940005985E /* weekTests */ = {
-			isa = PBXGroup;
-			children = (
-				5AA593DD2C871A940005985E /* weekTests.swift */,
-			);
-			path = weekTests;
 			sourceTree = "<group>";
 		};
 		5AAB8A4B2C635E64002ECBC5 /* Coredata */ = {
@@ -351,7 +340,6 @@
 				5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */,
 				5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */,
 				5A2463212CAB24C400B02F0A /* PrivacyInfo.xcprivacy in Resources */,
-				5ABDAB3A2CABA12200392A44 /* GoogleService-Info.plist in Resources */,
 				5AE391CF2CB7C3B200C87DF7 /* week - 1週間を記録する日記.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,7 +495,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AA593DE2C871A940005985E /* weekTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
