@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:week/SwiftData/ThoughtCardEntity.swift">
-   </FileRef>
-   <FileRef
-      location = "group:week/SwiftData/WeeklyRecordEntity.swift">
-   </FileRef>
-   <FileRef
       location = "group:week.xcodeproj">
    </FileRef>
    <FileRef

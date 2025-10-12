@@ -12,8 +12,8 @@ struct PurchaseView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var sceneDelegate: SceneDelegate
     let productIdList = [
-        "com.gmail.iura.smh.syuki.monthly",
-        "com.gmail.iura.smh.syuki.yearly",
+        "com.gmail.iura.smh.week.monthly",
+        "com.gmail.iura.smh.week.yearly",
     ]
     @State private var products: [Product] = []
     @State private var isLoading = false

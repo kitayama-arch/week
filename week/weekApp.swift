@@ -9,18 +9,15 @@ import SwiftUI
 import FirebaseCore
 import GoogleMobileAds
 import StoreKit
-import SwiftData
-import CoreData
-
-// 自作ファイルをインポート
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-       #if RELEASE
+       #if DEBUG
        FirebaseApp.configure()
        #endif
+      print("FirebaseApp count: \(FirebaseApp.allApps?.count ?? 0)")
       GADMobileAds.sharedInstance().start(completionHandler: nil)
       return true
   }
@@ -86,9 +83,9 @@ class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     
     private func getPlanName(for productId: String) -> String {
         switch productId {
-        case "com.gmail.iura.smh.syuki.monthly":
+        case "com.gmail.iura.smh.week.monthly":
             return NSLocalizedString("月額プラン", comment: "Monthly plan")
-        case "com.gmail.iura.smh.syuki.yearly":
+        case "com.gmail.iura.smh.week.yearly":
             return NSLocalizedString("年額プラン", comment: "Yearly plan")
         default:
             return NSLocalizedString("不明なプラン", comment: "Unknown plan")
@@ -149,35 +146,14 @@ struct weekApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @AppStorage("isPremium") private var isPremium = false
     
-    // SwiftDataのモデルコンテナを設定
-    let modelContainer: ModelContainer = {
-        do {
-            // 最もシンプルな初期化方法を使用
-            return try ModelContainer(for: ThoughtCardEntity.self, WeeklyRecordEntity.self)
-        } catch {
-            fatalError("モデルコンテナの初期化に失敗しました: \(error)")
-        }
-    }()
-    
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environmentObject(sceneDelegate)
+                .environmentObject(sceneDelegate)  // この行を追加
                 .onAppear {
                     if !hasSeenTutorial {
                         showTutorial = true
                     }
-                    
-                    // CoreDataからSwiftDataへのデータ移行を実行
-                    // 一時的にコメントアウトして、ビルドエラーを解消
-                    /*
-                    Task {
-                        print("SwiftDataへの移行を開始します")
-                        
-                        // 必要に応じて後で移行ロジックを実装
-                        print("SwiftDataへの移行は手動で実行する必要があります")
-                    }
-                    */
                 }
                 .fullScreenCover(isPresented: $showTutorial) {
                     TutorialView()
@@ -194,6 +170,5 @@ struct weekApp: App {
                     }
                 }
         }
-        .modelContainer(modelContainer)  // SwiftDataのモデルコンテナを設定
     }
 }

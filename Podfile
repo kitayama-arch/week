@@ -9,7 +9,7 @@ target 'week' do
   pod 'Google-Mobile-Ads-SDK'
   pod 'FirebaseAnalytics'
 
-  target 'WeekTests' do
+  target 'weekTests' do
     inherit! :search_paths
     # Pods for testing
   end
