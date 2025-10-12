@@ -59,6 +59,12 @@ GoogleService-Info_old.plist
 Config/GoogleService-Info.plist
 Config/GoogleService-Info.*.plist
 
+# Documentation and design files
+docs/
+
+# StoreKit configuration files
+*.storekit
+
 # Carthage
 Carthage/Build/
 
@@ -77,3 +83,6 @@ iOSInjectionProject/
 
 CLAUDE.md
 docs/
+.claude/
+.windsurfrules
+.cursorrules

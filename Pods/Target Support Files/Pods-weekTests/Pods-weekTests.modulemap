@@ -1,6 +1,0 @@
-framework module Pods_weekTests {
-  umbrella header "Pods-weekTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
