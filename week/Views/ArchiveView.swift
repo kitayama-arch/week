@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 // 検索一致種別
 enum SearchMatchKind: String {
@@ -32,6 +33,7 @@ struct SearchMatchItem: Identifiable {
 
 struct ArchiveView: View {
     @ObservedObject private var dataManager = DataManager.shared
+    let resetToken: Int
     @State private var selectedWeeklyRecord: WeeklyRecord? = nil
     @State private var searchText = ""
     
@@ -91,47 +93,80 @@ struct ArchiveView: View {
             Color.background
                 .ignoresSafeArea()
             
-            ScrollView {
-                VStack(spacing: 16) {
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(spacing: 16) {
+                        Color.clear
+                            .frame(height: 0)
+                            .id("archive-top")
+
                     HStack(spacing: 8) {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(.secondary)
                         TextField("記録・目標・振り返りを検索", text: $searchText)
                             .textFieldStyle(.plain)
                             .autocorrectionDisabled()
+                        if !searchText.isEmpty {
+                            Button {
+                                searchText = ""
+                            } label: {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 11, weight: .semibold))
+                                    .foregroundStyle(.secondary)
+                                    .frame(width: 24, height: 24)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                     .padding(12)
                     .background(Color.card)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-                    
-                    if isSearching {
-                        SearchResultsView(
-                            results: searchResults,
-                            searchQuery: searchText.trimmingCharacters(in: .whitespaces),
-                            formatDate: formatDate,
-                            onSelect: { selectedWeeklyRecord = $0 }
-                        )
-                    } else {
-                        ContributionGraphView()
-                            .padding(.horizontal)
+                        .cornerRadius(10)
+                        .padding(.horizontal)
                         
-                        LazyVStack(spacing: 8) {
-                            ForEach(sortedRecords) { weeklyRecord in
-                                WeeklyRecordCardView(
-                                    weeklyRecord: weeklyRecord,
-                                    formatDate: formatDate
-                                )
-                                .contentShape(Rectangle())
-                                .onTapGesture {
-                                    selectedWeeklyRecord = weeklyRecord
-                                }
+                        if isSearching {
+                            SearchResultsView(
+                                results: searchResults,
+                                searchQuery: searchText.trimmingCharacters(in: .whitespaces),
+                                formatDate: formatDate,
+                                onSelect: { selectedWeeklyRecord = $0 }
+                            )
+                        } else {
+                            ContributionGraphView()
                                 .padding(.horizontal)
+                            
+                            LazyVStack(spacing: 8) {
+                                ForEach(sortedRecords) { weeklyRecord in
+                                    WeeklyRecordCardView(
+                                        weeklyRecord: weeklyRecord,
+                                        formatDate: formatDate
+                                    )
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        selectedWeeklyRecord = weeklyRecord
+                                    }
+                                    .padding(.horizontal)
+                                }
                             }
                         }
                     }
+                    .padding(.vertical)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
-                .padding(.vertical)
+                .onChange(of: resetToken) { _, _ in
+                    searchText = ""
+                    selectedWeeklyRecord = nil
+                    withAnimation {
+                        proxy.scrollTo("archive-top", anchor: .top)
+                    }
+                }
+                .onChange(of: isSearching) { _, isSearching in
+                    guard isSearching else { return }
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            proxy.scrollTo("archive-top", anchor: .top)
+                        }
+                    }
+                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -170,11 +205,14 @@ struct SearchResultsView: View {
     
     var body: some View {
         if results.isEmpty {
-            Text("検索結果がありません")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 40)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("検索結果がありません")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 40)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
         } else {
             LazyVStack(alignment: .leading, spacing: 20) {
                 ForEach(Array(groupedByKind.enumerated()), id: \.offset) { _, group in
@@ -205,6 +243,7 @@ struct SearchResultsView: View {
 
 // 検索結果1行（週の日付 + 該当抜粋、一致部分は黄色ハイライト）
 struct SearchResultRowView: View {
+    @Environment(\.colorScheme) private var colorScheme
     let item: SearchMatchItem
     let searchQuery: String
     let formatDate: (Date) -> String
@@ -216,7 +255,6 @@ struct SearchResultRowView: View {
                 .foregroundStyle(.secondary)
             highlightedExcerpt(item.excerpt, query: searchQuery)
                 .font(.subheadline)
-                .foregroundColor(.primary)
                 .lineLimit(3)
         }
         .padding(12)
@@ -237,14 +275,20 @@ struct SearchResultRowView: View {
                 return Text(text)
             } else {
                 var attributed = AttributedString(text)
-                attributed.foregroundColor = .primary
-                let highlightColor = Color(red: 212 / 255, green: 1.0, blue: 0).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85)
+                attributed.foregroundColor = UIColor.label
+                let highlightColor = UIColor(
+                    red: colorScheme == .dark ? 188 / 255 : 212 / 255,
+                    green: colorScheme == .dark ? 225 / 255 : 1.0,
+                    blue: 0,
+                    alpha: colorScheme == .dark ? 0.72 : 0.85
+                )
                 var currentIndex = attributed.startIndex
 
                 for segment in segments {
                     let segmentEnd = attributed.index(currentIndex, offsetByCharacters: segment.text.count)
                     if segment.isHighlight {
                         attributed[currentIndex..<segmentEnd].backgroundColor = highlightColor
+                        attributed[currentIndex..<segmentEnd].foregroundColor = UIColor.label
                     }
                     currentIndex = segmentEnd
                 }
@@ -402,5 +446,5 @@ struct WeeklyRecordDetailView: View {
 }
 
 #Preview {
-    ArchiveView()
+    ArchiveView(resetToken: 0)
 }
