@@ -107,6 +107,12 @@
             "state" : "translated",
             "value" : "Tap to Unlock"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タップしてアンロック"
+          }
         }
       }
     },
@@ -355,6 +361,17 @@
         }
       }
     },
+    "不明" : {
+      "comment" : "Version unknown fallback",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown"
+          }
+        }
+      }
+    },
     "不明なプラン" : {
       "comment" : "Unknown plan",
       "localizations" : {
@@ -509,6 +526,16 @@
         }
       }
     },
+    "振り返りで一致" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matched in reflection"
+          }
+        }
+      }
+    },
     "振り返りは日曜日のみ可能です" : {
       "localizations" : {
         "en" : {
@@ -577,6 +604,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter your goal for next week…"
+          }
+        }
+      }
+    },
+    "検索結果がありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No search results"
           }
         }
       }
@@ -652,6 +689,16 @@
         }
       }
     },
+    "目標で一致" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matched in goals"
+          }
+        }
+      }
+    },
     "確認" : {
       "localizations" : {
         "en" : {
@@ -672,12 +719,32 @@
         }
       }
     },
+    "記録・目標・振り返りを検索" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search records, goals, reflections"
+          }
+        }
+      }
+    },
     "記録する" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Record"
+          }
+        }
+      }
+    },
+    "記録で一致" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matched in records"
           }
         }
       }

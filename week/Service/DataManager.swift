@@ -20,6 +20,14 @@ class DataManager: ObservableObject {
     private init() {
         loadThoughtCards()
         loadWeeklyRecords()
+        #if targetEnvironment(simulator)
+        let hasSeeded = UserDefaults.standard.bool(forKey: "hasSeededDummyData")
+        if !hasSeeded {
+            seedDummyDataForSimulator()
+            UserDefaults.standard.set(true, forKey: "hasSeededDummyData")
+            loadWeeklyRecords()
+        }
+        #endif
         print("Initial thoughtCards count: \(thoughtCards.count)")
         print("Initial CoreData entities count: \(coreDataManager.readThoughtCards().count)")
         loadCurrentWeekRecord()
@@ -387,4 +395,50 @@ class DataManager: ObservableObject {
         }
         return nil
     }
+    
+    #if targetEnvironment(simulator)
+    /// シミュレータ確認用のダミーデータを投入（週間記録が空の場合のみ）
+    private func seedDummyDataForSimulator() {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        let now = Date()
+        let currentWeekStart = getStartOfWeek(for: now)
+        
+        let dummyWeeks: [(goal: String, emoji: String, thoughts: [String], reflection: String, nextWeekGoal: String)] = [
+            ("運動を続ける", "💪", ["ジョギングした", "プロテイン飲んだ", "少し疲れたけど達成感"], "体を動かす習慣がついてきた。", "読書を毎日30分"),
+            ("早起きする", "🌅", ["6時に起きられた", "朝食をちゃんと食べた", "夜更かしに注意"], "初日は失敗したが、後半は習慣化できた。", "瞑想を試す"),
+            ("勉強を習慣化", "📚", ["英語の勉強", "プログラミング学習", "資格の勉強", "復習が大切だと気づいた"], "", "")
+        ]
+        
+        for (i, dummy) in dummyWeeks.enumerated() {
+            let weekStart = calendar.date(byAdding: .day, value: -7 * (i + 1), to: currentWeekStart)!
+            let weekEnd = calendar.date(byAdding: .day, value: 6, to: weekStart)!
+            
+            guard let weeklyEntity = coreDataManager.createWeeklyRecord(
+                startDate: weekStart,
+                endDate: weekEnd,
+                goal: dummy.goal,
+                emoji: dummy.emoji
+            ) else { continue }
+            
+            for (dayOffset, thoughtContent) in dummy.thoughts.enumerated() {
+                let thoughtDate = calendar.date(byAdding: .day, value: dayOffset, to: weekStart)!
+                _ = coreDataManager.createThoughtCard(content: thoughtContent, date: thoughtDate, weeklyRecord: weeklyEntity)
+            }
+            
+            if !dummy.reflection.isEmpty {
+                coreDataManager.updateWeeklyRecord(
+                    weeklyRecord: weeklyEntity,
+                    reflection: dummy.reflection,
+                    nextWeekGoal: dummy.nextWeekGoal,
+                    goal: dummy.goal,
+                    emoji: dummy.emoji,
+                    nextWeekEmoji: dummy.emoji,
+                    isReflectionCompleted: true
+                )
+            }
+        }
+        print("DataManager: シミュレータ用ダミーデータを投入しました")
+    }
+    #endif
 }
