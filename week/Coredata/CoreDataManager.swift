@@ -156,7 +156,7 @@ class CoreDataManager {
             return []
         }
     }
-    
+
     func updateWeeklyRecord(
         weeklyRecord: WeeklyRecordEntity,
         reflection: String,

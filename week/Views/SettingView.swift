@@ -60,7 +60,7 @@ struct SettingView: View {
                             HStack {
                                 Text("バージョン")
                                 Spacer()
-                                Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "不明")
+                                Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? String(localized: "不明"))
                                     .foregroundColor(.gray)
                             }
                             .padding(.vertical, 8)

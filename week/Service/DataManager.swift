@@ -20,6 +20,14 @@ class DataManager: ObservableObject {
     private init() {
         loadThoughtCards()
         loadWeeklyRecords()
+        #if targetEnvironment(simulator)
+        if hasMissingDummyWeeklyRecords() {
+            seedDummyDataForSimulator()
+            loadThoughtCards()
+            loadWeeklyRecords()
+            loadCurrentWeekRecord()
+        }
+        #endif
         print("Initial thoughtCards count: \(thoughtCards.count)")
         print("Initial CoreData entities count: \(coreDataManager.readThoughtCards().count)")
         loadCurrentWeekRecord()
@@ -387,4 +395,108 @@ class DataManager: ObservableObject {
         }
         return nil
     }
+    
+    #if targetEnvironment(simulator)
+    /// シミュレータで不足しているダミーデータだけ投入する
+    private func seedDummyDataForSimulator() {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        let now = Date()
+        let currentWeekStart = getStartOfWeek(for: now)
+
+        let dummyWeeks: [(weeksAgo: Int, goal: String, emoji: String, thoughts: [String], reflection: String, nextWeekGoal: String)] = [
+            (
+                1,
+                "運動を三日坊主で終わらせず、平日でも短時間で続けられる形を探しながら、体力の底上げを一週間通して意識する",
+                "💪",
+                [
+                    "仕事終わりで疲れていたけれど、走る距離を短めに決めてから外に出たら気持ちのハードルがかなり下がって、結果的に先週より継続しやすかった。",
+                    "プロテインを飲む時間を固定したことで、運動した日の流れが少しずつ習慣としてつながってきた感覚がある。",
+                    "足の重さが残る日もあったが、完全に休むよりストレッチだけでもやると翌日のだるさが軽くなると分かった。"
+                ],
+                "勢いだけで頑張るより、疲れている日でも続けられる最小単位を決めておく方が習慣化には効いた。達成感を毎回大きくしようとしない方が、結果的に継続しやすい。",
+                "読書を毎日三十分続けつつ、感じたことを一行でもメモに残して理解を浅いまま流さない"
+            ),
+            (
+                2,
+                "早起きを根性論にせず、夜の過ごし方から整えて、朝に余白のある状態で一日を始められるようにする",
+                "🌅",
+                [
+                    "六時に起きられた日は、その後の準備に追われず落ち着いて朝食を取れたので、一日の焦り方がかなり違った。",
+                    "夜にスマホをだらだら見始めると就寝時間がすぐ崩れるので、充電場所をベッドから離したのは地味だが効果があった。",
+                    "起床直後は眠くても、カーテンを開けて水を飲むまでをセットにすると二度寝しにくくなった。"
+                ],
+                "早起きそのものより、前日の行動設計の方が成功率に直結していた。朝だけ改善しようとすると再現性が低いが、夜のだらつきを減らすと安定した。",
+                "朝の時間に五分だけでも瞑想を入れて、起きた直後のぼんやりを引きずらないようにする"
+            ),
+            (
+                3,
+                "勉強時間の長さではなく、毎日どこまで理解が進んだかを振り返れる状態をつくって、学習を惰性にしない",
+                "📚",
+                [
+                    "英語の勉強では単語を眺めるだけの日より、短い例文を声に出した日の方が記憶の残り方がはっきりしていた。",
+                    "プログラミング学習は動画を見るだけだと分かった気になりやすく、手を動かして小さく再現した方が理解の穴に気づけた。",
+                    "資格の勉強では、新しい範囲に進むより前日に迷ったポイントを解き直した方が、知識のつながりが見えやすかった。",
+                    "復習メモを一行ずつでも残すと、翌日に何を見直すべきかがすぐ分かって再開コストが下がった。"
+                ],
+                "学習量だけを追うと満足してしまうが、説明できない部分を書き出すと理解の浅さが見えた。毎日の終わりに小さく整理するだけでも、次の日の質が変わる。",
+                "学んだ内容を短く人に説明する前提でまとめて、理解したつもりを減らす"
+            )
+        ]
+
+        for dummy in dummyWeeks {
+            let weekStart = calendar.date(byAdding: .day, value: -7 * dummy.weeksAgo, to: currentWeekStart)!
+            let weekEnd = calendar.date(byAdding: .day, value: 6, to: weekStart)!
+            guard !hasDummyWeeklyRecord(startDate: weekStart, goal: dummy.goal) else { continue }
+
+            guard let weeklyEntity = coreDataManager.createWeeklyRecord(
+                startDate: weekStart,
+                endDate: weekEnd,
+                goal: dummy.goal,
+                emoji: dummy.emoji
+            ) else { continue }
+            
+            for (dayOffset, thoughtContent) in dummy.thoughts.enumerated() {
+                let thoughtDate = calendar.date(byAdding: .day, value: dayOffset, to: weekStart)!
+                _ = coreDataManager.createThoughtCard(content: thoughtContent, date: thoughtDate, weeklyRecord: weeklyEntity)
+            }
+            
+            if !dummy.reflection.isEmpty {
+                coreDataManager.updateWeeklyRecord(
+                    weeklyRecord: weeklyEntity,
+                    reflection: dummy.reflection,
+                    nextWeekGoal: dummy.nextWeekGoal,
+                    goal: dummy.goal,
+                    emoji: dummy.emoji,
+                    nextWeekEmoji: dummy.emoji,
+                    isReflectionCompleted: true
+                )
+            }
+        }
+        print("DataManager: シミュレータ用ダミーデータを投入しました")
+    }
+
+    private func hasMissingDummyWeeklyRecords() -> Bool {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        let currentWeekStart = getStartOfWeek(for: Date())
+
+        let dummySignatures: [(weeksAgo: Int, goal: String)] = [
+            (1, "運動を三日坊主で終わらせず、平日でも短時間で続けられる形を探しながら、体力の底上げを一週間通して意識する"),
+            (2, "早起きを根性論にせず、夜の過ごし方から整えて、朝に余白のある状態で一日を始められるようにする"),
+            (3, "勉強時間の長さではなく、毎日どこまで理解が進んだかを振り返れる状態をつくって、学習を惰性にしない")
+        ]
+
+        return dummySignatures.contains { signature in
+            let weekStart = calendar.date(byAdding: .day, value: -7 * signature.weeksAgo, to: currentWeekStart)!
+            return !hasDummyWeeklyRecord(startDate: weekStart, goal: signature.goal)
+        }
+    }
+
+    private func hasDummyWeeklyRecord(startDate: Date, goal: String) -> Bool {
+        weeklyRecords.contains { record in
+            record.startDate == startDate && record.goal == goal
+        }
+    }
+    #endif
 }

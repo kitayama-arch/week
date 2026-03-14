@@ -87,6 +87,7 @@ struct ReflectionView: View {
         }
         .navigationTitle("振り返り")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
