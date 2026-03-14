@@ -226,27 +226,29 @@ struct SearchResultRowView: View {
         .padding(.horizontal, 4)
     }
     
-    /// 検索クエリに一致する部分を黄色背景でハイライトしたViewを返す
-    @ViewBuilder
-    private func highlightedExcerpt(_ text: String, query: String) -> some View {
+    /// 検索クエリに一致する部分を黄色背景でハイライトしたTextを返す
+    private func highlightedExcerpt(_ text: String, query: String) -> Text {
         let q = query.trimmingCharacters(in: .whitespaces)
         if q.isEmpty {
-            Text(text)
+            return Text(text)
         } else {
             let segments = buildHighlightSegments(text: text, query: q)
             if segments.isEmpty {
-                Text(text)
+                return Text(text)
             } else {
-                HStack(alignment: .firstTextBaseline, spacing: 0) {
-                    ForEach(Array(segments.enumerated()), id: \.offset) { _, seg in
-                        if seg.isHighlight {
-                            Text(verbatim: seg.text)
-                                .background(Color(red: 212/255, green: 1.0, blue: 0))
-                        } else {
-                            Text(verbatim: seg.text)
-                        }
+                var attributed = AttributedString(text)
+                attributed.foregroundColor = .primary
+                let highlightColor = Color(red: 212 / 255, green: 1.0, blue: 0).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85).opacity(0.85)
+                var currentIndex = attributed.startIndex
+
+                for segment in segments {
+                    let segmentEnd = attributed.index(currentIndex, offsetByCharacters: segment.text.count)
+                    if segment.isHighlight {
+                        attributed[currentIndex..<segmentEnd].backgroundColor = highlightColor
                     }
+                    currentIndex = segmentEnd
                 }
+                return Text(attributed)
             }
         }
     }
