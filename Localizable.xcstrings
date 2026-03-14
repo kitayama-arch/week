@@ -672,6 +672,16 @@
         }
       }
     },
+    "記録する" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Record"
+          }
+        }
+      }
+    },
     "記録はありません" : {
       "localizations" : {
         "en" : {

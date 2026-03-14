@@ -10,7 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
     @State private var showReflectionView = false
-    @State private var showArchiveView = false
     @State private var showSettingView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
     @State private var focusedThoughtCardID: UUID?
@@ -84,13 +83,6 @@ struct HomeView: View {
                                             showSettingView = true
                                         } label: {
                                             Image(systemName: "gearshape")
-                                                .font(.title)
-                                                .foregroundStyle(.gray.opacity(0.8))
-                                        }
-                                        Button {
-                                            showArchiveView = true
-                                        } label: {
-                                            Image(systemName: "archivebox")
                                                 .font(.title)
                                                 .foregroundStyle(.gray.opacity(0.8))
                                         }
@@ -325,9 +317,6 @@ struct HomeView: View {
                 } else {
                     Text("振り返りデータが利用できません")
                 }
-            }
-            .navigationDestination(isPresented: $showArchiveView) {
-                ArchiveView()
             }
             .navigationDestination(isPresented: $showSettingView) {
                 SettingView()

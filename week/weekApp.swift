@@ -148,7 +148,7 @@ struct weekApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            MainTabView()
                 .environmentObject(sceneDelegate)  // この行を追加
                 .onAppear {
                     if !hasSeenTutorial {
