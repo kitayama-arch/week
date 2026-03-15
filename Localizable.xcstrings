@@ -1,5 +1,5 @@
 {
-  "sourceLanguage" : "ja",
+  "sourceLanguage" : "en",
   "strings" : {
     "" : {
       "comment" : "Unknown subscription period unit",
@@ -10,7 +10,7 @@
     },
     "%@ - %@" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ - %2$@"
@@ -41,7 +41,7 @@
     },
     "%lld %@" : {
       "localizations" : {
-        "ja" : {
+        "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld %2$@"
@@ -536,22 +536,22 @@
         }
       }
     },
-    "振り返りを行う" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conduct Review"
-          }
-        }
-      }
-    },
     "振り返りは日曜日のみ可能です" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reflect is only possible on Sundays"
+          }
+        }
+      }
+    },
+    "振り返りを行う" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conduct Review"
           }
         }
       }
@@ -610,6 +610,7 @@
       }
     },
     "来週の目標を入力してください" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

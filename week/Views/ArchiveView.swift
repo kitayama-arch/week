@@ -36,6 +36,7 @@ struct ArchiveView: View {
     let resetToken: Int
     @State private var selectedWeeklyRecord: WeeklyRecord? = nil
     @State private var searchText = ""
+    @State private var isSearchFieldActive = false
     
     private var isSearching: Bool {
         !searchText.trimmingCharacters(in: .whitespaces).isEmpty
@@ -92,68 +93,76 @@ struct ArchiveView: View {
         ZStack {
             Color.background
                 .ignoresSafeArea()
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    dismissSearchKeyboard()
+                }
             
             ScrollViewReader { proxy in
                 ScrollView {
-                    VStack(spacing: 16) {
+                    VStack(spacing: 0) {
                         Color.clear
                             .frame(height: 0)
                             .id("archive-top")
 
-                    HStack(spacing: 8) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(.secondary)
-                        TextField("記録・目標・振り返りを検索", text: $searchText)
-                            .textFieldStyle(.plain)
-                            .autocorrectionDisabled()
-                        if !searchText.isEmpty {
-                            Button {
-                                searchText = ""
-                            } label: {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 11, weight: .semibold))
-                                    .foregroundStyle(.secondary)
-                                    .frame(width: 24, height: 24)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .padding(12)
-                    .background(Color.card)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                        NativeSearchBar(
+                            text: $searchText,
+                            isEditing: $isSearchFieldActive,
+                            placeholder: String(localized: "記録・目標・振り返りを検索")
+                        )
+                        .padding(.horizontal, 8)
+                        .padding(.top, 8)
                         
                         if isSearching {
                             SearchResultsView(
                                 results: searchResults,
                                 searchQuery: searchText.trimmingCharacters(in: .whitespaces),
                                 formatDate: formatDate,
-                                onSelect: { selectedWeeklyRecord = $0 }
+                                onSelect: {
+                                    dismissSearchKeyboard()
+                                    selectedWeeklyRecord = $0
+                                }
                             )
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    dismissSearchKeyboard()
+                                }
+                            )
+                            .padding(.top, 16)
                         } else {
-                            ContributionGraphView()
-                                .padding(.horizontal)
-                            
-                            LazyVStack(spacing: 8) {
-                                ForEach(sortedRecords) { weeklyRecord in
-                                    WeeklyRecordCardView(
-                                        weeklyRecord: weeklyRecord,
-                                        formatDate: formatDate
-                                    )
-                                    .contentShape(Rectangle())
-                                    .onTapGesture {
-                                        selectedWeeklyRecord = weeklyRecord
-                                    }
+                            VStack(spacing: 16) {
+                                ContributionGraphView()
                                     .padding(.horizontal)
+                                
+                                LazyVStack(spacing: 8) {
+                                    ForEach(sortedRecords) { weeklyRecord in
+                                        WeeklyRecordCardView(
+                                            weeklyRecord: weeklyRecord,
+                                            formatDate: formatDate
+                                        )
+                                        .contentShape(Rectangle())
+                                        .onTapGesture {
+                                            selectedWeeklyRecord = weeklyRecord
+                                        }
+                                        .padding(.horizontal)
+                                    }
                                 }
                             }
+                            .simultaneousGesture(
+                                TapGesture().onEnded {
+                                    dismissSearchKeyboard()
+                                }
+                            )
+                            .padding(.top, 16)
                         }
                     }
-                    .padding(.vertical)
+                    .padding(.bottom, 16)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
+                .scrollDismissesKeyboard(.immediately)
                 .onChange(of: resetToken) { _, _ in
                     searchText = ""
+                    dismissSearchKeyboard()
                     selectedWeeklyRecord = nil
                     withAnimation {
                         proxy.scrollTo("archive-top", anchor: .top)
@@ -185,6 +194,92 @@ struct ArchiveView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         return formatter.string(from: date)
+    }
+
+    private func dismissSearchKeyboard() {
+        isSearchFieldActive = false
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+private struct NativeSearchBar: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var isEditing: Bool
+    let placeholder: String
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(text: $text, isEditing: $isEditing)
+    }
+
+    func makeUIView(context: Context) -> UISearchBar {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = context.coordinator
+        searchBar.searchBarStyle = .minimal
+        searchBar.backgroundImage = UIImage()
+        searchBar.backgroundColor = .clear
+        searchBar.placeholder = placeholder
+        searchBar.searchTextField.autocorrectionType = .no
+        searchBar.searchTextField.autocapitalizationType = .none
+        searchBar.searchTextField.returnKeyType = .search
+        searchBar.searchTextField.enablesReturnKeyAutomatically = false
+        searchBar.searchTextField.backgroundColor = .secondarySystemFill
+        return searchBar
+    }
+
+    func updateUIView(_ searchBar: UISearchBar, context: Context) {
+        if searchBar.text != text {
+            searchBar.text = text
+        }
+
+        if searchBar.placeholder != placeholder {
+            searchBar.placeholder = placeholder
+        }
+
+        if searchBar.showsCancelButton != isEditing {
+            searchBar.setShowsCancelButton(isEditing, animated: true)
+        }
+
+        if !isEditing, searchBar.searchTextField.isFirstResponder {
+            searchBar.searchTextField.resignFirstResponder()
+        }
+    }
+
+    final class Coordinator: NSObject, UISearchBarDelegate {
+        @Binding var text: String
+        @Binding var isEditing: Bool
+
+        init(text: Binding<String>, isEditing: Binding<Bool>) {
+            _text = text
+            _isEditing = isEditing
+        }
+
+        func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+            isEditing = true
+            searchBar.setShowsCancelButton(true, animated: true)
+        }
+
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            isEditing = false
+            searchBar.setShowsCancelButton(false, animated: true)
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
+        }
+
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            dismiss(searchBar)
+        }
+
+        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            dismiss(searchBar)
+        }
+
+        private func dismiss(_ searchBar: UISearchBar) {
+            isEditing = false
+            searchBar.setShowsCancelButton(false, animated: true)
+            searchBar.searchTextField.resignFirstResponder()
+        }
     }
 }
 
