@@ -12,6 +12,7 @@ struct ReflectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State var weeklyRecord: WeeklyRecord
     @State private var selectedTab: ReflectionSheetTab = .reflection
+    @State private var activeInput: ReflectionActiveInput?
     @State private var reflectionEditorHeight: CGFloat = 84
     
     var body: some View {
@@ -24,6 +25,10 @@ struct ReflectionView: View {
             ZStack(alignment: .bottom) {
                 Color.background
                     .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        dismissKeyboard()
+                    }
                 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
@@ -53,9 +58,14 @@ struct ReflectionView: View {
                     .padding(.top, 12)
                     .padding(.bottom, currentHeight + 40)
                 }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    dismissKeyboard()
+                }
                 
                 ReflectionBottomSheet(
                     selectedTab: $selectedTab,
+                    activeInput: $activeInput,
                     weeklyRecord: weeklyRecord,
                     reflectionEditorHeight: $reflectionEditorHeight,
                     onSave: saveReflection
@@ -74,6 +84,12 @@ struct ReflectionView: View {
         .navigationTitle("振り返り")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
+        .onChange(of: selectedTab) { _, newValue in
+            guard activeInput != nil else { return }
+            DispatchQueue.main.async {
+                activeInput = newValue == .reflection ? .reflection : .nextGoal
+            }
+        }
     }
     
     private func saveReflection() {
@@ -82,6 +98,12 @@ struct ReflectionView: View {
         dataManager.loadWeeklyRecords()
         dataManager.loadCurrentWeekRecord()
         dismiss()
+    }
+    
+    private func dismissKeyboard() {
+        guard activeInput != nil else { return }
+        activeInput = nil
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
@@ -101,6 +123,11 @@ private enum ReflectionSheetTab: String, CaseIterable, Identifiable {
     }
 }
 
+private enum ReflectionActiveInput {
+    case reflection
+    case nextGoal
+}
+
 private struct TopRoundedSheetShape: Shape {
     let cornerRadius: CGFloat
     
@@ -117,6 +144,7 @@ private struct TopRoundedSheetShape: Shape {
 
 private struct ReflectionBottomSheet: View {
     @Binding var selectedTab: ReflectionSheetTab
+    @Binding var activeInput: ReflectionActiveInput?
     @ObservedObject var weeklyRecord: WeeklyRecord
     @Binding var reflectionEditorHeight: CGFloat
     let onSave: () -> Void
@@ -145,12 +173,14 @@ private struct ReflectionBottomSheet: View {
                     if selectedTab == .reflection {
                         ReflectionEditorView(
                             reflection: $weeklyRecord.reflection,
+                            isFirstResponder: activeInputBinding(for: .reflection),
                             measuredHeight: $reflectionEditorHeight
                         )
                     } else {
                         NextGoalCardView(
                             nextWeekGoal: $weeklyRecord.nextWeekGoal,
-                            nextWeekEmoji: $weeklyRecord.nextWeekEmoji
+                            nextWeekEmoji: $weeklyRecord.nextWeekEmoji,
+                            isFirstResponder: activeInputBinding(for: .nextGoal)
                         )
                     }
                 }
@@ -167,6 +197,15 @@ private struct ReflectionBottomSheet: View {
                 .frame(width: 44, height: 5)
                 .padding(.top, 10)
         }
+    }
+    
+    private func activeInputBinding(for input: ReflectionActiveInput) -> Binding<Bool> {
+        Binding(
+            get: { activeInput == input },
+            set: { isFocused in
+                activeInput = isFocused ? input : nil
+            }
+        )
     }
 }
 
@@ -278,6 +317,7 @@ struct ThoughtsListView: View {
 
 private struct ReflectionEditorView: View {
     @Binding var reflection: String
+    @Binding var isFirstResponder: Bool
     @Binding var measuredHeight: CGFloat
     
     var body: some View {
@@ -300,6 +340,7 @@ private struct ReflectionEditorView: View {
                 
                 GrowingTextView(
                     text: $reflection,
+                    isFirstResponder: $isFirstResponder,
                     measuredHeight: $measuredHeight
                 )
                 .frame(height: measuredHeight)
@@ -313,6 +354,7 @@ private struct ReflectionEditorView: View {
 
 private struct GrowingTextView: UIViewRepresentable {
     @Binding var text: String
+    @Binding var isFirstResponder: Bool
     @Binding var measuredHeight: CGFloat
     
     func makeCoordinator() -> Coordinator {
@@ -333,6 +375,11 @@ private struct GrowingTextView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: Context) {
         if uiView.text != text {
             uiView.text = text
+        }
+        if isFirstResponder, !uiView.isFirstResponder {
+            uiView.becomeFirstResponder()
+        } else if !isFirstResponder, uiView.isFirstResponder {
+            uiView.resignFirstResponder()
         }
         Self.recalculateHeight(view: uiView, result: $measuredHeight)
     }
@@ -361,6 +408,14 @@ private struct GrowingTextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
             GrowingTextView.recalculateHeight(view: textView, result: parent.$measuredHeight)
+        }
+        
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            parent.isFirstResponder = true
+        }
+        
+        func textViewDidEndEditing(_ textView: UITextView) {
+            parent.isFirstResponder = false
         }
     }
 }
