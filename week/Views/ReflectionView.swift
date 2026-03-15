@@ -322,6 +322,8 @@ private struct ReflectionEditorView: View {
     @Binding var isFirstResponder: Bool
     @Binding var measuredHeight: CGFloat
     
+    private let placeholder = String(localized: "どんな一週間でしたか？")
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             ZStack(alignment: .topLeading) {
@@ -333,15 +335,17 @@ private struct ReflectionEditorView: View {
                     )
                 
                 if reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    Text("どんな一週間でしたか？")
+                    Text(placeholder)
                         .foregroundStyle(.secondary)
                         .padding(.horizontal, 14)
                         .padding(.vertical, 16)
                         .allowsHitTesting(false)
+                        .accessibilityHidden(true)
                 }
                 
                 GrowingTextView(
                     text: $reflection,
+                    placeholder: placeholder,
                     isFirstResponder: $isFirstResponder,
                     measuredHeight: $measuredHeight
                 )
@@ -356,6 +360,7 @@ private struct ReflectionEditorView: View {
 
 private struct GrowingTextView: UIViewRepresentable {
     @Binding var text: String
+    let placeholder: String
     @Binding var isFirstResponder: Bool
     @Binding var measuredHeight: CGFloat
     
@@ -367,9 +372,11 @@ private struct GrowingTextView: UIViewRepresentable {
         let textView = UITextView()
         textView.backgroundColor = .clear
         textView.font = .preferredFont(forTextStyle: .body)
+        textView.adjustsFontForContentSizeCategory = true
         textView.isScrollEnabled = false
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
+        textView.accessibilityLabel = placeholder
         textView.delegate = context.coordinator
         return textView
     }
@@ -378,6 +385,7 @@ private struct GrowingTextView: UIViewRepresentable {
         if uiView.text != text {
             uiView.text = text
         }
+        uiView.accessibilityLabel = placeholder
         if isFirstResponder, !uiView.isFirstResponder {
             uiView.becomeFirstResponder()
         } else if !isFirstResponder, uiView.isFirstResponder {

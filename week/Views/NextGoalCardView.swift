@@ -73,6 +73,7 @@ private struct FocusableTextField: UIViewRepresentable {
     func makeUIView(context: Context) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
+        textField.accessibilityLabel = placeholder
         textField.borderStyle = .none
         textField.delegate = context.coordinator
         textField.addTarget(context.coordinator, action: #selector(Coordinator.textDidChange(_:)), for: .editingChanged)
@@ -84,6 +85,7 @@ private struct FocusableTextField: UIViewRepresentable {
             uiView.text = text
         }
         uiView.placeholder = placeholder
+        uiView.accessibilityLabel = placeholder
         
         if isFirstResponder, !uiView.isFirstResponder {
             uiView.becomeFirstResponder()

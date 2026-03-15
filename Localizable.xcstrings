@@ -228,7 +228,6 @@
       }
     },
     "それまでの間、日々の出来事や思考を\n記録してみてください。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -537,17 +536,6 @@
         }
       }
     },
-    "振り返りは日曜日のみ可能です" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reflect is only possible on Sundays"
-          }
-        }
-      }
-    },
     "振り返りを行う" : {
       "localizations" : {
         "en" : {
@@ -558,8 +546,26 @@
         }
       }
     },
+    "振り返りは日曜日のみ可能です" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflect is only possible on Sundays"
+          }
+        }
+      }
+    },
     "振り返り入力" : {
-
+      "comment" : "Accessibility label for the reflection segmented control",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflection input"
+          }
+        }
+      }
     },
     "日" : {
       "comment" : "Subscription period unit: day",
