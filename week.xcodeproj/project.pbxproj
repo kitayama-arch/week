@@ -32,6 +32,8 @@
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
+		5AACE9832F6768B000920D4F /* ForceSimulation in Frameworks */ = {isa = PBXBuildFile; productRef = 5AACE9822F6768B000920D4F /* ForceSimulation */; };
+		5AACE9852F6768B000920D4F /* Grape in Frameworks */ = {isa = PBXBuildFile; productRef = 5AACE9842F6768B000920D4F /* Grape */; };
 		5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */; };
 		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
 		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
@@ -108,6 +110,8 @@
 				5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */,
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
 				3C518B7674550B17AB9142ED /* Pods_week.framework in Frameworks */,
+				5AACE9852F6768B000920D4F /* Grape in Frameworks */,
+				5AACE9832F6768B000920D4F /* ForceSimulation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +270,8 @@
 			name = week;
 			packageProductDependencies = (
 				5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */,
+				5AACE9822F6768B000920D4F /* ForceSimulation */,
+				5AACE9842F6768B000920D4F /* Grape */,
 			);
 			productName = syuki;
 			productReference = 5A4ED3712C3275BA003E2E0C /* week.app */;
@@ -321,6 +327,7 @@
 			mainGroup = 5A4ED3682C3275BA003E2E0C;
 			packageReferences = (
 				5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */,
 			);
 			productRefGroup = 5A4ED3722C3275BA003E2E0C /* Products */;
 			projectDirPath = "";
@@ -800,6 +807,14 @@
 				minimumVersion = 1.2.3;
 			};
 		};
+		5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftGraphs/Grape";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -807,6 +822,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
 			productName = MCEmojiPicker;
+		};
+		5AACE9822F6768B000920D4F /* ForceSimulation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */;
+			productName = ForceSimulation;
+		};
+		5AACE9842F6768B000920D4F /* Grape */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */;
+			productName = Grape;
 		};
 /* End XCSwiftPackageProductDependency section */
 

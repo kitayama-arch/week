@@ -5,6 +5,8 @@
 //  Created by Ta-MacbookAir on 2024/07/02.
 //
 
+import ForceSimulation
+import Grape
 import SwiftUI
 import UIKit
 
@@ -212,7 +214,6 @@ struct ArchiveView: View {
                     )
                     .padding(.top, 12)
                     .padding(.horizontal)
-                    .padding(.bottom, 12)
                 }
                 
                 if isSearching {
@@ -232,7 +233,8 @@ struct ArchiveView: View {
                 } else {
                     TabView(selection: $selectedTab) {
                         YouArchivePage(
-                            randomThought: randomThought,
+                            randomThoughts: archivalThoughtItems,
+                            initialRandomThoughtID: randomThought?.id,
                             goalEmojiBubbleItems: Array(goalEmojiBubbleItems.prefix(8)),
                             recentReflectionRecords: Array(recentReflectionRecords.prefix(3)),
                             mostActiveRecords: Array(mostActiveRecords.prefix(3)),
@@ -406,7 +408,8 @@ private struct TimelineArchivePage: View {
 }
 
 private struct YouArchivePage: View {
-    let randomThought: ArchiveThoughtItem?
+    let randomThoughts: [ArchiveThoughtItem]
+    let initialRandomThoughtID: String?
     let goalEmojiBubbleItems: [GoalEmojiBubbleItem]
     let recentReflectionRecords: [WeeklyRecord]
     let mostActiveRecords: [WeeklyRecord]
@@ -426,7 +429,8 @@ private struct YouArchivePage: View {
                         .id(topID)
                     
                     PickupHeroSection(
-                        randomThought: randomThought,
+                        thoughts: randomThoughts,
+                        initialThoughtID: initialRandomThoughtID,
                         formatDate: formatDate,
                         onSelectRecord: onSelectRecord
                     )
@@ -479,9 +483,39 @@ private struct YouArchivePage: View {
 }
 
 private struct PickupHeroSection: View {
-    let randomThought: ArchiveThoughtItem?
+    let thoughts: [ArchiveThoughtItem]
+    let initialThoughtID: String?
     let formatDate: (Date) -> String
     let onSelectRecord: (WeeklyRecord) -> Void
+    
+    @State private var displayedThoughtID: String?
+    @State private var isRerolling = false
+    @State private var rouletteTask: Task<Void, Never>?
+    
+    init(
+        thoughts: [ArchiveThoughtItem],
+        initialThoughtID: String?,
+        formatDate: @escaping (Date) -> String,
+        onSelectRecord: @escaping (WeeklyRecord) -> Void
+    ) {
+        self.thoughts = thoughts
+        self.initialThoughtID = initialThoughtID
+        self.formatDate = formatDate
+        self.onSelectRecord = onSelectRecord
+        _displayedThoughtID = State(initialValue: initialThoughtID ?? thoughts.first?.id)
+    }
+    
+    private var displayedThought: ArchiveThoughtItem? {
+        if let displayedThoughtID,
+           let thought = thoughts.first(where: { $0.id == displayedThoughtID }) {
+            return thought
+        }
+        return thoughts.first
+    }
+    
+    private var thoughtIDsKey: String {
+        thoughts.map(\.id).joined(separator: "|")
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -490,48 +524,24 @@ private struct PickupHeroSection: View {
                 subtitle: "過去の記録から、今日ひらく一枚を選びます。"
             )
             
-            if let randomThought {
-                Button {
-                    onSelectRecord(randomThought.weeklyRecord)
-                } label: {
-                    VStack(alignment: .leading, spacing: 14) {
-                        HStack(alignment: .top) {
-                            Text("今日の一枚")
-                                .font(.system(.caption, design: .rounded, weight: .semibold))
-                                .foregroundStyle(Color.accentColor)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 6)
-                                .background(
-                                    Capsule()
-                                        .fill(Color.accentColor.opacity(0.12))
-                                )
-                            Spacer()
-                            Text(formatDate(randomThought.thought.date))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        
-                        Text(randomThought.thought.content)
-                            .font(.system(.body, design: .rounded))
-                            .foregroundStyle(.primary)
-                            .multilineTextAlignment(.leading)
-                            .lineLimit(5)
-                        
-                        HStack(spacing: 8) {
-                            Text(randomThought.weeklyRecord.emoji)
-                                .font(.headline)
-                            Text(randomThought.weeklyRecord.goal)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                                .lineLimit(2)
-                        }
-                    }
-                    .padding(18)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.card)
-                    .cornerRadius(16)
+            if let displayedThought {
+                PickupHeroCard(
+                    thought: displayedThought,
+                    formatDate: formatDate,
+                    isRerolling: isRerolling,
+                    onTap: {
+                        guard !isRerolling else { return }
+                        onSelectRecord(displayedThought.weeklyRecord)
+                    },
+                    onSwipeRight: rerollThought
+                )
+                .onChange(of: thoughtIDsKey) { _, _ in
+                    syncDisplayedThoughtID()
                 }
-                .buttonStyle(.plain)
+                .onDisappear {
+                    rouletteTask?.cancel()
+                    rouletteTask = nil
+                }
             } else {
                 ArchiveEmptyStateView(
                     title: "まだ『ランダム』はありません",
@@ -539,6 +549,64 @@ private struct PickupHeroSection: View {
                 )
             }
         }
+    }
+    
+    private func syncDisplayedThoughtID() {
+        guard !thoughts.isEmpty else {
+            displayedThoughtID = nil
+            return
+        }
+        
+        if let displayedThoughtID,
+           thoughts.contains(where: { $0.id == displayedThoughtID }) {
+            return
+        }
+        
+        displayedThoughtID = initialThoughtID ?? thoughts.first?.id
+    }
+    
+    private func rerollThought() {
+        guard thoughts.count > 1, !isRerolling else { return }
+        
+        rouletteTask?.cancel()
+        rouletteTask = Task { @MainActor in
+            isRerolling = true
+            
+            let selectionFeedback = UISelectionFeedbackGenerator()
+            let finishFeedback = UIImpactFeedbackGenerator(style: .soft)
+            selectionFeedback.prepare()
+            finishFeedback.prepare()
+            
+            var currentID = displayedThoughtID
+            let spinSteps = min(max(thoughts.count, 4), 7)
+            let delays: [UInt64] = [45, 65, 90, 120, 160, 210, 270]
+            
+            for step in 0..<spinSteps {
+                guard let nextThought = nextThought(excluding: currentID) else { continue }
+                
+                withAnimation(.snappy(duration: 0.22, extraBounce: 0.02)) {
+                    displayedThoughtID = nextThought.id
+                }
+                currentID = nextThought.id
+                selectionFeedback.selectionChanged()
+                
+                let delay = delays[min(step, delays.count - 1)] * 1_000_000
+                try? await Task.sleep(nanoseconds: delay)
+                if Task.isCancelled {
+                    isRerolling = false
+                    return
+                }
+            }
+            
+            finishFeedback.impactOccurred(intensity: 0.55)
+            isRerolling = false
+            rouletteTask = nil
+        }
+    }
+    
+    private func nextThought(excluding currentID: String?) -> ArchiveThoughtItem? {
+        let candidates = thoughts.filter { $0.id != currentID }
+        return candidates.randomElement() ?? thoughts.first
     }
 }
 
@@ -566,77 +634,156 @@ private struct GoalEmojiBubbleSection: View {
 private struct GoalEmojiBubbleCloudView: View {
     let items: [GoalEmojiBubbleItem]
     
+    @State private var graphState = ForceDirectedGraphState(
+        initialIsRunning: true,
+        ticksOnAppear: .untilStable
+    )
+    @State private var draggingNodeID: String?
+    
+    private let cardCornerRadius: CGFloat = 20
+    
+    private var maxCount: Int {
+        max(items.map(\.count).max() ?? 1, 1)
+    }
+    
+    private var countTiers: [Int] {
+        Array(Set(items.map(\.count))).sorted(by: >)
+    }
+    
     var body: some View {
-        GeometryReader { geometry in
-            let canvasSize = min(geometry.size.width, geometry.size.height)
-            let maxCount = items.map(\.count).max() ?? 1
+        ZStack {
+            RoundedRectangle(cornerRadius: cardCornerRadius)
+                .fill(Color.card)
             
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.card)
-                
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    let diameter = bubbleDiameter(for: item.count, maxCount: maxCount)
-                    let anchor = bubbleAnchor(for: index)
-                    let x = diameter / 2 + (canvasSize - diameter) * anchor.x
-                    let y = diameter / 2 + (canvasSize - diameter) * anchor.y
-                    
-                    Text(item.emoji)
-                        .font(.system(size: diameter * 0.42))
-                        .frame(width: diameter, height: diameter)
-                        .background(
-                            Circle()
-                                .fill(bubbleColor(for: index))
-                        )
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white.opacity(0.32), lineWidth: 1)
-                        )
-                        .shadow(color: Color.black.opacity(0.07), radius: 14, y: 8)
-                        .position(x: x, y: y)
-                }
-            }
+            bubbleGraph
         }
         .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: .infinity)
+        .clipShape(RoundedRectangle(cornerRadius: cardCornerRadius))
     }
     
-    private func bubbleDiameter(for count: Int, maxCount: Int) -> CGFloat {
-        let base: CGFloat = 54
-        let extra: CGFloat = 54
-        guard maxCount > 0 else { return base }
-        let ratio = CGFloat(count) / CGFloat(maxCount)
-        return base + pow(ratio, 0.82) * extra
+    private var bubbleGraph: some View {
+        ForceDirectedGraph(states: graphState) {
+            bubbleContent
+        } force: {
+            bubbleForce
+        } emittingNewNodesWithStates: { nodeID in
+            KineticState(position: initialNodePosition(forID: nodeID))
+        }
+        .padding(18)
+        .graphOverlay { proxy in
+            Rectangle()
+                .fill(.clear)
+                .contentShape(Rectangle())
+                .gesture(nodeDragGesture(proxy: proxy))
+        }
     }
     
-    private func bubbleAnchor(for index: Int) -> CGPoint {
-        let anchors: [CGPoint] = [
-            CGPoint(x: 0.5, y: 0.5),
-            CGPoint(x: 0.32, y: 0.38),
-            CGPoint(x: 0.68, y: 0.36),
-            CGPoint(x: 0.35, y: 0.7),
-            CGPoint(x: 0.68, y: 0.66),
-            CGPoint(x: 0.2, y: 0.56),
-            CGPoint(x: 0.8, y: 0.56),
-            CGPoint(x: 0.5, y: 0.2),
-            CGPoint(x: 0.5, y: 0.82),
-            CGPoint(x: 0.2, y: 0.22),
-            CGPoint(x: 0.8, y: 0.22),
-            CGPoint(x: 0.22, y: 0.82)
-        ]
+    @GraphContentBuilder<String>
+    private var bubbleContent: some GraphContent<String> {
+        Series(items) { item in
+            bubbleNodeMark(for: item)
+        }
+    }
+    
+    private var bubbleForce: SealedForceDescriptor<String> {
+        SealedForceDescriptor<String>
+            .manyBody(
+                strength: -18,
+                mass: .varied { nodeID in
+                    1.0 + nodeRadius(forID: nodeID, maxCount: maxCount) / 18
+                }
+            )
+            .collide(
+                strength: 1.0,
+                radius: .varied { nodeID in
+                    nodeRadius(forID: nodeID, maxCount: maxCount) + 4
+                },
+                iterationsPerTick: 3
+            )
+            .position(direction: .x, targetOnDirection: 0.0, strength: 0.05)
+            .position(direction: .y, targetOnDirection: 0.0, strength: 0.05)
+            .center(strength: 0.16)
+    }
+    
+    private func bubbleNodeMark(for item: GoalEmojiBubbleItem) -> some GraphContent<String> {
+        let radius = nodeRadius(for: item, maxCount: maxCount)
         
-        return anchors[index % anchors.count]
+        return NodeMark(id: item.id)
+            .symbolSize(radius: radius)
+            .foregroundStyle(Color.gray.opacity(0.18))
+            .annotation(emojiText(for: item), alignment: .center, offset: .zero)
     }
     
-    private func bubbleColor(for index: Int) -> Color {
-        let palette: [Color] = [
-            Color.accentColor.opacity(0.2),
-            Color.orange.opacity(0.18),
-            Color.green.opacity(0.16),
-            Color.blue.opacity(0.16)
-        ]
+    private func emojiFontSize(for item: GoalEmojiBubbleItem, maxCount: Int) -> CGFloat {
+        let tierSizes: [CGFloat] = [52, 38, 28, 22, 17, 14]
+        guard let tierIndex = countTiers.firstIndex(of: item.count) else {
+            return tierSizes.last ?? 18
+        }
+        return tierSizes[min(tierIndex, tierSizes.count - 1)]
+    }
+    
+    private func nodeRadius(for item: GoalEmojiBubbleItem, maxCount: Int) -> CGFloat {
+        emojiFontSize(for: item, maxCount: maxCount) * 0.72
+    }
+    
+    private func emojiText(for item: GoalEmojiBubbleItem) -> Text {
+        Text(item.emoji)
+            .font(.system(size: emojiFontSize(for: item, maxCount: maxCount)))
+    }
+    
+    private func nodeRadius(forID id: String, maxCount: Int) -> Double {
+        guard let item = items.first(where: { $0.id == id }) else { return 14 }
+        return nodeRadius(for: item, maxCount: maxCount)
+    }
+    
+    private func initialNodePosition(forID id: String) -> SIMD2<Double> {
+        guard let index = items.firstIndex(where: { $0.id == id }) else { return .zero }
         
-        return palette[index % palette.count]
+        let count = max(items.count, 1)
+        let angleOffset = Double(id.unicodeScalars.reduce(0) { $0 + Int($1.value) % 17 }) * 0.07
+        let angle = (Double(index) / Double(count)) * (.pi * 2) + angleOffset
+        let radius = 88.0 + Double(index % 3) * 22.0
+        
+        return SIMD2<Double>(
+            cos(angle) * radius,
+            sin(angle) * radius
+        )
+    }
+    
+    private func nodeDragGesture(proxy: GraphProxy) -> some Gesture {
+        DragGesture(minimumDistance: 2, coordinateSpace: .local)
+            .onChanged { value in
+                if draggingNodeID == nil {
+                    guard let nodeID = proxy.node(of: String.self, at: value.startLocation) else {
+                        return
+                    }
+                    triggerNodeGrabImpact()
+                    draggingNodeID = nodeID
+                }
+                
+                guard let draggingNodeID else { return }
+                proxy.setNodeFixation(nodeID: draggingNodeID, fixation: value.location)
+            }
+            .onEnded { _ in
+                if let draggingNodeID {
+                    proxy.setNodeFixation(nodeID: draggingNodeID, fixation: nil)
+                    triggerNodeReleaseImpact()
+                }
+                draggingNodeID = nil
+            }
+    }
+    
+    private func triggerNodeGrabImpact() {
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.prepare()
+        generator.impactOccurred(intensity: 0.75)
+    }
+    
+    private func triggerNodeReleaseImpact() {
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.prepare()
+        generator.impactOccurred(intensity: 0.45)
     }
 }
 
@@ -706,6 +853,90 @@ private struct PickupReflectionSection: View {
                 }
             }
         }
+    }
+}
+
+private struct PickupHeroCard: View {
+    let thought: ArchiveThoughtItem
+    let formatDate: (Date) -> String
+    let isRerolling: Bool
+    let onTap: () -> Void
+    let onSwipeRight: () -> Void
+    
+    @GestureState private var dragOffset: CGFloat = 0
+    
+    var body: some View {
+        let swipeGesture = DragGesture(minimumDistance: 16, coordinateSpace: .local)
+            .updating($dragOffset) { value, state, _ in
+                let horizontal = max(value.translation.width, 0)
+                let vertical = abs(value.translation.height)
+                if horizontal > vertical {
+                    state = min(horizontal, 60)
+                }
+            }
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = abs(value.translation.height)
+                let predicted = value.predictedEndTranslation.width
+                guard horizontal > 52,
+                      horizontal > vertical * 1.2 || predicted > 88 else { return }
+                onSwipeRight()
+            }
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.card)
+            
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top) {
+                    Text("今日の一枚")
+                        .font(.system(.caption, design: .rounded, weight: .semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(
+                            Capsule()
+                                .fill(Color.accentColor.opacity(0.12))
+                        )
+                    Spacer()
+                    Text(formatDate(thought.thought.date))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Text(thought.thought.content)
+                    .font(.system(.body, design: .rounded))
+                    .foregroundStyle(.primary)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(5)
+                
+                HStack(spacing: 8) {
+                    Text(thought.weeklyRecord.emoji)
+                        .font(.headline)
+                    Text(thought.weeklyRecord.goal)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
+            }
+            .id(thought.id)
+            .padding(18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .offset(x: dragOffset * 0.18)
+            .opacity(isRerolling ? 0.96 : 1)
+            .transition(
+                .asymmetric(
+                    insertion: .move(edge: .trailing).combined(with: .opacity),
+                    removal: .move(edge: .leading).combined(with: .opacity)
+                )
+            )
+        }
+        .contentShape(RoundedRectangle(cornerRadius: 16))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .onTapGesture(perform: onTap)
+        .simultaneousGesture(swipeGesture)
+        .animation(.snappy(duration: 0.25, extraBounce: 0), value: thought.id)
+        .animation(.snappy(duration: 0.2, extraBounce: 0), value: dragOffset)
     }
 }
 
