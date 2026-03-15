@@ -228,6 +228,7 @@
       }
     },
     "それまでの間、日々の出来事や思考を\n記録してみてください。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -350,17 +351,6 @@
         }
       }
     },
-    "不明なエラーが発生しました" : {
-      "comment" : "Unknown error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An unknown error occurred"
-          }
-        }
-      }
-    },
     "不明" : {
       "comment" : "Version unknown fallback",
       "localizations" : {
@@ -368,6 +358,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unknown"
+          }
+        }
+      }
+    },
+    "不明なエラーが発生しました" : {
+      "comment" : "Unknown error",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error occurred"
           }
         }
       }
@@ -537,6 +538,7 @@
       }
     },
     "振り返りは日曜日のみ可能です" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -555,6 +557,9 @@
           }
         }
       }
+    },
+    "振り返り入力" : {
+
     },
     "日" : {
       "comment" : "Subscription period unit: day",
@@ -587,6 +592,9 @@
           }
         }
       }
+    },
+    "来週のテーマや、一番進めたいことを書いておく" : {
+
     },
     "来週の目標" : {
       "localizations" : {
@@ -758,6 +766,9 @@
           }
         }
       }
+    },
+    "記録を見返しながら、よかったことや気づきを残す" : {
+
     },
     "設定" : {
       "localizations" : {
