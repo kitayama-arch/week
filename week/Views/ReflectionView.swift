@@ -180,7 +180,9 @@ private struct ReflectionBottomSheet: View {
                         NextGoalCardView(
                             nextWeekGoal: $weeklyRecord.nextWeekGoal,
                             nextWeekEmoji: $weeklyRecord.nextWeekEmoji,
-                            isFirstResponder: activeInputBinding(for: .nextGoal)
+                            isFirstResponder: activeInputBinding(for: .nextGoal),
+                            pickerArrowDirection: .down,
+                            pickerCustomHeight: 260
                         )
                     }
                 }

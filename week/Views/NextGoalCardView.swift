@@ -13,6 +13,8 @@ struct NextGoalCardView: View {
     @Binding var nextWeekGoal: String
     @Binding var nextWeekEmoji: String
     var isFirstResponder: Binding<Bool> = .constant(false)
+    var pickerArrowDirection: MCPickerArrowDirection? = nil
+    var pickerCustomHeight: CGFloat? = nil
     @State private var isPickerPresented: Bool = false // 絵文字ピッカーの表示状態を管理
 
     var body: some View {
@@ -36,7 +38,12 @@ struct NextGoalCardView: View {
                             .font(.largeTitle)
                     }
                 }
-                .emojiPicker(isPresented: $isPickerPresented, selectedEmoji: $nextWeekEmoji)
+                .emojiPicker(
+                    isPresented: $isPickerPresented,
+                    selectedEmoji: $nextWeekEmoji,
+                    arrowDirection: pickerArrowDirection,
+                    customHeight: pickerCustomHeight
+                )
                 
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
