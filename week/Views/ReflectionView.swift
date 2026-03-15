@@ -12,17 +12,14 @@ struct ReflectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State var weeklyRecord: WeeklyRecord
     @State private var selectedTab: ReflectionSheetTab = .reflection
-    @State private var sheetPosition: ReflectionSheetPosition = .middle
-    @GestureState private var dragTranslation: CGFloat = 0
+    @State private var reflectionEditorHeight: CGFloat = 84
     
     var body: some View {
         GeometryReader { geometry in
-            let collapsedHeight = max(330, geometry.size.height * 0.42)
-            let expandedHeight = min(max(520, geometry.size.height * 0.78), geometry.size.height - 24)
-            let currentHeight = resolvedSheetHeight(
-                collapsedHeight: collapsedHeight,
-                expandedHeight: expandedHeight
-            )
+            let naturalContentHeight = selectedTab == .reflection ? reflectionEditorHeight + 20 : 80
+            let naturalSheetHeight = naturalContentHeight + 82
+            let maxSheetHeight = max(176, geometry.size.height * 0.5)
+            let currentHeight = min(naturalSheetHeight, maxSheetHeight)
             
             ZStack(alignment: .bottom) {
                 Color.background
@@ -54,59 +51,29 @@ struct ReflectionView: View {
                     }
                     .padding(.horizontal)
                     .padding(.top, 12)
-                    .padding(.bottom, collapsedHeight + 40)
+                    .padding(.bottom, currentHeight + 40)
                 }
                 
                 ReflectionBottomSheet(
                     selectedTab: $selectedTab,
-                    weeklyRecord: $weeklyRecord,
+                    weeklyRecord: weeklyRecord,
+                    reflectionEditorHeight: $reflectionEditorHeight,
                     onSave: saveReflection
                 )
                 .frame(maxWidth: .infinity)
                 .frame(height: currentHeight, alignment: .top)
-                .background(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
-                .overlay(alignment: .top) {
-                    Capsule()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(width: 44, height: 5)
-                        .padding(.top, 10)
+                .background {
+                    TopRoundedSheetShape(cornerRadius: 28)
+                        .fill(Color.white)
                 }
-                .shadow(color: Color.black.opacity(0.12), radius: 18, x: 0, y: -6)
-                .gesture(
-                    DragGesture(minimumDistance: 10)
-                        .updating($dragTranslation) { value, state, _ in
-                            state = value.translation.height
-                        }
-                        .onEnded { value in
-                            let projectedHeight = resolvedSheetHeight(
-                                collapsedHeight: collapsedHeight,
-                                expandedHeight: expandedHeight,
-                                translation: value.predictedEndTranslation.height
-                            )
-                            let midpoint = (collapsedHeight + expandedHeight) / 2
-                            withAnimation(.spring(response: 0.28, dampingFraction: 0.86)) {
-                                sheetPosition = projectedHeight > midpoint ? .expanded : .middle
-                            }
-                        }
-                )
-                .animation(.spring(response: 0.28, dampingFraction: 0.86), value: sheetPosition)
-                .animation(.spring(response: 0.28, dampingFraction: 0.86), value: dragTranslation)
+                .shadow(color: Color.black.opacity(0.08), radius: 14, x: 0, y: -4)
+                .animation(.spring(response: 0.28, dampingFraction: 0.86), value: currentHeight)
             }
+            .ignoresSafeArea(.container, edges: .bottom)
         }
         .navigationTitle("振り返り")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.hidden, for: .tabBar)
-    }
-    
-    private func resolvedSheetHeight(
-        collapsedHeight: CGFloat,
-        expandedHeight: CGFloat,
-        translation: CGFloat? = nil
-    ) -> CGFloat {
-        let baseHeight = sheetPosition == .middle ? collapsedHeight : expandedHeight
-        let drag = translation ?? dragTranslation
-        return min(max(baseHeight - drag, collapsedHeight), expandedHeight)
     }
     
     private func saveReflection() {
@@ -134,14 +101,24 @@ private enum ReflectionSheetTab: String, CaseIterable, Identifiable {
     }
 }
 
-private enum ReflectionSheetPosition {
-    case middle
-    case expanded
+private struct TopRoundedSheetShape: Shape {
+    let cornerRadius: CGFloat
+    
+    func path(in rect: CGRect) -> Path {
+        Path(
+            UIBezierPath(
+                roundedRect: rect,
+                byRoundingCorners: [.topLeft, .topRight],
+                cornerRadii: CGSize(width: cornerRadius, height: cornerRadius)
+            ).cgPath
+        )
+    }
 }
 
 private struct ReflectionBottomSheet: View {
     @Binding var selectedTab: ReflectionSheetTab
-    @Binding var weeklyRecord: WeeklyRecord
+    @ObservedObject var weeklyRecord: WeeklyRecord
+    @Binding var reflectionEditorHeight: CGFloat
     let onSave: () -> Void
     
     private var reflectionCompleted: Bool {
@@ -153,71 +130,80 @@ private struct ReflectionBottomSheet: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
-            ReflectionSheetTabs(
+        VStack(alignment: .leading, spacing: 0) {
+            ReflectionSheetHeader(
                 selectedTab: $selectedTab,
                 reflectionCompleted: reflectionCompleted,
-                nextGoalCompleted: nextGoalCompleted
+                nextGoalCompleted: nextGoalCompleted,
+                onSave: onSave
             )
-            .padding(.top, 26)
+            .padding(.top, 14)
+            .padding(.bottom, 4)
             
-            Group {
-                if selectedTab == .reflection {
-                    ReflectionEditorView(reflection: $weeklyRecord.reflection)
-                } else {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("来週のテーマや、一番進めたいことを書いておく")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+            ScrollView {
+                Group {
+                    if selectedTab == .reflection {
+                        ReflectionEditorView(
+                            reflection: $weeklyRecord.reflection,
+                            measuredHeight: $reflectionEditorHeight
+                        )
+                    } else {
                         NextGoalCardView(
                             nextWeekGoal: $weeklyRecord.nextWeekGoal,
                             nextWeekEmoji: $weeklyRecord.nextWeekEmoji
                         )
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.bottom, 8)
             }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            
-            Spacer(minLength: 0)
-            
-            Button(action: onSave) {
-                Text("保存")
-                    .font(.title3.bold())
-                    .foregroundColor(.white.opacity(0.96))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 16)
-                    .background(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.accentColor.opacity(0.8), Color.accentColor]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .clipShape(Capsule())
-            }
-            .shadow(color: .accent.opacity(0.24), radius: 12, x: 0, y: 6)
+            .scrollIndicators(.hidden)
         }
         .padding(.horizontal, 20)
-        .padding(.bottom, 20)
+        .padding(.bottom, 12)
+        .overlay(alignment: .top) {
+            Capsule()
+                .fill(Color.gray.opacity(0.3))
+                .frame(width: 44, height: 5)
+                .padding(.top, 10)
+        }
     }
 }
 
-private struct ReflectionSheetTabs: View {
+private struct ReflectionSheetHeader: View {
     @Binding var selectedTab: ReflectionSheetTab
     let reflectionCompleted: Bool
     let nextGoalCompleted: Bool
+    let onSave: () -> Void
     
     var body: some View {
-        Picker("振り返り入力", selection: $selectedTab.animation(.spring(response: 0.24, dampingFraction: 0.9))) {
-            Text("振り返り")
-                .foregroundColor(foregroundColor(for: .reflection, completed: reflectionCompleted))
-                .tag(ReflectionSheetTab.reflection)
+        ZStack {
+            Picker("振り返り入力", selection: $selectedTab.animation(.spring(response: 0.24, dampingFraction: 0.9))) {
+                Text("振り返り")
+                    .foregroundColor(foregroundColor(for: .reflection, completed: reflectionCompleted))
+                    .tag(ReflectionSheetTab.reflection)
+                
+                Text("来週の目標")
+                    .foregroundColor(foregroundColor(for: .nextGoal, completed: nextGoalCompleted))
+                    .tag(ReflectionSheetTab.nextGoal)
+            }
+            .pickerStyle(.segmented)
+            .frame(width: 220)
+            .padding(.vertical, 4)
             
-            Text("来週の目標")
-                .foregroundColor(foregroundColor(for: .nextGoal, completed: nextGoalCompleted))
-                .tag(ReflectionSheetTab.nextGoal)
+            HStack {
+                Spacer()
+                Button(action: onSave) {
+                    Text("保存")
+                        .font(.subheadline.bold())
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 10)
+                        .background(Color.accentColor)
+                        .clipShape(Capsule())
+                }
+            }
         }
-        .pickerStyle(.segmented)
     }
     
     private func foregroundColor(for tab: ReflectionSheetTab, completed: Bool) -> Color {
@@ -292,14 +278,10 @@ struct ThoughtsListView: View {
 
 private struct ReflectionEditorView: View {
     @Binding var reflection: String
-    @FocusState private var isFocused: Bool
+    @Binding var measuredHeight: CGFloat
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("記録を見返しながら、よかったことや気づきを残す")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
                     .fill(Color.card)
@@ -308,7 +290,7 @@ private struct ReflectionEditorView: View {
                             .stroke(Color.gray.opacity(0.18), lineWidth: 1)
                     )
                 
-                if reflection.isEmpty {
+                if reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     Text("どんな一週間でしたか？")
                         .foregroundStyle(.secondary)
                         .padding(.horizontal, 14)
@@ -316,13 +298,69 @@ private struct ReflectionEditorView: View {
                         .allowsHitTesting(false)
                 }
                 
-                TextEditor(text: $reflection)
-                    .scrollContentBackground(.hidden)
+                GrowingTextView(
+                    text: $reflection,
+                    measuredHeight: $measuredHeight
+                )
+                .frame(height: measuredHeight)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 10)
-                    .frame(minHeight: 180)
-                    .focused($isFocused)
             }
+            .clipped()
+        }
+    }
+}
+
+private struct GrowingTextView: UIViewRepresentable {
+    @Binding var text: String
+    @Binding var measuredHeight: CGFloat
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.font = .preferredFont(forTextStyle: .body)
+        textView.isScrollEnabled = false
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        textView.delegate = context.coordinator
+        return textView
+    }
+    
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        if uiView.text != text {
+            uiView.text = text
+        }
+        Self.recalculateHeight(view: uiView, result: $measuredHeight)
+    }
+    
+    static func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {
+        uiView.delegate = nil
+    }
+    
+    static func recalculateHeight(view: UITextView, result: Binding<CGFloat>) {
+        let fittingSize = CGSize(width: view.bounds.width, height: .greatestFiniteMagnitude)
+        let nextSize = max(view.sizeThatFits(fittingSize).height, 64)
+        if result.wrappedValue != nextSize {
+            DispatchQueue.main.async {
+                result.wrappedValue = nextSize
+            }
+        }
+    }
+    
+    final class Coordinator: NSObject, UITextViewDelegate {
+        var parent: GrowingTextView
+        
+        init(_ parent: GrowingTextView) {
+            self.parent = parent
+        }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            parent.text = textView.text
+            GrowingTextView.recalculateHeight(view: textView, result: parent.$measuredHeight)
         }
     }
 }
