@@ -1,5 +1,5 @@
 {
-  "originHash" : "6444e7fae44813c33a2dfc0dc67018e27dd6535a2d28a9b2c541bd629578d40d",
+  "originHash" : "b6afb039c8a96f8d723d61bd14bfcaabc2f061acb7e7da302169b9f0d2118398",
   "pins" : [
     {
       "identity" : "grape",
@@ -13,10 +13,10 @@
     {
       "identity" : "mcemojipicker",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/izyumkin/MCEmojiPicker",
+      "location" : "https://github.com/Jeanno/MCEmojiPicker",
       "state" : {
-        "revision" : "e5b3ed359b04370287366a7c15ffa7013cdd4eec",
-        "version" : "1.2.5"
+        "branch" : "main",
+        "revision" : "94180dde361967629778e7d8aaffecb72a76ef9d"
       }
     }
   ],
