@@ -10,7 +10,6 @@ import UIKit
 
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
-    private let isReflectionGateTemporarilyDisabled = true
     @State private var showReflectionView = false
     @State private var showSettingView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
@@ -33,7 +32,7 @@ struct HomeView: View {
     }
 
     private var canOpenReflection: Bool {
-        isReflectionGateTemporarilyDisabled || isSunday
+        isSunday
     }
     
     var body: some View {
