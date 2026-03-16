@@ -16,13 +16,16 @@ struct ReflectionView: View {
     @State private var activeInput: ReflectionActiveInput?
     @State private var reflectionEditorHeight: CGFloat = 84
     @State private var isSavingReflection = false
+    @GestureState private var sheetDragTranslation: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
             let naturalContentHeight = selectedTab == .reflection ? reflectionEditorHeight + 20 : 80
             let naturalSheetHeight = naturalContentHeight + 82
             let maxSheetHeight = max(176, geometry.size.height * 0.5)
-            let currentHeight = min(naturalSheetHeight, maxSheetHeight)
+            let collapsedSheetHeight = min(naturalSheetHeight, maxSheetHeight)
+            let liftHeight = min(max(0, -sheetDragTranslation), max(0, maxSheetHeight - collapsedSheetHeight))
+            let currentHeight = collapsedSheetHeight + liftHeight
             
             ZStack(alignment: .bottom) {
                 Color.background
@@ -79,6 +82,8 @@ struct ReflectionView: View {
                         .fill(Color.white)
                 }
                 .shadow(color: Color.black.opacity(0.08), radius: 14, x: 0, y: -4)
+                .contentShape(Rectangle())
+                .simultaneousGesture(sheetInteractionGesture)
                 .animation(.spring(response: 0.28, dampingFraction: 0.86), value: currentHeight)
             }
             .ignoresSafeArea(.container, edges: .bottom)
@@ -111,6 +116,45 @@ struct ReflectionView: View {
         guard activeInput != nil else { return }
         activeInput = nil
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    private var sheetInteractionGesture: some Gesture {
+        DragGesture(minimumDistance: 12)
+            .updating($sheetDragTranslation) { value, state, _ in
+                guard abs(value.translation.height) > abs(value.translation.width) else { return }
+                state = value.translation.height
+            }
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = value.translation.height
+                
+                if abs(horizontal) > abs(vertical), abs(horizontal) > 36 {
+                    handleSheetTabSwipe(horizontal)
+                    return
+                }
+                
+                if vertical < -28 {
+                    activeInput = selectedTab == .reflection ? .reflection : .nextGoal
+                } else if vertical > 34, activeInput != nil {
+                    dismissKeyboard()
+                }
+            }
+    }
+    
+    private func handleSheetTabSwipe(_ horizontalTranslation: CGFloat) {
+        let targetTab: ReflectionSheetTab?
+        
+        if horizontalTranslation < 0 {
+            targetTab = selectedTab == .reflection ? .nextGoal : nil
+        } else {
+            targetTab = selectedTab == .nextGoal ? .reflection : nil
+        }
+        
+        guard let targetTab else { return }
+        let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
+        selectedTab = targetTab
+        generator.selectionChanged()
     }
     
     @MainActor
