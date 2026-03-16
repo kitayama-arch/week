@@ -228,6 +228,7 @@
       }
     },
     "それまでの間、日々の出来事や思考を\n記録してみてください。" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -540,6 +541,7 @@
       }
     },
     "振り返りは日曜日のみ可能です" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

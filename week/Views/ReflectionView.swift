@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ReflectionView: View {
     @EnvironmentObject var dataManager: DataManager
@@ -14,6 +15,7 @@ struct ReflectionView: View {
     @State private var selectedTab: ReflectionSheetTab = .reflection
     @State private var activeInput: ReflectionActiveInput?
     @State private var reflectionEditorHeight: CGFloat = 84
+    @State private var isSavingReflection = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -93,17 +95,42 @@ struct ReflectionView: View {
     }
     
     private func saveReflection() {
+        guard !isSavingReflection else { return }
+        isSavingReflection = true
         weeklyRecord.isReflectionCompleted = true
         dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
         dataManager.loadWeeklyRecords()
         dataManager.loadCurrentWeekRecord()
-        dismiss()
+        Task { @MainActor in
+            await playReflectionCompletionHaptic()
+            dismiss()
+        }
     }
     
     private func dismissKeyboard() {
         guard activeInput != nil else { return }
         activeInput = nil
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    @MainActor
+    private func playReflectionCompletionHaptic() async {
+        let soft = UIImpactFeedbackGenerator(style: .soft)
+        let rigid = UIImpactFeedbackGenerator(style: .rigid)
+        let final = UIImpactFeedbackGenerator(style: .medium)
+        
+        soft.prepare()
+        rigid.prepare()
+        final.prepare()
+        
+        soft.impactOccurred(intensity: 0.55)
+        try? await Task.sleep(nanoseconds: 55_000_000)
+        soft.impactOccurred(intensity: 0.72)
+        try? await Task.sleep(nanoseconds: 60_000_000)
+        rigid.impactOccurred(intensity: 0.9)
+        try? await Task.sleep(nanoseconds: 95_000_000)
+        final.impactOccurred(intensity: 1.0)
+        try? await Task.sleep(nanoseconds: 40_000_000)
     }
 }
 
@@ -230,7 +257,7 @@ private struct ReflectionSheetHeader: View {
             }
             .pickerStyle(.segmented)
             .frame(width: 220)
-            .padding(.vertical, 4)
+            .padding(.vertical, 6)
             
             HStack {
                 Spacer()

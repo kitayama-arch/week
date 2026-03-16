@@ -670,7 +670,7 @@ private struct GoalEmojiBubbleCloudView: View {
         } emittingNewNodesWithStates: { nodeID in
             KineticState(position: initialNodePosition(forID: nodeID))
         }
-        .padding(18)
+        .clipShape(RoundedRectangle(cornerRadius: cardCornerRadius))
         .graphOverlay { proxy in
             Rectangle()
                 .fill(.clear)
@@ -831,10 +831,6 @@ private struct PickupReflectionSection: View {
                                     Text("\(formatDate(record.startDate)) - \(formatDate(record.endDate))")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
-                                    Spacer()
-                                    Text("振り返り")
-                                        .font(.system(.caption, design: .rounded, weight: .semibold))
-                                        .foregroundStyle(Color.accentColor)
                                 }
                                 
                                 Text(record.reflection)
