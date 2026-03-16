@@ -93,7 +93,7 @@ struct PickupHeroSection: View {
                         guard !isRerolling else { return }
                         onSelectRecord(displayedThought.weeklyRecord)
                     },
-                    onSwipeRight: rerollThought
+                    onSwipeHorizontal: rerollThought
                 )
                 .onChange(of: thoughtIDsKey) { _, _ in
                     syncDisplayedThoughtID()
@@ -255,28 +255,11 @@ struct PickupHeroCard: View {
     let thought: ArchiveThoughtItem
     let isRerolling: Bool
     let onTap: () -> Void
-    let onSwipeRight: () -> Void
+    let onSwipeHorizontal: () -> Void
     
-    @GestureState private var dragOffset: CGFloat = 0
+    @State private var dragOffset: CGFloat = 0
     
     var body: some View {
-        let swipeGesture = DragGesture(minimumDistance: 16, coordinateSpace: .local)
-            .updating($dragOffset) { value, state, _ in
-                let horizontal = max(value.translation.width, 0)
-                let vertical = abs(value.translation.height)
-                if horizontal > vertical {
-                    state = min(horizontal, 60)
-                }
-            }
-            .onEnded { value in
-                let horizontal = value.translation.width
-                let vertical = abs(value.translation.height)
-                let predicted = value.predictedEndTranslation.width
-                guard horizontal > 52,
-                      horizontal > vertical * 1.2 || predicted > 88 else { return }
-                onSwipeRight()
-            }
-        
         ZStack {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.card)
@@ -327,10 +310,164 @@ struct PickupHeroCard: View {
         }
         .contentShape(RoundedRectangle(cornerRadius: 16))
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .onTapGesture(perform: onTap)
-        .simultaneousGesture(swipeGesture)
+        .overlay {
+            PickupHeroCardInteractionOverlay(
+                onTap: onTap,
+                onHorizontalDragChanged: { translation in
+                    withAnimation(.snappy(duration: 0.14, extraBounce: 0)) {
+                        dragOffset = max(min(translation, 60), -60)
+                    }
+                },
+                onHorizontalDragEnded: { translation, projectedTranslation in
+                    if abs(translation) > 52 || abs(projectedTranslation) > 88 {
+                        onSwipeHorizontal()
+                    }
+                    withAnimation(.snappy(duration: 0.18, extraBounce: 0)) {
+                        dragOffset = 0
+                    }
+                }
+            )
+        }
         .animation(.snappy(duration: 0.25, extraBounce: 0), value: thought.id)
         .animation(.snappy(duration: 0.2, extraBounce: 0), value: dragOffset)
+    }
+}
+
+private struct PickupHeroCardInteractionOverlay: UIViewRepresentable {
+    let onTap: () -> Void
+    let onHorizontalDragChanged: (CGFloat) -> Void
+    let onHorizontalDragEnded: (_ translation: CGFloat, _ projectedTranslation: CGFloat) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(
+            onTap: onTap,
+            onHorizontalDragChanged: onHorizontalDragChanged,
+            onHorizontalDragEnded: onHorizontalDragEnded
+        )
+    }
+
+    func makeUIView(context: Context) -> PickupHeroCardInteractionView {
+        let view = PickupHeroCardInteractionView()
+        view.backgroundColor = .clear
+        view.onHierarchyChange = { interactionView in
+            context.coordinator.attachPagingRecognizerIfNeeded(from: interactionView)
+        }
+
+        let tapGesture = UITapGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handleTap)
+        )
+
+        let panGesture = UIPanGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handlePan(_:))
+        )
+        panGesture.delegate = context.coordinator
+        panGesture.cancelsTouchesInView = true
+        tapGesture.require(toFail: panGesture)
+
+        view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(panGesture)
+
+        context.coordinator.tapGesture = tapGesture
+        context.coordinator.panGesture = panGesture
+        context.coordinator.attachPagingRecognizerIfNeeded(from: view)
+        return view
+    }
+
+    func updateUIView(_ uiView: PickupHeroCardInteractionView, context: Context) {
+        context.coordinator.onTap = onTap
+        context.coordinator.onHorizontalDragChanged = onHorizontalDragChanged
+        context.coordinator.onHorizontalDragEnded = onHorizontalDragEnded
+        context.coordinator.attachPagingRecognizerIfNeeded(from: uiView)
+    }
+
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var onTap: () -> Void
+        var onHorizontalDragChanged: (CGFloat) -> Void
+        var onHorizontalDragEnded: (_ translation: CGFloat, _ projectedTranslation: CGFloat) -> Void
+        weak var tapGesture: UITapGestureRecognizer?
+        weak var panGesture: UIPanGestureRecognizer?
+        weak var pagingPanGesture: UIPanGestureRecognizer?
+
+        init(
+            onTap: @escaping () -> Void,
+            onHorizontalDragChanged: @escaping (CGFloat) -> Void,
+            onHorizontalDragEnded: @escaping (_ translation: CGFloat, _ projectedTranslation: CGFloat) -> Void
+        ) {
+            self.onTap = onTap
+            self.onHorizontalDragChanged = onHorizontalDragChanged
+            self.onHorizontalDragEnded = onHorizontalDragEnded
+        }
+
+        func attachPagingRecognizerIfNeeded(from view: UIView) {
+            guard pagingPanGesture == nil, let panGesture else { return }
+
+            var currentSuperview: UIView? = view.superview
+            while let currentView = currentSuperview {
+                if let pagingScrollView = currentView as? UIScrollView, pagingScrollView.isPagingEnabled {
+                    pagingScrollView.panGestureRecognizer.require(toFail: panGesture)
+                    pagingPanGesture = pagingScrollView.panGestureRecognizer
+                    break
+                }
+                currentSuperview = currentView.superview
+            }
+        }
+
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else {
+                return true
+            }
+
+            let velocity = panGesture.velocity(in: panGesture.view)
+            return abs(velocity.x) > abs(velocity.y)
+        }
+
+        func gestureRecognizer(
+            _ gestureRecognizer: UIGestureRecognizer,
+            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+        ) -> Bool {
+            false
+        }
+
+        @objc
+        func handleTap() {
+            onTap()
+        }
+
+        @objc
+        func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+            guard let view = gestureRecognizer.view else { return }
+
+            let translation = gestureRecognizer.translation(in: view).x
+            let velocity = gestureRecognizer.velocity(in: view).x
+            let projectedTranslation = translation + (velocity * 0.12)
+
+            switch gestureRecognizer.state {
+            case .began, .changed:
+                onHorizontalDragChanged(translation)
+
+            case .ended, .cancelled, .failed:
+                onHorizontalDragEnded(translation, projectedTranslation)
+
+            default:
+                break
+            }
+        }
+    }
+}
+
+private final class PickupHeroCardInteractionView: UIView {
+    var onHierarchyChange: ((UIView) -> Void)?
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        onHierarchyChange?(self)
+    }
+
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
+        onHierarchyChange?(self)
     }
 }
 

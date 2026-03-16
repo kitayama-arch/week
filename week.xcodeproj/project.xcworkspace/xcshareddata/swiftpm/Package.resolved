@@ -1,6 +1,15 @@
 {
-  "originHash" : "595d1748b1c3db11b79ffd9f75f2eb43bd054d2196cd9f3ba2c5add22061bf3c",
+  "originHash" : "6444e7fae44813c33a2dfc0dc67018e27dd6535a2d28a9b2c541bd629578d40d",
   "pins" : [
+    {
+      "identity" : "grape",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftGraphs/Grape",
+      "state" : {
+        "revision" : "48eb7d8ab4ce549c6cdde106b5f7fa317421364c",
+        "version" : "1.1.0"
+      }
+    },
     {
       "identity" : "mcemojipicker",
       "kind" : "remoteSourceControl",

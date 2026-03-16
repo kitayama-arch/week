@@ -15,6 +15,7 @@ struct ContributionGraphView: View {
     private func getContributionCount(for date: Date) -> Int {
         return dataManager.weeklyRecords.flatMap { record in
             record.thoughts.filter { thought in
+                !thought.content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
                 Calendar.current.isDate(thought.date, inSameDayAs: date)
             }
         }.count

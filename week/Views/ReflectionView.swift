@@ -11,6 +11,7 @@ import UIKit
 struct ReflectionView: View {
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @State var weeklyRecord: WeeklyRecord
     @State private var selectedTab: ReflectionSheetTab = .reflection
     @State private var activeInput: ReflectionActiveInput?
@@ -73,25 +74,16 @@ struct ReflectionView: View {
                     activeInput: $activeInput,
                     weeklyRecord: weeklyRecord,
                     reflectionEditorHeight: $reflectionEditorHeight,
-                    onSave: saveReflection
+                    onSave: saveReflection,
+                    handleGesture: sheetInteractionGesture
                 )
                 .frame(maxWidth: .infinity)
                 .frame(height: currentHeight, alignment: .top)
                 .background {
                     TopRoundedSheetShape(cornerRadius: 28)
-                        .fill(Color.white)
+                        .fill(colorScheme == .dark ? Color.card : Color.white)
                 }
                 .shadow(color: Color.black.opacity(0.08), radius: 14, x: 0, y: -4)
-                .contentShape(Rectangle())
-                .overlay(alignment: .top) {
-                    Rectangle()
-                        .fill(.clear)
-                        .frame(width: 120, height: 40)
-                        .contentShape(Rectangle())
-                        .padding(.top, 4)
-                        .gesture(sheetInteractionGesture)
-                        .accessibilityHidden(true)
-                }
                 .animation(.spring(response: 0.28, dampingFraction: 0.86), value: currentHeight)
             }
             .ignoresSafeArea(.container, edges: .bottom)
@@ -175,12 +167,16 @@ struct ReflectionView: View {
         rigid.prepare()
         final.prepare()
         
-        soft.impactOccurred(intensity: 0.55)
-        try? await Task.sleep(nanoseconds: 55_000_000)
-        soft.impactOccurred(intensity: 0.72)
-        try? await Task.sleep(nanoseconds: 60_000_000)
-        rigid.impactOccurred(intensity: 0.9)
-        try? await Task.sleep(nanoseconds: 95_000_000)
+        soft.impactOccurred(intensity: 0.34)
+        try? await Task.sleep(nanoseconds: 35_000_000)
+        soft.impactOccurred(intensity: 0.48)
+        try? await Task.sleep(nanoseconds: 38_000_000)
+        soft.impactOccurred(intensity: 0.62)
+        try? await Task.sleep(nanoseconds: 45_000_000)
+        rigid.impactOccurred(intensity: 0.78)
+        try? await Task.sleep(nanoseconds: 70_000_000)
+        rigid.impactOccurred(intensity: 0.92)
+        try? await Task.sleep(nanoseconds: 90_000_000)
         final.impactOccurred(intensity: 1.0)
         try? await Task.sleep(nanoseconds: 40_000_000)
     }
@@ -221,12 +217,13 @@ private struct TopRoundedSheetShape: Shape {
     }
 }
 
-private struct ReflectionBottomSheet: View {
+private struct ReflectionBottomSheet<HandleGesture: Gesture>: View {
     @Binding var selectedTab: ReflectionSheetTab
     @Binding var activeInput: ReflectionActiveInput?
     @ObservedObject var weeklyRecord: WeeklyRecord
     @Binding var reflectionEditorHeight: CGFloat
     let onSave: () -> Void
+    let handleGesture: HandleGesture
     
     private var reflectionCompleted: Bool {
         !weeklyRecord.reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -238,13 +235,14 @@ private struct ReflectionBottomSheet: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+            ReflectionSheetHandle(gesture: handleGesture)
+
             ReflectionSheetHeader(
                 selectedTab: $selectedTab,
                 reflectionCompleted: reflectionCompleted,
                 nextGoalCompleted: nextGoalCompleted,
                 onSave: onSave
             )
-            .padding(.top, 14)
             .padding(.bottom, 4)
             
             ScrollView {
@@ -266,18 +264,13 @@ private struct ReflectionBottomSheet: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.top, 6)
                 .padding(.bottom, 8)
             }
             .scrollIndicators(.hidden)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 12)
-        .overlay(alignment: .top) {
-            Capsule()
-                .fill(Color.gray.opacity(0.3))
-                .frame(width: 44, height: 5)
-                .padding(.top, 10)
-        }
     }
     
     private func activeInputBinding(for input: ReflectionActiveInput) -> Binding<Bool> {
@@ -287,6 +280,23 @@ private struct ReflectionBottomSheet: View {
                 activeInput = isFocused ? input : nil
             }
         )
+    }
+}
+
+private struct ReflectionSheetHandle<HandleGesture: Gesture>: View {
+    let gesture: HandleGesture
+
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(Color.gray.opacity(0.3))
+                .frame(width: 44, height: 5)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 28)
+        .contentShape(Rectangle())
+        .gesture(gesture)
+        .accessibilityHidden(true)
     }
 }
 
@@ -410,7 +420,7 @@ private struct ReflectionEditorView: View {
                     .fill(Color.card)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(Color.gray.opacity(0.18), lineWidth: 1)
+                            .strokeBorder(Color.gray.opacity(0.18), lineWidth: 1)
                     )
                 
                 if reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -429,10 +439,9 @@ private struct ReflectionEditorView: View {
                     measuredHeight: $measuredHeight
                 )
                 .frame(height: measuredHeight)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 10)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 10)
             }
-            .clipped()
         }
     }
 }

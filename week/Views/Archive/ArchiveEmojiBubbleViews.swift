@@ -38,7 +38,6 @@ struct GoalEmojiBubbleCloudView: View {
         initialIsRunning: true,
         ticksOnAppear: .untilStable
     )
-    @State private var draggingNodeID: String?
     
     private let cardCornerRadius: CGFloat = 20
     
@@ -72,10 +71,11 @@ struct GoalEmojiBubbleCloudView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: cardCornerRadius))
         .graphOverlay { proxy in
-            Rectangle()
-                .fill(.clear)
-                .contentShape(Rectangle())
-                .gesture(nodeDragGesture(proxy: proxy))
+            NodeOnlyGraphDragOverlay(
+                proxy: proxy,
+                onNodeGrab: triggerNodeGrabImpact,
+                onNodeRelease: triggerNodeReleaseImpact
+            )
         }
     }
     
@@ -151,29 +151,6 @@ struct GoalEmojiBubbleCloudView: View {
         )
     }
     
-    private func nodeDragGesture(proxy: GraphProxy) -> some Gesture {
-        DragGesture(minimumDistance: 2, coordinateSpace: .local)
-            .onChanged { value in
-                if draggingNodeID == nil {
-                    guard let nodeID = proxy.node(of: String.self, at: value.startLocation) else {
-                        return
-                    }
-                    triggerNodeGrabImpact()
-                    draggingNodeID = nodeID
-                }
-                
-                guard let draggingNodeID else { return }
-                proxy.setNodeFixation(nodeID: draggingNodeID, fixation: value.location)
-            }
-            .onEnded { _ in
-                if let draggingNodeID {
-                    proxy.setNodeFixation(nodeID: draggingNodeID, fixation: nil)
-                    triggerNodeReleaseImpact()
-                }
-                draggingNodeID = nil
-            }
-    }
-    
     private func triggerNodeGrabImpact() {
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.prepare()
@@ -184,5 +161,93 @@ struct GoalEmojiBubbleCloudView: View {
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.prepare()
         generator.impactOccurred(intensity: 0.45)
+    }
+}
+
+private struct NodeOnlyGraphDragOverlay: UIViewRepresentable {
+    let proxy: GraphProxy
+    let onNodeGrab: () -> Void
+    let onNodeRelease: () -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(proxy: proxy, onNodeGrab: onNodeGrab, onNodeRelease: onNodeRelease)
+    }
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = .clear
+
+        let panGesture = UIPanGestureRecognizer(
+            target: context.coordinator,
+            action: #selector(Coordinator.handlePan(_:))
+        )
+        panGesture.delegate = context.coordinator
+        panGesture.cancelsTouchesInView = true
+        view.addGestureRecognizer(panGesture)
+
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
+        context.coordinator.proxy = proxy
+        context.coordinator.onNodeGrab = onNodeGrab
+        context.coordinator.onNodeRelease = onNodeRelease
+    }
+
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var proxy: GraphProxy
+        var onNodeGrab: () -> Void
+        var onNodeRelease: () -> Void
+        private var activeNodeID: String?
+
+        init(proxy: GraphProxy, onNodeGrab: @escaping () -> Void, onNodeRelease: @escaping () -> Void) {
+            self.proxy = proxy
+            self.onNodeGrab = onNodeGrab
+            self.onNodeRelease = onNodeRelease
+        }
+
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer,
+                  let view = panGesture.view else {
+                return false
+            }
+
+            let location = panGesture.location(in: view)
+            activeNodeID = proxy.node(of: String.self, at: location)
+            return activeNodeID != nil
+        }
+
+        @objc
+        func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+            guard let view = gestureRecognizer.view else { return }
+            let location = gestureRecognizer.location(in: view)
+
+            switch gestureRecognizer.state {
+            case .began:
+                guard let nodeID = activeNodeID ?? proxy.node(of: String.self, at: location) else {
+                    return
+                }
+                activeNodeID = nodeID
+                onNodeGrab()
+                proxy.setNodeFixation(nodeID: nodeID, fixation: location)
+
+            case .changed:
+                guard let nodeID = activeNodeID else { return }
+                proxy.setNodeFixation(nodeID: nodeID, fixation: location)
+
+            case .ended, .cancelled, .failed:
+                releaseNode()
+
+            default:
+                break
+            }
+        }
+
+        private func releaseNode() {
+            guard let nodeID = activeNodeID else { return }
+            proxy.setNodeFixation(nodeID: nodeID, fixation: nil)
+            activeNodeID = nil
+            onNodeRelease()
+        }
     }
 }
