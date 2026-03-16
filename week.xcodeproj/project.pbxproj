@@ -829,10 +829,10 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			repositoryURL = "https://github.com/Jeanno/MCEmojiPicker";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.3;
+				branch = main;
+				kind = branch;
 			};
 		};
 		5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */ = {
