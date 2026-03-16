@@ -154,7 +154,10 @@ struct PurchaseView: View {
             }
             products = loadedProducts
         } catch {
-            errorMessage = ErrorMessage(title: "エラー", message: "製品の読み込みに失敗しました: \(error.localizedDescription)")
+            errorMessage = ErrorMessage(
+                title: String(localized: "エラー"),
+                message: String(format: String(localized: "製品の読み込みに失敗しました: %@"), error.localizedDescription)
+            )
         }
     }
     
@@ -168,7 +171,7 @@ struct PurchaseView: View {
             enablePrivilege(productId: transaction.productID)
             await transaction.finish()
             // 完了メッセージを表示
-            showResultMessage("購入が完了しました。", isError: false)
+            showResultMessage(String(localized: "購入が完了しました。"), isError: false)
         } catch {
             // エラーメッセージを表示
             let errorMessage = getErrorMessage(error: error)
@@ -226,7 +229,7 @@ struct PurchaseView: View {
     }
     
     private func showResultMessage(_ message: String, isError: Bool = false) {
-        let title = isError ? "Error" : "成功"
+        let title = isError ? String(localized: "エラー") : String(localized: "成功")
         errorMessage = ErrorMessage(title: title, message: message)
     }
     
@@ -269,12 +272,12 @@ struct PurchaseView: View {
             }
 
             if restoredSubscription {
-                showResultMessage("購入が復元されました。", isError: false)
+                showResultMessage(String(localized: "購入が復元されました。"), isError: false)
             } else {
-                showResultMessage("復元可能な購入がありません。", isError: true)
+                showResultMessage(String(localized: "復元可能な購入がありません。"), isError: true)
             }
         } catch {
-            showResultMessage("購入の復元に失敗しました: \(error.localizedDescription)", isError: true)
+            showResultMessage(String(format: String(localized: "購入の復元に失敗しました: %@"), error.localizedDescription), isError: true)
         }
 
         // 購読状態を更新

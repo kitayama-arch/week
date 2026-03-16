@@ -32,6 +32,8 @@
 		5A9ECF092CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9ECF052CA7265800E28E7F /* WeeklyRecordEntity+CoreDataProperties.swift */; };
 		5AAB8A4A2C635DE7002ECBC5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */; };
 		5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB8A4C2C639EE2002ECBC5 /* CoreDataManager.swift */; };
+		5AACE9832F6768B000920D4F /* ForceSimulation in Frameworks */ = {isa = PBXBuildFile; productRef = 5AACE9822F6768B000920D4F /* ForceSimulation */; };
+		5AACE9852F6768B000920D4F /* Grape in Frameworks */ = {isa = PBXBuildFile; productRef = 5AACE9842F6768B000920D4F /* Grape */; };
 		5ABF75072CC9A72A00454AC8 /* ContributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */; };
 		5AE391CB2CB7BACF00C87DF7 /* PurchaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */; };
 		5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AE391CC2CB7BF6600C87DF7 /* StoreKit.framework */; };
@@ -40,6 +42,11 @@
 		5AFA1DBF2CAB4E1C00181F51 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */; };
 		5AFA1DC12CAB614C00181F51 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AFA1DC02CAB614C00181F51 /* Color.xcassets */; };
 		5AFA1DC42CAB615000181F51 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFA1DC32CAB615000181F51 /* MainTabView.swift */; };
+		5B6C6A5A2F69700100A1B001 /* ArchiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C6A5F2F69700100A1B001 /* ArchiveData.swift */; };
+		5B6C6A5B2F69700100A1B001 /* ArchivePages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C6A602F69700100A1B001 /* ArchivePages.swift */; };
+		5B6C6A5C2F69700100A1B001 /* ArchiveSearchViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C6A612F69700100A1B001 /* ArchiveSearchViews.swift */; };
+		5B6C6A5D2F69700100A1B001 /* ArchiveEmojiBubbleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C6A622F69700100A1B001 /* ArchiveEmojiBubbleViews.swift */; };
+		5B6C6A5E2F69700100A1B001 /* ArchiveComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6C6A632F69700100A1B001 /* ArchiveComponents.swift */; };
 		B8859F9ED05B62534C0BB0F2 /* Pods_weekTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F7593BBBC24728268D094D /* Pods_weekTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +99,11 @@
 		5AFA1DBE2CAB4E1C00181F51 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		5AFA1DC02CAB614C00181F51 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		5AFA1DC32CAB615000181F51 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		5B6C6A5F2F69700100A1B001 /* ArchiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveData.swift; sourceTree = "<group>"; };
+		5B6C6A602F69700100A1B001 /* ArchivePages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivePages.swift; sourceTree = "<group>"; };
+		5B6C6A612F69700100A1B001 /* ArchiveSearchViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveSearchViews.swift; sourceTree = "<group>"; };
+		5B6C6A622F69700100A1B001 /* ArchiveEmojiBubbleViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveEmojiBubbleViews.swift; sourceTree = "<group>"; };
+		5B6C6A632F69700100A1B001 /* ArchiveComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveComponents.swift; sourceTree = "<group>"; };
 		6BA57B40A83707B94AB0033C /* Pods-syuki.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-syuki.debug.xcconfig"; path = "Target Support Files/Pods-syuki/Pods-syuki.debug.xcconfig"; sourceTree = "<group>"; };
 		6E01471588EA58CD23D448AE /* Pods-weekTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weekTests.release.xcconfig"; path = "Target Support Files/Pods-weekTests/Pods-weekTests.release.xcconfig"; sourceTree = "<group>"; };
 		B04899E32BFAC4EA5F6ED580 /* Pods-weekTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weekTests.debug.xcconfig"; path = "Target Support Files/Pods-weekTests/Pods-weekTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +120,8 @@
 				5AE391CD2CB7BF6600C87DF7 /* StoreKit.framework in Frameworks */,
 				5A0853C82C33FF6E00DF69BF /* MCEmojiPicker in Frameworks */,
 				3C518B7674550B17AB9142ED /* Pods_week.framework in Frameworks */,
+				5AACE9852F6768B000920D4F /* Grape in Frameworks */,
+				5AACE9832F6768B000920D4F /* ForceSimulation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +151,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5B6C6A642F69700100A1B001 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
+				5B6C6A5F2F69700100A1B001 /* ArchiveData.swift */,
+				5B6C6A602F69700100A1B001 /* ArchivePages.swift */,
+				5B6C6A612F69700100A1B001 /* ArchiveSearchViews.swift */,
+				5B6C6A622F69700100A1B001 /* ArchiveEmojiBubbleViews.swift */,
+				5B6C6A632F69700100A1B001 /* ArchiveComponents.swift */,
+				5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
 		5A2BEDF72C32B42D00D2307F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,12 +174,11 @@
 				5A35393B2C33D09D00C3AB8D /* ThoughtCardView.swift */,
 				5A2471792C68BB9A001C3CAA /* ReflectionView.swift */,
 				5A24717D2C6B4D2D001C3CAA /* NextGoalCardView.swift */,
-				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
+				5B6C6A642F69700100A1B001 /* Archive */,
 				5A24631C2CAB16E500B02F0A /* SettingView.swift */,
 				5A24631E2CAB212F00B02F0A /* BannerView.swift */,
 				5AE391CA2CB7BACF00C87DF7 /* PurchaseView.swift */,
 				5A4B02E02CAC10DC00497E79 /* TutorialView.swift */,
-				5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +293,8 @@
 			name = week;
 			packageProductDependencies = (
 				5A0853C72C33FF6E00DF69BF /* MCEmojiPicker */,
+				5AACE9822F6768B000920D4F /* ForceSimulation */,
+				5AACE9842F6768B000920D4F /* Grape */,
 			);
 			productName = syuki;
 			productReference = 5A4ED3712C3275BA003E2E0C /* week.app */;
@@ -311,7 +340,7 @@
 			};
 			buildConfigurationList = 5A4ED36C2C3275BA003E2E0C /* Build configuration list for PBXProject "week" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = ja;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -321,6 +350,7 @@
 			mainGroup = 5A4ED3682C3275BA003E2E0C;
 			packageReferences = (
 				5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */,
 			);
 			productRefGroup = 5A4ED3722C3275BA003E2E0C /* Products */;
 			projectDirPath = "";
@@ -487,6 +517,11 @@
 				5A3539362C33CBB700C3AB8D /* GoalCardView.swift in Sources */,
 				5A6157A12CAEF780006C4F67 /* KeyboardResponder.swift in Sources */,
 				5A3539342C33CA0400C3AB8D /* ArchiveView.swift in Sources */,
+				5B6C6A5A2F69700100A1B001 /* ArchiveData.swift in Sources */,
+				5B6C6A5B2F69700100A1B001 /* ArchivePages.swift in Sources */,
+				5B6C6A5C2F69700100A1B001 /* ArchiveSearchViews.swift in Sources */,
+				5B6C6A5D2F69700100A1B001 /* ArchiveEmojiBubbleViews.swift in Sources */,
+				5B6C6A5E2F69700100A1B001 /* ArchiveComponents.swift in Sources */,
 				5AAB8A4D2C639EE2002ECBC5 /* CoreDataManager.swift in Sources */,
 				5A71975D2C66DC77005BDAC2 /* DataManager.swift in Sources */,
 				5A4ED3752C3275BA003E2E0C /* weekApp.swift in Sources */,
@@ -646,7 +681,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"week/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
@@ -654,6 +689,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = week/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = week;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -663,7 +699,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -685,7 +721,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"week/Preview Content\"";
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				ENABLE_PREVIEWS = YES;
@@ -693,6 +729,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = week/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = week;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -702,7 +739,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -723,7 +760,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
@@ -743,7 +780,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7Z3QK7D946;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
@@ -792,10 +829,18 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker";
+			repositoryURL = "https://github.com/Jeanno/MCEmojiPicker";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftGraphs/Grape";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.2.3;
+				minimumVersion = 1.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -805,6 +850,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A0853C62C33FF6E00DF69BF /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
 			productName = MCEmojiPicker;
+		};
+		5AACE9822F6768B000920D4F /* ForceSimulation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */;
+			productName = ForceSimulation;
+		};
+		5AACE9842F6768B000920D4F /* Grape */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5AACE9812F6768B000920D4F /* XCRemoteSwiftPackageReference "Grape" */;
+			productName = Grape;
 		};
 /* End XCSwiftPackageProductDependency section */
 
