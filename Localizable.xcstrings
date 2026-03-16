@@ -176,6 +176,66 @@
         }
       }
     },
+    "あなた" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You"
+          }
+        }
+      }
+    },
+    "エラー" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        }
+      }
+    },
+    "購入が完了しました。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase completed."
+          }
+        }
+      }
+    },
+    "購入が復元されました。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purchase restored."
+          }
+        }
+      }
+    },
+    "購入の復元に失敗しました: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to restore purchase: %@"
+          }
+        }
+      }
+    },
+    "復元可能な購入がありません。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No purchases to restore."
+          }
+        }
+      }
+    },
     "グラフ機能のアンロック" : {
       "localizations" : {
         "en" : {
@@ -385,7 +445,134 @@
       }
     },
     "今日の一枚" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today's Card"
+          }
+        }
+      }
+    },
+    "直近の振り返り" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Reflections"
+          }
+        }
+      }
+    },
+    "思考がよく動いていた週を見つけ直せます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find weeks when your thoughts were most active."
+          }
+        }
+      }
+    },
+    "自分が選びがちな気分やテーマが、だんだん見えてきます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your frequently chosen moods and themes will gradually become visible."
+          }
+        }
+      }
+    },
+    "タイムライン" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline"
+          }
+        }
+      }
+    },
+    "まだ『ランダム』はありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No random card yet"
+          }
+        }
+      }
+    },
+    "まだ十分な記録がありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not enough records yet"
+          }
+        }
+      }
+    },
+    "まだ絵文字の傾向は見えていません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emoji patterns not visible yet"
+          }
+        }
+      }
+    },
+    "最近書いた振り返りをまとめて見返せます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Review your recent reflections in one place."
+          }
+        }
+      }
+    },
+    "週の振り返りを書き始めると、ここから最近のまとめを辿れます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Once you start reflecting, you can trace your recent summaries from here."
+          }
+        }
+      }
+    },
+    "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As you set more weekly goals, your frequently used emojis will grow here."
+          }
+        }
+      }
+    },
+    "週ごとの記録が増えると、動きの多かった週をここで拾えます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As you add more weekly records, you can find your busiest weeks here."
+          }
+        }
+      }
+    },
+    "今週の絵文字" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Week's Emojis"
+          }
+        }
+      }
     },
     "今週の目標を入力してください" : {
       "localizations" : {
@@ -510,6 +697,26 @@
         }
       }
     },
+    "成功" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Success"
+          }
+        }
+      }
+    },
+    "製品の読み込みに失敗しました: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to load products: %@"
+          }
+        }
+      }
+    },
     "振り返り" : {
       "localizations" : {
         "en" : {
@@ -547,6 +754,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reflect is only possible on Sundays"
+          }
+        }
+      }
+    },
+    "振り返りはまだありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No reflections yet"
           }
         }
       }
@@ -732,6 +949,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Record"
+          }
+        }
+      }
+    },
+    "記録が増えると、ここで過去の一枚をひらけるようになります。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "As you add more records, you'll be able to open a random past entry here."
+          }
+        }
+      }
+    },
+    "記録が増えると、ここに週ごとのアーカイブが並びます。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly archives will appear here as you add more records."
+          }
+        }
+      }
+    },
+    "記録が多かった週" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most Active Weeks"
+          }
+        }
+      }
+    },
+    "記録はまだありません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No records yet"
           }
         }
       }

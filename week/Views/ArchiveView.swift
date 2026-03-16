@@ -41,8 +41,8 @@ private enum ArchiveTab: String, CaseIterable, Identifiable {
     
     var title: String {
         switch self {
-        case .you: return "あなた"
-        case .timeline: return "タイムライン"
+        case .you: return String(localized: "あなた")
+        case .timeline: return String(localized: "タイムライン")
         }
     }
 }
@@ -362,8 +362,8 @@ private struct TimelineArchivePage: View {
                     
                     if sortedRecords.isEmpty {
                         ArchiveEmptyStateView(
-                            title: "記録はまだありません",
-                            message: "記録が増えると、ここに週ごとのアーカイブが並びます。"
+                            title: String(localized: "記録はまだありません"),
+                            message: String(localized: "記録が増えると、ここに週ごとのアーカイブが並びます。")
                         )
                         .padding(.horizontal)
                         .padding(.top, 12)
@@ -437,15 +437,15 @@ private struct YouArchivePage: View {
                     .padding(.horizontal)
                     
                     GoalEmojiBubbleSection(
-                        title: "今週の絵文字",
-                        subtitle: "自分が選びがちな気分やテーマが、だんだん見えてきます。",
+                        title: String(localized: "今週の絵文字"),
+                        subtitle: String(localized: "自分が選びがちな気分やテーマが、だんだん見えてきます。"),
                         items: goalEmojiBubbleItems
                     )
                     .padding(.horizontal)
                     
                     PickupReflectionSection(
-                        title: "直近の振り返り",
-                        subtitle: "最近書いた振り返りをまとめて見返せます。",
+                        title: String(localized: "直近の振り返り"),
+                        subtitle: String(localized: "最近書いた振り返りをまとめて見返せます。"),
                         records: recentReflectionRecords,
                         formatDate: formatDate,
                         onSelectRecord: onSelectRecord
@@ -453,8 +453,8 @@ private struct YouArchivePage: View {
                     .padding(.horizontal)
                     
                     PickupWeeklySection(
-                        title: "記録が多かった週",
-                        subtitle: "思考がよく動いていた週を見つけ直せます。",
+                        title: String(localized: "記録が多かった週"),
+                        subtitle: String(localized: "思考がよく動いていた週を見つけ直せます。"),
                         records: mostActiveRecords,
                         formatDate: formatDate,
                         onSelectRecord: onSelectRecord
@@ -520,8 +520,8 @@ private struct PickupHeroSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             PickupSectionHeader(
-                title: "ランダム",
-                subtitle: "過去の記録から、今日ひらく一枚を選びます。"
+                title: String(localized: "ランダム"),
+                subtitle: String(localized: "過去の記録から、今日ひらく一枚を選びます。")
             )
             
             if let displayedThought {
@@ -544,8 +544,8 @@ private struct PickupHeroSection: View {
                 }
             } else {
                 ArchiveEmptyStateView(
-                    title: "まだ『ランダム』はありません",
-                    message: "記録が増えると、ここで過去の一枚をひらけるようになります。"
+                    title: String(localized: "まだ『ランダム』はありません"),
+                    message: String(localized: "記録が増えると、ここで過去の一枚をひらけるようになります。")
                 )
             }
         }
@@ -621,8 +621,8 @@ private struct GoalEmojiBubbleSection: View {
             
             if items.isEmpty {
                 ArchiveEmptyStateView(
-                    title: "まだ絵文字の傾向は見えていません",
-                    message: "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。"
+                    title: String(localized: "まだ絵文字の傾向は見えていません"),
+                    message: String(localized: "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。")
                 )
             } else {
                 GoalEmojiBubbleCloudView(items: items)
@@ -815,8 +815,8 @@ private struct PickupReflectionSection: View {
             
             if records.isEmpty {
                 ArchiveEmptyStateView(
-                    title: "振り返りはまだありません",
-                    message: "週の振り返りを書き始めると、ここから最近のまとめを辿れます。"
+                    title: String(localized: "振り返りはまだありません"),
+                    message: String(localized: "週の振り返りを書き始めると、ここから最近のまとめを辿れます。")
                 )
             } else {
                 LazyVStack(spacing: 10) {
@@ -949,8 +949,8 @@ private struct PickupWeeklySection: View {
             
             if records.isEmpty {
                 ArchiveEmptyStateView(
-                    title: "まだ十分な記録がありません",
-                    message: "週ごとの記録が増えると、動きの多かった週をここで拾えます。"
+                    title: String(localized: "まだ十分な記録がありません"),
+                    message: String(localized: "週ごとの記録が増えると、動きの多かった週をここで拾えます。")
                 )
             } else {
                 LazyVStack(spacing: 10) {

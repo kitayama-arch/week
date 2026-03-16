@@ -14,6 +14,8 @@ struct HomeView: View {
     @State private var showSettingView = false
     @State private var reflectionWeeklyRecord: WeeklyRecord?
     @State private var focusedThoughtCardID: UUID?
+    @State private var isSunday: Bool = false
+    @State private var showAlert = false
     @State private var isButtonPressed = false
     @State private var buttonScale: CGFloat = 1.0
     @State private var isKeyboardVisible = false
@@ -89,15 +91,19 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                        reflectionWeeklyRecord = currentWeeklyRecord
-                                        showReflectionView = true
+                                        if isSunday {
+                                            reflectionWeeklyRecord = currentWeeklyRecord
+                                            showReflectionView = true
+                                        } else {
+                                            showAlert = true
+                                        }
                                     }) {
                                         Capsule()
                                             .fill(
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
-                                                        Color.accentColor.opacity(0.8),
-                                                        Color.accentColor
+                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
                                                     ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
@@ -110,7 +116,7 @@ struct HomeView: View {
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: .accent.opacity(0.7), radius: 12, x: 0.0, y: 4)
+                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
                             }
@@ -293,6 +299,7 @@ struct HomeView: View {
             }
             .onAppear {
                 dataManager.loadCurrentWeekRecord()
+                updateIsSunday()
                 print("HomeView appeared - currentWeeklyRecord.thoughts: \(dataManager.currentWeeklyRecord?.thoughts ?? [])")
                 shouldScrollToBottom = true
             }
@@ -314,6 +321,11 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $showSettingView) {
                 SettingView()
+            }
+            .alert("振り返りは日曜日のみ可能です", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("それまでの間、日々の出来事や思考を\n記録してみてください。")
             }
         }
     }
@@ -345,6 +357,12 @@ struct HomeView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
         return formatter.string(from: date)
+    }
+    
+    private func updateIsSunday() {
+        let calendar = Calendar.current
+        let today = calendar.component(.weekday, from: Date())
+        isSunday = today == 1
     }
     
     private func getCurrentDayIndex() -> Int {
