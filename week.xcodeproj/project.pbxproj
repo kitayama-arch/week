@@ -151,20 +151,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		5B6C6A642F69700100A1B001 /* Archive */ = {
-			isa = PBXGroup;
-			children = (
-				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
-				5B6C6A5F2F69700100A1B001 /* ArchiveData.swift */,
-				5B6C6A602F69700100A1B001 /* ArchivePages.swift */,
-				5B6C6A612F69700100A1B001 /* ArchiveSearchViews.swift */,
-				5B6C6A622F69700100A1B001 /* ArchiveEmojiBubbleViews.swift */,
-				5B6C6A632F69700100A1B001 /* ArchiveComponents.swift */,
-				5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */,
-			);
-			path = Archive;
-			sourceTree = "<group>";
-		};
 		5A2BEDF72C32B42D00D2307F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +245,20 @@
 				5AAB8A482C635DE7002ECBC5 /* Model.xcdatamodeld */,
 			);
 			path = Coredata;
+			sourceTree = "<group>";
+		};
+		5B6C6A642F69700100A1B001 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				5A3539332C33CA0400C3AB8D /* ArchiveView.swift */,
+				5B6C6A5F2F69700100A1B001 /* ArchiveData.swift */,
+				5B6C6A602F69700100A1B001 /* ArchivePages.swift */,
+				5B6C6A612F69700100A1B001 /* ArchiveSearchViews.swift */,
+				5B6C6A622F69700100A1B001 /* ArchiveEmojiBubbleViews.swift */,
+				5B6C6A632F69700100A1B001 /* ArchiveComponents.swift */,
+				5ABF75062CC9A72A00454AC8 /* ContributionGraphView.swift */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		9A543FC3A3433BCDC5BBD582 /* Frameworks */ = {
@@ -699,7 +699,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -739,7 +739,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gmail.iura.smh.week${BUNDLE_ID_SUFFIX}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
