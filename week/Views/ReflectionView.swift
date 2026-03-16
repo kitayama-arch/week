@@ -83,7 +83,15 @@ struct ReflectionView: View {
                 }
                 .shadow(color: Color.black.opacity(0.08), radius: 14, x: 0, y: -4)
                 .contentShape(Rectangle())
-                .simultaneousGesture(sheetInteractionGesture)
+                .overlay(alignment: .top) {
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width: 120, height: 40)
+                        .contentShape(Rectangle())
+                        .padding(.top, 4)
+                        .gesture(sheetInteractionGesture)
+                        .accessibilityHidden(true)
+                }
                 .animation(.spring(response: 0.28, dampingFraction: 0.86), value: currentHeight)
             }
             .ignoresSafeArea(.container, edges: .bottom)
