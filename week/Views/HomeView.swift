@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct HomeView: View {
     @ObservedObject private var dataManager = DataManager.shared // 共有インスタンスを使用
@@ -28,6 +29,10 @@ struct HomeView: View {
             get: { currentWeeklyRecord.thoughts },
             set: { dataManager.currentWeeklyRecord?.thoughts = $0 }
         )
+    }
+
+    private var canOpenReflection: Bool {
+        isSunday
     }
     
     var body: some View {
@@ -90,7 +95,7 @@ struct HomeView: View {
                                     
                                     Spacer()
                                     Button(action: {
-                                        if isSunday {
+                                        if canOpenReflection {
                                             reflectionWeeklyRecord = currentWeeklyRecord
                                             showReflectionView = true
                                         } else {
@@ -101,8 +106,8 @@ struct HomeView: View {
                                             .fill(
                                                 LinearGradient(
                                                     gradient: Gradient(colors: [
-                                                        isSunday ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
-                                                        isSunday ? Color.accentColor : Color.gray.opacity(0.6)
+                                                        canOpenReflection ? Color.accentColor.opacity(0.8) : Color.gray.opacity(0.4),
+                                                        canOpenReflection ? Color.accentColor : Color.gray.opacity(0.6)
                                                     ]),
                                                     startPoint: .top,
                                                     endPoint: .bottom
@@ -115,7 +120,7 @@ struct HomeView: View {
                                             )
                                             .frame(width: 100, height: 40)
                                     }
-                                    .shadow(color: isSunday ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
+                                    .shadow(color: canOpenReflection ? .accent.opacity(0.7) : .gray.opacity(0.7), radius: 12, x: 0.0, y: 4)
                                 }
                                 .padding(.horizontal)
                             }
@@ -347,6 +352,9 @@ struct HomeView: View {
     
     private func createNewThoughtCard() {
         dataManager.createThoughtCard(content: "", date: Date())
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.prepare()
+        generator.impactOccurred(intensity: 0.65)
     }
     
     private func formatDate(_ date: Date) -> String {
@@ -358,8 +366,9 @@ struct HomeView: View {
     private func updateIsSunday() {
         let calendar = Calendar.current
         let today = calendar.component(.weekday, from: Date())
-        isSunday = today == 1 // 日曜日は1
+        isSunday = today == 1
     }
+    
     private func getCurrentDayIndex() -> Int {
         let calendar = Calendar.current
         let today = calendar.component(.weekday, from: Date())

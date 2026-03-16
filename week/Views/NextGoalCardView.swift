@@ -24,7 +24,7 @@ struct NextGoalCardView: View {
                 .frame(height: 60)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                        .strokeBorder(Color.gray.opacity(0.3), lineWidth: 1)
                 )
             HStack {
                 Button(action: {

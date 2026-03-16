@@ -6,21 +6,27 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ReflectionView: View {
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @State var weeklyRecord: WeeklyRecord
     @State private var selectedTab: ReflectionSheetTab = .reflection
     @State private var activeInput: ReflectionActiveInput?
     @State private var reflectionEditorHeight: CGFloat = 84
+    @State private var isSavingReflection = false
+    @GestureState private var sheetDragTranslation: CGFloat = 0
     
     var body: some View {
         GeometryReader { geometry in
             let naturalContentHeight = selectedTab == .reflection ? reflectionEditorHeight + 20 : 80
             let naturalSheetHeight = naturalContentHeight + 82
             let maxSheetHeight = max(176, geometry.size.height * 0.5)
-            let currentHeight = min(naturalSheetHeight, maxSheetHeight)
+            let collapsedSheetHeight = min(naturalSheetHeight, maxSheetHeight)
+            let liftHeight = min(max(0, -sheetDragTranslation), max(0, maxSheetHeight - collapsedSheetHeight))
+            let currentHeight = collapsedSheetHeight + liftHeight
             
             ZStack(alignment: .bottom) {
                 Color.background
@@ -68,13 +74,14 @@ struct ReflectionView: View {
                     activeInput: $activeInput,
                     weeklyRecord: weeklyRecord,
                     reflectionEditorHeight: $reflectionEditorHeight,
-                    onSave: saveReflection
+                    onSave: saveReflection,
+                    handleGesture: sheetInteractionGesture
                 )
                 .frame(maxWidth: .infinity)
                 .frame(height: currentHeight, alignment: .top)
                 .background {
                     TopRoundedSheetShape(cornerRadius: 28)
-                        .fill(Color.white)
+                        .fill(colorScheme == .dark ? Color.card : Color.white)
                 }
                 .shadow(color: Color.black.opacity(0.08), radius: 14, x: 0, y: -4)
                 .animation(.spring(response: 0.28, dampingFraction: 0.86), value: currentHeight)
@@ -93,17 +100,85 @@ struct ReflectionView: View {
     }
     
     private func saveReflection() {
+        guard !isSavingReflection else { return }
+        isSavingReflection = true
         weeklyRecord.isReflectionCompleted = true
         dataManager.updateWeeklyRecord(weeklyRecord: weeklyRecord)
         dataManager.loadWeeklyRecords()
         dataManager.loadCurrentWeekRecord()
-        dismiss()
+        Task { @MainActor in
+            await playReflectionCompletionHaptic()
+            dismiss()
+        }
     }
     
     private func dismissKeyboard() {
         guard activeInput != nil else { return }
         activeInput = nil
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    private var sheetInteractionGesture: some Gesture {
+        DragGesture(minimumDistance: 12)
+            .updating($sheetDragTranslation) { value, state, _ in
+                guard abs(value.translation.height) > abs(value.translation.width) else { return }
+                state = value.translation.height
+            }
+            .onEnded { value in
+                let horizontal = value.translation.width
+                let vertical = value.translation.height
+                
+                if abs(horizontal) > abs(vertical), abs(horizontal) > 36 {
+                    handleSheetTabSwipe(horizontal)
+                    return
+                }
+                
+                if vertical < -28 {
+                    activeInput = selectedTab == .reflection ? .reflection : .nextGoal
+                } else if vertical > 34, activeInput != nil {
+                    dismissKeyboard()
+                }
+            }
+    }
+    
+    private func handleSheetTabSwipe(_ horizontalTranslation: CGFloat) {
+        let targetTab: ReflectionSheetTab?
+        
+        if horizontalTranslation < 0 {
+            targetTab = selectedTab == .reflection ? .nextGoal : nil
+        } else {
+            targetTab = selectedTab == .nextGoal ? .reflection : nil
+        }
+        
+        guard let targetTab else { return }
+        let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
+        selectedTab = targetTab
+        generator.selectionChanged()
+    }
+    
+    @MainActor
+    private func playReflectionCompletionHaptic() async {
+        let soft = UIImpactFeedbackGenerator(style: .soft)
+        let rigid = UIImpactFeedbackGenerator(style: .rigid)
+        let final = UIImpactFeedbackGenerator(style: .medium)
+        
+        soft.prepare()
+        rigid.prepare()
+        final.prepare()
+        
+        soft.impactOccurred(intensity: 0.34)
+        try? await Task.sleep(nanoseconds: 35_000_000)
+        soft.impactOccurred(intensity: 0.48)
+        try? await Task.sleep(nanoseconds: 38_000_000)
+        soft.impactOccurred(intensity: 0.62)
+        try? await Task.sleep(nanoseconds: 45_000_000)
+        rigid.impactOccurred(intensity: 0.78)
+        try? await Task.sleep(nanoseconds: 70_000_000)
+        rigid.impactOccurred(intensity: 0.92)
+        try? await Task.sleep(nanoseconds: 90_000_000)
+        final.impactOccurred(intensity: 1.0)
+        try? await Task.sleep(nanoseconds: 40_000_000)
     }
 }
 
@@ -142,12 +217,13 @@ private struct TopRoundedSheetShape: Shape {
     }
 }
 
-private struct ReflectionBottomSheet: View {
+private struct ReflectionBottomSheet<HandleGesture: Gesture>: View {
     @Binding var selectedTab: ReflectionSheetTab
     @Binding var activeInput: ReflectionActiveInput?
     @ObservedObject var weeklyRecord: WeeklyRecord
     @Binding var reflectionEditorHeight: CGFloat
     let onSave: () -> Void
+    let handleGesture: HandleGesture
     
     private var reflectionCompleted: Bool {
         !weeklyRecord.reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
@@ -159,13 +235,14 @@ private struct ReflectionBottomSheet: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
+            ReflectionSheetHandle(gesture: handleGesture)
+
             ReflectionSheetHeader(
                 selectedTab: $selectedTab,
                 reflectionCompleted: reflectionCompleted,
                 nextGoalCompleted: nextGoalCompleted,
                 onSave: onSave
             )
-            .padding(.top, 14)
             .padding(.bottom, 4)
             
             ScrollView {
@@ -187,18 +264,13 @@ private struct ReflectionBottomSheet: View {
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .topLeading)
+                .padding(.top, 6)
                 .padding(.bottom, 8)
             }
             .scrollIndicators(.hidden)
         }
         .padding(.horizontal, 20)
         .padding(.bottom, 12)
-        .overlay(alignment: .top) {
-            Capsule()
-                .fill(Color.gray.opacity(0.3))
-                .frame(width: 44, height: 5)
-                .padding(.top, 10)
-        }
     }
     
     private func activeInputBinding(for input: ReflectionActiveInput) -> Binding<Bool> {
@@ -208,6 +280,23 @@ private struct ReflectionBottomSheet: View {
                 activeInput = isFocused ? input : nil
             }
         )
+    }
+}
+
+private struct ReflectionSheetHandle<HandleGesture: Gesture>: View {
+    let gesture: HandleGesture
+
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(Color.gray.opacity(0.3))
+                .frame(width: 44, height: 5)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 28)
+        .contentShape(Rectangle())
+        .gesture(gesture)
+        .accessibilityHidden(true)
     }
 }
 
@@ -230,7 +319,7 @@ private struct ReflectionSheetHeader: View {
             }
             .pickerStyle(.segmented)
             .frame(width: 220)
-            .padding(.vertical, 4)
+            .padding(.vertical, 6)
             
             HStack {
                 Spacer()
@@ -331,7 +420,7 @@ private struct ReflectionEditorView: View {
                     .fill(Color.card)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            .stroke(Color.gray.opacity(0.18), lineWidth: 1)
+                            .strokeBorder(Color.gray.opacity(0.18), lineWidth: 1)
                     )
                 
                 if reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -350,10 +439,9 @@ private struct ReflectionEditorView: View {
                     measuredHeight: $measuredHeight
                 )
                 .frame(height: measuredHeight)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 10)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 10)
             }
-            .clipped()
         }
     }
 }
