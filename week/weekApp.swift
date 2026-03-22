@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
+@MainActor
 class SceneDelegate: NSObject, UIWindowSceneDelegate, ObservableObject {
     @Published var isPremium = false
     @Published var currentPlan: String = NSLocalizedString("無料プラン", comment: "Free plan")
