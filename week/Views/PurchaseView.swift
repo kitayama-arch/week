@@ -35,18 +35,26 @@ struct PurchaseView: View {
                 Color.background
                     .ignoresSafeArea()
                 
-                VStack(spacing: 20) {
-                    currentPlanView
-                    subscriptionDetails
-                    Spacer()
-                    ForEach(products) { product in
-                        SubscriptionButton(product: product)
+                ScrollView {
+                    VStack(spacing: 20) {
+                        currentPlanView
+                        subscriptionDetails
+                        ForEach(products) { product in
+                            SubscriptionButton(product: product, isLoading: isLoading) {
+                                Task {
+                                    await purchaseProduct(product)
+                                }
+                            }
+                        }
+                        subscriptionLegalNotice
+                        termsAndPrivacy
                     }
-                    termsAndPrivacy
+                    .padding()
                 }
-                .padding()
                 
                 if isLoading {
+                    Color.black.opacity(0.15)
+                        .ignoresSafeArea()
                     ProgressView()
                 }
             }
@@ -126,22 +134,47 @@ struct PurchaseView: View {
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
     }
-    
+
+    private var subscriptionLegalNotice: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text(String(localized: "購入前にご確認ください"))
+                .font(.headline)
+            Text(String(localized: "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。各プランの価格と期間は上のボタンに表示しています。"))
+                .font(.footnote)
+                .foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(Color.card)
+        .cornerRadius(10)
+    }
+
     private var termsAndPrivacy: some View {
-        HStack {
-            Button("購入を復元") {
+        HStack(spacing: 8) {
+            Spacer(minLength: 0)
+            Button {
                 Task {
                     await restorePurchases()
                 }
+            } label: {
+                Text(String(localized: "購入を復元"))
+            }
+            .disabled(isLoading)
+            Divider()
+                .frame(height: 10)
+            Link(destination: URL(string: privacyPolicyURL)!) {
+                Text(String(localized: "プライバシーポリシー"))
             }
             Divider()
                 .frame(height: 10)
-            Link("プライバシーポリシー", destination: URL(string: privacyPolicyURL)!)
-            Divider()
-                .frame(height: 10)
-            Link("利用規約", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+            Link(destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!) {
+                Text(String(localized: "利用規約（EULA）"))
+            }
+            Spacer(minLength: 0)
         }
         .font(.footnote)
+        .multilineTextAlignment(.center)
+        .frame(maxWidth: .infinity)
     }
     
     private func loadProducts() async {
@@ -167,9 +200,9 @@ struct PurchaseView: View {
         
         do {
             let transaction = try await purchase(product: product)
-            // productIdに対応した特典を有効にする
-            enablePrivilege(productId: transaction.productID)
+            sceneDelegate.enablePrivilege(productId: transaction.productID)
             await transaction.finish()
+            await sceneDelegate.updateSubscriptionStatus()
             // 完了メッセージを表示
             showResultMessage(String(localized: "購入が完了しました。"), isError: false)
         } catch {
@@ -212,20 +245,6 @@ struct PurchaseView: View {
         case .unverified:
             throw SubscribeError.failedVerification
         }
-    }
-    
-    private func enablePrivilege(productId: String) {
-        // ここで特典を有効にする処理を実装
-        // 例: UserDefaultsに保存したり、サーバーに通知したりする
-        print("特典を有効化: \(productId)")
-        UserDefaults.standard.set(true, forKey: "isPremium")
-    }
-    
-    private func disablePrivilege() {
-        // ここで特典を無効にする処理を実装
-        // 例: UserDefaultsから削除したり、サーバーに通知したりする
-        print("特典を無効化")
-        UserDefaults.standard.set(false, forKey: "isPremium")
     }
     
     private func showResultMessage(_ message: String, isError: Bool = false) {
@@ -380,17 +399,19 @@ struct ProductView: View {
 
 struct SubscriptionButton: View {
     let product: Product
+    let isLoading: Bool
+    let action: () -> Void
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
             if product.id.contains("yearly") {
                 ZStack(alignment: .topTrailing) {
                     VStack(spacing: 8) {
-                        Text("１ヶ月の無料トライアルを開始")
+                        Text(trialHeadline)
                             .font(.headline)
                             .foregroundColor(.white)
                         
-                        Text("1か月無料。その後、\(product.displayPrice)/年")
+                        Text(yearlyPricingText)
                             .font(.subheadline)
                             .foregroundColor(.white)
                     }
@@ -431,7 +452,7 @@ struct SubscriptionButton: View {
                         Text("月間プランを開始")
                             .font(.headline)
                     }
-                    Text("\(product.displayPrice)/ヶ月")
+                    Text(monthlyPricingText)
                         .font(.subheadline)
                 }
                 .frame(maxWidth: .infinity)
@@ -441,6 +462,40 @@ struct SubscriptionButton: View {
             }
         }
         .buttonStyle(.plain)
+        .disabled(isLoading)
+    }
+
+    private var trialHeadline: String {
+        if let offer = product.subscription?.introductoryOffer {
+            return "\(offer.period.value)\(periodUnitString(offer.period.unit))の無料トライアルを開始"
+        }
+        return "年額プランを開始"
+    }
+
+    private var yearlyPricingText: String {
+        if let offer = product.subscription?.introductoryOffer {
+            return "\(offer.period.value)\(periodUnitString(offer.period.unit))無料。その後は\(product.displayPrice)/年が自動更新"
+        }
+        return "\(product.displayPrice)/年"
+    }
+
+    private var monthlyPricingText: String {
+        "\(product.displayPrice)/月"
+    }
+
+    private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {
+        switch unit {
+        case .day:
+            return "日"
+        case .week:
+            return "週間"
+        case .month:
+            return "か月"
+        case .year:
+            return "年"
+        @unknown default:
+            return ""
+        }
     }
 }
 
