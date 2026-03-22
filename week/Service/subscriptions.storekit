@@ -17,26 +17,28 @@
 
   ],
   "settings" : {
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
     "_compatibilityTimeRate" : {
       "3" : 6,
       "5" : 1004
     },
+    "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
     "_locale" : "ja",
+    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "JPN",
     "_storeKitErrors" : [
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Load Products"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Purchase"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Verification"
       },
@@ -49,27 +51,22 @@
         "name" : "App Store Sync"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Subscription Status"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "App Transaction"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Manage Subscriptions Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Refund Request Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
@@ -109,7 +106,7 @@
             }
           ],
           "productID" : "com.gmail.iura.smh.week.monthly",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "月プラン",
           "subscriptionGroupID" : "40C4996D",
           "type" : "RecurringSubscription",
@@ -137,7 +134,7 @@
             }
           ],
           "productID" : "com.gmail.iura.smh.week.yearly",
-          "recurringSubscriptionPeriod" : "P1M",
+          "recurringSubscriptionPeriod" : "P1Y",
           "referenceName" : "年プラン",
           "subscriptionGroupID" : "40C4996D",
           "type" : "RecurringSubscription",

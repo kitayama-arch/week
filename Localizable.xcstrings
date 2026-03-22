@@ -344,18 +344,18 @@
         }
       }
     },
-    "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。各プランの価格と期間は上のボタンに表示しています。" : {
+    "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subscription is charged to your Apple ID. For plans with a free trial, after the trial ends you will be charged for the next subscription period, and the subscription renews automatically unless you cancel at least 24 hours before the renewal date. Pricing and billing period for each plan are shown on the buttons above."
+            "value" : "Subscription is charged to your Apple ID. For plans with a free trial, after the trial ends you will be charged for the next subscription period, and the subscription renews automatically unless you cancel at least 24 hours before the renewal date."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。各プランの価格と期間は上のボタンに表示しています。"
+            "value" : "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。"
           }
         }
       }
@@ -959,6 +959,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "年額プラン"
+          }
+        }
+      }
+    },
+    "年額プランを開始" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start annual plan"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年額プランを開始"
           }
         }
       }

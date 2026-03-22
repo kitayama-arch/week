@@ -139,7 +139,7 @@ struct PurchaseView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(String(localized: "購入前にご確認ください"))
                 .font(.headline)
-            Text(String(localized: "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。各プランの価格と期間は上のボタンに表示しています。"))
+            Text(String(localized: "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。"))
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
@@ -429,7 +429,7 @@ struct SubscriptionButton: View {
                     .clipShape(Capsule())
                     .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                     
-                    Text("2ヶ月分お得")
+                    Text(String(localized: "2ヶ月分お得"))
                         .font(.caption2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -449,7 +449,7 @@ struct SubscriptionButton: View {
                 // 月額プラン用の既存のデザイン
                 VStack(spacing: 8) {
                     HStack {
-                        Text("月間プランを開始")
+                        Text(String(localized: "月間プランを開始"))
                             .font(.headline)
                     }
                     Text(monthlyPricingText)
@@ -469,30 +469,38 @@ struct SubscriptionButton: View {
         if let offer = product.subscription?.introductoryOffer {
             return "\(offer.period.value)\(periodUnitString(offer.period.unit))の無料トライアルを開始"
         }
-        return "年額プランを開始"
+        return String(localized: "年額プランを開始")
     }
 
     private var yearlyPricingText: String {
         if let offer = product.subscription?.introductoryOffer {
-            return "\(offer.period.value)\(periodUnitString(offer.period.unit))無料。その後は\(product.displayPrice)/年が自動更新"
+            return "\(offer.period.value)\(periodUnitString(offer.period.unit))無料。その後は\(product.displayPrice)/\(renewalPeriodText)が自動更新"
         }
-        return "\(product.displayPrice)/年"
+        return "\(product.displayPrice)/\(renewalPeriodText)"
     }
 
     private var monthlyPricingText: String {
-        "\(product.displayPrice)/月"
+        "\(product.displayPrice)/\(renewalPeriodText)"
+    }
+
+    private var renewalPeriodText: String {
+        guard let period = product.subscription?.subscriptionPeriod else {
+            return ""
+        }
+        let separator = Locale.current.language.languageCode?.identifier == "ja" ? "" : " "
+        return "\(period.value)\(separator)\(periodUnitString(period.unit))"
     }
 
     private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {
         switch unit {
         case .day:
-            return "日"
+            return String(localized: "日")
         case .week:
-            return "週間"
+            return String(localized: "週間")
         case .month:
-            return "か月"
+            return String(localized: "ヶ月")
         case .year:
-            return "年"
+            return String(localized: "年")
         @unknown default:
             return ""
         }
