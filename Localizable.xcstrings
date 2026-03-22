@@ -68,6 +68,38 @@
         }
       }
     },
+    "%@ %@ free trial" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@ free trial"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@の無料トライアルを開始"
+          }
+        }
+      }
+    },
+    "%@ %@ free, then %@/%@ auto-renews" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ %2$@ free, then %3$@/%4$@ auto-renews"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@無料。その後は%3$@/%4$@が自動更新"
+          }
+        }
+      }
+    },
     "1か月無料。その後、%@/年" : {
       "extractionState" : "stale",
       "localizations" : {

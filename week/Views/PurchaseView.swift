@@ -467,14 +467,24 @@ struct SubscriptionButton: View {
 
     private var trialHeadline: String {
         if let offer = product.subscription?.introductoryOffer {
-            return "\(offer.period.value)\(periodUnitString(offer.period.unit))の無料トライアルを開始"
+            return String(
+                format: String(localized: "%@ %@ free trial"),
+                String(offer.period.value),
+                periodUnitString(offer.period.unit)
+            )
         }
         return String(localized: "年額プランを開始")
     }
 
     private var yearlyPricingText: String {
         if let offer = product.subscription?.introductoryOffer {
-            return "\(offer.period.value)\(periodUnitString(offer.period.unit))無料。その後は\(product.displayPrice)/\(renewalPeriodText)が自動更新"
+            return String(
+                format: String(localized: "%@ %@ free, then %@/%@ auto-renews"),
+                String(offer.period.value),
+                periodUnitString(offer.period.unit),
+                product.displayPrice,
+                renewalPeriodText
+            )
         }
         return "\(product.displayPrice)/\(renewalPeriodText)"
     }

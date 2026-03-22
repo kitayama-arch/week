@@ -106,7 +106,7 @@
             }
           ],
           "productID" : "com.gmail.iura.smh.week.monthly",
-          "recurringSubscriptionPeriod" : "P1Y",
+          "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "月プラン",
           "subscriptionGroupID" : "40C4996D",
           "type" : "RecurringSubscription",
