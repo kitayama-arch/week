@@ -51,7 +51,7 @@ struct NextGoalCardView: View {
                     .cornerRadius(1)
                 
                 FocusableTextField(
-                    placeholder: "来週の目標を入力してください",
+                    placeholder: String(localized: "来週の目標を入力してください"),
                     text: $nextWeekGoal,
                     isFirstResponder: isFirstResponder
                 )

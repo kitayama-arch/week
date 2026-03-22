@@ -1,1924 +1,1909 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "" : {
-      "comment" : "Unknown subscription period unit",
-      "shouldTranslate" : false
+  "sourceLanguage": "en",
+  "strings": {
+    "": {
+      "comment": "Unknown subscription period unit",
+      "shouldTranslate": false
     },
-    "%@" : {
-      "shouldTranslate" : false
+    "%@": {
+      "shouldTranslate": false
     },
-    "%@ - %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$@"
+    "%@ - %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ - %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ - %2$@"
           }
         }
       },
-      "shouldTranslate" : false
+      "shouldTranslate": false
     },
-    "%@/ヶ月" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@/month"
+    "%@ %@無料": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ free"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@/ヶ月"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@%2$@無料"
           }
         }
       }
     },
-    "%lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
+    "%@/%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@/%2$@"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@/%2$@"
           }
         }
       }
     },
-    "%lld %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$lld %2$@"
+    "%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld %@"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
           }
         }
       }
     },
-    "%@ %@ free trial" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$@ free trial"
+    "%lld %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld %2$@"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@%2$@の無料トライアルを開始"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld %2$@"
           }
         }
       }
     },
-    "%@ %@ free, then %@/%@ auto-renews" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@ %2$@ free, then %3$@/%4$@ auto-renews"
+    "1年分をまとめてお得に続ける": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pay yearly to save more over time"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%1$@%2$@無料。その後は%3$@/%4$@が自動更新"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1年分をまとめてお得に続ける"
           }
         }
       }
     },
-    "1か月無料。その後、%@/年" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1 month free, then %@/year"
+    "OK": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1か月無料。その後、%@/年"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
           }
         }
       }
     },
-    "１ヶ月の無料トライアルを開始" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start 1-Month Free Trial"
+    "OSの支払い機能が無効化されています": {
+      "comment": "Purchase not allowed error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The OS payment feature is disabled"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "１ヶ月の無料トライアルを開始"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OSの支払い機能が無効化されています"
           }
         }
       }
     },
-    "2ヶ月分お得" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get 2 months free!"
+    "Tap to Unlock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap to Unlock"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "2ヶ月分お得"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タップしてアンロック"
           }
         }
       }
     },
-    "OK" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+    "weekへようこそ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to the world of week!"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "weekへようこそ"
           }
         }
       }
     },
-    "OSの支払い機能が無効化されています" : {
-      "comment" : "Purchase not allowed error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The OS payment feature is disabled"
+    "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With week,\nyou'll never say \"A week has passed without me noticing\" again."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OSの支払い機能が無効化されています"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。"
           }
         }
       }
     },
-    "Tap to Unlock" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap to Unlock"
+    "アーカイブ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "タップしてアンロック"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブ"
           }
         }
       }
     },
-    "weekへようこそ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Welcome to the world of week!"
+    "あなた": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "weekへようこそ"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなた"
           }
         }
       }
     },
-    "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "With week,\nyou'll never say \"A week has passed without me noticing\" again."
+    "アプリについて": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About the App"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "weekを使えば、\n「気づいたら一週間経ってた」がなくなります。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリについて"
           }
         }
       }
     },
-    "アーカイブ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archive"
+    "アプリを評価する": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rate the App"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アーカイブ"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリを評価する"
           }
         }
       }
     },
-    "あなた" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You"
+    "いい生活は、いい一週間から。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A good life starts with a good week."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "あなた"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "いい生活は、いい一週間から。"
           }
         }
       }
     },
-    "アプリについて" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About the App"
+    "エラー": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アプリについて"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エラー"
           }
         }
       }
     },
-    "アプリを評価する" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rate the App"
+    "グラフ機能のアンロック": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock Graph Feature"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アプリを評価する"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "グラフ機能のアンロック"
           }
         }
       }
     },
-    "いい生活は、いい一週間から。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A good life starts with a good week."
+    "ヶ月": {
+      "comment": "Subscription period unit: month",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "month"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "いい生活は、いい一週間から。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヶ月"
           }
         }
       }
     },
-    "エラー" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error"
+    "ご意見・ご要望": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback and Requests"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "エラー"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ご意見・ご要望"
           }
         }
       }
     },
-    "グラフ機能のアンロック" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unlock Graph Feature"
+    "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription is charged to your Apple ID. For plans with a free trial, after the trial ends you will be charged for the next subscription period, and the subscription renews automatically unless you cancel at least 24 hours before the renewal date."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "グラフ機能のアンロック"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。"
           }
         }
       }
     },
-    "ヶ月" : {
-      "comment" : "Subscription period unit: month",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "month"
+    "サブスクリプション内容": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription Details"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ヶ月"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプション内容"
           }
         }
       }
     },
-    "ご意見・ご要望" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feedback and Requests"
+    "すべての広告の削除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove All Ads"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ご意見・ご要望"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべての広告の削除"
           }
         }
       }
     },
-    "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Subscription is charged to your Apple ID. For plans with a free trial, after the trial ends you will be charged for the next subscription period, and the subscription renews automatically unless you cancel at least 24 hours before the renewal date."
+    "その後は%@/%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Then %1$@/%2$@"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その後は%1$@/%2$@"
           }
         }
       }
     },
-    "サブスクリプション内容" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Subscription Details"
+    "それまでの間、日々の出来事や思考を\n記録してみてください。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try recording your daily events and thoughts until then."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "サブスクリプション内容"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "それまでの間、日々の出来事や思考を\n記録してみてください。"
           }
         }
       }
     },
-    "すべての広告の削除" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remove All Ads"
+    "タイムライン": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timeline"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "すべての広告の削除"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムライン"
           }
         }
       }
     },
-    "それまでの間、日々の出来事や思考を\n記録してみてください。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Try recording your daily events and thoughts until then."
+    "チュートリアルを表示": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Tutorial"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "それまでの間、日々の出来事や思考を\n記録してみてください。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チュートリアルを表示"
           }
         }
       }
     },
-    "タイムライン" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Timeline"
+    "トランザクションデータの署名が不正です": {
+      "comment": "Failed verification error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The transaction data signature is invalid"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "タイムライン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トランザクションデータの署名が不正です"
           }
         }
       }
     },
-    "チュートリアルを表示" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Tutorial"
+    "トランザクションの検証に失敗しました": {
+      "comment": "Failed verification error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to verify the transaction"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "チュートリアルを表示"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トランザクションの検証に失敗しました"
           }
         }
       }
     },
-    "トランザクションデータの署名が不正です" : {
-      "comment" : "Failed verification error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The transaction data signature is invalid"
+    "どんな一週間でしたか？": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How was your week?"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トランザクションデータの署名が不正です"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どんな一週間でしたか？"
           }
         }
       }
     },
-    "トランザクションの検証に失敗しました" : {
-      "comment" : "Failed verification error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to verify the transaction"
+    "バージョン": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "トランザクションの検証に失敗しました"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン"
           }
         }
       }
     },
-    "どんな一週間でしたか？" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How was your week?"
+    "フィードバックを送信": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send Feedback"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "どんな一週間でしたか？"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フィードバックを送信"
           }
         }
       }
     },
-    "バージョン" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Version"
+    "プライバシーポリシー": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Privacy Policy"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "バージョン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プライバシーポリシー"
           }
         }
       }
     },
-    "フィードバックを送信" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Send Feedback"
+    "プレミアムにアップグレード": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upgrade to Premium"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "フィードバックを送信"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレミアムにアップグレード"
           }
         }
       }
     },
-    "プライバシーポリシー" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Privacy Policy"
+    "プレミアムプラン": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プライバシーポリシー"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレミアムプラン"
           }
         }
       }
     },
-    "プレミアムにアップグレード" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upgrade to Premium"
+    "プレミアム機能": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium Features"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プレミアムにアップグレード"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレミアム機能"
           }
         }
       }
     },
-    "プレミアムプラン" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Plan"
+    "まずはお試し": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start with a trial"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プレミアムプラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まずはお試し"
           }
         }
       }
     },
-    "プレミアム機能" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premium Features"
+    "まだ『ランダム』はありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No random card yet"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "プレミアム機能"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ『ランダム』はありません"
           }
         }
       }
     },
-    "まだ『ランダム』はありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No random card yet"
+    "まだ十分な記録がありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not enough records yet"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "まだ『ランダム』はありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ十分な記録がありません"
           }
         }
       }
     },
-    "まだ十分な記録がありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Not enough records yet"
+    "まだ絵文字の傾向は見えていません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emoji patterns not visible yet"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "まだ十分な記録がありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ絵文字の傾向は見えていません"
           }
         }
       }
     },
-    "まだ絵文字の傾向は見えていません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Emoji patterns not visible yet"
+    "ユーザーによって購入がキャンセルされました": {
+      "comment": "User cancelled purchase error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase was cancelled by the user"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "まだ絵文字の傾向は見えていません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザーによって購入がキャンセルされました"
           }
         }
       }
     },
-    "ユーザーによって購入がキャンセルされました" : {
-      "comment" : "User cancelled purchase error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Purchase was cancelled by the user"
+    "ランダム": {
+      "comment": "Title of a section in the \"Pickup\" tab that allows the user to randomly select a past record to relive.",
+      "isCommentAutoGenerated": true,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ユーザーによって購入がキャンセルされました"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ランダム"
           }
         }
       }
     },
-    "ランダム" : {
-      "comment" : "Title of a section in the \"Pickup\" tab that allows the user to randomly select a past record to relive.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Random"
+    "不明": {
+      "comment": "Version unknown fallback",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ランダム"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不明"
           }
         }
       }
     },
-    "不明" : {
-      "comment" : "Version unknown fallback",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
+    "不明なエラーが発生しました": {
+      "comment": "Unknown error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An unknown error occurred"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不明"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不明なエラーが発生しました"
           }
         }
       }
     },
-    "不明なエラーが発生しました" : {
-      "comment" : "Unknown error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An unknown error occurred"
+    "不明なプラン": {
+      "comment": "Unknown plan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unknown Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不明なエラーが発生しました"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不明なプラン"
           }
         }
       }
     },
-    "不明なプラン" : {
-      "comment" : "Unknown plan",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown Plan"
+    "今日の一枚": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's Card"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "不明なプラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の一枚"
           }
         }
       }
     },
-    "今日の一枚" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Today's Card"
+    "今週の目標を入力してください": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter your goal for this week…"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今日の一枚"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週の目標を入力してください"
           }
         }
       }
     },
-    "今週の目標を入力してください" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter your goal for this week…"
+    "今週の絵文字": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This Week's Emojis"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今週の目標を入力してください"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週の絵文字"
           }
         }
       }
     },
-    "今週の絵文字" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This Week's Emojis"
+    "保存": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "今週の絵文字"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
           }
         }
       }
     },
-    "保存" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
+    "入力してください...": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type something..."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力してください..."
           }
         }
       }
     },
-    "入力してください..." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type something..."
+    "最近書いた振り返りをまとめて見返せます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review your recent reflections in one place."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "入力してください..."
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近書いた振り返りをまとめて見返せます。"
           }
         }
       }
     },
-    "最近書いた振り返りをまとめて見返せます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Review your recent reflections in one place."
+    "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Events, ideas, feelings,\nfeel free to jot down anything.\nYou don't need to record daily like a diary"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最近書いた振り返りをまとめて見返せます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません。"
           }
         }
       }
     },
-    "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Events, ideas, feelings,\nfeel free to jot down anything.\nYou don't need to record daily like a diary"
+    "利用規約（EULA）": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terms of Use (EULA)"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "出来事、アイデア、感情、\nどんなことでも自由に書き留めましょう。\n日記のように毎日記録する必要はありません。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "利用規約（EULA）"
           }
         }
       }
     },
-    "利用規約" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terms of Service"
+    "削除": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "利用規約"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
           }
         }
       }
     },
-    "利用規約（EULA）" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Terms of Use (EULA)"
+    "前の週の振り返りがまだ完了していません。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The reflection for the previous week is not yet complete."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "利用規約（EULA）"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前の週の振り返りがまだ完了していません。"
           }
         }
       }
     },
-    "削除" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete"
+    "始める": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "始める"
           }
         }
       }
     },
-    "前の週の振り返りがまだ完了していません。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The reflection for the previous week is not yet complete."
+    "少しでも前に進む": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move forward, even if just a little"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "前の週の振り返りがまだ完了していません。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "少しでも前に進む"
           }
         }
       }
     },
-    "始める" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start"
+    "年": {
+      "comment": "Subscription period unit: year",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "year"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "始める"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年"
           }
         }
       }
     },
-    "少しでも前に進む" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Move forward, even if just a little"
+    "年額プラン": {
+      "comment": "Yearly plan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yearly Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "少しでも前に進む"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年額プラン"
           }
         }
       }
     },
-    "年" : {
-      "comment" : "Subscription period unit: year",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "year"
+    "復元可能な購入がありません。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No purchases to restore."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "年"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "復元可能な購入がありません。"
           }
         }
       }
     },
-    "年額プラン" : {
-      "comment" : "Yearly plan",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yearly Plan"
+    "思考がよく動いていた週を見つけ直せます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find weeks when your thoughts were most active."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "年額プラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "思考がよく動いていた週を見つけ直せます。"
           }
         }
       }
     },
-    "年額プランを開始" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start annual plan"
+    "成功": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Success"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "年額プランを開始"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "成功"
           }
         }
       }
     },
-    "復元可能な購入がありません。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No purchases to restore."
+    "指定した商品が無効です": {
+      "comment": "Product unavailable error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The specified product is invalid"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "復元可能な購入がありません。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "指定した商品が無効です"
           }
         }
       }
     },
-    "思考がよく動いていた週を見つけ直せます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Find weeks when your thoughts were most active."
+    "振り返り": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflect"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "思考がよく動いていた週を見つけ直せます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返り"
           }
         }
       }
     },
-    "成功" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Success"
+    "振り返りデータが利用できません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflect data is not available"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "成功"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返りデータが利用できません"
           }
         }
       }
     },
-    "指定した商品が無効です" : {
-      "comment" : "Product unavailable error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The specified product is invalid"
+    "振り返りで一致": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matched in reflection"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "指定した商品が無効です"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返りで一致"
           }
         }
       }
     },
-    "振り返り" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reflect"
+    "振り返りはまだありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No reflections yet"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返り"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返りはまだありません"
           }
         }
       }
     },
-    "振り返りデータが利用できません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reflect data is not available"
+    "振り返りは日曜日のみ可能です": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflect is only possible on Sundays"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返りデータが利用できません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返りは日曜日のみ可能です"
           }
         }
       }
     },
-    "振り返りで一致" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matched in reflection"
+    "振り返りを行う": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conduct Review"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返りで一致"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返りを行う"
           }
         }
       }
     },
-    "振り返りはまだありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No reflections yet"
+    "振り返り入力": {
+      "comment": "Accessibility label for the reflection segmented control",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reflection input"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返りはまだありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "振り返り入力"
           }
         }
       }
     },
-    "振り返りは日曜日のみ可能です" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reflect is only possible on Sundays"
+    "日": {
+      "comment": "Subscription period unit: day",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "day"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返りは日曜日のみ可能です"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日"
           }
         }
       }
     },
-    "振り返りを行う" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Conduct Review"
+    "月額プラン": {
+      "comment": "Monthly plan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返りを行う"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月額プラン"
           }
         }
       }
     },
-    "振り返り入力" : {
-      "comment" : "Accessibility label for the reflection segmented control",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reflection input"
+    "月額より年間%@お得": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save %1$@ per year vs monthly"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "振り返り入力"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月額より年間%1$@お得"
           }
         }
       }
     },
-    "日" : {
-      "comment" : "Subscription period unit: day",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "day"
+    "来週の目標": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next Week's Goal"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "日"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "来週の目標"
           }
         }
       }
     },
-    "月間プランを開始" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Monthly Plan"
+    "来週の目標を入力してください": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter your goal for next week…"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "月間プランを開始"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "来週の目標を入力してください"
           }
         }
       }
     },
-    "月額プラン" : {
-      "comment" : "Monthly plan",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Monthly Plan"
+    "検索結果がありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No search results"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "月額プラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索結果がありません"
           }
         }
       }
     },
-    "来週の目標" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next Week's Goal"
+    "次へ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "来週の目標"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次へ"
           }
         }
       }
     },
-    "来週の目標を入力してください" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter your goal for next week…"
+    "次週の目標": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next Week's Goal"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "来週の目標を入力してください"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次週の目標"
           }
         }
       }
     },
-    "検索結果がありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No search results"
+    "毎週日曜日は、weekで一週間を振り返る日。\n良かったこと、次週への改善策などを\nゆっくり整理し、自分の成長を確認しましょう。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every Sunday is the day to reflect on the week with week.\nTake your time to organize what went well,\nimprovements for next week, and confirm your growth."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "検索結果がありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎週日曜日は、weekで一週間を振り返る日。\n良かったこと、次週への改善策などを\nゆっくり整理し、自分の成長を確認しましょう。"
           }
         }
       }
     },
-    "次へ" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next"
+    "気軽に始めて使い心地を試せる": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try it casually and see how it feels"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "次へ"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "気軽に始めて使い心地を試せる"
           }
         }
       }
     },
-    "次週の目標" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next Week's Goal"
+    "流れる日々を記録する": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record the flowing days"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "次週の目標"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "流れる日々を記録する"
           }
         }
       }
     },
-    "毎週日曜日は、weekで一週間を振り返る日。\n良かったこと、次週への改善策などを\nゆっくり整理し、自分の成長を確認しましょう。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Every Sunday is the day to reflect on the week with week.\nTake your time to organize what went well,\nimprovements for next week, and confirm your growth."
+    "無料プラン": {
+      "comment": "Free plan",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "毎週日曜日は、weekで一週間を振り返る日。\n良かったこと、次週への改善策などを\nゆっくり整理し、自分の成長を確認しましょう。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無料プラン"
           }
         }
       }
     },
-    "流れる日々を記録する" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Record the flowing days"
+    "現在のプラン": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current Plan"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "流れる日々を記録する"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在のプラン"
           }
         }
       }
     },
-    "無料プラン" : {
-      "comment" : "Free plan",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Free Plan"
+    "目標": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "無料プラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標"
           }
         }
       }
     },
-    "現在のプラン" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current Plan"
+    "目標で一致": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matched in goals"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "現在のプラン"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標で一致"
           }
         }
       }
     },
-    "目標" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Goal"
+    "直近の振り返り": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent Reflections"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近の振り返り"
           }
         }
       }
     },
-    "目標で一致" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matched in goals"
+    "確認": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "目標で一致"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認"
           }
         }
       }
     },
-    "直近の振り返り" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recent Reflections"
+    "続けるなら年額がお得": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annual is better if you'll keep using it"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "直近の振り返り"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "続けるなら年額がお得"
           }
         }
       }
     },
-    "確認" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm"
+    "自分が選びがちな気分やテーマが、だんだん見えてきます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your frequently chosen moods and themes will gradually become visible."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "確認"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分が選びがちな気分やテーマが、だんだん見えてきます。"
           }
         }
       }
     },
-    "自分が選びがちな気分やテーマが、だんだん見えてきます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your frequently chosen moods and themes will gradually become visible."
+    "製品の読み込みに失敗しました: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to load products: %@"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自分が選びがちな気分やテーマが、だんだん見えてきます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "製品の読み込みに失敗しました: %@"
           }
         }
       }
     },
-    "製品の読み込みに失敗しました: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to load products: %@"
+    "記録": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "製品の読み込みに失敗しました: %@"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録"
           }
         }
       }
     },
-    "記録" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Record"
+    "記録・目標・振り返りを検索": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search records, goals, reflections"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録・目標・振り返りを検索"
           }
         }
       }
     },
-    "記録・目標・振り返りを検索" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search records, goals, reflections"
+    "記録が増えると、ここで過去の一枚をひらけるようになります。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As you add more records, you'll be able to open a random past entry here."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録・目標・振り返りを検索"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録が増えると、ここで過去の一枚をひらけるようになります。"
           }
         }
       }
     },
-    "記録が増えると、ここで過去の一枚をひらけるようになります。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As you add more records, you'll be able to open a random past entry here."
+    "記録が増えると、ここに週ごとのアーカイブが並びます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly archives will appear here as you add more records."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録が増えると、ここで過去の一枚をひらけるようになります。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録が増えると、ここに週ごとのアーカイブが並びます。"
           }
         }
       }
     },
-    "記録が増えると、ここに週ごとのアーカイブが並びます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly archives will appear here as you add more records."
+    "記録が多かった週": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most Active Weeks"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録が増えると、ここに週ごとのアーカイブが並びます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録が多かった週"
           }
         }
       }
     },
-    "記録が多かった週" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Most Active Weeks"
+    "記録する": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録が多かった週"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録する"
           }
         }
       }
     },
-    "記録する" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Record"
+    "記録で一致": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matched in records"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録する"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録で一致"
           }
         }
       }
     },
-    "記録で一致" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Matched in records"
+    "記録はありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No records available"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録で一致"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録はありません"
           }
         }
       }
     },
-    "記録はありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No records available"
+    "記録はまだありません": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No records yet"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録はありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録はまだありません"
           }
         }
       }
     },
-    "記録はまだありません" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No records yet"
+    "設定": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "記録はまだありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
           }
         }
       }
     },
-    "設定" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
+    "購入が保留されています": {
+      "comment": "Purchase pending error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase is pending"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "設定"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入が保留されています"
           }
         }
       }
     },
-    "購入が保留されています" : {
-      "comment" : "Purchase pending error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Purchase is pending"
+    "購入が完了しました。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase completed."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入が保留されています"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入が完了しました。"
           }
         }
       }
     },
-    "購入が完了しました。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Purchase completed."
+    "購入が復元されました。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchase restored."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入が完了しました。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入が復元されました。"
           }
         }
       }
     },
-    "購入が復元されました。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Purchase restored."
+    "購入の復元に失敗しました: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to restore purchase: %@"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入が復元されました。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入の復元に失敗しました: %@"
           }
         }
       }
     },
-    "購入の復元に失敗しました: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to restore purchase: %@"
+    "購入は保留中です": {
+      "comment": "Purchase pending error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase is pending"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入の復元に失敗しました: %@"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入は保留中です"
           }
         }
       }
     },
-    "購入は保留中です" : {
-      "comment" : "Purchase pending error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The purchase is pending"
+    "購入を復元": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore Purchase"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入は保留中です"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入を復元"
           }
         }
       }
     },
-    "購入を復元" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restore Purchase"
+    "購入中に予期せぬエラーが発生しました": {
+      "comment": "Other purchase error",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An unexpected error occurred during purchase"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入を復元"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入中に予期せぬエラーが発生しました"
           }
         }
       }
     },
-    "購入中に予期せぬエラーが発生しました" : {
-      "comment" : "Other purchase error",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "An unexpected error occurred during purchase"
+    "購入前に": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Before purchase"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入中に予期せぬエラーが発生しました"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入前に"
           }
         }
       }
     },
-    "購入前にご確認ください" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please review before purchasing"
+    "週ごとの記録が増えると、動きの多かった週をここで拾えます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As you add more weekly records, you can find your busiest weeks here."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "購入前にご確認ください"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週ごとの記録が増えると、動きの多かった週をここで拾えます。"
           }
         }
       }
     },
-    "週ごとの記録が増えると、動きの多かった週をここで拾えます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As you add more weekly records, you can find your busiest weeks here."
+    "週の振り返りを書き始めると、ここから最近のまとめを辿れます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once you start reflecting, you can trace your recent summaries from here."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週ごとの記録が増えると、動きの多かった週をここで拾えます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の振り返りを書き始めると、ここから最近のまとめを辿れます。"
           }
         }
       }
     },
-    "週の振り返りを書き始めると、ここから最近のまとめを辿れます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Once you start reflecting, you can trace your recent summaries from here."
+    "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As you set more weekly goals, your frequently used emojis will grow here."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週の振り返りを書き始めると、ここから最近のまとめを辿れます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。"
           }
         }
       }
     },
-    "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As you set more weekly goals, your frequently used emojis will grow here."
+    "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set a goal for the week and move forward step by step.\nSmall progress leads to big changes."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週の目標が増えると、よく選ぶ絵文字がここでふくらんで見えてきます。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。"
           }
         }
       }
     },
-    "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set a goal for the week and move forward step by step.\nSmall progress leads to big changes."
+    "週間": {
+      "comment": "Subscription period unit: week",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "week"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週の目標を設定し、一歩ずつ前進しましょう。\n小さな進歩が大きな変化を生み出します。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週間"
           }
         }
       }
     },
-    "週間" : {
-      "comment" : "Subscription period unit: week",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "week"
+    "週間記録詳細": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly Record Details"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週間"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週間記録詳細"
           }
         }
       }
     },
-    "週間記録詳細" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekly Record Details"
+    "過去の自分と比べる": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare with your past self"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "週間記録詳細"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去の自分と比べる"
           }
         }
       }
     },
-    "過去の自分と比べる" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Compare with your past self"
+    "過去の記録から、今日ひらく一枚を選びます。": {
+      "comment": "Subtitle for the \"ランダム\" section in the \"Pickup\" view.",
+      "isCommentAutoGenerated": true,
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose one past card to open today."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "過去の自分と比べる"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去の記録から、今日ひらく一枚を選びます。"
           }
         }
       }
     },
-    "過去の記録から、今日ひらく一枚を選びます。" : {
-      "comment" : "Subtitle for the \"ランダム\" section in the \"Pickup\" view.",
-      "isCommentAutoGenerated" : true,
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Choose one past card to open today."
+    "閉じる": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "過去の記録から、今日ひらく一枚を選びます。"
-          }
-        }
-      }
-    },
-    "閉じる" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "閉じる"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
           }
         }
       }
     }
   },
-  "version" : "1.1"
+  "version": "1.1"
 }

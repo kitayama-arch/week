@@ -40,7 +40,11 @@ struct PurchaseView: View {
                         currentPlanView
                         subscriptionDetails
                         ForEach(products) { product in
-                            SubscriptionButton(product: product, isLoading: isLoading) {
+                            SubscriptionButton(
+                                product: product,
+                                monthlyProduct: monthlyProduct,
+                                isLoading: isLoading
+                            ) {
                                 Task {
                                     await purchaseProduct(product)
                                 }
@@ -136,17 +140,18 @@ struct PurchaseView: View {
     }
 
     private var subscriptionLegalNotice: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(String(localized: "購入前にご確認ください"))
+        VStack(alignment: .leading, spacing: 0) {
+            Text(String(localized: "購入前に"))
                 .font(.headline)
             Text(String(localized: "サブスクリプションは Apple ID に請求されます。無料トライアル付きプランは、トライアル終了後に次回の購読期間の料金が自動で請求され、更新日の24時間前までに解約しない限り自動更新されます。"))
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color.card)
-        .cornerRadius(10)
+    }
+
+    private var monthlyProduct: Product? {
+        products.first { $0.id.contains("monthly") }
     }
 
     private var termsAndPrivacy: some View {
@@ -399,98 +404,132 @@ struct ProductView: View {
 
 struct SubscriptionButton: View {
     let product: Product
+    let monthlyProduct: Product?
     let isLoading: Bool
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            if product.id.contains("yearly") {
-                ZStack(alignment: .topTrailing) {
-                    VStack(spacing: 8) {
-                        Text(trialHeadline)
+            ZStack(alignment: .topTrailing) {
+                VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(planTitle)
                             .font(.headline)
-                            .foregroundColor(.white)
-                        
-                        Text(yearlyPricingText)
+                            .foregroundStyle(titleColor)
+                        Text(planSubtitle)
                             .font(.subheadline)
-                            .foregroundColor(.white)
+                            .foregroundStyle(subtitleColor)
                     }
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        LinearGradient(
-                            gradient: Gradient(colors: [
-                                Color.accentColor.opacity(0.8), Color.accentColor
-                            ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-                    .clipShape(Capsule())
-                    .shadow(color: .accent.opacity(0.5), radius: 10, x: 0.0, y: 0.0)
                     
-                    Text(String(localized: "2ヶ月分お得"))
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(primaryPriceText)
+                            .font(.title3.weight(.bold))
+                            .foregroundStyle(titleColor)
+                        Text(secondaryPriceText)
+                            .font(.footnote)
+                            .foregroundStyle(subtitleColor)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .background(backgroundStyle)
+                .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .strokeBorder(borderColor, lineWidth: 1)
+                )
+                .shadow(color: shadowColor, radius: 12, x: 0, y: 6)
+
+                if let badgeText {
+                    Text(badgeText)
                         .font(.caption2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(
-                            Color.red
-                        )
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(badgeColor)
                         .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
-                        )
-                        .offset(x: -10, y: -5)
+                        .offset(x: -10, y: -8)
                 }
-            } else {
-                // 月額プラン用の既存のデザイン
-                VStack(spacing: 8) {
-                    HStack {
-                        Text(String(localized: "月間プランを開始"))
-                            .font(.headline)
-                    }
-                    Text(monthlyPricingText)
-                        .font(.subheadline)
-                }
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.card)
-                .clipShape(Capsule())
             }
         }
         .buttonStyle(.plain)
         .disabled(isLoading)
     }
 
-    private var trialHeadline: String {
+    private var hasIntroductoryOffer: Bool {
+        product.subscription?.introductoryOffer != nil
+    }
+
+    private var isYearlyPlan: Bool {
+        product.id.contains("yearly")
+    }
+
+    private var planTitle: String {
+        isYearlyPlan
+            ? String(localized: "続けるなら年額がお得")
+            : String(localized: "まずはお試し")
+    }
+
+    private var planSubtitle: String {
+        isYearlyPlan
+            ? String(localized: "1年分をまとめてお得に続ける")
+            : String(localized: "気軽に始めて使い心地を試せる")
+    }
+
+    private var primaryPriceText: String {
         if let offer = product.subscription?.introductoryOffer {
             return String(
-                format: String(localized: "%@ %@ free trial"),
+                format: String(localized: "%@ %@無料"),
                 String(offer.period.value),
                 periodUnitString(offer.period.unit)
             )
         }
-        return String(localized: "年額プランを開始")
+        return product.displayPrice
     }
 
-    private var yearlyPricingText: String {
-        if let offer = product.subscription?.introductoryOffer {
+    private var secondaryPriceText: String {
+        if product.subscription?.introductoryOffer != nil {
             return String(
-                format: String(localized: "%@ %@ free, then %@/%@ auto-renews"),
-                String(offer.period.value),
-                periodUnitString(offer.period.unit),
+                format: String(localized: "その後は%@/%@"),
                 product.displayPrice,
                 renewalPeriodText
             )
         }
-        return "\(product.displayPrice)/\(renewalPeriodText)"
+        return String(
+            format: String(localized: "%@/%@"),
+            product.displayPrice,
+            renewalPeriodText
+        )
     }
 
-    private var monthlyPricingText: String {
-        "\(product.displayPrice)/\(renewalPeriodText)"
+    private var badgeText: String? {
+        if isYearlyPlan, let savingsText {
+            return String(
+                format: String(localized: "月額より年間%@お得"),
+                savingsText
+            )
+        }
+        if let offer = product.subscription?.introductoryOffer {
+            return String(
+                format: String(localized: "%@ %@無料"),
+                String(offer.period.value),
+                periodUnitString(offer.period.unit)
+            )
+        }
+        return nil
+    }
+
+    private var savingsText: String? {
+        guard
+            isYearlyPlan,
+            let monthlyProduct,
+            let savings = annualSavings(monthlyProduct: monthlyProduct, yearlyProduct: product)
+        else {
+            return nil
+        }
+        return currencyString(for: savings, locale: product.priceFormatStyle.locale)
     }
 
     private var renewalPeriodText: String {
@@ -499,6 +538,45 @@ struct SubscriptionButton: View {
         }
         let separator = Locale.current.language.languageCode?.identifier == "ja" ? "" : " "
         return "\(period.value)\(separator)\(periodUnitString(period.unit))"
+    }
+
+    private var backgroundStyle: AnyShapeStyle {
+        AnyShapeStyle(Color.card)
+    }
+
+    private var borderColor: Color {
+        Color.primary.opacity(0.08)
+    }
+
+    private var titleColor: Color {
+        .primary
+    }
+
+    private var subtitleColor: Color {
+        .secondary
+    }
+
+    private var shadowColor: Color {
+        Color.black.opacity(0.08)
+    }
+
+    private var badgeColor: Color {
+        isYearlyPlan ? Color.red : Color.accentColor.opacity(0.9)
+    }
+
+    private func annualSavings(monthlyProduct: Product, yearlyProduct: Product) -> Decimal? {
+        let monthlyAnnualCost = NSDecimalNumber(decimal: monthlyProduct.price)
+            .multiplying(by: NSDecimalNumber(value: 12))
+            .decimalValue
+        let savings = monthlyAnnualCost - yearlyProduct.price
+        return savings > 0 ? savings : nil
+    }
+
+    private func currencyString(for amount: Decimal, locale: Locale) -> String? {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = locale
+        return formatter.string(from: amount as NSDecimalNumber)
     }
 
     private func periodUnitString(_ unit: Product.SubscriptionPeriod.Unit) -> String {

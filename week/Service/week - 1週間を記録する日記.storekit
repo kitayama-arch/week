@@ -18,58 +18,55 @@
   ],
   "settings" : {
     "_applicationInternalID" : "6736693039",
+    "_askToBuyEnabled" : false,
+    "_billingGracePeriodEnabled" : false,
+    "_billingIssuesEnabled" : false,
     "_developerTeamID" : "7Z3QK7D946",
+    "_disableDialogs" : false,
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 750328629.55351996,
+    "_lastSynchronizedDate" : 795884900.90258396,
     "_locale" : "ja",
+    "_renewalBillingIssuesEnabled" : false,
     "_storefront" : "JPN",
     "_storeKitErrors" : [
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Load Products"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Purchase"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Verification"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "App Store Sync"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Subscription Status"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "App Transaction"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Manage Subscriptions Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Refund Request Sheet"
       },
       {
-        "current" : null,
         "enabled" : false,
         "name" : "Offer Code Redeem Sheet"
       }
-    ]
+    ],
+    "_timeRate" : 0
   },
   "subscriptionGroups" : [
     {
@@ -86,21 +83,26 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "2.99",
+          "displayPrice" : "300",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "6736732985",
-          "introductoryOffer" : null,
+          "introductoryOffer" : {
+            "internalID" : "F986B906",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
           "localizations" : [
             {
-              "description" : "1ヶ月間のプランです。",
-              "displayName" : "月プラン",
-              "locale" : "ja"
+              "description" : "1-month plan.",
+              "displayName" : "Premium - monthly",
+              "locale" : "en_US"
             },
             {
-              "description" : "1-month plan",
-              "displayName" : "monthly",
-              "locale" : "en_US"
+              "description" : "1ヶ月間のプランです。",
+              "displayName" : "プレミアム - 月額プラン",
+              "locale" : "ja"
             }
           ],
           "productID" : "com.gmail.iura.smh.week.monthly",
@@ -119,21 +121,21 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "34.99",
+          "displayPrice" : "3000",
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "6736733238",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "1年間のプランです。",
-              "displayName" : "年プラン",
-              "locale" : "ja"
+              "description" : "1-year plan.",
+              "displayName" : "Premium - yearly",
+              "locale" : "en_US"
             },
             {
-              "description" : "1-year plan",
-              "displayName" : "yearly",
-              "locale" : "en_US"
+              "description" : "1年間のプランです。",
+              "displayName" : "プレミアム  - 年額プラン",
+              "locale" : "ja"
             }
           ],
           "productID" : "com.gmail.iura.smh.week.yearly",
